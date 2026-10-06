@@ -1,0 +1,411 @@
+{
+  "sprint": {
+    "id": "sprint-week-41",
+    "name": "HackAaroh Starlit Weekly Sprint",
+    "description": "Weekly GitHub open-source PR tracking sprint. Admins review PRs daily and award credits.",
+    "status": "ACTIVE",
+    "startDate": "2026-10-02T07:18:20.949Z",
+    "endDate": "2026-10-09T07:18:20.949Z",
+    "currentDay": 4,
+    "totalDays": 7,
+    "lastSyncAt": "2026-10-06T05:18:20.949Z",
+    "nextSyncAt": "2026-10-07T05:18:20.949Z",
+    "trackedRepos": [
+      "openverse/hackaaroh",
+      "tanstack/react-router",
+      "facebook/react",
+      "astral-sh/uv"
+    ],
+    "isFinalized": false,
+    "finalizedAt": null,
+    "finalPodium": []
+  },
+  "users": [
+    {
+      "id": "usr_manav",
+      "username": "manav-codes",
+      "name": "Manav Sharma",
+      "avatarUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      "bio": "Full-stack builder & open source enthusiast",
+      "htmlUrl": "https://github.com/manav-codes",
+      "role": "contributor",
+      "createdAt": "2026-10-02T07:18:20.949Z"
+    },
+    {
+      "id": "usr_sarah",
+      "username": "sarah-dev",
+      "name": "Sarah Chen",
+      "avatarUrl": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
+      "bio": "Systems engineer & TypeScript fanatic",
+      "htmlUrl": "https://github.com/sarah-dev",
+      "role": "contributor",
+      "createdAt": "2026-10-02T07:18:20.949Z"
+    },
+    {
+      "id": "usr_alex",
+      "username": "alex-rustacean",
+      "name": "Alex Rivera",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+      "bio": "Rust & WebAssembly specialist",
+      "htmlUrl": "https://github.com/alex-rustacean",
+      "role": "contributor",
+      "createdAt": "2026-10-02T07:18:20.949Z"
+    },
+    {
+      "id": "usr_elena",
+      "username": "elena-cloud",
+      "name": "Elena Rostova",
+      "avatarUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
+      "bio": "Distributed systems & TanStack fan",
+      "htmlUrl": "https://github.com/elena-cloud",
+      "role": "contributor",
+      "createdAt": "2026-10-02T07:18:20.949Z"
+    },
+    {
+      "id": "usr_devon",
+      "username": "devon-craft",
+      "name": "Devon Patel",
+      "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
+      "bio": "Frontend architect and performance junkie",
+      "htmlUrl": "https://github.com/devon-craft",
+      "role": "contributor",
+      "createdAt": "2026-10-02T07:18:20.949Z"
+    },
+    {
+      "id": "usr_admin",
+      "username": "admin-starlit",
+      "name": "Admin Chief (Lead Reviewer)",
+      "avatarUrl": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80",
+      "bio": "Sprint Administrator & Lead Code Reviewer",
+      "htmlUrl": "https://github.com/admin-starlit",
+      "role": "admin",
+      "createdAt": "2026-10-02T07:18:20.949Z"
+    }
+  ],
+  "pullRequests": [
+    {
+      "id": "pr-101",
+      "githubPrNumber": 142,
+      "repo": "openverse/hackaaroh",
+      "title": "feat: add resilient TanStack Query caching layer for PR ingestion",
+      "description": "Implements optimistic updates and multi-level query invalidation for the daily leaderboard.",
+      "url": "https://github.com/openverse/hackaaroh/pull/142",
+      "state": "merged",
+      "author": "manav-codes",
+      "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-02T17:18:20.949Z",
+      "dayOfSprint": 1,
+      "additions": 384,
+      "deletions": 42,
+      "commitsCount": 4,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 85,
+      "adminFeedback": "Exceptional test coverage and cleanly structured caching boundaries. Great impact!",
+      "adminCriteria": {
+        "quality": 23,
+        "complexity": 22,
+        "impact": 20,
+        "testCoverage": 20
+      },
+      "reviewedBy": "admin-starlit",
+      "reviewedAt": "2026-10-02T21:18:20.949Z",
+      "tags": [
+        "tanstack",
+        "caching",
+        "feat"
+      ]
+    },
+    {
+      "id": "pr-102",
+      "githubPrNumber": 143,
+      "repo": "openverse/hackaaroh",
+      "title": "fix: handle rate-limit throttling in GitHub sync worker",
+      "description": "Adds exponential backoff and secondary token pool rotation when rate limits hit 429.",
+      "url": "https://github.com/openverse/hackaaroh/pull/143",
+      "state": "merged",
+      "author": "sarah-dev",
+      "authorAvatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-02T23:18:20.949Z",
+      "dayOfSprint": 1,
+      "additions": 128,
+      "deletions": 19,
+      "commitsCount": 2,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 78,
+      "adminFeedback": "Solid retry policy and defensive error handling. Saved the sync pipeline.",
+      "adminCriteria": {
+        "quality": 20,
+        "complexity": 19,
+        "impact": 20,
+        "testCoverage": 19
+      },
+      "reviewedBy": "admin-starlit",
+      "reviewedAt": "2026-10-03T03:18:20.949Z",
+      "tags": [
+        "bugfix",
+        "github-api",
+        "resilience"
+      ]
+    },
+    {
+      "id": "pr-103",
+      "githubPrNumber": 144,
+      "repo": "openverse/hackaaroh",
+      "title": "perf: optimize daily snapshot aggregation query index",
+      "description": "Reduced aggregation overhead from 450ms down to 14ms across 10,000 historical records.",
+      "url": "https://github.com/openverse/hackaaroh/pull/144",
+      "state": "merged",
+      "author": "alex-rustacean",
+      "authorAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-03T15:18:20.949Z",
+      "dayOfSprint": 2,
+      "additions": 64,
+      "deletions": 88,
+      "commitsCount": 3,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 92,
+      "adminFeedback": "Brilliant index optimization and benchmark proof included. Huge performance win.",
+      "adminCriteria": {
+        "quality": 24,
+        "complexity": 23,
+        "impact": 24,
+        "testCoverage": 21
+      },
+      "reviewedBy": "admin-starlit",
+      "reviewedAt": "2026-10-03T21:18:20.949Z",
+      "tags": [
+        "perf",
+        "database",
+        "optimization"
+      ]
+    },
+    {
+      "id": "pr-104",
+      "githubPrNumber": 145,
+      "repo": "openverse/hackaaroh",
+      "title": "ui: implement starlit cosmos glass panels and aurora dividers",
+      "description": "Implements Design token specifications with inset rim-light glows and Aeonik medium typography.",
+      "url": "https://github.com/openverse/hackaaroh/pull/145",
+      "state": "merged",
+      "author": "manav-codes",
+      "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-03T19:18:20.949Z",
+      "dayOfSprint": 2,
+      "additions": 512,
+      "deletions": 110,
+      "commitsCount": 5,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 90,
+      "adminFeedback": "Flawless adherence to DESIGN.md tokens and monochromatic quiet aesthetic.",
+      "adminCriteria": {
+        "quality": 24,
+        "complexity": 21,
+        "impact": 23,
+        "testCoverage": 22
+      },
+      "reviewedBy": "admin-starlit",
+      "reviewedAt": "2026-10-04T01:18:20.949Z",
+      "tags": [
+        "ui",
+        "design-system",
+        "tailwind"
+      ]
+    },
+    {
+      "id": "pr-105",
+      "githubPrNumber": 146,
+      "repo": "openverse/hackaaroh",
+      "title": "feat: add TanStack Table column sorting and pagination for leaderboard",
+      "description": "Integrates @tanstack/react-table headless grid with customizable metric filters.",
+      "url": "https://github.com/openverse/hackaaroh/pull/146",
+      "state": "merged",
+      "author": "sarah-dev",
+      "authorAvatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-04T13:18:20.949Z",
+      "dayOfSprint": 3,
+      "additions": 430,
+      "deletions": 35,
+      "commitsCount": 3,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 88,
+      "adminFeedback": "Clean table abstraction and responsive scroll controls. Very snappy.",
+      "adminCriteria": {
+        "quality": 22,
+        "complexity": 22,
+        "impact": 22,
+        "testCoverage": 22
+      },
+      "reviewedBy": "admin-starlit",
+      "reviewedAt": "2026-10-02T08:18:20.949Z",
+      "tags": [
+        "tanstack-table",
+        "ui",
+        "leaderboard"
+      ]
+    },
+    {
+      "id": "pr-106",
+      "githubPrNumber": 147,
+      "repo": "openverse/hackaaroh",
+      "title": "docs: comprehensive guide for manual admin credit scoring rubric",
+      "description": "Documents scoring guidelines across Code Quality, Complexity, Impact, and Tests.",
+      "url": "https://github.com/openverse/hackaaroh/pull/147",
+      "state": "merged",
+      "author": "elena-cloud",
+      "authorAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-04T17:18:20.949Z",
+      "dayOfSprint": 3,
+      "additions": 195,
+      "deletions": 12,
+      "commitsCount": 2,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 65,
+      "adminFeedback": "Well written and transparent criteria documentation. Helpful for all new reviewers.",
+      "adminCriteria": {
+        "quality": 18,
+        "complexity": 12,
+        "impact": 18,
+        "testCoverage": 17
+      },
+      "reviewedBy": "admin-starlit",
+      "reviewedAt": "2026-10-04T23:18:20.949Z",
+      "tags": [
+        "docs",
+        "rubric"
+      ]
+    },
+    {
+      "id": "pr-107",
+      "githubPrNumber": 148,
+      "repo": "openverse/hackaaroh",
+      "title": "feat: add automated daily sync cron with manual admin override",
+      "description": "Implements recurring sync scheduler every 24h with lock guards against duplicate ingestion.",
+      "url": "https://github.com/openverse/hackaaroh/pull/148",
+      "state": "open",
+      "author": "devon-craft",
+      "authorAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-05T10:18:20.949Z",
+      "dayOfSprint": 4,
+      "additions": 290,
+      "deletions": 22,
+      "commitsCount": 3,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "cron",
+        "daily-sync",
+        "worker"
+      ]
+    },
+    {
+      "id": "pr-108",
+      "githubPrNumber": 149,
+      "repo": "openverse/hackaaroh",
+      "title": "feat: add sprint finalization and podium snapshot generator",
+      "description": "Allows sprint admins to freeze rankings and declare winners with cryptographic timestamp hash.",
+      "url": "https://github.com/openverse/hackaaroh/pull/149",
+      "state": "open",
+      "author": "manav-codes",
+      "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-05T13:18:20.949Z",
+      "dayOfSprint": 4,
+      "additions": 340,
+      "deletions": 15,
+      "commitsCount": 4,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "sprint",
+        "leaderboard",
+        "podium"
+      ]
+    },
+    {
+      "id": "pr-109",
+      "githubPrNumber": 150,
+      "repo": "openverse/hackaaroh",
+      "title": "test: add end-to-end integration tests for credit audit trail",
+      "description": "Simulates admin scoring lifecycle and validates leaderboard recalculation invariant.",
+      "url": "https://github.com/openverse/hackaaroh/pull/150",
+      "state": "open",
+      "author": "alex-rustacean",
+      "authorAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-05T17:18:20.949Z",
+      "dayOfSprint": 4,
+      "additions": 410,
+      "deletions": 18,
+      "commitsCount": 3,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "tests",
+        "e2e",
+        "security"
+      ]
+    }
+  ],
+  "auditLogs": [
+    {
+      "id": "log-1",
+      "action": "SPRINT_STARTED",
+      "actor": "admin-starlit",
+      "details": "Weekly sprint initialized with 7-day tracking window",
+      "timestamp": "2026-10-02T07:18:20.949Z"
+    },
+    {
+      "id": "log-2",
+      "action": "PR_REVIEWED",
+      "actor": "admin-starlit",
+      "details": "Awarded 85 credits to PR #142 (manav-codes)",
+      "timestamp": "2026-10-02T21:18:20.949Z"
+    },
+    {
+      "id": "log-3",
+      "action": "DAILY_SYNC",
+      "actor": "SYSTEM_CRON",
+      "details": "Day 2 tracking update finished. 2 new PRs ingested.",
+      "timestamp": "2026-10-03T07:18:20.949Z"
+    },
+    {
+      "id": "log-4",
+      "action": "PR_REVIEWED",
+      "actor": "admin-starlit",
+      "details": "Awarded 92 credits to PR #144 (alex-rustacean)",
+      "timestamp": "2026-10-03T21:18:20.949Z"
+    },
+    {
+      "id": "log-5",
+      "action": "DAILY_SYNC",
+      "actor": "SYSTEM_CRON",
+      "details": "Day 3 tracking update finished. 2 new PRs ingested.",
+      "timestamp": "2026-10-04T07:18:20.949Z"
+    }
+  ]
+}
