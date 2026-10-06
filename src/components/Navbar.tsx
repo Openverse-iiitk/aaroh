@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from '@tanstack/react-router';
 import { User, Sprint } from '../types';
-import { GitPullRequest, Trophy, Shield, Sparkles, LogOut, Github, PlusCircle } from 'lucide-react';
+import { GitPullRequest, Trophy, Shield, LogOut, Github, ShieldCheck } from 'lucide-react';
 
 interface NavbarProps {
   user: User | null;
@@ -15,137 +15,128 @@ export const Navbar: React.FC<NavbarProps> = ({
   user,
   sprint,
   onOpenAuth,
-  onOpenSubmitPr,
   onLogout
 }) => {
   const location = useLocation();
   const currentPath = location.pathname;
 
   return (
-    <header className="sticky top-4 z-50 w-full px-4 flex justify-center">
-      <nav className="nav-pill flex items-center justify-between gap-4 px-5 py-2 w-full max-w-5xl transition-all">
+    <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-[#121215]/95 backdrop-blur-sm">
+      <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
         {/* Brand / Logo */}
-        <Link to="/" className="flex items-center gap-2 group text-decoration-none">
-          <div className="w-8 h-8 rounded-full bg-deep-indigo flex items-center justify-center border border-lavender-accent/30 group-hover:border-lavender-accent transition-colors shadow-badge">
-            <Sparkles className="w-4 h-4 text-lavender-accent" />
+        <Link to="/" className="flex items-center gap-2.5 text-decoration-none">
+          <div className="w-8 h-8 rounded bg-[#1f1f23] flex items-center justify-center border border-white/10">
+            <GitPullRequest className="w-4 h-4 text-white" />
           </div>
-          <div className="flex flex-col">
-            <span className="text-base font-medium tracking-tight text-lilac-white group-hover:text-pearl transition-colors flex items-center gap-1.5">
-              Reflect<span className="text-cosmic-gradient font-normal">PR</span>
-            </span>
-          </div>
+          <span className="text-sm font-semibold text-white tracking-tight">
+            HackAaroh <span className="text-zinc-400 font-normal">PR Tracker</span>
+          </span>
         </Link>
 
         {/* Navigation links */}
-        <div className="hidden md:flex items-center gap-6 text-[15px]">
-          <Link
-            to="/"
-            className={`transition-colors flex items-center gap-1.5 ${
-              currentPath === '/' ? 'text-lilac-white font-medium' : 'text-fog hover:text-lilac-white'
-            }`}
-          >
-            Overview
-          </Link>
-
+        <nav className="flex items-center gap-6 text-sm">
           <Link
             to="/leaderboard"
             className={`transition-colors flex items-center gap-1.5 ${
-              currentPath === '/leaderboard' ? 'text-lilac-white font-medium' : 'text-fog hover:text-lilac-white'
+              currentPath === '/leaderboard' ? 'text-white font-medium' : 'text-zinc-400 hover:text-white'
             }`}
           >
-            <Trophy className="w-3.5 h-3.5 text-lavender-accent/70" />
-            Leaderboard
+            <Trophy className="w-4 h-4 text-zinc-400" />
+            <span>Leaderboard</span>
           </Link>
 
           <Link
             to="/pull-requests"
             className={`transition-colors flex items-center gap-1.5 ${
-              currentPath === '/pull-requests' ? 'text-lilac-white font-medium' : 'text-fog hover:text-lilac-white'
+              currentPath === '/pull-requests' ? 'text-white font-medium' : 'text-zinc-400 hover:text-white'
             }`}
           >
-            <GitPullRequest className="w-3.5 h-3.5 text-lavender-accent/70" />
-            Pull Requests
+            <GitPullRequest className="w-4 h-4 text-zinc-400" />
+            <span>Submitted PRs</span>
           </Link>
 
-          <Link
-            to="/admin"
-            className={`transition-colors flex items-center gap-1.5 ${
-              currentPath === '/admin' ? 'text-lilac-white font-medium' : 'text-fog hover:text-lilac-white'
-            }`}
-          >
-            <Shield className="w-3.5 h-3.5 text-lavender-accent" />
-            Admin Review
-            {user?.role === 'admin' && (
-              <span className="text-[11px] px-1.5 py-0.2 rounded-full bg-iris/30 text-lavender-accent border border-iris/50 font-medium">
-                Admin
-              </span>
-            )}
-          </Link>
-        </div>
-
-        {/* Sprint Status Indicator Pill */}
-        {sprint && (
-          <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-void-canvas border border-white/5 text-xs text-ash">
-            <span
-              className={`w-2 h-2 rounded-full ${
-                sprint.isFinalized
-                  ? 'bg-lavender-accent shadow-[0_0_8px_rgba(147,130,255,0.8)]'
-                  : sprint.status === 'ACTIVE'
-                  ? 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)] animate-pulse'
-                  : 'bg-amber-400'
+          {user?.role === 'admin' ? (
+            <Link
+              to="/admin"
+              className={`transition-colors flex items-center gap-1.5 ${
+                currentPath === '/admin' ? 'text-white font-medium' : 'text-zinc-400 hover:text-white'
               }`}
-            />
-            <span>
-              {sprint.isFinalized
-                ? 'Final Leaderboard Locked'
-                : `Day ${sprint.currentDay} of ${sprint.totalDays}`}
-            </span>
-          </div>
-        )}
+            >
+              <Shield className="w-4 h-4 text-blue-400" />
+              <span>Admin</span>
+            </Link>
+          ) : (
+            <Link
+              to="/admin"
+              className={`hidden sm:flex transition-colors items-center gap-1.5 ${
+                currentPath === '/admin' ? 'text-white font-medium' : 'text-zinc-500 hover:text-zinc-300'
+              }`}
+            >
+              <Shield className="w-3.5 h-3.5" />
+              <span>Admin Portal</span>
+            </Link>
+          )}
+        </nav>
 
-        {/* User Session & CTAs */}
+        {/* Status Indicator & User Session */}
         <div className="flex items-center gap-3">
-          {user ? (
-            <div className="flex items-center gap-2">
-              <button
-                onClick={onOpenSubmitPr}
-                disabled={sprint?.isFinalized}
-                className="btn-secondary !text-xs !py-1.5 !px-2.5 hidden sm:inline-flex items-center gap-1.5 disabled:opacity-40 disabled:cursor-not-allowed"
-                title={sprint?.isFinalized ? 'Sprint has ended' : 'Submit PR for scoring'}
-              >
-                <PlusCircle className="w-3.5 h-3.5 text-lavender-accent" />
-                <span>Submit PR</span>
-              </button>
+          {sprint && (
+            <div className="hidden lg:flex items-center gap-2 px-2.5 py-1 rounded bg-[#18181b] border border-white/10 text-xs text-zinc-400">
+              <span
+                className={`w-2 h-2 rounded-full ${
+                  sprint.status === 'NOT_STARTED'
+                    ? 'bg-zinc-500'
+                    : sprint.isFinalized
+                    ? 'bg-blue-400'
+                    : 'bg-emerald-500'
+                }`}
+              />
+              <span>
+                {sprint.status === 'NOT_STARTED'
+                  ? 'Pending Start'
+                  : sprint.isFinalized
+                  ? 'Concluded'
+                  : `Day ${sprint.currentDay} Active`}
+              </span>
+            </div>
+          )}
 
-              <div className="flex items-center gap-2 pl-2 border-l border-white/10">
+          {user ? (
+            <div className="flex items-center gap-2 pl-2 border-l border-white/10">
+              <div className="flex items-center gap-2 px-2.5 py-1 rounded bg-[#18181b] border border-white/10">
                 <img
                   src={user.avatarUrl}
                   alt={user.username}
-                  className="w-7 h-7 rounded-full border border-lavender-accent/40 object-cover"
+                  className="w-5 h-5 rounded-full object-cover"
                 />
-                <span className="hidden sm:inline text-xs font-medium text-lilac-white">
+                <span className="text-xs font-medium text-white">
                   @{user.username}
                 </span>
+                {user.role === 'admin' && (
+                  <span className="text-[10px] px-1.5 py-0.2 rounded bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                    Admin
+                  </span>
+                )}
                 <button
                   onClick={onLogout}
-                  className="text-fog hover:text-lilac-white p-1 rounded transition-colors"
-                  title="Logout"
+                  className="text-zinc-400 hover:text-white ml-1 p-0.5 rounded transition-colors"
+                  title="Disconnect account"
                 >
-                  <LogOut className="w-3.5 h-3.5" />
+                  <LogOut className="w-3 h-3" />
                 </button>
               </div>
             </div>
           ) : (
             <button
               onClick={onOpenAuth}
-              className="btn-primary !text-xs !py-1.5 !px-3.5"
+              className="btn-primary !text-xs !py-1.5 !px-3"
             >
               <Github className="w-3.5 h-3.5" />
-              <span>Connect GitHub</span>
+              <span>Sign in with GitHub</span>
             </button>
           )}
         </div>
-      </nav>
+      </div>
     </header>
   );
 };

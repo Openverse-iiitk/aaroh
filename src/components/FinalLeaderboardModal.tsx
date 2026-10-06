@@ -35,32 +35,31 @@ export const FinalLeaderboardModal: React.FC<FinalLeaderboardModalProps> = ({
 
         {/* Celebratory Header */}
         <div className="text-center mb-8">
-          <div className="badge-pill inline-flex items-center gap-2 px-4 py-1.5 mb-4 text-xs font-semibold text-amber-300 bg-midnight-surface border-amber-400/40">
-            <Sparkles className="w-4 h-4 text-amber-300" />
-            <span>SPRINT OFFICIALLY CONCLUDED</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 text-xs font-semibold text-zinc-300 bg-zinc-900 border border-white/10 rounded">
+            <span>Sprint Concluded</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-medium text-pearl tracking-tight">
-            The Final <span className="text-cosmic-gradient">Leaderboard</span>
+          <h2 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight">
+            Final Event Leaderboard
           </h2>
 
-          <p className="text-sm sm:text-base text-ash max-w-lg mx-auto mt-2">
+          <p className="text-xs sm:text-sm text-zinc-400 max-w-lg mx-auto mt-2">
             Weekly pull request tracking is complete. Standings are frozen and validated by sprint administrators.
           </p>
 
           {/* Quick Metrics Bar */}
-          <div className="grid grid-cols-3 gap-3 max-w-md mx-auto mt-6 p-3 rounded-card bg-midnight-surface border border-white/5 text-center text-xs">
+          <div className="grid grid-cols-3 gap-3 max-w-md mx-auto mt-6 p-3 rounded bg-[#18181b] border border-white/10 text-center text-xs">
             <div>
-              <span className="text-fog block text-[11px]">Total PRs Tracked</span>
-              <span className="text-base font-semibold text-lilac-white">{totalPrsAwarded}</span>
+              <span className="text-zinc-500 block text-[11px]">Total PRs Tracked</span>
+              <span className="text-base font-semibold text-white">{totalPrsAwarded}</span>
             </div>
-            <div className="border-x border-white/5">
-              <span className="text-fog block text-[11px]">Credits Distributed</span>
-              <span className="text-base font-semibold text-cosmic-gradient">{totalCreditsAwarded} pts</span>
+            <div className="border-x border-white/10">
+              <span className="text-zinc-500 block text-[11px]">Credits Distributed</span>
+              <span className="text-base font-semibold text-white">{totalCreditsAwarded} pts</span>
             </div>
             <div>
-              <span className="text-fog block text-[11px]">Ranked Contributors</span>
-              <span className="text-base font-semibold text-lilac-white">{leaderboard.length}</span>
+              <span className="text-zinc-500 block text-[11px]">Ranked Contributors</span>
+              <span className="text-base font-semibold text-white">{leaderboard.length}</span>
             </div>
           </div>
         </div>
@@ -107,7 +106,7 @@ export const FinalLeaderboardModal: React.FC<FinalLeaderboardModalProps> = ({
 
                 <div className="w-full pt-2 border-t border-white/5 flex justify-between text-xs">
                   <span className="text-fog">Score:</span>
-                  <span className="font-semibold text-cosmic-gradient">{item.totalCredits} pts</span>
+                  <span className="font-semibold text-white">{item.totalCredits} pts</span>
                 </div>
                 <div className="w-full flex justify-between text-xs mt-1">
                   <span className="text-fog">PRs:</span>
@@ -157,7 +156,7 @@ export const FinalLeaderboardModal: React.FC<FinalLeaderboardModalProps> = ({
                   </div>
                   <div>
                     <span className="text-fog block text-[10px]">Final Credits</span>
-                    <span className="text-sm font-semibold text-cosmic-gradient">
+                    <span className="text-sm font-semibold text-white">
                       {item.totalCredits} pts
                     </span>
                   </div>

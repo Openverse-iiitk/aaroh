@@ -190,7 +190,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
               </span>
               <div className="text-right">
                 <span className="text-xs text-ash">Calculated Credit Score: </span>
-                <span className="text-base font-semibold text-cosmic-gradient">
+                <span className="text-base font-semibold text-white">
                   {reviewStatus === 'REJECTED' ? 0 : totalScore} pts
                 </span>
               </div>

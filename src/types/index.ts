@@ -11,7 +11,7 @@ export interface User {
   createdAt: string;
 }
 
-export type SprintStatus = 'ACTIVE' | 'PAUSED' | 'FINALIZED';
+export type SprintStatus = 'NOT_STARTED' | 'ACTIVE' | 'PAUSED' | 'FINALIZED';
 
 export interface FinalPodiumItem {
   rank: number;
@@ -29,16 +29,32 @@ export interface Sprint {
   name: string;
   description: string;
   status: SprintStatus;
-  startDate: string;
-  endDate: string;
+  dailyUpdateTime: string;
+  startDate: string | null;
+  endDate: string | null;
   currentDay: number;
-  totalDays: number;
-  lastSyncAt: string;
-  nextSyncAt: string;
+  lastSyncAt: string | null;
+  nextSyncAt: string | null;
+  trackingScope?: string;
   trackedRepos: string[];
+  totalTrackedContributors?: number;
+  totalDiscoveredRepos?: number;
   isFinalized: boolean;
   finalizedAt: string | null;
   finalPodium: FinalPodiumItem[];
+}
+
+export interface UserReviewsSummary {
+  user: User;
+  prs: PullRequest[];
+  stats: {
+    totalPrs: number;
+    reviewedPrs: number;
+    pendingPrs: number;
+    totalCredits: number;
+    avgCreditScore: number;
+    distinctRepos: string[];
+  };
 }
 
 export type PRReviewStatus = 'PENDING_REVIEW' | 'REVIEWED' | 'REJECTED';

@@ -15,17 +15,17 @@ import {
   fetchAuditLogs,
   triggerDailySync,
   toggleSprintStatus,
+  startSprint,
   endSprint,
-  startNewSprint,
+  updateSprintSettings,
+  resetToNotStarted,
   reviewPullRequest,
-  submitPullRequest,
   mockLogin,
   logout,
   resetDatabase
 } from './api/client';
 import { Navbar } from './components/Navbar';
 import { AuthModal } from './components/AuthModal';
-import { SubmitPrModal } from './components/SubmitPrModal';
 import { ReviewModal } from './components/ReviewModal';
 import { FinalLeaderboardModal } from './components/FinalLeaderboardModal';
 import { HomePage } from './pages/HomePage';
@@ -100,11 +100,30 @@ function RootLayout() {
     },
   });
 
-  const startNewSprintMutation = useMutation({
-    mutationFn: startNewSprint,
+  const startSprintMutation = useMutation({
+    mutationFn: startSprint,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['sprint'] });
       queryClient.invalidateQueries({ queryKey: ['leaderboard'] });
+      queryClient.invalidateQueries({ queryKey: ['pullRequests'] });
+      queryClient.invalidateQueries({ queryKey: ['auditLogs'] });
+    },
+  });
+
+  const updateSettingsMutation = useMutation({
+    mutationFn: updateSprintSettings,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['sprint'] });
+      queryClient.invalidateQueries({ queryKey: ['auditLogs'] });
+    },
+  });
+
+  const resetToNotStartedMutation = useMutation({
+    mutationFn: resetToNotStarted,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['sprint'] });
+      queryClient.invalidateQueries({ queryKey: ['leaderboard'] });
+      queryClient.invalidateQueries({ queryKey: ['pullRequests'] });
       queryClient.invalidateQueries({ queryKey: ['auditLogs'] });
     },
   });
@@ -116,16 +135,6 @@ function RootLayout() {
       queryClient.invalidateQueries({ queryKey: ['leaderboard'] });
       queryClient.invalidateQueries({ queryKey: ['auditLogs'] });
       setReviewPrModalPr(null);
-    },
-  });
-
-  const submitPrMutation = useMutation({
-    mutationFn: submitPullRequest,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['pullRequests'] });
-      queryClient.invalidateQueries({ queryKey: ['leaderboard'] });
-      queryClient.invalidateQueries({ queryKey: ['auditLogs'] });
-      setSubmitPrModalOpen(false);
     },
   });
 
@@ -152,6 +161,8 @@ function RootLayout() {
     },
   });
 
+  const navigate = useNavigate();
+
   const handleSelectMockUser = async (
     username: string,
     role: 'admin' | 'contributor',
@@ -159,6 +170,12 @@ function RootLayout() {
     avatarUrl?: string
   ) => {
     await loginMutation.mutateAsync({ username, role, name, avatarUrl });
+    setAuthModalOpen(false);
+    if (role === 'admin') {
+      navigate({ to: '/admin' });
+    } else {
+      navigate({ to: '/leaderboard' });
+    }
   };
 
   const handleSwitchToAdmin = async () => {
@@ -168,18 +185,19 @@ function RootLayout() {
       name: 'Admin Chief (Lead Reviewer)',
       avatarUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150',
     });
+    navigate({ to: '/admin' });
   };
 
   const outletContext = {
     sprint: sprint || {
-      id: 'sprint-week-41',
-      name: 'HackAaroh Starlit Weekly Sprint',
+      id: 'sprint-hackaaroh-current',
+      name: 'Open Source PR Tracking Sprint',
       description: '',
       status: 'ACTIVE',
+      dailyUpdateTime: '00:00',
       startDate: new Date().toISOString(),
-      endDate: new Date().toISOString(),
+      endDate: null,
       currentDay: 4,
-      totalDays: 7,
       lastSyncAt: new Date().toISOString(),
       nextSyncAt: new Date().toISOString(),
       trackedRepos: ['openverse/hackaaroh'],
@@ -192,12 +210,14 @@ function RootLayout() {
     recentPrs: pullRequests || [],
     auditLogs: auditLogs || [],
     currentUser: currentUser || null,
-    onOpenSubmitPr: () => setSubmitPrModalOpen(true),
     onOpenAuth: () => setAuthModalOpen(true),
     onSyncDaily: () => syncMutation.mutate(),
     onToggleStatus: () => toggleStatusMutation.mutate(),
     onEndTracking: () => endSprintMutation.mutate(),
-    onStartNewSprint: () => startNewSprintMutation.mutate(),
+    onStartSprint: () => startSprintMutation.mutate(),
+    onStartNewSprint: () => startSprintMutation.mutate(),
+    onUpdateSettings: (payload: any) => updateSettingsMutation.mutate(payload),
+    onResetToNotStarted: () => resetToNotStartedMutation.mutate(),
     onSelectPrForReview: (pr: PullRequest) => setReviewPrModalPr(pr),
     onResetDatabase: () => resetDbMutation.mutate(),
     onSwitchToAdmin: handleSwitchToAdmin,
@@ -206,13 +226,13 @@ function RootLayout() {
 
   return (
     <RouteContextShim.Provider value={outletContext}>
-      <div className="min-h-screen flex flex-col bg-void-canvas bg-starfield text-lilac-white">
-        {/* Floating Navigation Pill */}
+      <div className="min-h-screen flex flex-col bg-[#09090b] text-[#f4f4f5]">
+        {/* Navigation */}
         <Navbar
           user={currentUser || null}
           sprint={sprint}
           onOpenAuth={() => setAuthModalOpen(true)}
-          onOpenSubmitPr={() => setSubmitPrModalOpen(true)}
+          onOpenSubmitPr={() => {}}
           onLogout={() => logoutMutation.mutate()}
         />
 
@@ -222,14 +242,14 @@ function RootLayout() {
         </main>
 
         {/* Footer */}
-        <footer className="w-full py-8 border-t border-white/5 text-center text-xs text-fog">
+        <footer className="w-full py-6 border-t border-white/10 text-center text-xs text-zinc-500">
           <div className="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-lavender-accent" />
-              <span>ReflectPR — Built with TanStack Framework &amp; Starlit Cosmos Design</span>
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span>HackAaroh PR Tracker — Event Platform</span>
             </div>
-            <div className="text-steel">
-              Daily GitHub PR ingestion • Manual Admin Scoring • Weekly Leaderboard
+            <div className="text-zinc-500">
+              Automated PR Ingestion • Daily Review &amp; Scoring • Contributor Rankings
             </div>
           </div>
         </footer>
@@ -240,17 +260,6 @@ function RootLayout() {
           onClose={() => setAuthModalOpen(false)}
           onSelectMockUser={handleSelectMockUser}
           isLoading={loginMutation.isPending}
-        />
-
-        <SubmitPrModal
-          isOpen={submitPrModalOpen}
-          onClose={() => setSubmitPrModalOpen(false)}
-          currentUser={currentUser || null}
-          sprint={sprint}
-          onSubmitPr={async (payload) => {
-            await submitPrMutation.mutateAsync(payload);
-          }}
-          isSubmitting={submitPrMutation.isPending}
         />
 
         <ReviewModal
@@ -312,6 +321,8 @@ function LeaderboardView() {
     <LeaderboardPage
       leaderboard={context.leaderboard}
       sprint={context.sprint}
+      pullRequests={context.pullRequests}
+      currentUser={context.currentUser}
       onSelectPrForReview={context.onSelectPrForReview}
       isAdmin={context.currentUser?.role === 'admin'}
     />
@@ -335,7 +346,7 @@ function PullRequestsView() {
       sprint={context.sprint}
       currentUser={context.currentUser}
       onSelectPrForReview={context.onSelectPrForReview}
-      onOpenSubmitPr={context.onOpenSubmitPr}
+      onOpenAuth={context.onOpenAuth}
     />
   );
 }

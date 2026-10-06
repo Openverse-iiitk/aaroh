@@ -35,6 +35,12 @@ export async function fetchSprint(): Promise<Sprint> {
   return res.json();
 }
 
+export async function startSprint(): Promise<Sprint> {
+  const res = await fetch(`${BASE_URL}/sprint/start`, { method: 'POST' });
+  if (!res.ok) throw new Error('Failed to start sprint');
+  return res.json();
+}
+
 export async function toggleSprintStatus(): Promise<Sprint> {
   const res = await fetch(`${BASE_URL}/sprint/toggle-status`, { method: 'POST' });
   if (!res.ok) throw new Error('Failed to toggle sprint status');
@@ -47,27 +53,44 @@ export async function endSprint(): Promise<{ sprint: Sprint; podium: any[] }> {
   return res.json();
 }
 
-export async function startNewSprint(): Promise<Sprint> {
-  const res = await fetch(`${BASE_URL}/sprint/start-new`, { method: 'POST' });
-  if (!res.ok) throw new Error('Failed to start new sprint');
+export async function updateSprintSettings(payload: { dailyUpdateTime?: string; name?: string; trackedRepos?: string[] }): Promise<Sprint> {
+  const res = await fetch(`${BASE_URL}/sprint/update-settings`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  if (!res.ok) throw new Error('Failed to update sprint settings');
   return res.json();
 }
 
-export async function triggerDailySync(): Promise<{ message: string; sprint: Sprint; newPr: PullRequest }> {
+export async function resetToNotStarted(): Promise<Sprint> {
+  const res = await fetch(`${BASE_URL}/sprint/reset-to-not-started`, { method: 'POST' });
+  if (!res.ok) throw new Error('Failed to reset sprint to not started');
+  return res.json();
+}
+
+export async function triggerDailySync(): Promise<{ success: boolean; sprint: Sprint; ingestedPrs: PullRequest[] }> {
   const res = await fetch(`${BASE_URL}/sprint/sync-daily`, { method: 'POST' });
   if (!res.ok) throw new Error('Failed to run daily sync');
   return res.json();
 }
 
-export async function fetchPullRequests(filters?: { author?: string; status?: string; day?: number; repo?: string }): Promise<PullRequest[]> {
+export async function fetchPullRequests(filters?: { author?: string; status?: string; day?: number; repo?: string; mine?: boolean }): Promise<PullRequest[]> {
   const query = new URLSearchParams();
   if (filters?.author) query.set('author', filters.author);
   if (filters?.status) query.set('status', filters.status);
   if (filters?.day) query.set('day', filters.day.toString());
   if (filters?.repo) query.set('repo', filters.repo);
+  if (filters?.mine) query.set('mine', 'true');
 
   const res = await fetch(`${BASE_URL}/pull-requests?${query.toString()}`);
   if (!res.ok) throw new Error('Failed to fetch pull requests');
+  return res.json();
+}
+
+export async function fetchMyReviewsSummary(): Promise<any> {
+  const res = await fetch(`${BASE_URL}/pull-requests/my`);
+  if (!res.ok) throw new Error('Failed to fetch personal PR reviews');
   return res.json();
 }
 

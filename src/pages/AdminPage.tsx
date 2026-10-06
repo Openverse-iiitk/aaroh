@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PullRequest, Sprint, User, AuditLog } from '../types';
-import { Shield, CheckCircle2, Clock, StopCircle, PlayCircle, RefreshCw, Flag, RotateCcw, AlertTriangle, ExternalLink, Award, FileCode, Check } from 'lucide-react';
+import { Shield, CheckCircle2, Clock, StopCircle, PlayCircle, RefreshCw, Flag, RotateCcw, AlertTriangle, ExternalLink, Award, FileCode, Check, Play, Settings, Plus, Trash2, Calendar } from 'lucide-react';
 
 interface AdminPageProps {
   currentUser: User | null;
@@ -10,8 +10,11 @@ interface AdminPageProps {
   onSelectPrForReview: (pr: PullRequest) => void;
   onToggleStatus: () => void;
   onEndTracking: () => void;
+  onStartSprint?: () => void;
   onStartNewSprint: () => void;
   onSyncDaily: () => void;
+  onUpdateSettings?: (payload: { dailyUpdateTime?: string; name?: string; trackedRepos?: string[] }) => void;
+  onResetToNotStarted?: () => void;
   onResetDatabase: () => void;
   onSwitchToAdmin: () => void;
   isSyncing: boolean;
@@ -25,13 +28,19 @@ export const AdminPage: React.FC<AdminPageProps> = ({
   onSelectPrForReview,
   onToggleStatus,
   onEndTracking,
+  onStartSprint,
   onStartNewSprint,
   onSyncDaily,
+  onUpdateSettings,
+  onResetToNotStarted,
   onResetDatabase,
   onSwitchToAdmin,
   isSyncing
 }) => {
   const [confirmEndModal, setConfirmEndModal] = useState(false);
+  const [dailyTimeInput, setDailyTimeInput] = useState(sprint.dailyUpdateTime || '00:00');
+  const [newRepoInput, setNewRepoInput] = useState('');
+  const [settingsSaved, setSettingsSaved] = useState(false);
 
   const isAdmin = currentUser?.role === 'admin';
   const safePrs = Array.isArray(pullRequests) ? pullRequests : [];
@@ -43,16 +52,16 @@ export const AdminPage: React.FC<AdminPageProps> = ({
   if (!isAdmin) {
     return (
       <div className="w-full max-w-3xl mx-auto px-4 py-16 text-center">
-        <div className="panel-glass p-8 space-y-4 border border-lavender-accent/30 shadow-badge">
-          <div className="w-12 h-12 rounded-full bg-deep-indigo border border-lavender-accent/40 mx-auto flex items-center justify-center">
-            <Shield className="w-6 h-6 text-lavender-accent" />
+        <div className="p-8 rounded bg-[#121215] border border-white/10 space-y-4">
+          <div className="w-12 h-12 rounded bg-[#18181b] border border-white/10 mx-auto flex items-center justify-center">
+            <Shield className="w-6 h-6 text-blue-400" />
           </div>
-          <h2 className="text-2xl font-medium text-lilac-white">
-            Admin Review & Tracking Portal
+          <h2 className="text-xl font-semibold text-white">
+            Admin Portal Access
           </h2>
-          <p className="text-sm text-ash max-w-md mx-auto">
-            You are currently browsing as a standard contributor. Admin privileges are required
-            to manually grade pull requests and manage the 7-day tracking lifecycle.
+          <p className="text-xs text-zinc-400 max-w-md mx-auto">
+            You are currently browsing as a participant. Admin privileges are required
+            to start/end tracking, adjust scheduled daily update times, and manually grade pull requests.
           </p>
 
           <div className="pt-4 flex justify-center">
@@ -61,7 +70,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
               className="btn-primary !px-5 !py-2.5"
             >
               <Shield className="w-4 h-4" />
-              <span>Switch to Admin Account (admin-starlit)</span>
+              <span>Switch to Admin Account</span>
             </button>
           </div>
         </div>
@@ -69,31 +78,62 @@ export const AdminPage: React.FC<AdminPageProps> = ({
     );
   }
 
+  const handleSaveSchedule = () => {
+    if (onUpdateSettings) {
+      onUpdateSettings({ dailyUpdateTime: dailyTimeInput });
+      setSettingsSaved(true);
+      setTimeout(() => setSettingsSaved(false), 2500);
+    }
+  };
+
+  const handleAddRepo = () => {
+    if (!newRepoInput.trim() || !onUpdateSettings) return;
+    const current = sprint.trackedRepos || [];
+    if (!current.includes(newRepoInput.trim())) {
+      onUpdateSettings({ trackedRepos: [...current, newRepoInput.trim()] });
+    }
+    setNewRepoInput('');
+  };
+
+  const handleRemoveRepo = (repoToRemove: string) => {
+    if (!onUpdateSettings) return;
+    const current = sprint.trackedRepos || [];
+    onUpdateSettings({ trackedRepos: current.filter(r => r !== repoToRemove) });
+  };
+
   return (
     <div className="w-full max-w-5xl mx-auto px-4 py-8 space-y-8">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
         <div>
-          <div className="badge-pill inline-flex items-center gap-1.5 px-3 py-1 mb-2 text-xs font-medium text-lavender-accent">
-            <Shield className="w-3.5 h-3.5" />
-            <span>Admin Review & Scoring Operations</span>
-          </div>
-          <h2 className="text-3xl font-medium text-lilac-white">
-            Sprint Administration Hub
-          </h2>
-          <p className="text-sm text-ash mt-1">
-            Manually grade pull requests, assign credit scores, update daily tracking, and declare the final leaderboard.
+          <h1 className="text-2xl font-semibold text-white tracking-tight">
+            Event Administration Hub
+          </h1>
+          <p className="text-xs text-zinc-400 mt-1">
+            Manage tracking lifecycle, review pull requests, and configure scheduled daily syncs.
           </p>
         </div>
 
-        <button
-          onClick={onResetDatabase}
-          className="btn-ghost !text-xs !py-1.5 !px-3 self-start sm:self-auto flex items-center gap-1 text-fog hover:text-rose-300"
-          title="Reset back to initial seed data"
-        >
-          <RotateCcw className="w-3.5 h-3.5" />
-          <span>Reset Test Database</span>
-        </button>
+        <div className="flex items-center gap-2">
+          {onResetToNotStarted && (
+            <button
+              onClick={onResetToNotStarted}
+              className="btn-ghost !text-xs !py-1.5 !px-2.5 text-fog hover:text-lilac-white"
+              title="Reset state to not started so you can test starting"
+            >
+              <span>Reset to Pending Start</span>
+            </button>
+          )}
+
+          <button
+            onClick={onResetDatabase}
+            className="btn-ghost !text-xs !py-1.5 !px-3 flex items-center gap-1 text-fog hover:text-rose-300"
+            title="Reset back to initial seed data"
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+            <span>Reset Demo Data</span>
+          </button>
+        </div>
       </div>
 
       {/* Metrics Row */}
@@ -105,7 +145,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
           <span className="text-2xl font-semibold text-amber-300 block">
             {pendingPrs.length}
           </span>
-          <span className="text-[10px] text-ash">Needs manual score</span>
+          <span className="text-[10px] text-ash">Needs admin credit score</span>
         </div>
 
         <div className="panel-glass p-4">
@@ -115,14 +155,14 @@ export const AdminPage: React.FC<AdminPageProps> = ({
           <span className="text-2xl font-semibold text-emerald-400 block">
             {reviewedPrs.length}
           </span>
-          <span className="text-[10px] text-ash">Approved & credited</span>
+          <span className="text-[10px] text-ash">Approved &amp; credited</span>
         </div>
 
         <div className="panel-glass p-4">
           <span className="text-[11px] uppercase tracking-wider text-fog block mb-1">
             Credits Distributed
           </span>
-          <span className="text-2xl font-semibold text-cosmic-gradient block">
+          <span className="text-2xl font-semibold text-white block">
             {totalCreditsAwarded} pts
           </span>
           <span className="text-[10px] text-ash">Across all contributors</span>
@@ -130,38 +170,71 @@ export const AdminPage: React.FC<AdminPageProps> = ({
 
         <div className="panel-glass p-4">
           <span className="text-[11px] uppercase tracking-wider text-fog block mb-1">
-            Sprint Lifecycle
+            Tracking Lifecycle
           </span>
           <span className="text-base font-semibold text-lilac-white block mt-1">
-            {sprint.isFinalized ? 'FINALIZED' : `${sprint.status} (Day ${sprint.currentDay})`}
+            {sprint.status === 'NOT_STARTED'
+              ? 'NOT STARTED'
+              : sprint.isFinalized
+              ? 'FINALIZED'
+              : `${sprint.status} (Day ${sprint.currentDay})`}
           </span>
           <span className="text-[10px] text-ash">
-            {sprint.isFinalized ? 'Leaderboard frozen' : 'Active weekly cycle'}
+            {sprint.status === 'NOT_STARTED'
+              ? 'Awaiting admin start'
+              : sprint.isFinalized
+              ? 'Rankings locked'
+              : 'Admin-controlled duration'}
           </span>
         </div>
       </div>
 
-      {/* Sprint Tracking Controls Panel */}
+      {/* Sprint Lifecycle Management Panel */}
       <div className="panel-glass p-6 space-y-4">
-        <h3 className="text-lg font-medium text-lilac-white flex items-center gap-2">
-          <Clock className="w-4 h-4 text-lavender-accent" />
-          <span>Sprint Tracking Lifecycle Controls</span>
-        </h3>
-        <p className="text-xs text-ash">
-          Control when tracking starts, pauses, or officially ends to produce the final leaderboard.
-        </p>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h3 className="text-lg font-medium text-lilac-white flex items-center gap-2">
+              <Calendar className="w-4 h-4 text-lavender-accent" />
+              <span>Event Lifecycle: Starts and Ends When You Choose</span>
+            </h3>
+            <p className="text-xs text-ash mt-0.5">
+              The tracking event does not have a forced calendar cutoff. You decide when to begin and when to end tracking and reveal final rankings.
+            </p>
+          </div>
 
-        <div className="flex flex-wrap items-center gap-3 pt-2">
-          {!sprint.isFinalized ? (
+          <div className="text-xs text-fog">
+            Status:{' '}
+            <strong className="text-lilac-white">
+              {sprint.status === 'NOT_STARTED'
+                ? 'Pending Start'
+                : sprint.status === 'ACTIVE'
+                ? `Running (Day ${sprint.currentDay})`
+                : sprint.status === 'PAUSED'
+                ? 'Paused'
+                : 'Concluded'}
+            </strong>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-white/5">
+          {sprint.status === 'NOT_STARTED' ? (
+            <button
+              onClick={onStartSprint}
+              className="btn-primary !text-xs !py-2 !px-4 flex items-center gap-1.5"
+            >
+              <Play className="w-4 h-4 fill-current" />
+              <span>Start Tracking Event Now</span>
+            </button>
+          ) : !sprint.isFinalized ? (
             <>
-              {/* Daily Sync */}
+              {/* Daily PR Calculation Trigger */}
               <button
                 onClick={onSyncDaily}
                 disabled={isSyncing || sprint.status !== 'ACTIVE'}
                 className="btn-primary !text-xs !py-2 !px-4 disabled:opacity-40"
               >
                 <RefreshCw className={`w-3.5 h-3.5 ${isSyncing ? 'animate-spin' : ''}`} />
-                <span>{isSyncing ? 'Ingesting Day Updates...' : 'Trigger Daily PR Sync'}</span>
+                <span>{isSyncing ? 'Calculating Daily PRs...' : 'Run Daily Calculation Now'}</span>
               </button>
 
               {/* Pause / Resume */}
@@ -172,39 +245,127 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 {sprint.status === 'ACTIVE' ? (
                   <>
                     <PlayCircle className="w-3.5 h-3.5 text-amber-300" />
-                    <span>Pause Sprint Tracking</span>
+                    <span>Pause Event</span>
                   </>
                 ) : (
                   <>
                     <PlayCircle className="w-3.5 h-3.5 text-emerald-300" />
-                    <span>Resume Sprint Tracking</span>
+                    <span>Resume Event</span>
                   </>
                 )}
               </button>
 
-              {/* End Tracking & Lock Final Leaderboard */}
+              {/* End Tracking */}
               <button
                 onClick={() => setConfirmEndModal(true)}
                 className="px-4 py-2 rounded-btn bg-rose-950/40 border border-rose-500/40 text-rose-300 hover:bg-rose-900/40 hover:text-rose-100 text-xs font-medium transition-colors flex items-center gap-2"
               >
                 <StopCircle className="w-3.5 h-3.5" />
-                <span>End Tracking & Show Final Leaderboard</span>
+                <span>End Tracking &amp; Finalize Leaderboard</span>
               </button>
             </>
           ) : (
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <span className="text-xs text-lavender-accent font-medium">
-                Tracking concluded on {new Date(sprint.finalizedAt || '').toLocaleDateString()}.
+                Tracking concluded on {new Date(sprint.finalizedAt || '').toLocaleDateString()}. Standings are locked.
               </span>
               <button
                 onClick={onStartNewSprint}
                 className="btn-primary !text-xs !py-2 !px-4 flex items-center gap-1.5"
               >
                 <Flag className="w-3.5 h-3.5" />
-                <span>Initialize Next Week Sprint</span>
+                <span>Start New Tracking Event</span>
               </button>
             </div>
           )}
+        </div>
+      </div>
+
+      {/* Daily Update Schedule & Tracked Repos Settings */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Schedule Settings */}
+        <div className="panel-glass p-5 space-y-3">
+          <div className="flex items-center gap-2 text-xs font-medium text-lilac-white">
+            <Clock className="w-4 h-4 text-lavender-accent" />
+            <span>Automatic Daily Calculation Time</span>
+          </div>
+          <p className="text-xs text-ash">
+            Set the specific time of day (UTC) when pull requests are automatically ingested and calculated.
+          </p>
+
+          <div className="flex items-center gap-3 pt-2">
+            <input
+              type="time"
+              value={dailyTimeInput}
+              onChange={(e) => setDailyTimeInput(e.target.value)}
+              className="px-3 py-1.5 rounded-btn bg-midnight-surface border border-white/10 text-xs text-lilac-white focus:outline-none focus:border-lavender-accent font-mono"
+            />
+            <button
+              onClick={handleSaveSchedule}
+              className="btn-secondary !text-xs !py-1.5 !px-3"
+            >
+              Save Schedule
+            </button>
+            {settingsSaved && (
+              <span className="text-xs text-emerald-400 flex items-center gap-1 animate-fade-in">
+                <Check className="w-3.5 h-3.5" /> Saved!
+              </span>
+            )}
+          </div>
+          <span className="text-[11px] text-fog block">
+            Current: {sprint.dailyUpdateTime || '00:00'} UTC (Runs automatically every 24 hours)
+          </span>
+        </div>
+
+        {/* Global Cross-Repository Tracking Scope */}
+        <div className="panel-glass p-5 space-y-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 text-xs font-medium text-lilac-white">
+              <Settings className="w-4 h-4 text-lavender-accent" />
+              <span>Cross-Repository Contributor Scope</span>
+            </div>
+            <span className="px-2 py-0.5 rounded-full bg-emerald-950/40 text-emerald-300 border border-emerald-500/30 text-[10px] font-semibold">
+              Global Scope Active
+            </span>
+          </div>
+          <p className="text-xs text-ash leading-relaxed">
+            All pull requests authored by registered contributors across <strong>all public repositories</strong> on GitHub are automatically tracked, calculated daily, and routed here for admin scoring.
+          </p>
+
+          <div className="pt-2">
+            <span className="text-[11px] text-fog block mb-1.5 font-medium">
+              Active Repositories Discovered from Registered Users ({sprint.trackedRepos?.length || 0}):
+            </span>
+            <div className="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto pr-1">
+              {sprint.trackedRepos?.map((repo) => (
+                <span
+                  key={repo}
+                  className="px-2.5 py-1 rounded-btn bg-midnight-surface border border-white/10 text-[11px] text-lilac-white font-mono flex items-center gap-1.5"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-lavender-accent" />
+                  <span>{repo}</span>
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex gap-2 pt-2 border-t border-white/5">
+            <input
+              type="text"
+              placeholder="Track custom repo: e.g. org/repo"
+              value={newRepoInput}
+              onChange={(e) => setNewRepoInput(e.target.value)}
+              className="flex-1 px-3 py-1.5 rounded-btn bg-midnight-surface border border-white/10 text-xs text-lilac-white focus:outline-none focus:border-lavender-accent placeholder:text-steel"
+            />
+            <button
+              onClick={handleAddRepo}
+              disabled={!newRepoInput.trim()}
+              className="btn-secondary !text-xs !py-1.5 !px-3 disabled:opacity-40"
+            >
+              <Plus className="w-3.5 h-3.5" />
+              <span>Pin Repo</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -213,10 +374,10 @@ export const AdminPage: React.FC<AdminPageProps> = ({
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-medium text-lilac-white flex items-center gap-2">
             <Award className="w-4 h-4 text-lavender-accent" />
-            <span>PR Review Queue ({pendingPrs.length} Pending)</span>
+            <span>PR Review Queue ({pendingPrs.length} Awaiting Score)</span>
           </h3>
           <span className="text-xs text-fog">
-            Review code quality & assign credit points
+            Admin manual code inspection &amp; credit points
           </span>
         </div>
 
@@ -276,7 +437,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                     className="btn-primary !text-xs !py-2 !px-4 flex-shrink-0"
                   >
                     <Shield className="w-3.5 h-3.5" />
-                    <span>Grade & Score PR</span>
+                    <span>Grade &amp; Score PR</span>
                   </button>
                 </div>
               </div>
@@ -284,7 +445,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
           </div>
         ) : (
           <div className="panel-glass p-8 text-center text-xs text-fog">
-            All pull requests have been reviewed and credited!
+            All detected pull requests have been reviewed and credited!
           </div>
         )}
       </div>
@@ -314,7 +475,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
               </div>
 
               <div className="flex items-center gap-3 flex-shrink-0">
-                <span className="text-sm font-semibold text-cosmic-gradient">
+                <span className="text-sm font-semibold text-white">
                   +{pr.creditScore} pts
                 </span>
                 <button
@@ -333,7 +494,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
       <div className="space-y-4">
         <h3 className="text-lg font-medium text-lilac-white flex items-center gap-2">
           <FileCode className="w-4 h-4 text-lavender-accent" />
-          <span>Audit & Operations Log</span>
+          <span>Audit &amp; Operations Log</span>
         </h3>
 
         <div className="panel-glass p-4 max-h-56 overflow-y-auto space-y-2 text-xs font-mono">
@@ -361,10 +522,10 @@ export const AdminPage: React.FC<AdminPageProps> = ({
             </div>
 
             <h3 className="text-xl font-medium text-lilac-white">
-              End Sprint Tracking & Finalize Leaderboard?
+              End Sprint Tracking &amp; Finalize Leaderboard?
             </h3>
             <p className="text-xs text-ash leading-relaxed">
-              This will officially conclude the 7-day tracking sprint, freeze all contributor credits,
+              This will officially conclude the tracking event, freeze all contributor credits,
               lock rankings, and present the celebratory final podium and leaderboard.
             </p>
 

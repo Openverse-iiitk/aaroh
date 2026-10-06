@@ -17,14 +17,10 @@ export const Podium: React.FC<PodiumProps> = ({ topThree, isFinalized }) => {
   return (
     <div className="w-full max-w-4xl mx-auto mb-12">
       <div className="text-center mb-8">
-        <div className="badge-pill inline-flex items-center gap-1.5 px-3 py-1 mb-2 text-xs font-medium text-lilac-white">
-          <Trophy className="w-3.5 h-3.5 text-lavender-accent" />
-          <span>{isFinalized ? 'Final Sprint Champions' : 'Sprint Podium Leaders'}</span>
-        </div>
-        <h3 className="text-2xl font-medium text-lilac-white">
-          {isFinalized ? 'The Final Celestial Podium' : 'Leading Contributors'}
+        <h3 className="text-xl font-semibold text-white">
+          {isFinalized ? 'Top Event Contributors' : 'Current Leaders'}
         </h3>
-        <p className="text-sm text-ash mt-1">
+        <p className="text-xs text-zinc-400 mt-1">
           Scored by administrators based on pull request complexity, code quality, and impact.
         </p>
       </div>
@@ -32,37 +28,37 @@ export const Podium: React.FC<PodiumProps> = ({ topThree, isFinalized }) => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-end pt-6">
         {/* 2nd Place */}
         {second && (
-          <div className="order-2 md:order-1 panel-glass p-5 flex flex-col items-center text-center relative border border-white/5 hover:border-lavender-accent/30 transition-all">
-            <div className="w-6 h-6 rounded-full bg-steel/30 text-ash text-xs font-semibold flex items-center justify-center mb-3 border border-white/10">
+          <div className="order-2 md:order-1 p-5 rounded bg-[#121215] flex flex-col items-center text-center relative border border-white/10">
+            <div className="w-6 h-6 rounded bg-zinc-800 text-zinc-300 text-xs font-semibold flex items-center justify-center mb-3 border border-white/10">
               #2
             </div>
             <div className="relative mb-3">
               <img
                 src={second.user.avatarUrl}
                 alt={second.user.username}
-                className="w-16 h-16 rounded-full border-2 border-slate-300/40 object-cover"
+                className="w-16 h-16 rounded-full border border-white/20 object-cover"
               />
-              <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-midnight-surface flex items-center justify-center border border-white/10 text-ash">
+              <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded bg-[#18181b] flex items-center justify-center border border-white/10 text-zinc-400">
                 <Award className="w-3.5 h-3.5" />
               </div>
             </div>
-            <h4 className="text-base font-medium text-lilac-white">
+            <h4 className="text-sm font-semibold text-white">
               {second.user.name}
             </h4>
-            <span className="text-xs text-fog">@{second.user.username}</span>
+            <span className="text-xs text-zinc-500">@{second.user.username}</span>
 
-            <div className="mt-4 pt-3 border-t border-white/5 w-full flex items-center justify-around text-xs">
+            <div className="mt-4 pt-3 border-t border-white/10 w-full flex items-center justify-around text-xs">
               <div>
-                <span className="text-fog block text-[11px]">Credits</span>
-                <span className="text-sm font-semibold text-lilac-white">
-                  {second.totalCredits}
+                <span className="text-zinc-500 block text-[11px]">Score</span>
+                <span className="text-sm font-semibold text-white">
+                  {second.totalCredits} pts
                 </span>
               </div>
-              <div className="w-px h-6 bg-white/5" />
+              <div className="w-px h-6 bg-white/10" />
               <div>
-                <span className="text-fog block text-[11px]">PRs</span>
-                <span className="text-sm font-medium text-ash flex items-center justify-center gap-1">
-                  <GitPullRequest className="w-3 h-3 text-lavender-accent" />
+                <span className="text-zinc-500 block text-[11px]">PRs</span>
+                <span className="text-sm font-medium text-zinc-300 flex items-center justify-center gap-1">
+                  <GitPullRequest className="w-3 h-3 text-zinc-400" />
                   {second.totalPrs}
                 </span>
               </div>
@@ -72,29 +68,29 @@ export const Podium: React.FC<PodiumProps> = ({ topThree, isFinalized }) => {
 
         {/* 1st Place (Center, Elevated) */}
         {first && (
-          <div className="order-1 md:order-2 panel-glass-elevated p-6 flex flex-col items-center text-center relative border border-lavender-accent/40 shadow-cosmic-glow -translate-y-2">
-            <div className="w-7 h-7 rounded-full bg-amber-400/20 text-amber-300 text-xs font-bold flex items-center justify-center mb-3 border border-amber-400/40">
-              <Star className="w-3.5 h-3.5 fill-amber-300 text-amber-300" />
+          <div className="order-1 md:order-2 p-6 rounded bg-[#18181b] flex flex-col items-center text-center relative border border-white/20">
+            <div className="w-7 h-7 rounded bg-amber-400/20 text-amber-300 text-xs font-bold flex items-center justify-center mb-3 border border-amber-400/30">
+              #1
             </div>
             <div className="relative mb-3">
               <img
                 src={first.user.avatarUrl}
                 alt={first.user.username}
-                className="w-20 h-20 rounded-full border-2 border-lavender-accent object-cover ring-4 ring-lavender-accent/20"
+                className="w-20 h-20 rounded-full border-2 border-white/30 object-cover"
               />
-              <div className="absolute -bottom-1.5 -right-1.5 w-7 h-7 rounded-full bg-deep-indigo flex items-center justify-center border border-lavender-accent text-amber-300 shadow-md">
+              <div className="absolute -bottom-1.5 -right-1.5 w-7 h-7 rounded bg-[#121215] flex items-center justify-center border border-white/20 text-amber-400">
                 <Trophy className="w-4 h-4" />
               </div>
             </div>
-            <h4 className="text-lg font-medium text-pearl">
+            <h4 className="text-base font-semibold text-white">
               {first.user.name}
             </h4>
-            <span className="text-xs text-lavender-accent">@{first.user.username}</span>
+            <span className="text-xs text-zinc-400">@{first.user.username}</span>
 
-            <div className="mt-4 pt-3 border-t border-lavender-accent/20 w-full flex items-center justify-around text-xs">
+            <div className="mt-4 pt-3 border-t border-white/10 w-full flex items-center justify-around text-xs">
               <div>
-                <span className="text-ash block text-[11px]">Total Credits</span>
-                <span className="text-xl font-semibold text-cosmic-gradient">
+                <span className="text-zinc-400 block text-[11px]">Total Score</span>
+                <span className="text-lg font-semibold text-white">
                   {first.totalCredits} pts
                 </span>
               </div>

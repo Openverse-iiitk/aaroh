@@ -1,20 +1,27 @@
 {
   "sprint": {
-    "id": "sprint-week-41",
-    "name": "HackAaroh Starlit Weekly Sprint",
-    "description": "Weekly GitHub open-source PR tracking sprint. Admins review PRs daily and award credits.",
+    "id": "sprint-hackaaroh-current",
+    "name": "Global Open Source PR Tracking Sprint",
+    "description": "Automated GitHub pull request tracking across all repositories for registered users. Admins review PRs daily and award credits.",
     "status": "ACTIVE",
-    "startDate": "2026-10-02T07:18:20.949Z",
-    "endDate": "2026-10-09T07:18:20.949Z",
-    "currentDay": 4,
-    "totalDays": 7,
-    "lastSyncAt": "2026-10-06T05:18:20.949Z",
-    "nextSyncAt": "2026-10-07T05:18:20.949Z",
+    "dailyUpdateTime": "00:00",
+    "startDate": "2026-10-03T09:42:45.191Z",
+    "endDate": null,
+    "currentDay": 5,
+    "lastSyncAt": "2026-10-06T09:51:09.360Z",
+    "nextSyncAt": "2026-10-07T00:00:00.000Z",
+    "trackingScope": "ALL_REPOSITORIES",
     "trackedRepos": [
-      "openverse/hackaaroh",
-      "tanstack/react-router",
       "facebook/react",
-      "astral-sh/uv"
+      "nodejs/node",
+      "rust-lang/rust",
+      "tailwindlabs/tailwindcss",
+      "tanstack/table",
+      "microsoft/vscode",
+      "shadcn-ui/ui",
+      "astral-sh/uv",
+      "torvalds/linux",
+      "openverse/hackaaroh"
     ],
     "isFinalized": false,
     "finalizedAt": null,
@@ -29,7 +36,7 @@
       "bio": "Full-stack builder & open source enthusiast",
       "htmlUrl": "https://github.com/manav-codes",
       "role": "contributor",
-      "createdAt": "2026-10-02T07:18:20.949Z"
+      "createdAt": "2026-10-03T09:42:45.191Z"
     },
     {
       "id": "usr_sarah",
@@ -39,7 +46,7 @@
       "bio": "Systems engineer & TypeScript fanatic",
       "htmlUrl": "https://github.com/sarah-dev",
       "role": "contributor",
-      "createdAt": "2026-10-02T07:18:20.949Z"
+      "createdAt": "2026-10-03T09:42:45.191Z"
     },
     {
       "id": "usr_alex",
@@ -49,7 +56,7 @@
       "bio": "Rust & WebAssembly specialist",
       "htmlUrl": "https://github.com/alex-rustacean",
       "role": "contributor",
-      "createdAt": "2026-10-02T07:18:20.949Z"
+      "createdAt": "2026-10-03T09:42:45.191Z"
     },
     {
       "id": "usr_elena",
@@ -59,7 +66,7 @@
       "bio": "Distributed systems & TanStack fan",
       "htmlUrl": "https://github.com/elena-cloud",
       "role": "contributor",
-      "createdAt": "2026-10-02T07:18:20.949Z"
+      "createdAt": "2026-10-03T09:42:45.191Z"
     },
     {
       "id": "usr_devon",
@@ -69,7 +76,7 @@
       "bio": "Frontend architect and performance junkie",
       "htmlUrl": "https://github.com/devon-craft",
       "role": "contributor",
-      "createdAt": "2026-10-02T07:18:20.949Z"
+      "createdAt": "2026-10-03T09:42:45.191Z"
     },
     {
       "id": "usr_admin",
@@ -79,21 +86,217 @@
       "bio": "Sprint Administrator & Lead Code Reviewer",
       "htmlUrl": "https://github.com/admin-starlit",
       "role": "admin",
-      "createdAt": "2026-10-02T07:18:20.949Z"
+      "createdAt": "2026-10-03T09:42:45.191Z"
+    },
+    {
+      "id": "usr_jordan-dev",
+      "username": "jordan-dev",
+      "name": "Jordan Taylor",
+      "avatarUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/jordan-dev",
+      "role": "contributor",
+      "createdAt": "2026-10-06T09:50:37.604Z"
     }
   ],
   "pullRequests": [
     {
-      "id": "pr-101",
-      "githubPrNumber": 142,
+      "id": "pr-1791280269371-iy4f",
+      "githubPrNumber": 406,
+      "repo": "oven-sh/bun",
+      "title": "perf: optimize AST traversal in query compiler",
+      "description": "Automatically detected on GitHub for @jordan-dev in oven-sh/bun during the Day 5 scheduled calculation.",
+      "url": "https://github.com/oven-sh/bun/pull/406",
+      "state": "merged",
+      "author": "jordan-dev",
+      "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
+      "createdAt": "2026-10-06T09:51:09.360Z",
+      "dayOfSprint": 5,
+      "additions": 180,
+      "deletions": 54,
+      "commitsCount": 4,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "compiler",
+        "perf"
+      ]
+    },
+    {
+      "id": "pr-1791280269370-dnwh",
+      "githubPrNumber": 247,
       "repo": "openverse/hackaaroh",
-      "title": "feat: add resilient TanStack Query caching layer for PR ingestion",
-      "description": "Implements optimistic updates and multi-level query invalidation for the daily leaderboard.",
-      "url": "https://github.com/openverse/hackaaroh/pull/142",
+      "title": "fix: resolve race condition in concurrent daily sync scheduler",
+      "description": "Automatically detected on GitHub for @elena-cloud in openverse/hackaaroh during the Day 5 scheduled calculation.",
+      "url": "https://github.com/openverse/hackaaroh/pull/247",
+      "state": "merged",
+      "author": "elena-cloud",
+      "authorAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-06T09:51:09.360Z",
+      "dayOfSprint": 5,
+      "additions": 95,
+      "deletions": 12,
+      "commitsCount": 4,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "bugfix",
+        "concurrency"
+      ]
+    },
+    {
+      "id": "pr-1791280269362-fz22",
+      "githubPrNumber": 461,
+      "repo": "tanstack/table",
+      "title": "feat: add virtualized row windowing model adapter",
+      "description": "Automatically detected on GitHub for @alex-rustacean in tanstack/table during the Day 5 scheduled calculation.",
+      "url": "https://github.com/tanstack/table/pull/461",
+      "state": "merged",
+      "author": "alex-rustacean",
+      "authorAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-06T09:51:09.360Z",
+      "dayOfSprint": 5,
+      "additions": 340,
+      "deletions": 50,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "table",
+        "performance"
+      ]
+    },
+    {
+      "id": "pr-1791280269361-tfpy",
+      "githubPrNumber": 736,
+      "repo": "torvalds/linux",
+      "title": "fix: handle memory compaction deadlock in eBPF filter allocator",
+      "description": "Automatically detected on GitHub for @manav-codes in torvalds/linux during the Day 5 scheduled calculation.",
+      "url": "https://github.com/torvalds/linux/pull/736",
       "state": "merged",
       "author": "manav-codes",
       "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
-      "createdAt": "2026-10-02T17:18:20.949Z",
+      "createdAt": "2026-10-06T09:51:09.360Z",
+      "dayOfSprint": 5,
+      "additions": 160,
+      "deletions": 48,
+      "commitsCount": 3,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "linux",
+        "kernel"
+      ]
+    },
+    {
+      "id": "pr-1791280237607-1-bd2",
+      "githubPrNumber": 862,
+      "repo": "tailwindlabs/tailwindcss",
+      "title": "feat: add container queries runtime polyfill for tailwind engine",
+      "description": "Automatically detected on GitHub across all repositories for @jordan-dev.",
+      "url": "https://github.com/tailwindlabs/tailwindcss/pull/862",
+      "state": "open",
+      "author": "jordan-dev",
+      "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
+      "createdAt": "2026-10-06T09:50:37.607Z",
+      "dayOfSprint": 4,
+      "additions": 175,
+      "deletions": 15,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "tailwind",
+        "css"
+      ]
+    },
+    {
+      "id": "pr-1791280237606-0-y1j",
+      "githubPrNumber": 891,
+      "repo": "vercel/next.js",
+      "title": "feat: implement concurrent task scheduler with priority queue",
+      "description": "Automatically detected on GitHub across all repositories for @jordan-dev.",
+      "url": "https://github.com/vercel/next.js/pull/891",
+      "state": "open",
+      "author": "jordan-dev",
+      "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
+      "createdAt": "2026-10-06T09:50:37.606Z",
+      "dayOfSprint": 4,
+      "additions": 310,
+      "deletions": 25,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "scheduler",
+        "nextjs"
+      ]
+    },
+    {
+      "id": "pr-101",
+      "githubPrNumber": 142,
+      "repo": "facebook/react",
+      "title": "feat: add resilient TanStack Query caching layer for PR ingestion",
+      "description": "Automatically tracked from facebook/react. Optimistic updates and multi-level query invalidation.",
+      "url": "https://github.com/facebook/react/pull/142",
+      "state": "merged",
+      "author": "manav-codes",
+      "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-03T19:42:45.191Z",
       "dayOfSprint": 1,
       "additions": 384,
       "deletions": 42,
@@ -108,9 +311,9 @@
         "testCoverage": 20
       },
       "reviewedBy": "admin-starlit",
-      "reviewedAt": "2026-10-02T21:18:20.949Z",
+      "reviewedAt": "2026-10-03T23:42:45.191Z",
       "tags": [
-        "tanstack",
+        "react",
         "caching",
         "feat"
       ]
@@ -118,14 +321,14 @@
     {
       "id": "pr-102",
       "githubPrNumber": 143,
-      "repo": "openverse/hackaaroh",
-      "title": "fix: handle rate-limit throttling in GitHub sync worker",
-      "description": "Adds exponential backoff and secondary token pool rotation when rate limits hit 429.",
-      "url": "https://github.com/openverse/hackaaroh/pull/143",
+      "repo": "nodejs/node",
+      "title": "fix: handle rate-limit throttling in HTTP client connection pool",
+      "description": "Automatically tracked from nodejs/node. Exponential backoff and token pool rotation.",
+      "url": "https://github.com/nodejs/node/pull/143",
       "state": "merged",
       "author": "sarah-dev",
       "authorAvatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
-      "createdAt": "2026-10-02T23:18:20.949Z",
+      "createdAt": "2026-10-04T01:42:45.191Z",
       "dayOfSprint": 1,
       "additions": 128,
       "deletions": 19,
@@ -140,24 +343,24 @@
         "testCoverage": 19
       },
       "reviewedBy": "admin-starlit",
-      "reviewedAt": "2026-10-03T03:18:20.949Z",
+      "reviewedAt": "2026-10-04T05:42:45.191Z",
       "tags": [
         "bugfix",
-        "github-api",
+        "nodejs",
         "resilience"
       ]
     },
     {
       "id": "pr-103",
       "githubPrNumber": 144,
-      "repo": "openverse/hackaaroh",
-      "title": "perf: optimize daily snapshot aggregation query index",
-      "description": "Reduced aggregation overhead from 450ms down to 14ms across 10,000 historical records.",
-      "url": "https://github.com/openverse/hackaaroh/pull/144",
+      "repo": "rust-lang/rust",
+      "title": "perf: optimize daily snapshot aggregation query index in compiler",
+      "description": "Automatically tracked from rust-lang/rust. Reduced aggregation overhead from 450ms down to 14ms.",
+      "url": "https://github.com/rust-lang/rust/pull/144",
       "state": "merged",
       "author": "alex-rustacean",
       "authorAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
-      "createdAt": "2026-10-03T15:18:20.949Z",
+      "createdAt": "2026-10-04T17:42:45.191Z",
       "dayOfSprint": 2,
       "additions": 64,
       "deletions": 88,
@@ -172,24 +375,24 @@
         "testCoverage": 21
       },
       "reviewedBy": "admin-starlit",
-      "reviewedAt": "2026-10-03T21:18:20.949Z",
+      "reviewedAt": "2026-10-04T23:42:45.191Z",
       "tags": [
         "perf",
-        "database",
-        "optimization"
+        "rust",
+        "compiler"
       ]
     },
     {
       "id": "pr-104",
       "githubPrNumber": 145,
-      "repo": "openverse/hackaaroh",
+      "repo": "tailwindlabs/tailwindcss",
       "title": "ui: implement starlit cosmos glass panels and aurora dividers",
-      "description": "Implements Design token specifications with inset rim-light glows and Aeonik medium typography.",
-      "url": "https://github.com/openverse/hackaaroh/pull/145",
+      "description": "Automatically tracked from tailwindlabs/tailwindcss. DESIGN.md tokens with inset rim-light glows.",
+      "url": "https://github.com/tailwindlabs/tailwindcss/pull/145",
       "state": "merged",
       "author": "manav-codes",
       "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
-      "createdAt": "2026-10-03T19:18:20.949Z",
+      "createdAt": "2026-10-04T21:42:45.191Z",
       "dayOfSprint": 2,
       "additions": 512,
       "deletions": 110,
@@ -204,24 +407,24 @@
         "testCoverage": 22
       },
       "reviewedBy": "admin-starlit",
-      "reviewedAt": "2026-10-04T01:18:20.949Z",
+      "reviewedAt": "2026-10-05T03:42:45.191Z",
       "tags": [
         "ui",
-        "design-system",
-        "tailwind"
+        "tailwind",
+        "design-system"
       ]
     },
     {
       "id": "pr-105",
       "githubPrNumber": 146,
-      "repo": "openverse/hackaaroh",
+      "repo": "tanstack/table",
       "title": "feat: add TanStack Table column sorting and pagination for leaderboard",
-      "description": "Integrates @tanstack/react-table headless grid with customizable metric filters.",
-      "url": "https://github.com/openverse/hackaaroh/pull/146",
+      "description": "Automatically tracked from tanstack/table. Integrates @tanstack/react-table headless grid.",
+      "url": "https://github.com/tanstack/table/pull/146",
       "state": "merged",
       "author": "sarah-dev",
       "authorAvatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
-      "createdAt": "2026-10-04T13:18:20.949Z",
+      "createdAt": "2026-10-05T15:42:45.191Z",
       "dayOfSprint": 3,
       "additions": 430,
       "deletions": 35,
@@ -236,24 +439,24 @@
         "testCoverage": 22
       },
       "reviewedBy": "admin-starlit",
-      "reviewedAt": "2026-10-02T08:18:20.949Z",
+      "reviewedAt": "2026-10-03T10:42:45.191Z",
       "tags": [
         "tanstack-table",
         "ui",
-        "leaderboard"
+        "virtualization"
       ]
     },
     {
       "id": "pr-106",
       "githubPrNumber": 147,
-      "repo": "openverse/hackaaroh",
+      "repo": "microsoft/vscode",
       "title": "docs: comprehensive guide for manual admin credit scoring rubric",
-      "description": "Documents scoring guidelines across Code Quality, Complexity, Impact, and Tests.",
-      "url": "https://github.com/openverse/hackaaroh/pull/147",
+      "description": "Automatically tracked from microsoft/vscode. Scoring guidelines across 4 core axes.",
+      "url": "https://github.com/microsoft/vscode/pull/147",
       "state": "merged",
       "author": "elena-cloud",
       "authorAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
-      "createdAt": "2026-10-04T17:18:20.949Z",
+      "createdAt": "2026-10-05T19:42:45.191Z",
       "dayOfSprint": 3,
       "additions": 195,
       "deletions": 12,
@@ -268,23 +471,24 @@
         "testCoverage": 17
       },
       "reviewedBy": "admin-starlit",
-      "reviewedAt": "2026-10-04T23:18:20.949Z",
+      "reviewedAt": "2026-10-06T01:42:45.191Z",
       "tags": [
         "docs",
+        "vscode",
         "rubric"
       ]
     },
     {
       "id": "pr-107",
       "githubPrNumber": 148,
-      "repo": "openverse/hackaaroh",
-      "title": "feat: add automated daily sync cron with manual admin override",
-      "description": "Implements recurring sync scheduler every 24h with lock guards against duplicate ingestion.",
-      "url": "https://github.com/openverse/hackaaroh/pull/148",
+      "repo": "shadcn-ui/ui",
+      "title": "feat: add accessible starlit modal primitive with focus trapping",
+      "description": "Automatically tracked across repositories during daily scheduled ingestion. In review queue for admin score.",
+      "url": "https://github.com/shadcn-ui/ui/pull/148",
       "state": "open",
       "author": "devon-craft",
       "authorAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
-      "createdAt": "2026-10-05T10:18:20.949Z",
+      "createdAt": "2026-10-06T12:42:45.191Z",
       "dayOfSprint": 4,
       "additions": 290,
       "deletions": 22,
@@ -301,22 +505,22 @@
       "reviewedBy": null,
       "reviewedAt": null,
       "tags": [
-        "cron",
-        "daily-sync",
-        "worker"
+        "shadcn",
+        "ui",
+        "a11y"
       ]
     },
     {
       "id": "pr-108",
       "githubPrNumber": 149,
-      "repo": "openverse/hackaaroh",
-      "title": "feat: add sprint finalization and podium snapshot generator",
-      "description": "Allows sprint admins to freeze rankings and declare winners with cryptographic timestamp hash.",
-      "url": "https://github.com/openverse/hackaaroh/pull/149",
+      "repo": "astral-sh/uv",
+      "title": "feat: add zero-allocation byte serializer in rust microservice",
+      "description": "Automatically tracked across repositories during daily scheduled ingestion. In review queue for admin score.",
+      "url": "https://github.com/astral-sh/uv/pull/149",
       "state": "open",
       "author": "manav-codes",
       "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
-      "createdAt": "2026-10-05T13:18:20.949Z",
+      "createdAt": "2026-10-06T15:42:45.191Z",
       "dayOfSprint": 4,
       "additions": 340,
       "deletions": 15,
@@ -333,22 +537,22 @@
       "reviewedBy": null,
       "reviewedAt": null,
       "tags": [
-        "sprint",
-        "leaderboard",
-        "podium"
+        "rust",
+        "uv",
+        "perf"
       ]
     },
     {
       "id": "pr-109",
       "githubPrNumber": 150,
-      "repo": "openverse/hackaaroh",
-      "title": "test: add end-to-end integration tests for credit audit trail",
-      "description": "Simulates admin scoring lifecycle and validates leaderboard recalculation invariant.",
-      "url": "https://github.com/openverse/hackaaroh/pull/150",
+      "repo": "torvalds/linux",
+      "title": "test: add end-to-end integration tests for eBPF security telemetry",
+      "description": "Automatically tracked across repositories during daily scheduled ingestion. In review queue for admin score.",
+      "url": "https://github.com/torvalds/linux/pull/150",
       "state": "open",
       "author": "alex-rustacean",
       "authorAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
-      "createdAt": "2026-10-05T17:18:20.949Z",
+      "createdAt": "2026-10-06T19:42:45.191Z",
       "dayOfSprint": 4,
       "additions": 410,
       "deletions": 18,
@@ -365,47 +569,82 @@
       "reviewedBy": null,
       "reviewedAt": null,
       "tags": [
-        "tests",
-        "e2e",
-        "security"
+        "linux",
+        "kernel",
+        "tests"
       ]
     }
   ],
   "auditLogs": [
     {
+      "id": "log-1791284798917-4oul",
+      "action": "USER_LOGIN",
+      "actor": "admin-starlit",
+      "details": "User connected with role admin",
+      "timestamp": "2026-10-06T11:06:38.917Z"
+    },
+    {
+      "id": "log-1791284797547-5mqk",
+      "action": "USER_LOGIN",
+      "actor": "admin-starlit",
+      "details": "User connected with role admin",
+      "timestamp": "2026-10-06T11:06:37.547Z"
+    },
+    {
+      "id": "log-1791284794617-r0x2",
+      "action": "USER_LOGIN",
+      "actor": "admin-starlit",
+      "details": "User connected with role admin",
+      "timestamp": "2026-10-06T11:06:34.617Z"
+    },
+    {
+      "id": "log-1791280323290-kv5e",
+      "action": "USER_LOGIN",
+      "actor": "manav-codes",
+      "details": "User connected with role contributor",
+      "timestamp": "2026-10-06T09:52:03.290Z"
+    },
+    {
+      "id": "log-1791280269372-swuy",
+      "action": "MANUAL_DAILY_UPDATE",
+      "actor": "ADMIN",
+      "details": "Day 5 daily calculation completed across all repositories. Ingested 4 PRs across 4 distinct repositories for registered contributors into the admin review queue.",
+      "timestamp": "2026-10-06T09:51:09.372Z"
+    },
+    {
+      "id": "log-1791280237608-ch47",
+      "action": "USER_LOGIN",
+      "actor": "jordan-dev",
+      "details": "User connected with role contributor",
+      "timestamp": "2026-10-06T09:50:37.608Z"
+    },
+    {
       "id": "log-1",
       "action": "SPRINT_STARTED",
       "actor": "admin-starlit",
-      "details": "Weekly sprint initialized with 7-day tracking window",
-      "timestamp": "2026-10-02T07:18:20.949Z"
+      "details": "Admin officially started PR tracking event. Daily update scheduled at 00:00 UTC.",
+      "timestamp": "2026-10-03T09:42:45.191Z"
     },
     {
       "id": "log-2",
-      "action": "PR_REVIEWED",
-      "actor": "admin-starlit",
-      "details": "Awarded 85 credits to PR #142 (manav-codes)",
-      "timestamp": "2026-10-02T21:18:20.949Z"
+      "action": "AUTOMATIC_DAILY_UPDATE",
+      "actor": "SCHEDULED_WORKER",
+      "details": "Daily PR calculation completed for Day 2. Synced with tracked repositories.",
+      "timestamp": "2026-10-04T09:42:45.191Z"
     },
     {
       "id": "log-3",
-      "action": "DAILY_SYNC",
-      "actor": "SYSTEM_CRON",
-      "details": "Day 2 tracking update finished. 2 new PRs ingested.",
-      "timestamp": "2026-10-03T07:18:20.949Z"
+      "action": "PR_REVIEWED",
+      "actor": "admin-starlit",
+      "details": "Admin reviewed PR #144 (alex-rustacean) -> Awarded 92 credits",
+      "timestamp": "2026-10-04T23:42:45.191Z"
     },
     {
       "id": "log-4",
-      "action": "PR_REVIEWED",
-      "actor": "admin-starlit",
-      "details": "Awarded 92 credits to PR #144 (alex-rustacean)",
-      "timestamp": "2026-10-03T21:18:20.949Z"
-    },
-    {
-      "id": "log-5",
-      "action": "DAILY_SYNC",
-      "actor": "SYSTEM_CRON",
-      "details": "Day 3 tracking update finished. 2 new PRs ingested.",
-      "timestamp": "2026-10-04T07:18:20.949Z"
+      "action": "AUTOMATIC_DAILY_UPDATE",
+      "actor": "SCHEDULED_WORKER",
+      "details": "Daily PR calculation completed for Day 3. Synced with tracked repositories.",
+      "timestamp": "2026-10-05T09:42:45.191Z"
     }
   ]
 }

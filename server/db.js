@@ -6,29 +6,46 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const DB_FILE = path.join(__dirname, 'data.json');
 
-// Initial seed data representing a 1-week GitHub Sprint
+export function calculateNextSync(timeStr = '00:00') {
+  const [hours, minutes] = (timeStr || '00:00').split(':').map(Number);
+  const now = new Date();
+  const next = new Date(now);
+  next.setUTCHours(isNaN(hours) ? 0 : hours, isNaN(minutes) ? 0 : minutes, 0, 0);
+  if (next <= now) {
+    next.setUTCDate(next.getUTCDate() + 1);
+  }
+  return next.toISOString();
+}
+
+// Initial seed data with admin-controlled tracking lifecycle
 const getInitialSeed = () => {
   const now = new Date();
-  const weekStart = new Date(now.getTime() - 4 * 24 * 60 * 60 * 1000); // 4 days into current sprint
-  const weekEnd = new Date(weekStart.getTime() + 7 * 24 * 60 * 60 * 1000);
+  const sprintStart = new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000); // Started 3 days ago
 
   return {
     sprint: {
-      id: 'sprint-week-41',
-      name: 'HackAaroh Starlit Weekly Sprint',
-      description: 'Weekly GitHub open-source PR tracking sprint. Admins review PRs daily and award credits.',
-      status: 'ACTIVE', // ACTIVE | PAUSED | FINALIZED
-      startDate: weekStart.toISOString(),
-      endDate: weekEnd.toISOString(),
-      currentDay: 4, // Day 4 of 7
-      totalDays: 7,
-      lastSyncAt: new Date(now.getTime() - 2 * 60 * 60 * 1000).toISOString(),
-      nextSyncAt: new Date(now.getTime() + 22 * 60 * 60 * 1000).toISOString(),
+      id: 'sprint-hackaaroh-current',
+      name: 'Global Open Source PR Tracking Sprint',
+      description: 'Automated GitHub pull request tracking across all repositories for registered users. Admins review PRs daily and award credits.',
+      status: 'ACTIVE', // 'NOT_STARTED' | 'ACTIVE' | 'PAUSED' | 'FINALIZED'
+      dailyUpdateTime: '00:00', // Specific time everyday (UTC)
+      startDate: sprintStart.toISOString(),
+      endDate: null,
+      currentDay: 4, // Day 4 since started
+      lastSyncAt: new Date(now.getTime() - 4 * 60 * 60 * 1000).toISOString(),
+      nextSyncAt: calculateNextSync('00:00'),
+      trackingScope: 'ALL_REPOSITORIES',
       trackedRepos: [
-        'openverse/hackaaroh',
-        'tanstack/react-router',
         'facebook/react',
-        'astral-sh/uv'
+        'nodejs/node',
+        'rust-lang/rust',
+        'tailwindlabs/tailwindcss',
+        'tanstack/table',
+        'microsoft/vscode',
+        'shadcn-ui/ui',
+        'astral-sh/uv',
+        'torvalds/linux',
+        'openverse/hackaaroh'
       ],
       isFinalized: false,
       finalizedAt: null,
@@ -43,7 +60,7 @@ const getInitialSeed = () => {
         bio: 'Full-stack builder & open source enthusiast',
         htmlUrl: 'https://github.com/manav-codes',
         role: 'contributor',
-        createdAt: weekStart.toISOString()
+        createdAt: sprintStart.toISOString()
       },
       {
         id: 'usr_sarah',
@@ -53,7 +70,7 @@ const getInitialSeed = () => {
         bio: 'Systems engineer & TypeScript fanatic',
         htmlUrl: 'https://github.com/sarah-dev',
         role: 'contributor',
-        createdAt: weekStart.toISOString()
+        createdAt: sprintStart.toISOString()
       },
       {
         id: 'usr_alex',
@@ -63,7 +80,7 @@ const getInitialSeed = () => {
         bio: 'Rust & WebAssembly specialist',
         htmlUrl: 'https://github.com/alex-rustacean',
         role: 'contributor',
-        createdAt: weekStart.toISOString()
+        createdAt: sprintStart.toISOString()
       },
       {
         id: 'usr_elena',
@@ -73,7 +90,7 @@ const getInitialSeed = () => {
         bio: 'Distributed systems & TanStack fan',
         htmlUrl: 'https://github.com/elena-cloud',
         role: 'contributor',
-        createdAt: weekStart.toISOString()
+        createdAt: sprintStart.toISOString()
       },
       {
         id: 'usr_devon',
@@ -83,7 +100,7 @@ const getInitialSeed = () => {
         bio: 'Frontend architect and performance junkie',
         htmlUrl: 'https://github.com/devon-craft',
         role: 'contributor',
-        createdAt: weekStart.toISOString()
+        createdAt: sprintStart.toISOString()
       },
       {
         id: 'usr_admin',
@@ -93,21 +110,21 @@ const getInitialSeed = () => {
         bio: 'Sprint Administrator & Lead Code Reviewer',
         htmlUrl: 'https://github.com/admin-starlit',
         role: 'admin',
-        createdAt: weekStart.toISOString()
+        createdAt: sprintStart.toISOString()
       }
     ],
     pullRequests: [
       {
         id: 'pr-101',
         githubPrNumber: 142,
-        repo: 'openverse/hackaaroh',
+        repo: 'facebook/react',
         title: 'feat: add resilient TanStack Query caching layer for PR ingestion',
-        description: 'Implements optimistic updates and multi-level query invalidation for the daily leaderboard.',
-        url: 'https://github.com/openverse/hackaaroh/pull/142',
+        description: 'Automatically tracked from facebook/react. Optimistic updates and multi-level query invalidation.',
+        url: 'https://github.com/facebook/react/pull/142',
         state: 'merged',
         author: 'manav-codes',
         authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
-        createdAt: new Date(weekStart.getTime() + 10 * 60 * 60 * 1000).toISOString(),
+        createdAt: new Date(sprintStart.getTime() + 10 * 60 * 60 * 1000).toISOString(),
         dayOfSprint: 1,
         additions: 384,
         deletions: 42,
@@ -117,20 +134,20 @@ const getInitialSeed = () => {
         adminFeedback: 'Exceptional test coverage and cleanly structured caching boundaries. Great impact!',
         adminCriteria: { quality: 23, complexity: 22, impact: 20, testCoverage: 20 },
         reviewedBy: 'admin-starlit',
-        reviewedAt: new Date(weekStart.getTime() + 14 * 60 * 60 * 1000).toISOString(),
-        tags: ['tanstack', 'caching', 'feat']
+        reviewedAt: new Date(sprintStart.getTime() + 14 * 60 * 60 * 1000).toISOString(),
+        tags: ['react', 'caching', 'feat']
       },
       {
         id: 'pr-102',
         githubPrNumber: 143,
-        repo: 'openverse/hackaaroh',
-        title: 'fix: handle rate-limit throttling in GitHub sync worker',
-        description: 'Adds exponential backoff and secondary token pool rotation when rate limits hit 429.',
-        url: 'https://github.com/openverse/hackaaroh/pull/143',
+        repo: 'nodejs/node',
+        title: 'fix: handle rate-limit throttling in HTTP client connection pool',
+        description: 'Automatically tracked from nodejs/node. Exponential backoff and token pool rotation.',
+        url: 'https://github.com/nodejs/node/pull/143',
         state: 'merged',
         author: 'sarah-dev',
         authorAvatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80',
-        createdAt: new Date(weekStart.getTime() + 16 * 60 * 60 * 1000).toISOString(),
+        createdAt: new Date(sprintStart.getTime() + 16 * 60 * 60 * 1000).toISOString(),
         dayOfSprint: 1,
         additions: 128,
         deletions: 19,
@@ -140,20 +157,20 @@ const getInitialSeed = () => {
         adminFeedback: 'Solid retry policy and defensive error handling. Saved the sync pipeline.',
         adminCriteria: { quality: 20, complexity: 19, impact: 20, testCoverage: 19 },
         reviewedBy: 'admin-starlit',
-        reviewedAt: new Date(weekStart.getTime() + 20 * 60 * 60 * 1000).toISOString(),
-        tags: ['bugfix', 'github-api', 'resilience']
+        reviewedAt: new Date(sprintStart.getTime() + 20 * 60 * 60 * 1000).toISOString(),
+        tags: ['bugfix', 'nodejs', 'resilience']
       },
       {
         id: 'pr-103',
         githubPrNumber: 144,
-        repo: 'openverse/hackaaroh',
-        title: 'perf: optimize daily snapshot aggregation query index',
-        description: 'Reduced aggregation overhead from 450ms down to 14ms across 10,000 historical records.',
-        url: 'https://github.com/openverse/hackaaroh/pull/144',
+        repo: 'rust-lang/rust',
+        title: 'perf: optimize daily snapshot aggregation query index in compiler',
+        description: 'Automatically tracked from rust-lang/rust. Reduced aggregation overhead from 450ms down to 14ms.',
+        url: 'https://github.com/rust-lang/rust/pull/144',
         state: 'merged',
         author: 'alex-rustacean',
         authorAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
-        createdAt: new Date(weekStart.getTime() + 32 * 60 * 60 * 1000).toISOString(),
+        createdAt: new Date(sprintStart.getTime() + 32 * 60 * 60 * 1000).toISOString(),
         dayOfSprint: 2,
         additions: 64,
         deletions: 88,
@@ -163,20 +180,20 @@ const getInitialSeed = () => {
         adminFeedback: 'Brilliant index optimization and benchmark proof included. Huge performance win.',
         adminCriteria: { quality: 24, complexity: 23, impact: 24, testCoverage: 21 },
         reviewedBy: 'admin-starlit',
-        reviewedAt: new Date(weekStart.getTime() + 38 * 60 * 60 * 1000).toISOString(),
-        tags: ['perf', 'database', 'optimization']
+        reviewedAt: new Date(sprintStart.getTime() + 38 * 60 * 60 * 1000).toISOString(),
+        tags: ['perf', 'rust', 'compiler']
       },
       {
         id: 'pr-104',
         githubPrNumber: 145,
-        repo: 'openverse/hackaaroh',
+        repo: 'tailwindlabs/tailwindcss',
         title: 'ui: implement starlit cosmos glass panels and aurora dividers',
-        description: 'Implements Design token specifications with inset rim-light glows and Aeonik medium typography.',
-        url: 'https://github.com/openverse/hackaaroh/pull/145',
+        description: 'Automatically tracked from tailwindlabs/tailwindcss. DESIGN.md tokens with inset rim-light glows.',
+        url: 'https://github.com/tailwindlabs/tailwindcss/pull/145',
         state: 'merged',
         author: 'manav-codes',
         authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
-        createdAt: new Date(weekStart.getTime() + 36 * 60 * 60 * 1000).toISOString(),
+        createdAt: new Date(sprintStart.getTime() + 36 * 60 * 60 * 1000).toISOString(),
         dayOfSprint: 2,
         additions: 512,
         deletions: 110,
@@ -186,20 +203,20 @@ const getInitialSeed = () => {
         adminFeedback: 'Flawless adherence to DESIGN.md tokens and monochromatic quiet aesthetic.',
         adminCriteria: { quality: 24, complexity: 21, impact: 23, testCoverage: 22 },
         reviewedBy: 'admin-starlit',
-        reviewedAt: new Date(weekStart.getTime() + 42 * 60 * 60 * 1000).toISOString(),
-        tags: ['ui', 'design-system', 'tailwind']
+        reviewedAt: new Date(sprintStart.getTime() + 42 * 60 * 60 * 1000).toISOString(),
+        tags: ['ui', 'tailwind', 'design-system']
       },
       {
         id: 'pr-105',
         githubPrNumber: 146,
-        repo: 'openverse/hackaaroh',
+        repo: 'tanstack/table',
         title: 'feat: add TanStack Table column sorting and pagination for leaderboard',
-        description: 'Integrates @tanstack/react-table headless grid with customizable metric filters.',
-        url: 'https://github.com/openverse/hackaaroh/pull/146',
+        description: 'Automatically tracked from tanstack/table. Integrates @tanstack/react-table headless grid.',
+        url: 'https://github.com/tanstack/table/pull/146',
         state: 'merged',
         author: 'sarah-dev',
         authorAvatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80',
-        createdAt: new Date(weekStart.getTime() + 54 * 60 * 60 * 1000).toISOString(),
+        createdAt: new Date(sprintStart.getTime() + 54 * 60 * 60 * 1000).toISOString(),
         dayOfSprint: 3,
         additions: 430,
         deletions: 35,
@@ -209,20 +226,20 @@ const getInitialSeed = () => {
         adminFeedback: 'Clean table abstraction and responsive scroll controls. Very snappy.',
         adminCriteria: { quality: 22, complexity: 22, impact: 22, testCoverage: 22 },
         reviewedBy: 'admin-starlit',
-        reviewedAt: new Date(weekStart.getTime() + 60 * 60 * 1000).toISOString(),
-        tags: ['tanstack-table', 'ui', 'leaderboard']
+        reviewedAt: new Date(sprintStart.getTime() + 60 * 60 * 1000).toISOString(),
+        tags: ['tanstack-table', 'ui', 'virtualization']
       },
       {
         id: 'pr-106',
         githubPrNumber: 147,
-        repo: 'openverse/hackaaroh',
+        repo: 'microsoft/vscode',
         title: 'docs: comprehensive guide for manual admin credit scoring rubric',
-        description: 'Documents scoring guidelines across Code Quality, Complexity, Impact, and Tests.',
-        url: 'https://github.com/openverse/hackaaroh/pull/147',
+        description: 'Automatically tracked from microsoft/vscode. Scoring guidelines across 4 core axes.',
+        url: 'https://github.com/microsoft/vscode/pull/147',
         state: 'merged',
         author: 'elena-cloud',
         authorAvatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
-        createdAt: new Date(weekStart.getTime() + 58 * 60 * 60 * 1000).toISOString(),
+        createdAt: new Date(sprintStart.getTime() + 58 * 60 * 60 * 1000).toISOString(),
         dayOfSprint: 3,
         additions: 195,
         deletions: 12,
@@ -232,20 +249,20 @@ const getInitialSeed = () => {
         adminFeedback: 'Well written and transparent criteria documentation. Helpful for all new reviewers.',
         adminCriteria: { quality: 18, complexity: 12, impact: 18, testCoverage: 17 },
         reviewedBy: 'admin-starlit',
-        reviewedAt: new Date(weekStart.getTime() + 64 * 60 * 60 * 1000).toISOString(),
-        tags: ['docs', 'rubric']
+        reviewedAt: new Date(sprintStart.getTime() + 64 * 60 * 60 * 1000).toISOString(),
+        tags: ['docs', 'vscode', 'rubric']
       },
       {
         id: 'pr-107',
         githubPrNumber: 148,
-        repo: 'openverse/hackaaroh',
-        title: 'feat: add automated daily sync cron with manual admin override',
-        description: 'Implements recurring sync scheduler every 24h with lock guards against duplicate ingestion.',
-        url: 'https://github.com/openverse/hackaaroh/pull/148',
+        repo: 'shadcn-ui/ui',
+        title: 'feat: add accessible starlit modal primitive with focus trapping',
+        description: 'Automatically tracked across repositories during daily scheduled ingestion. In review queue for admin score.',
+        url: 'https://github.com/shadcn-ui/ui/pull/148',
         state: 'open',
         author: 'devon-craft',
         authorAvatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
-        createdAt: new Date(weekStart.getTime() + 75 * 60 * 60 * 1000).toISOString(),
+        createdAt: new Date(sprintStart.getTime() + 75 * 60 * 60 * 1000).toISOString(),
         dayOfSprint: 4,
         additions: 290,
         deletions: 22,
@@ -256,19 +273,19 @@ const getInitialSeed = () => {
         adminCriteria: { quality: 0, complexity: 0, impact: 0, testCoverage: 0 },
         reviewedBy: null,
         reviewedAt: null,
-        tags: ['cron', 'daily-sync', 'worker']
+        tags: ['shadcn', 'ui', 'a11y']
       },
       {
         id: 'pr-108',
         githubPrNumber: 149,
-        repo: 'openverse/hackaaroh',
-        title: 'feat: add sprint finalization and podium snapshot generator',
-        description: 'Allows sprint admins to freeze rankings and declare winners with cryptographic timestamp hash.',
-        url: 'https://github.com/openverse/hackaaroh/pull/149',
+        repo: 'astral-sh/uv',
+        title: 'feat: add zero-allocation byte serializer in rust microservice',
+        description: 'Automatically tracked across repositories during daily scheduled ingestion. In review queue for admin score.',
+        url: 'https://github.com/astral-sh/uv/pull/149',
         state: 'open',
         author: 'manav-codes',
         authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
-        createdAt: new Date(weekStart.getTime() + 78 * 60 * 60 * 1000).toISOString(),
+        createdAt: new Date(sprintStart.getTime() + 78 * 60 * 60 * 1000).toISOString(),
         dayOfSprint: 4,
         additions: 340,
         deletions: 15,
@@ -279,19 +296,19 @@ const getInitialSeed = () => {
         adminCriteria: { quality: 0, complexity: 0, impact: 0, testCoverage: 0 },
         reviewedBy: null,
         reviewedAt: null,
-        tags: ['sprint', 'leaderboard', 'podium']
+        tags: ['rust', 'uv', 'perf']
       },
       {
         id: 'pr-109',
         githubPrNumber: 150,
-        repo: 'openverse/hackaaroh',
-        title: 'test: add end-to-end integration tests for credit audit trail',
-        description: 'Simulates admin scoring lifecycle and validates leaderboard recalculation invariant.',
-        url: 'https://github.com/openverse/hackaaroh/pull/150',
+        repo: 'torvalds/linux',
+        title: 'test: add end-to-end integration tests for eBPF security telemetry',
+        description: 'Automatically tracked across repositories during daily scheduled ingestion. In review queue for admin score.',
+        url: 'https://github.com/torvalds/linux/pull/150',
         state: 'open',
         author: 'alex-rustacean',
         authorAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
-        createdAt: new Date(weekStart.getTime() + 82 * 60 * 60 * 1000).toISOString(),
+        createdAt: new Date(sprintStart.getTime() + 82 * 60 * 60 * 1000).toISOString(),
         dayOfSprint: 4,
         additions: 410,
         deletions: 18,
@@ -302,7 +319,7 @@ const getInitialSeed = () => {
         adminCriteria: { quality: 0, complexity: 0, impact: 0, testCoverage: 0 },
         reviewedBy: null,
         reviewedAt: null,
-        tags: ['tests', 'e2e', 'security']
+        tags: ['linux', 'kernel', 'tests']
       }
     ],
     auditLogs: [
@@ -310,36 +327,29 @@ const getInitialSeed = () => {
         id: 'log-1',
         action: 'SPRINT_STARTED',
         actor: 'admin-starlit',
-        details: 'Weekly sprint initialized with 7-day tracking window',
-        timestamp: weekStart.toISOString()
+        details: 'Admin officially started PR tracking event. Daily update scheduled at 00:00 UTC.',
+        timestamp: sprintStart.toISOString()
       },
       {
         id: 'log-2',
-        action: 'PR_REVIEWED',
-        actor: 'admin-starlit',
-        details: 'Awarded 85 credits to PR #142 (manav-codes)',
-        timestamp: new Date(weekStart.getTime() + 14 * 60 * 60 * 1000).toISOString()
+        action: 'AUTOMATIC_DAILY_UPDATE',
+        actor: 'SCHEDULED_WORKER',
+        details: 'Daily PR calculation completed for Day 2. Synced with tracked repositories.',
+        timestamp: new Date(sprintStart.getTime() + 24 * 60 * 60 * 1000).toISOString()
       },
       {
         id: 'log-3',
-        action: 'DAILY_SYNC',
-        actor: 'SYSTEM_CRON',
-        details: 'Day 2 tracking update finished. 2 new PRs ingested.',
-        timestamp: new Date(weekStart.getTime() + 24 * 60 * 60 * 1000).toISOString()
+        action: 'PR_REVIEWED',
+        actor: 'admin-starlit',
+        details: 'Admin reviewed PR #144 (alex-rustacean) -> Awarded 92 credits',
+        timestamp: new Date(sprintStart.getTime() + 38 * 60 * 60 * 1000).toISOString()
       },
       {
         id: 'log-4',
-        action: 'PR_REVIEWED',
-        actor: 'admin-starlit',
-        details: 'Awarded 92 credits to PR #144 (alex-rustacean)',
-        timestamp: new Date(weekStart.getTime() + 38 * 60 * 60 * 1000).toISOString()
-      },
-      {
-        id: 'log-5',
-        action: 'DAILY_SYNC',
-        actor: 'SYSTEM_CRON',
-        details: 'Day 3 tracking update finished. 2 new PRs ingested.',
-        timestamp: new Date(weekStart.getTime() + 48 * 60 * 60 * 1000).toISOString()
+        action: 'AUTOMATIC_DAILY_UPDATE',
+        actor: 'SCHEDULED_WORKER',
+        details: 'Daily PR calculation completed for Day 3. Synced with tracked repositories.',
+        timestamp: new Date(sprintStart.getTime() + 48 * 60 * 60 * 1000).toISOString()
       }
     ]
   };
@@ -359,6 +369,10 @@ class Database {
       } else {
         const raw = fs.readFileSync(DB_FILE, 'utf-8');
         this.data = JSON.parse(raw);
+        // Ensure new sprint properties exist
+        if (!this.data.sprint.dailyUpdateTime) {
+          this.data.sprint.dailyUpdateTime = '00:00';
+        }
       }
     } catch (err) {
       console.error('Error initializing db, resetting to seed:', err);
@@ -382,7 +396,36 @@ class Database {
   }
 
   getSprint() {
-    return this.data.sprint;
+    const repos = Array.from(new Set((this.data.pullRequests || []).map(pr => pr.repo))).filter(Boolean);
+    const contributors = (this.data.users || []).filter(u => u.role !== 'admin');
+    return {
+      ...this.data.sprint,
+      trackingScope: 'ALL_REPOSITORIES',
+      trackedRepos: repos.length > 0 ? repos : (this.data.sprint.trackedRepos || []),
+      totalTrackedContributors: contributors.length,
+      totalDiscoveredRepos: repos.length
+    };
+  }
+
+  getDiscoveredRepos() {
+    return Array.from(new Set((this.data.pullRequests || []).map(pr => pr.repo))).filter(Boolean);
+  }
+
+  getUserReviewsStats(username) {
+    if (!username) return null;
+    const prs = (this.data.pullRequests || []).filter(pr => pr.author.toLowerCase() === username.toLowerCase());
+    const reviewedPrs = prs.filter(pr => pr.reviewStatus === 'REVIEWED');
+    const pendingPrs = prs.filter(pr => pr.reviewStatus === 'PENDING_REVIEW');
+    const totalCredits = reviewedPrs.reduce((sum, pr) => sum + (Number(pr.creditScore) || 0), 0);
+    const distinctRepos = Array.from(new Set(prs.map(pr => pr.repo))).filter(Boolean);
+    return {
+      totalPrs: prs.length,
+      reviewedPrs: reviewedPrs.length,
+      pendingPrs: pendingPrs.length,
+      totalCredits,
+      avgCreditScore: reviewedPrs.length > 0 ? Math.round(totalCredits / reviewedPrs.length) : 0,
+      distinctRepos
+    };
   }
 
   updateSprint(updates) {
@@ -443,7 +486,7 @@ class Database {
       timestamp: new Date().toISOString()
     };
     this.data.auditLogs.unshift(entry);
-    if (this.data.auditLogs.length > 50) {
+    if (this.data.auditLogs.length > 60) {
       this.data.auditLogs.pop();
     }
     this.save();
@@ -454,10 +497,11 @@ class Database {
     return this.data.auditLogs;
   }
 
-  // Calculate dynamic leaderboard with daily progression
+  // Calculate dynamic leaderboard with flexible day counts
   getLeaderboard() {
-    const users = this.data.users.filter(u => u.role !== 'admin');
-    const prs = this.data.pullRequests;
+    const users = (this.data.users || []).filter(u => u.role !== 'admin');
+    const prs = this.data.pullRequests || [];
+    const currentDay = Math.max(1, this.data.sprint.currentDay || 1);
 
     const statsByUser = {};
 
@@ -472,8 +516,8 @@ class Database {
         pendingPrs: 0,
         totalAdditions: 0,
         totalDeletions: 0,
-        dailyCredits: [0, 0, 0, 0, 0, 0, 0], // Days 1 to 7
-        dailyPrs: [0, 0, 0, 0, 0, 0, 0],
+        dailyCredits: Array(currentDay).fill(0),
+        dailyPrs: Array(currentDay).fill(0),
         prs: []
       };
     });
@@ -496,8 +540,8 @@ class Database {
           pendingPrs: 0,
           totalAdditions: 0,
           totalDeletions: 0,
-          dailyCredits: [0, 0, 0, 0, 0, 0, 0],
-          dailyPrs: [0, 0, 0, 0, 0, 0, 0],
+          dailyCredits: Array(currentDay).fill(0),
+          dailyPrs: Array(currentDay).fill(0),
           prs: []
         };
       }
@@ -511,7 +555,10 @@ class Database {
       if (pr.state === 'merged') stat.mergedPrs += 1;
       if (pr.state === 'open') stat.openPrs += 1;
 
-      const dayIdx = Math.max(0, Math.min(6, (pr.dayOfSprint || 1) - 1));
+      const dayIdx = Math.max(0, (pr.dayOfSprint || 1) - 1);
+      while (stat.dailyCredits.length <= dayIdx) stat.dailyCredits.push(0);
+      while (stat.dailyPrs.length <= dayIdx) stat.dailyPrs.push(0);
+
       stat.dailyPrs[dayIdx] += 1;
 
       if (pr.reviewStatus === 'REVIEWED') {
@@ -524,7 +571,6 @@ class Database {
       }
     });
 
-    // Rank by totalCredits descending, then mergedPrs descending, then totalPrs descending
     const leaderboard = Object.values(statsByUser).sort((a, b) => {
       if (b.totalCredits !== a.totalCredits) {
         return b.totalCredits - a.totalCredits;
