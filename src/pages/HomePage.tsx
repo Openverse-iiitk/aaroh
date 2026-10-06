@@ -8,8 +8,9 @@ import { Trophy, GitPullRequest, ArrowRight, ShieldCheck, CheckCircle2, Clock, G
 
 interface HomePageProps {
   sprint: Sprint;
-  leaderboard: LeaderboardItem[];
-  recentPrs: PullRequest[];
+  leaderboard?: LeaderboardItem[];
+  pullRequests?: PullRequest[];
+  recentPrs?: PullRequest[];
   currentUser: User | null;
   onOpenSubmitPr: () => void;
   onOpenAuth: () => void;
@@ -23,8 +24,9 @@ interface HomePageProps {
 
 export const HomePage: React.FC<HomePageProps> = ({
   sprint,
-  leaderboard,
-  recentPrs,
+  leaderboard = [],
+  pullRequests = [],
+  recentPrs = [],
   currentUser,
   onOpenSubmitPr,
   onOpenAuth,
@@ -35,8 +37,12 @@ export const HomePage: React.FC<HomePageProps> = ({
   onSelectPrForReview,
   isSyncing
 }) => {
-  const topThree = leaderboard.slice(0, 3);
-  const pendingPrs = recentPrs.filter(pr => pr.reviewStatus === 'PENDING_REVIEW');
+  const safeLeaderboard = Array.isArray(leaderboard) ? leaderboard : [];
+  const allPrs = (Array.isArray(pullRequests) && pullRequests.length > 0)
+    ? pullRequests
+    : (Array.isArray(recentPrs) ? recentPrs : []);
+  const topThree = safeLeaderboard.slice(0, 3);
+  const pendingPrs = allPrs.filter(pr => pr && pr.reviewStatus === 'PENDING_REVIEW');
 
   return (
     <div className="w-full pb-20">
@@ -83,7 +89,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           </div>
 
           <div className="divide-y divide-white/5 panel-glass overflow-hidden">
-            {leaderboard.slice(0, 5).map((item) => (
+            {safeLeaderboard.slice(0, 5).map((item) => (
               <div
                 key={item.user.id}
                 className="p-4 flex items-center justify-between text-sm hover:bg-white/[0.02] transition-colors"
@@ -200,7 +206,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
           {/* Recent PR list */}
           <div className="space-y-3">
-            {recentPrs.slice(0, 4).map((pr) => (
+            {allPrs.slice(0, 4).map((pr) => (
               <div
                 key={pr.id}
                 className="panel-glass p-3.5 hover:border-lavender-accent/20 transition-all text-xs"

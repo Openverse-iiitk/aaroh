@@ -21,7 +21,7 @@ interface LeaderboardPageProps {
 }
 
 export const LeaderboardPage: React.FC<LeaderboardPageProps> = ({
-  leaderboard,
+  leaderboard = [],
   sprint,
   onSelectPrForReview,
   isAdmin

@@ -17,9 +17,10 @@ export const FinalLeaderboardModal: React.FC<FinalLeaderboardModalProps> = ({
 }) => {
   if (!isOpen) return null;
 
-  const topThree = leaderboard.slice(0, 3);
-  const totalPrsAwarded = leaderboard.reduce((acc, curr) => acc + curr.totalPrs, 0);
-  const totalCreditsAwarded = leaderboard.reduce((acc, curr) => acc + curr.totalCredits, 0);
+  const safeLeaderboard = Array.isArray(leaderboard) ? leaderboard : [];
+  const topThree = safeLeaderboard.slice(0, 3);
+  const totalPrsAwarded = safeLeaderboard.reduce((acc, curr) => acc + (curr.totalPrs || 0), 0);
+  const totalCreditsAwarded = safeLeaderboard.reduce((acc, curr) => acc + (curr.totalCredits || 0), 0);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
@@ -125,7 +126,7 @@ export const FinalLeaderboardModal: React.FC<FinalLeaderboardModalProps> = ({
           </h3>
 
           <div className="divide-y divide-white/5 rounded-card bg-midnight-surface border border-white/5 overflow-hidden">
-            {leaderboard.map((item) => (
+            {safeLeaderboard.map((item) => (
               <div
                 key={item.user.id}
                 className="p-3.5 flex items-center justify-between text-sm hover:bg-white/[0.02] transition-colors"

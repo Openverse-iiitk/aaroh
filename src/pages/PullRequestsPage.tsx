@@ -11,7 +11,7 @@ interface PullRequestsPageProps {
 }
 
 export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
-  pullRequests,
+  pullRequests = [],
   sprint,
   currentUser,
   onSelectPrForReview,
@@ -22,8 +22,9 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
 
   const isAdmin = currentUser?.role === 'admin';
+  const safePrs = Array.isArray(pullRequests) ? pullRequests : [];
 
-  const filteredPrs = pullRequests.filter((pr) => {
+  const filteredPrs = safePrs.filter((pr) => {
     if (selectedDay !== 'ALL' && pr.dayOfSprint !== selectedDay) return false;
     if (selectedStatus !== 'ALL' && pr.reviewStatus !== selectedStatus) return false;
     if (searchQuery) {

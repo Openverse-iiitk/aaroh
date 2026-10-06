@@ -20,8 +20,8 @@ interface AdminPageProps {
 export const AdminPage: React.FC<AdminPageProps> = ({
   currentUser,
   sprint,
-  pullRequests,
-  auditLogs,
+  pullRequests = [],
+  auditLogs = [],
   onSelectPrForReview,
   onToggleStatus,
   onEndTracking,
@@ -34,9 +34,10 @@ export const AdminPage: React.FC<AdminPageProps> = ({
   const [confirmEndModal, setConfirmEndModal] = useState(false);
 
   const isAdmin = currentUser?.role === 'admin';
-  const pendingPrs = pullRequests.filter((pr) => pr.reviewStatus === 'PENDING_REVIEW');
-  const reviewedPrs = pullRequests.filter((pr) => pr.reviewStatus === 'REVIEWED');
-  const totalCreditsAwarded = reviewedPrs.reduce((acc, curr) => acc + curr.creditScore, 0);
+  const safePrs = Array.isArray(pullRequests) ? pullRequests : [];
+  const pendingPrs = safePrs.filter((pr) => pr && pr.reviewStatus === 'PENDING_REVIEW');
+  const reviewedPrs = safePrs.filter((pr) => pr && pr.reviewStatus === 'REVIEWED');
+  const totalCreditsAwarded = reviewedPrs.reduce((acc, curr) => acc + (curr.creditScore || 0), 0);
 
   // If user is not admin, show testing switch banner
   if (!isAdmin) {
