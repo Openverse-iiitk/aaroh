@@ -24,7 +24,8 @@ import {
   submitPullRequest,
   mockLogin,
   logout,
-  resetDatabase
+  resetDatabase,
+  syncGitHubPullRequests
 } from './api/client';
 import { Navbar } from './components/Navbar';
 import { TopCountdownBanner } from './components/TopCountdownBanner';
@@ -176,6 +177,16 @@ function RootLayout() {
     },
   });
 
+  const syncGitHubMutation = useMutation({
+    mutationFn: syncGitHubPullRequests,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['pullRequests'] });
+      queryClient.invalidateQueries({ queryKey: ['leaderboard'] });
+      queryClient.invalidateQueries({ queryKey: ['sprint'] });
+      queryClient.invalidateQueries({ queryKey: ['auditLogs'] });
+    },
+  });
+
   const navigate = useNavigate();
 
   const handleSelectMockUser = async (
@@ -260,7 +271,9 @@ function RootLayout() {
     onResetDatabase: () => resetDbMutation.mutate(),
     onSwitchToAdmin: handleSwitchToAdmin,
     onOpenSubmitPr: () => setSubmitPrModalOpen(true),
+    onSyncGitHub: () => syncGitHubMutation.mutateAsync(),
     isSyncing: syncMutation.isPending,
+    isSyncingGitHub: syncGitHubMutation.isPending,
   };
 
   return (
@@ -413,6 +426,8 @@ function PullRequestsView() {
       onSelectPrForReview={context.onSelectPrForReview}
       onOpenAuth={context.onOpenAuth}
       onOpenSubmitPr={context.onOpenSubmitPr}
+      onSyncGitHub={context.onSyncGitHub}
+      isSyncingGitHub={context.isSyncingGitHub}
     />
   );
 }

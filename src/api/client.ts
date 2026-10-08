@@ -190,3 +190,12 @@ export async function resetDatabase(): Promise<void> {
   });
   if (!res.ok) throw new Error('Failed to reset database');
 }
+
+export async function syncGitHubPullRequests(): Promise<{ success: boolean; message: string; syncedCount: number; prs: PullRequest[] }> {
+  const res = await fetch(`${BASE_URL}/pull-requests/sync`, {
+    method: 'POST',
+    headers: authHeaders()
+  });
+  if (!res.ok) throw new Error('Failed to sync PRs from GitHub');
+  return res.json();
+}
