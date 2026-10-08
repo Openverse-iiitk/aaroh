@@ -21,6 +21,7 @@ import {
   RefreshCw,
   FolderGit2
 } from 'lucide-react';
+import { formatGithubPrUrl } from '../utils/github';
 
 interface PullRequestsPageProps {
   pullRequests: PullRequest[];
@@ -448,7 +449,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
 
                       {/* Repo Badge with link */}
                       <a
-                        href={`https://github.com/${pr.repo}`}
+                        href={formatGithubPrUrl(undefined, pr.repo)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-2 py-0.5 rounded-md bg-white/5 hover:bg-white/10 text-zinc-300 hover:text-white font-mono text-[11px] border border-white/5 transition-colors flex items-center gap-1"
@@ -494,10 +495,10 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
                     <div>
                       <h3 className="text-base font-semibold text-white hover:text-indigo-300 transition-colors leading-snug">
                         <a
-                          href={pr.url}
+                          href={formatGithubPrUrl(pr.url, pr.repo, pr.githubPrNumber)}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 group"
+                          className="inline-flex items-center gap-1.5 group cursor-pointer"
                         >
                           {pr.isRepoOnly || !pr.githubPrNumber ? (
                             <span className="px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-mono text-[10px] font-bold border border-indigo-500/30">

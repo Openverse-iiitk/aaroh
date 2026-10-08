@@ -26,6 +26,7 @@ import {
   Clock,
   Filter
 } from 'lucide-react';
+import { formatGithubPrUrl } from '../utils/github';
 
 interface LeaderboardPageProps {
   leaderboard: LeaderboardItem[];
@@ -394,7 +395,7 @@ export const LeaderboardPage: React.FC<LeaderboardPageProps> = ({
                                           </span>
                                         </div>
                                         <a
-                                          href={pr.url}
+                                          href={formatGithubPrUrl(pr.url, pr.repo, pr.githubPrNumber)}
                                           target="_blank"
                                           rel="noopener noreferrer"
                                           className="font-medium text-white hover:text-blue-400 transition-colors flex items-center gap-1"
@@ -557,7 +558,7 @@ export const LeaderboardPage: React.FC<LeaderboardPageProps> = ({
                     </div>
 
                     <a
-                      href={pr.url}
+                      href={formatGithubPrUrl(pr.url, pr.repo, pr.githubPrNumber)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="font-medium text-white hover:text-blue-400 transition-colors flex items-center gap-1.5 text-sm truncate"

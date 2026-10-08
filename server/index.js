@@ -686,90 +686,106 @@ app.get('/api/pull-requests/:id', (req, res) => {
   res.json(pr);
 });
 
-// Manual PR submission by authenticated contributor
+// Manual PR submission by authenticated contributor - strictly validates GitHub PR link
 app.post('/api/pull-requests', async (req, res) => {
   const sessionUser = getUserFromSession(req);
   if (!sessionUser) {
     return res.status(401).json({ error: 'Please sign in to submit a pull request' });
   }
 
-  const { repo, githubPrNumber, title, description, url, additions = 50, deletions = 10, tags = [] } = req.body;
-  if (!repo || !title) {
-    return res.status(400).json({ error: 'Repo and title are required' });
+  const rawInput = (req.body.url || req.body.repo || '').trim();
+  // Match forms like https://github.com/owner/repo/pull/123 or owner/repo/pull/123
+  const prMatch = rawInput.match(/(?:https?:\/\/github\.com\/)?([a-zA-Z0-9_.-]+)\/([a-zA-Z0-9_.-]+)\/pull\/(\d+)/i);
+  if (!prMatch) {
+    return res.status(400).json({
+      error: 'A specific GitHub Pull Request link is required (e.g. https://github.com/owner/repo/pull/123). Plain repository links without PRs cannot be submitted.'
+    });
   }
 
-  // Clean repo: extract owner/repo even if full URL was pasted
-  let cleanRepo = repo.trim()
-    .replace(/^https?:\/\/github\.com\//i, '')
-    .replace(/\/pull\/\d+.*$/i, '')
-    .replace(/\/$/, '');
+  const owner = prMatch[1];
+  const repoName = prMatch[2];
+  const prNumber = parseInt(prMatch[3], 10);
+  const cleanRepo = `${owner}/${repoName}`;
 
-  let cleanUrl = (url || '').trim().replace(/^https?:\/\/github\.com\/https?:\/\/github\.com\//i, 'https://github.com/');
-  let prNumber = githubPrNumber ? parseInt(githubPrNumber, 10) : null;
-  let isRepoOnly = false;
+  // Check duplicate submission
+  const existingPrs = db.getPullRequests();
+  const isDuplicate = existingPrs.some(p =>
+    p.repo.toLowerCase() === cleanRepo.toLowerCase() && p.githubPrNumber === prNumber
+  );
+  if (isDuplicate) {
+    return res.status(409).json({
+      error: `PR #${prNumber} in ${cleanRepo} has already been submitted to the review queue.`
+    });
+  }
 
-  // If a full PR URL was passed in url or repo
-  if (cleanUrl) {
-    const prMatch = cleanUrl.match(/\/pull\/(\d+)/i);
-    if (prMatch) {
-      prNumber = parseInt(prMatch[1], 10);
+  // Verify against real GitHub API
+  let prData = null;
+  const token = sessionUser.accessToken || process.env.GITHUB_TOKEN;
+  const headers = { 'User-Agent': 'HackAaroh-PR-Tracker' };
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+
+  try {
+    const ghRes = await fetch(`https://api.github.com/repos/${owner}/${repoName}/pulls/${prNumber}`, { headers });
+    if (ghRes.ok) {
+      prData = await ghRes.json();
+    } else if (ghRes.status === 404) {
+      return res.status(404).json({
+        error: `Pull request #${prNumber} does not exist in repository ${cleanRepo} on GitHub.`
+      });
+    } else {
+      console.warn(`GitHub API returned status ${ghRes.status} for PR ${cleanRepo}#${prNumber}`);
+    }
+  } catch (err) {
+    console.error('Error fetching PR from GitHub API:', err.message);
+  }
+
+  // Validate author matches the current user (allow organizers/admins to submit test PRs)
+  if (prData && prData.user) {
+    const isAuthor = prData.user.login.toLowerCase() === sessionUser.username.toLowerCase();
+    const isAdmin = sessionUser.role === 'admin';
+    if (!isAuthor && !isAdmin) {
+      return res.status(403).json({
+        error: `This Pull Request was authored by @${prData.user.login}, not @${sessionUser.username}. You can only submit your own pull requests.`
+      });
     }
   }
 
-  // If no PR number known yet, query GitHub API to check if user has an existing PR in this repo
-  if (!prNumber) {
-    try {
-      const token = sessionUser.accessToken || process.env.GITHUB_TOKEN;
-      const headers = { 'User-Agent': 'HackAaroh-PR-Tracker' };
-      if (token) headers['Authorization'] = `Bearer ${token}`;
-
-      const ghRes = await fetch(`https://api.github.com/repos/${cleanRepo}/pulls?creator=${encodeURIComponent(sessionUser.username)}&state=all`, { headers });
-      if (ghRes.ok) {
-        const ghPrs = await ghRes.json();
-        if (Array.isArray(ghPrs) && ghPrs.length > 0) {
-          prNumber = ghPrs[0].number;
-          cleanUrl = ghPrs[0].html_url;
-        }
-      }
-    } catch (_) {}
-  }
-
-  // If no PR exists on GitHub (user submitted a standalone repository project link):
-  if (!prNumber) {
-    isRepoOnly = true;
-    cleanUrl = `https://github.com/${cleanRepo}`;
-  } else if (!cleanUrl) {
-    cleanUrl = `https://github.com/${cleanRepo}/pull/${prNumber}`;
-  }
-
   const sprint = db.getSprint();
+  const finalTitle = (prData?.title || req.body.title || `PR #${prNumber}: Contribution to ${cleanRepo}`).trim();
+  const finalUrl = prData?.html_url || `https://github.com/${cleanRepo}/pull/${prNumber}`;
+  const isMerged = Boolean(prData?.merged_at || prData?.merged);
+  const finalState = isMerged ? 'merged' : (prData?.state || 'open');
+  const finalAdditions = prData?.additions !== undefined ? prData.additions : (parseInt(req.body.additions, 10) || 50);
+  const finalDeletions = prData?.deletions !== undefined ? prData.deletions : (parseInt(req.body.deletions, 10) || 10);
+  const finalCommits = prData?.commits !== undefined ? prData.commits : (parseInt(req.body.commitsCount, 10) || 1);
+
   const newPr = {
     id: `pr-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
-    githubPrNumber: prNumber || 0,
-    isRepoOnly,
+    githubPrNumber: prNumber,
+    isRepoOnly: false,
     repo: cleanRepo,
-    title,
-    description: description || (isRepoOnly ? `Repository project submitted by @${sessionUser.username}` : `Submitted by @${sessionUser.username}`),
-    url: cleanUrl,
-    state: 'open',
+    title: finalTitle,
+    description: req.body.description?.trim() || (prData?.body ? prData.body.substring(0, 300) : `Pull request #${prNumber} submitted by @${sessionUser.username}`),
+    url: finalUrl,
+    state: finalState,
     author: sessionUser.username,
     authorAvatar: sessionUser.avatarUrl,
     createdAt: new Date().toISOString(),
     dayOfSprint: sprint.currentDay || 1,
-    additions: parseInt(additions, 10) || 0,
-    deletions: parseInt(deletions, 10) || 0,
-    commitsCount: 1,
+    additions: finalAdditions,
+    deletions: finalDeletions,
+    commitsCount: finalCommits,
     reviewStatus: 'PENDING_REVIEW',
     creditScore: 0,
     adminFeedback: '',
     adminCriteria: { quality: 0, complexity: 0, impact: 0, testCoverage: 0 },
     reviewedBy: null,
     reviewedAt: null,
-    tags: Array.isArray(tags) ? tags : []
+    tags: Array.isArray(req.body.tags) && req.body.tags.length > 0 ? req.body.tags : ['contribution']
   };
 
   await db.addPullRequest(newPr);
-  await db.addAuditLog('PR_SUBMITTED', sessionUser.username, `@${sessionUser.username} submitted ${isRepoOnly ? 'repo project' : `PR #${prNumber}`} in ${cleanRepo}`);
+  await db.addAuditLog('PR_SUBMITTED', sessionUser.username, `@${sessionUser.username} submitted verified PR #${prNumber} in ${cleanRepo}`);
   res.status(201).json({ pr: newPr });
 });
 

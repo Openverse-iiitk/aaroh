@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PullRequest } from '../types';
 import { X, ExternalLink, ShieldCheck, Check, Star, AlertCircle, FileCode, GitCommit, Plus, Minus } from 'lucide-react';
+import { formatGithubPrUrl } from '../utils/github';
 
 interface ReviewModalProps {
   isOpen: boolean;
@@ -131,10 +132,10 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
             </div>
 
             <a
-              href={pr.url}
+              href={formatGithubPrUrl(pr.url, pr.repo, pr.githubPrNumber)}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-lavender-accent hover:text-lilac-white flex items-center gap-1 transition-colors"
+              className="text-lavender-accent hover:text-lilac-white flex items-center gap-1 transition-colors cursor-pointer"
             >
               <span>View on GitHub</span>
               <ExternalLink className="w-3 h-3" />

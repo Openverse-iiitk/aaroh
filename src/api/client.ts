@@ -159,10 +159,10 @@ export async function fetchPullRequestById(id: string): Promise<PullRequest> {
 }
 
 export async function submitPullRequest(payload: {
-  repo: string;
-  title: string;
+  repo?: string;
+  title?: string;
   description?: string;
-  url?: string;
+  url: string;
   additions?: number;
   deletions?: number;
   commitsCount?: number;
@@ -173,8 +173,12 @@ export async function submitPullRequest(payload: {
     headers: authHeaders(),
     body: JSON.stringify(payload)
   });
-  if (!res.ok) throw new Error('Failed to submit pull request');
-  return res.json();
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.error || 'Failed to submit pull request');
+  }
+  const data = await res.json();
+  return data.pr || data;
 }
 
 export async function reviewPullRequest(payload: {

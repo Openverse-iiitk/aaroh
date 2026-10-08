@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { PullRequest, Sprint, User, AuditLog } from '../types';
 import { Shield, CheckCircle2, Clock, StopCircle, PlayCircle, PauseCircle, RefreshCw, Flag, RotateCcw, AlertTriangle, ExternalLink, Award, FileCode, Check, Play, Settings, Plus, Trash2, Calendar, Lock } from 'lucide-react';
 import { adminSecretLogin } from '../api/client';
+import { formatGithubPrUrl } from '../utils/github';
 
 interface AdminPageProps {
   currentUser: User | null;
@@ -538,10 +539,10 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                       <span className="text-rose-400">-{pr.deletions}</span>
                       <span>{pr.commitsCount} commits</span>
                       <a
-                        href={pr.url}
+                        href={formatGithubPrUrl(pr.url, pr.repo, pr.githubPrNumber)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-lavender-accent hover:underline flex items-center gap-1"
+                        className="text-lavender-accent hover:underline flex items-center gap-1 cursor-pointer"
                       >
                         {pr.isRepoOnly || !pr.githubPrNumber ? 'View Repository' : 'GitHub PR'} <ExternalLink className="w-3 h-3" />
                       </a>

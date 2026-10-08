@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { X, GitPullRequest, Plus, ExternalLink, Check } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { X, GitPullRequest, ExternalLink, Check, AlertTriangle, ShieldAlert } from 'lucide-react';
 import { User, Sprint } from '../types';
 
 interface SubmitPrModalProps {
@@ -28,190 +28,217 @@ export const SubmitPrModal: React.FC<SubmitPrModalProps> = ({
   onSubmitPr,
   isSubmitting
 }) => {
-  const [repo, setRepo] = useState('');
+  const [prUrl, setPrUrl] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [url, setUrl] = useState('');
-  const [additions, setAdditions] = useState(0);
-  const [deletions, setDeletions] = useState(0);
-  const [commitsCount, setCommitsCount] = useState(1);
   const [tagsInput, setTagsInput] = useState('');
+  const [submissionError, setSubmissionError] = useState<string | null>(null);
+
+  // Validate PR link in real-time
+  const prAnalysis = useMemo(() => {
+    const trimmed = prUrl.trim();
+    if (!trimmed) return null;
+
+    const prRegex = /(?:https?:\/\/github\.com\/)?([a-zA-Z0-9_.-]+)\/([a-zA-Z0-9_.-]+)\/pull\/(\d+)/i;
+    const match = trimmed.match(prRegex);
+
+    if (match) {
+      return {
+        isValid: true,
+        owner: match[1],
+        repoName: match[2],
+        fullRepo: `${match[1]}/${match[2]}`,
+        prNumber: parseInt(match[3], 10),
+        canonicalUrl: `https://github.com/${match[1]}/${match[2]}/pull/${match[3]}`
+      };
+    }
+
+    // Check if user entered a plain repository link without /pull/
+    const repoOnlyRegex = /(?:https?:\/\/github\.com\/)?([a-zA-Z0-9_.-]+)\/([a-zA-Z0-9_.-]+)(?:\/)?$/i;
+    const repoMatch = trimmed.match(repoOnlyRegex);
+    if (repoMatch) {
+      return {
+        isValid: false,
+        isRepoOnly: true,
+        fullRepo: `${repoMatch[1]}/${repoMatch[2]}`
+      };
+    }
+
+    return { isValid: false, isRepoOnly: false };
+  }, [prUrl]);
 
   if (!isOpen) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title || !repo) return;
+    setSubmissionError(null);
+
+    if (!prAnalysis || !prAnalysis.isValid) {
+      setSubmissionError('Please provide a valid GitHub Pull Request link with a PR number (e.g. https://github.com/owner/repo/pull/123). Plain repository links cannot be submitted.');
+      return;
+    }
 
     const tags = tagsInput
       .split(',')
       .map((t) => t.trim().toLowerCase())
       .filter(Boolean);
 
-    const cleanRepo = repo
-      .trim()
-      .replace(/^https?:\/\/github\.com\//i, '')
-      .replace(/\/pull\/\d+.*$/i, '')
-      .replace(/\/$/, '');
+    try {
+      await onSubmitPr({
+        repo: prAnalysis.fullRepo!,
+        title: title.trim() || `PR #${prAnalysis.prNumber}: Contribution to ${prAnalysis.fullRepo}`,
+        description: description.trim(),
+        url: prAnalysis.canonicalUrl!,
+        additions: 0,
+        deletions: 0,
+        commitsCount: 1,
+        tags: tags.length ? tags : ['contribution']
+      });
 
-    await onSubmitPr({
-      repo: cleanRepo,
-      title: title.trim(),
-      description: description.trim(),
-      url: url.trim(),
-      additions: Number(additions),
-      deletions: Number(deletions),
-      commitsCount: Number(commitsCount),
-      tags: tags.length ? tags : ['contribution']
-    });
-
-    setTitle('');
-    setDescription('');
-    setUrl('');
+      setPrUrl('');
+      setTitle('');
+      setDescription('');
+      setSubmissionError(null);
+      onClose();
+    } catch (err: any) {
+      setSubmissionError(err.message || 'Failed to submit pull request to evaluation queue');
+    }
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
-      <div className="panel-glass-elevated w-full max-w-xl max-h-[92vh] overflow-y-auto p-6 relative border border-white/10 shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
+      <div className="w-full max-w-xl max-h-[92vh] overflow-y-auto p-6 sm:p-7 rounded-2xl bg-[#0e0a24] border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.8)] relative text-left">
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 text-fog hover:text-lilac-white p-1 rounded-btn hover:bg-white/5 transition-colors"
+          className="absolute top-5 right-5 text-zinc-400 hover:text-white p-1 rounded-lg hover:bg-white/5 transition-colors"
+          aria-label="Close dialog"
         >
           <X className="w-5 h-5" />
         </button>
 
-        <div className="flex items-center gap-2 mb-2 text-xs font-medium uppercase tracking-wider text-lavender-accent">
+        <div className="flex items-center gap-2 mb-2 text-xs font-semibold uppercase tracking-wider text-indigo-400">
           <GitPullRequest className="w-4 h-4" />
-          <span>Submit a Contribution or Project</span>
+          <span>Verified GitHub Pull Request Submission</span>
         </div>
 
-        <h3 className="text-xl font-medium text-lilac-white">
-          Submit Work for Admin Review
+        <h3 className="text-xl font-bold text-white tracking-tight">
+          Submit Pull Request for Evaluation
         </h3>
-        <p className="text-xs text-ash mt-1">
-          Submit an open-source pull request OR a complete project repository. Evaluators will inspect your GitHub code and assign rubric credit scores.
+        <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
+          Submit a live pull request that you authored on any public GitHub repository. Our automated system will verify your contribution directly via the GitHub API.
         </p>
+
+        {submissionError && (
+          <div className="p-3.5 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-200 text-xs mt-4 flex items-start gap-2.5 leading-relaxed">
+            <ShieldAlert className="w-4 h-4 text-rose-400 flex-shrink-0 mt-0.5" />
+            <div>
+              <span className="font-semibold block text-rose-300 mb-0.5">Submission Rejected</span>
+              {submissionError}
+            </div>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="mt-5 space-y-4">
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-fog block mb-1">
-              GitHub Repository or Project Link *
+            <label className="text-xs font-semibold text-zinc-200 block mb-1.5 flex items-center justify-between">
+              <span>GitHub Pull Request URL *</span>
+              <span className="text-[11px] font-normal text-zinc-400">Must include /pull/NUMBER</span>
             </label>
             <input
               type="text"
               required
-              placeholder="e.g. facebook/react or https://github.com/your-org/your-repo"
-              value={repo}
-              onChange={(e) => setRepo(e.target.value)}
-              className="w-full p-2.5 rounded-btn bg-midnight-surface border border-white/10 text-xs text-lilac-white focus:outline-none focus:border-lavender-accent"
+              placeholder="https://github.com/owner/repository/pull/123"
+              value={prUrl}
+              onChange={(e) => {
+                setPrUrl(e.target.value);
+                setSubmissionError(null);
+              }}
+              className="w-full p-2.5 rounded-xl bg-[#070417] border border-white/10 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-indigo-400 font-mono transition-colors"
+              autoFocus
             />
-            <p className="text-[11px] text-ash mt-1.5">You can enter either &ldquo;owner/repo&rdquo; or paste the full GitHub repository URL.</p>
+
+            {/* Validation Feedback */}
+            {prAnalysis && prAnalysis.isValid && (
+              <div className="mt-2 p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 text-[11px] flex items-center gap-1.5">
+                <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+                <span>
+                  Valid Pull Request detected: <strong className="font-mono">{prAnalysis.fullRepo} #{prAnalysis.prNumber}</strong>
+                </span>
+              </div>
+            )}
+
+            {prAnalysis && !prAnalysis.isValid && prAnalysis.isRepoOnly && (
+              <div className="mt-2 p-2.5 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-200 text-[11px] flex items-start gap-2 leading-relaxed">
+                <AlertTriangle className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
+                <div>
+                  <strong className="block text-amber-300">Plain repository URL detected:</strong>
+                  HackAaroh requires a specific Pull Request URL. Please enter the full link to your pull request in this repository (e.g. <span className="font-mono text-white">https://github.com/{prAnalysis.fullRepo}/pull/123</span>).
+                </div>
+              </div>
+            )}
           </div>
 
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-fog block mb-1">
-              Contribution or Project Title *
+            <label className="text-xs font-semibold text-zinc-200 block mb-1">
+              Contribution Title <span className="text-zinc-400 font-normal">(Optional)</span>
             </label>
             <input
               type="text"
-              required
-              placeholder="e.g. feat: Realtime collaborative canvas or project name"
+              placeholder="Leave blank to automatically fetch title from GitHub"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full p-2.5 rounded-btn bg-midnight-surface border border-white/10 text-xs text-lilac-white focus:outline-none focus:border-lavender-accent placeholder:text-steel"
+              className="w-full p-2.5 rounded-xl bg-[#070417] border border-white/10 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-indigo-400"
             />
           </div>
 
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-fog block mb-1">
-              Description & Highlights
+            <label className="text-xs font-semibold text-zinc-200 block mb-1">
+              Description &amp; Notes <span className="text-zinc-400 font-normal">(Optional)</span>
             </label>
             <textarea
               rows={2}
-              placeholder="Summarize key features, architecture, bug fixes, or performance gains."
+              placeholder="Highlight key architecture improvements, bug fixes, or performance gains."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full p-2.5 rounded-btn bg-midnight-surface border border-white/10 text-xs text-lilac-white focus:outline-none focus:border-lavender-accent placeholder:text-steel resize-none"
+              className="w-full p-2.5 rounded-xl bg-[#070417] border border-white/10 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-indigo-400 resize-none"
             />
           </div>
 
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-fog block mb-1">
-              Specific PR URL (optional)
-            </label>
-            <input
-              type="url"
-              placeholder="https://github.com/owner/repo/pull/123 (leave empty if submitting entire repo)"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-              className="w-full p-2.5 rounded-btn bg-midnight-surface border border-white/10 text-xs text-lilac-white focus:outline-none focus:border-lavender-accent placeholder:text-steel"
-            />
-            <p className="text-[11px] text-ash mt-1">If no PR exists, leave this empty. Evaluators will review your repository directly.</p>
-          </div>
-
-          <div className="grid grid-cols-3 gap-3">
-            <div>
-              <label className="text-[11px] uppercase tracking-wider text-fog block mb-1">
-                Lines Added (+)
-              </label>
-              <input
-                type="number"
-                min="0"
-                value={additions}
-                onChange={(e) => setAdditions(Number(e.target.value))}
-                className="w-full p-2 rounded-btn bg-midnight-surface border border-white/10 text-xs text-lilac-white focus:outline-none focus:border-lavender-accent"
-              />
-            </div>
-            <div>
-              <label className="text-[11px] uppercase tracking-wider text-fog block mb-1">
-                Lines Deleted (-)
-              </label>
-              <input
-                type="number"
-                min="0"
-                value={deletions}
-                onChange={(e) => setDeletions(Number(e.target.value))}
-                className="w-full p-2 rounded-btn bg-midnight-surface border border-white/10 text-xs text-lilac-white focus:outline-none focus:border-lavender-accent"
-              />
-            </div>
-            <div>
-              <label className="text-[11px] uppercase tracking-wider text-fog block mb-1">
-                Commits
-              </label>
-              <input
-                type="number"
-                min="1"
-                value={commitsCount}
-                onChange={(e) => setCommitsCount(Number(e.target.value))}
-                className="w-full p-2 rounded-btn bg-midnight-surface border border-white/10 text-xs text-lilac-white focus:outline-none focus:border-lavender-accent"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-fog block mb-1">
-              Tags (comma separated)
+            <label className="text-xs font-semibold text-zinc-200 block mb-1">
+              Tags <span className="text-zinc-400 font-normal">(Comma separated, optional)</span>
             </label>
             <input
               type="text"
-              placeholder="ui, tanstack, bugfix"
+              placeholder="e.g. backend, algorithm, optimization, bugfix"
               value={tagsInput}
               onChange={(e) => setTagsInput(e.target.value)}
-              className="w-full p-2.5 rounded-btn bg-midnight-surface border border-white/10 text-xs text-lilac-white focus:outline-none focus:border-lavender-accent placeholder:text-steel"
+              className="w-full p-2.5 rounded-xl bg-[#070417] border border-white/10 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-indigo-400"
             />
           </div>
 
-          <div className="flex items-center justify-end gap-3 pt-3 border-t border-white/5">
-            <button type="button" onClick={onClose} className="btn-ghost !text-xs">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/10">
+            <button
+              type="button"
+              onClick={onClose}
+              disabled={isSubmitting}
+              className="px-4 py-2 rounded-xl text-xs text-zinc-400 hover:text-white transition-colors"
+            >
               Cancel
             </button>
             <button
               type="submit"
-              disabled={isSubmitting || !title}
-              className="btn-primary !text-xs !py-2 !px-4"
+              disabled={isSubmitting || !prAnalysis?.isValid}
+              className="py-2.5 px-5 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 text-white text-xs font-semibold flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(99,102,241,0.3)] cursor-pointer disabled:cursor-not-allowed"
             >
-              <Check className="w-4 h-4" />
-              <span>{isSubmitting ? 'Submitting...' : 'Submit to Review Queue'}</span>
+              {isSubmitting ? (
+                <span>Validating with GitHub...</span>
+              ) : (
+                <>
+                  <Check className="w-3.5 h-3.5" />
+                  <span>Submit Verified PR</span>
+                </>
+              )}
             </button>
           </div>
         </form>
