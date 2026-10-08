@@ -73,6 +73,11 @@ export const SubmitPrModal: React.FC<SubmitPrModalProps> = ({
     e.preventDefault();
     setSubmissionError(null);
 
+    if (!currentUser) {
+      setSubmissionError('You must sign in with GitHub before submitting a pull request. Please close this dialog and sign in with GitHub.');
+      return;
+    }
+
     if (!prAnalysis || !prAnalysis.isValid) {
       setSubmissionError('Please provide a valid GitHub Pull Request link with a PR number (e.g. https://github.com/owner/repo/pull/123). Plain repository links cannot be submitted.');
       return;
@@ -134,6 +139,16 @@ export const SubmitPrModal: React.FC<SubmitPrModalProps> = ({
             <div>
               <span className="font-semibold block text-rose-300 mb-0.5">Submission Rejected</span>
               {submissionError}
+            </div>
+          </div>
+        )}
+
+        {!currentUser && (
+          <div className="p-3.5 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-200 text-xs mt-4 flex items-start gap-2.5 leading-relaxed">
+            <AlertTriangle className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
+            <div>
+              <span className="font-semibold block text-amber-300 mb-0.5">GitHub Sign-In Required</span>
+              You are currently browsing as a guest. Please sign in with your GitHub account before submitting so our system can verify your authorship.
             </div>
           </div>
         )}

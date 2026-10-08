@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PullRequest, Sprint, User, AuditLog } from '../types';
 import { Shield, CheckCircle2, Clock, StopCircle, PlayCircle, PauseCircle, RefreshCw, Flag, RotateCcw, AlertTriangle, ExternalLink, Award, FileCode, Check, Play, Settings, Plus, Trash2, Calendar, Lock } from 'lucide-react';
-import { adminSecretLogin } from '../api/client';
+import { adminSecretLogin, toggleLogins } from '../api/client';
 import { formatGithubPrUrl } from '../utils/github';
 
 interface AdminPageProps {
@@ -360,14 +360,10 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 type="button"
                 onClick={async () => {
                   try {
-                    await fetch('/api/admin/toggle-logins', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ paused: !sprint.loginsPaused })
-                    });
+                    await toggleLogins(!sprint.loginsPaused);
                     window.location.reload();
-                  } catch (e) {
-                    alert('Failed to update logins status');
+                  } catch (e: any) {
+                    alert('Failed to update logins status: ' + (e?.message || 'Unknown error'));
                   }
                 }}
                 className={`px-3 py-2 rounded-btn text-xs font-medium transition-colors flex items-center gap-1.5 border ${

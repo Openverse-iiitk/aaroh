@@ -51,6 +51,69 @@
   "pullRequests": [],
   "auditLogs": [
     {
+      "id": "log-1791493870972-ut97",
+      "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-08T21:11:10.972Z"
+    },
+    {
+      "id": "log-1791493695695-23mm",
+      "action": "LOGINS_TOGGLED",
+      "actor": "Vijay-1710",
+      "details": "Logins toggled to ACTIVE",
+      "timestamp": "2026-10-08T21:08:15.695Z"
+    },
+    {
+      "id": "log-1791493694677-meol",
+      "action": "LOGINS_TOGGLED",
+      "actor": "Vijay-1710",
+      "details": "Logins toggled to PAUSED",
+      "timestamp": "2026-10-08T21:08:14.677Z"
+    },
+    {
+      "id": "log-1791493694001-5m7d",
+      "action": "SETTINGS_UPDATED",
+      "actor": "Vijay-1710",
+      "details": "Updated sprint settings: Daily calculation time set to 00:00 UTC",
+      "timestamp": "2026-10-08T21:08:14.001Z"
+    },
+    {
+      "id": "log-1791493693094-es1c",
+      "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-08T21:08:13.094Z"
+    },
+    {
+      "id": "log-1791493543021-awxd",
+      "action": "LOGINS_TOGGLED",
+      "actor": "Vijay-1710",
+      "details": "Logins toggled to ACTIVE",
+      "timestamp": "2026-10-08T21:05:43.021Z"
+    },
+    {
+      "id": "log-1791493542376-dm1m",
+      "action": "LOGINS_TOGGLED",
+      "actor": "Vijay-1710",
+      "details": "Logins toggled to PAUSED",
+      "timestamp": "2026-10-08T21:05:42.376Z"
+    },
+    {
+      "id": "log-1791493541555-w3av",
+      "action": "SETTINGS_UPDATED",
+      "actor": "Vijay-1710",
+      "details": "Updated sprint settings: Daily calculation time set to 00:00 UTC",
+      "timestamp": "2026-10-08T21:05:41.555Z"
+    },
+    {
+      "id": "log-1791493540708-00kf",
+      "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-08T21:05:40.708Z"
+    },
+    {
       "id": "log-1791492320514-jmks",
       "action": "PR_DELETED",
       "actor": "Vijay-1710",
@@ -121,6 +184,10 @@
     "pr-test-delete-2",
     "11111",
     "22222",
-    "pr-test-del-99"
+    "pr-test-del-99",
+    "pr-test-suite-1791493543513",
+    "pr-test-suite-1791493696203",
+    "pr-test-review-step",
+    "55555"
   ]
 }

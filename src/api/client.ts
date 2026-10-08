@@ -143,25 +143,25 @@ export async function fetchGitHubOAuthUrl(): Promise<{ configured: boolean; url?
 }
 
 export async function fetchSprint(): Promise<Sprint> {
-  const res = await fetch(`${BASE_URL}/sprint`);
+  const res = await fetch(`${BASE_URL}/sprint`, { credentials: 'include' });
   if (!res.ok) throw new Error('Failed to fetch sprint');
   return res.json();
 }
 
 export async function startSprint(): Promise<Sprint> {
-  const res = await fetch(`${BASE_URL}/sprint/start`, { method: 'POST', headers: authHeaders() });
+  const res = await fetch(`${BASE_URL}/sprint/start`, { method: 'POST', headers: authHeaders(), credentials: 'include' });
   if (!res.ok) throw new Error('Failed to start sprint');
   return res.json();
 }
 
 export async function toggleSprintStatus(): Promise<Sprint> {
-  const res = await fetch(`${BASE_URL}/sprint/toggle-status`, { method: 'POST', headers: authHeaders() });
+  const res = await fetch(`${BASE_URL}/sprint/toggle-status`, { method: 'POST', headers: authHeaders(), credentials: 'include' });
   if (!res.ok) throw new Error('Failed to toggle sprint status');
   return res.json();
 }
 
 export async function endSprint(): Promise<{ sprint: Sprint; podium: any[] }> {
-  const res = await fetch(`${BASE_URL}/sprint/end`, { method: 'POST', headers: authHeaders() });
+  const res = await fetch(`${BASE_URL}/sprint/end`, { method: 'POST', headers: authHeaders(), credentials: 'include' });
   if (!res.ok) throw new Error('Failed to end sprint');
   return res.json();
 }
@@ -170,6 +170,7 @@ export async function updateSprintSettings(payload: { dailyUpdateTime?: string; 
   const res = await fetch(`${BASE_URL}/sprint/update-settings`, {
     method: 'POST',
     headers: authHeaders(),
+    credentials: 'include',
     body: JSON.stringify(payload)
   });
   if (!res.ok) throw new Error('Failed to update sprint settings');
@@ -177,14 +178,25 @@ export async function updateSprintSettings(payload: { dailyUpdateTime?: string; 
 }
 
 export async function resetToNotStarted(): Promise<Sprint> {
-  const res = await fetch(`${BASE_URL}/sprint/reset-to-not-started`, { method: 'POST', headers: authHeaders() });
+  const res = await fetch(`${BASE_URL}/sprint/reset-to-not-started`, { method: 'POST', headers: authHeaders(), credentials: 'include' });
   if (!res.ok) throw new Error('Failed to reset sprint to not started');
   return res.json();
 }
 
 export async function triggerDailySync(): Promise<{ success: boolean; sprint: Sprint; ingestedPrs: PullRequest[] }> {
-  const res = await fetch(`${BASE_URL}/sprint/sync-daily`, { method: 'POST', headers: authHeaders() });
+  const res = await fetch(`${BASE_URL}/sprint/sync-daily`, { method: 'POST', headers: authHeaders(), credentials: 'include' });
   if (!res.ok) throw new Error('Failed to run daily sync');
+  return res.json();
+}
+
+export async function toggleLogins(paused?: boolean): Promise<{ success: boolean; loginsPaused: boolean }> {
+  const res = await fetch(`${BASE_URL}/admin/toggle-logins`, {
+    method: 'POST',
+    headers: authHeaders(),
+    credentials: 'include',
+    body: JSON.stringify({ paused })
+  });
+  if (!res.ok) throw new Error('Failed to toggle logins status');
   return res.json();
 }
 
@@ -197,7 +209,8 @@ export async function fetchPullRequests(filters?: { author?: string; status?: st
   if (filters?.mine) query.set('mine', 'true');
 
   const res = await fetch(`${BASE_URL}/pull-requests?${query.toString()}`, {
-    headers: authHeaders()
+    headers: authHeaders(),
+    credentials: 'include'
   });
   if (!res.ok) throw new Error('Failed to fetch pull requests');
   return res.json();
@@ -205,14 +218,15 @@ export async function fetchPullRequests(filters?: { author?: string; status?: st
 
 export async function fetchMyReviewsSummary(): Promise<any> {
   const res = await fetch(`${BASE_URL}/pull-requests/my`, {
-    headers: authHeaders()
+    headers: authHeaders(),
+    credentials: 'include'
   });
   if (!res.ok) throw new Error('Failed to fetch personal PR reviews');
   return res.json();
 }
 
 export async function fetchPullRequestById(id: string): Promise<PullRequest> {
-  const res = await fetch(`${BASE_URL}/pull-requests/${id}`);
+  const res = await fetch(`${BASE_URL}/pull-requests/${id}`, { credentials: 'include' });
   if (!res.ok) throw new Error('Failed to fetch pull request');
   return res.json();
 }
@@ -230,6 +244,7 @@ export async function submitPullRequest(payload: {
   const res = await fetch(`${BASE_URL}/pull-requests`, {
     method: 'POST',
     headers: authHeaders(),
+    credentials: 'include',
     body: JSON.stringify(payload)
   });
   if (!res.ok) {

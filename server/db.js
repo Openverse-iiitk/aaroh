@@ -104,10 +104,22 @@ class Database {
   }
 
   async ensureLoaded(force = false) {
-    // Only attempt to load from remote Vercel Blob if running in VERCEL serverless environment
-    // or if BLOB_READ_WRITE_TOKEN is explicitly configured.
-    // In local development, use local data.json to prevent stale remote blob data from overwriting local state.
+    // In local development without BLOB token, reload from local data.json if modified
     if (!process.env.VERCEL && !process.env.BLOB_READ_WRITE_TOKEN) {
+      if (fs.existsSync(DB_FILE)) {
+        try {
+          const stats = fs.statSync(DB_FILE);
+          if (!this.lastFileMtime || stats.mtimeMs > this.lastFileMtime || force) {
+            const raw = fs.readFileSync(DB_FILE, 'utf-8');
+            const local = JSON.parse(raw);
+            if (local && local.sprint) {
+              this.data = local;
+              this.lastFileMtime = stats.mtimeMs;
+              return true;
+            }
+          }
+        } catch (_) {}
+      }
       return false;
     }
 
@@ -385,7 +397,12 @@ class Database {
 
   async updatePullRequest(id, updates) {
     await this.ensureLoaded(true);
-    const idx = (this.data.pullRequests || []).findIndex(pr => pr.id === id);
+    const target = String(id).trim().toLowerCase();
+    const idx = (this.data.pullRequests || []).findIndex(pr => {
+      const pId = String(pr.id || '').trim().toLowerCase();
+      const pNum = String(pr.githubPrNumber || '').trim().toLowerCase();
+      return pId === target || pNum === target;
+    });
     if (idx >= 0) {
       this.data.pullRequests[idx] = { ...this.data.pullRequests[idx], ...updates };
       await this.save();

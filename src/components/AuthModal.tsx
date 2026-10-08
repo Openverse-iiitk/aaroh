@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Github, AlertTriangle, ShieldCheck, GitPullRequest } from 'lucide-react';
+import { X, Github, AlertTriangle, ShieldCheck, GitPullRequest, Lock } from 'lucide-react';
 import { fetchGitHubOAuthUrl } from '../api/client';
 
 interface AuthModalProps {
