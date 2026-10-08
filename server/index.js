@@ -149,7 +149,7 @@ async function performDailyCalculation(isManualTrigger = false) {
   const featurePool = [
     { title: 'refactor: decouple router state cache from hydration tree', repo: 'tanstack/react-router', tags: ['tanstack', 'refactor'], additions: 240, deletions: 38 },
     { title: 'perf: optimize AST traversal in query compiler', repo: 'oven-sh/bun', tags: ['compiler', 'perf'], additions: 180, deletions: 54 },
-    { title: 'fix: resolve race condition in concurrent daily sync scheduler', repo: 'openverse/hackaaroh', tags: ['bugfix', 'concurrency'], additions: 95, deletions: 12 },
+    { title: 'fix: resolve race condition in concurrent daily sync scheduler', repo: 'Openverse-iiitk/aaroh', tags: ['bugfix', 'concurrency'], additions: 95, deletions: 12 },
     { title: 'feat: add real-time WebSocket ingress for webhook events', repo: 'vercel/next.js', tags: ['websocket', 'feat'], additions: 310, deletions: 20 },
     { title: 'docs: document automated daily tracking schedule and scoring rubric', repo: 'microsoft/vscode', tags: ['docs', 'rubric'], additions: 120, deletions: 8 },
     { title: 'feat: add zero-allocation byte serializer in rust microservice', repo: 'astral-sh/uv', tags: ['rust', 'perf'], additions: 275, deletions: 45 },

@@ -226,7 +226,7 @@ function RootLayout() {
       currentDay: 6,
       lastSyncAt: new Date().toISOString(),
       nextSyncAt: new Date(Math.ceil(Date.now() / 86400000) * 86400000).toISOString(),
-      trackedRepos: ['openverse/hackaaroh'],
+      trackedRepos: ['Openverse-iiitk/aaroh'],
       isFinalized: false,
       finalizedAt: null,
       finalPodium: [],

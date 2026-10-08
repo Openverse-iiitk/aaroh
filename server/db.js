@@ -9,6 +9,16 @@ const SEED_FILE = path.join(__dirname, 'data.json');
 const DB_FILE = process.env.VERCEL ? path.join('/tmp', 'hackaaroh_data.json') : SEED_FILE;
 const BLOB_URL = 'https://ae1nkbba9sxv7ktd.public.blob.vercel-storage.com/hackaaroh_data.json';
 
+function correctTrackedRepository(data) {
+  if (Array.isArray(data.sprint?.trackedRepos)) {
+    data.sprint.trackedRepos = data.sprint.trackedRepos.map(repo =>
+      typeof repo === 'string' && repo.toLowerCase() === 'openverse/hackaaroh'
+        ? 'Openverse-iiitk/aaroh'
+        : repo
+    );
+  }
+}
+
 export function calculateNextSync(timeStr = '00:00') {
   const [hours, minutes] = (timeStr || '00:00').split(':').map(Number);
   const now = new Date();
@@ -47,7 +57,7 @@ const getInitialSeed = () => {
       nextSyncAt: calculateNextSync('00:00'),
       trackingScope: 'ALL_REPOSITORIES',
       trackedRepos: [
-        'openverse/hackaaroh',
+        'Openverse-iiitk/aaroh',
         'facebook/react',
         'nodejs/node',
         'tailwindlabs/tailwindcss',
@@ -142,6 +152,7 @@ class Database {
             }
           }
 
+          correctTrackedRepository(remoteData);
           this.data = remoteData;
           this.lastLoadedAt = now;
           try {
@@ -180,6 +191,7 @@ class Database {
       if (!this.data.sprint.dailyUpdateTime) {
         this.data.sprint.dailyUpdateTime = '00:00';
       }
+      correctTrackedRepository(this.data);
     } catch (err) {
       console.error('Error initializing db, resetting to seed:', err);
       this.data = getInitialSeed();
