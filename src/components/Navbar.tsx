@@ -25,20 +25,20 @@ export const Navbar: React.FC<NavbarProps> = ({
   const isAdmin = user?.role === 'admin';
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-indigo-500/15 bg-[#0a0815]/80 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
-      <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
+    <header className="home-nav sticky top-0 z-40 w-full border-b border-white/10 bg-[#060507]/90 backdrop-blur-md">
+      <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between gap-3 sm:gap-4">
         {/* Brand / Logo */}
         <Link to="/" className="flex items-center gap-2.5 text-decoration-none group">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center border border-white/20 shadow-[0_0_14px_rgba(99,102,241,0.4)] group-hover:scale-105 transition-transform">
-            <GitPullRequest className="w-4 h-4 text-white" />
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-[#2eff7b]">
+            <GitPullRequest className="w-4 h-4 text-[#03140a]" />
           </div>
-          <span className="text-sm font-semibold text-white tracking-tight">
-            HackAaroh {!isPreEvent && <span className="bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent font-medium">PR Tracker</span>}
+          <span className="text-sm font-semibold text-white tracking-tight whitespace-nowrap">
+            HackAaroh {!isPreEvent && <span className="text-zinc-400 font-medium hidden sm:inline">PR Tracker</span>}
           </span>
         </Link>
 
         {/* Navigation links */}
-        <nav className="flex items-center gap-5 text-sm">
+        <nav className="flex items-center gap-4 sm:gap-5 text-sm min-w-0">
           {(!isPreEvent || isAdmin) && (
             <>
               <Link
@@ -47,7 +47,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   currentPath === '/leaderboard' ? 'text-white font-medium' : 'text-zinc-400 hover:text-white'
                 }`}
               >
-                <Trophy className="w-3.5 h-3.5 text-zinc-400" />
+                <Trophy className="w-3.5 h-3.5 text-zinc-400 hidden sm:block" />
                 <span>Leaderboard</span>
               </Link>
 
@@ -57,8 +57,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                   currentPath === '/pull-requests' ? 'text-white font-medium' : 'text-zinc-400 hover:text-white'
                 }`}
               >
-                <GitPullRequest className="w-3.5 h-3.5 text-zinc-400" />
-                <span>Submitted PRs</span>
+                <GitPullRequest className="w-3.5 h-3.5 text-zinc-400 hidden sm:block" />
+                <span className="hidden md:inline">Submitted PRs</span><span className="md:hidden">PRs</span>
               </Link>
             </>
           )}
@@ -121,7 +121,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {user ? (
             <div className="flex items-center gap-2 pl-2 border-l border-white/10">
-              <div className="flex items-center gap-2 px-2.5 py-1 rounded-btn bg-[#161326] border border-indigo-500/30 shadow-[0_0_12px_rgba(99,102,241,0.15)]">
+              <div className="flex items-center gap-2 px-2.5 py-1 rounded-btn bg-[#191c1a] border border-indigo-500/30">
                 <img
                   src={user.role === 'admin' ? 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&auto=format&fit=crop&q=80' : user.avatarUrl}
                   alt={user.role === 'admin' ? 'HackAaroh Admin' : user.username}
@@ -156,10 +156,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               </Link>
               <button
                 onClick={onOpenAuth}
-                className="btn-primary !text-xs !py-1.5 !px-3"
+                className="btn-primary !text-xs !py-1.5 !px-3 shrink-0 whitespace-nowrap"
               >
                 <Github className="w-3.5 h-3.5" />
-                <span>Sign in with GitHub</span>
+                <span className="whitespace-nowrap">Sign in<span className="hidden sm:inline"> with GitHub</span></span>
               </button>
             </div>
           )}

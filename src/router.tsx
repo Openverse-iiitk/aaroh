@@ -259,11 +259,11 @@ function RootLayout() {
 
   return (
     <RouteContextShim.Provider value={outletContext}>
-      <div className="min-h-screen flex flex-col bg-[#06040d] text-[#f5f3ff]">
+      <div className="min-h-screen flex flex-col bg-[#060507] text-[#ecf1ee]">
         {/* Top Announcement Banner (Pre-event) */}
         {isPreEvent && (
-          <div className="w-full bg-gradient-to-r from-indigo-950/80 via-purple-950/70 to-indigo-950/80 border-b border-indigo-500/20 text-xs py-2 px-4 backdrop-blur-md relative z-50 text-center">
-            <span className="inline-flex items-center justify-center bg-black/40 px-4 h-6 pt-px leading-none rounded-full border border-indigo-500/30 shadow-[0_0_12px_rgba(99,102,241,0.2)] text-[11px] text-zinc-200 font-medium tracking-wide">
+          <div className="w-full bg-indigo-950/80 border-b border-indigo-500/20 text-xs py-2 px-4 backdrop-blur-md relative z-50 text-center">
+            <span className="inline-flex items-center justify-center bg-black/40 px-4 h-6 pt-px leading-none rounded-full border border-indigo-500/30 text-[11px] text-zinc-200 font-medium tracking-wide">
               More updates will reach you soon
             </span>
           </div>
@@ -302,7 +302,7 @@ function RootLayout() {
             </div>
           </footer>
         ) : (
-          <footer className="w-full py-8 border-t border-white/10 text-xs text-zinc-500 bg-[#04020a]">
+          <footer className="w-full py-8 border-t border-white/10 text-xs text-zinc-500 bg-[#040705]">
             <div className="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-500" />

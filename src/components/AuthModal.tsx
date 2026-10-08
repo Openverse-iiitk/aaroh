@@ -58,7 +58,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
-      <div className="w-full max-w-md p-6 sm:p-7 rounded-2xl bg-[#0e0a24] border border-white/10 relative shadow-[0_16px_50px_rgba(0,0,0,0.7)] text-left">
+      <div className="w-full max-w-md p-6 sm:p-7 rounded-2xl bg-[#131614] border border-white/10 relative shadow-[0_16px_50px_rgba(0,0,0,0.7)] text-left">
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-zinc-400 hover:text-white p-1 rounded-lg hover:bg-white/5 transition-colors"
@@ -69,7 +69,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
         {/* Brand Icon Header */}
         <div className="text-center mb-6">
-          <div className="w-12 h-12 rounded-xl bg-[#17113a] border border-indigo-500/30 mx-auto flex items-center justify-center mb-3 shadow-[0_0_20px_rgba(99,102,241,0.2)]">
+          <div className="w-12 h-12 rounded-xl bg-[#202321] border border-indigo-500/30 mx-auto flex items-center justify-center mb-3">
             <Github className="w-6 h-6 text-white" />
           </div>
           <h2 className="text-xl font-semibold text-white tracking-tight">
@@ -106,7 +106,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           className={`w-full py-3 px-4 rounded-xl text-white border text-xs font-semibold flex items-center justify-center gap-2.5 transition-all shadow-lg ${
             loginsPaused
               ? 'bg-zinc-800/60 border-white/5 text-zinc-500 cursor-not-allowed opacity-60'
-              : 'bg-[#24292e] hover:bg-[#2f363d] border-white/20 hover:border-indigo-400/50 hover:shadow-[0_0_20px_rgba(99,102,241,0.25)]'
+              : 'bg-[#24292e] hover:bg-[#2f363d] border-white/20 hover:border-indigo-400/50'
           }`}
         >
           {loginsPaused ? (
@@ -165,7 +165,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   placeholder="Enter secret admin key"
                   value={adminPasskey}
                   onChange={(e) => setAdminPasskey(e.target.value)}
-                  className="w-full bg-[#0a071c] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-indigo-400 font-mono"
+                  className="w-full bg-[#0e110f] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-indigo-400 font-mono"
                   autoFocus
                 />
               </div>
@@ -177,14 +177,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   placeholder="Vijay-1710"
                   value={adminUsername}
                   onChange={(e) => setAdminUsername(e.target.value)}
-                  className="w-full bg-[#0a071c] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-indigo-400 font-mono"
+                  className="w-full bg-[#0e110f] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-indigo-400 font-mono"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={adminLoading || !adminPasskey.trim()}
-                className="w-full py-2 px-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium flex items-center justify-center gap-1.5 transition-colors disabled:opacity-50"
+                className="w-full py-2 px-3 rounded-lg bg-[#2eff7b] hover:bg-[#6bffa1] text-[#03140a] text-xs font-medium flex items-center justify-center gap-1.5 transition-colors disabled:opacity-50"
               >
                 <span>{adminLoading ? 'Authenticating...' : 'Unlock Admin Portal'}</span>
                 <ArrowRight className="w-3.5 h-3.5" />

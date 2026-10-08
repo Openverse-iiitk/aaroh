@@ -79,8 +79,8 @@ export const AdminPage: React.FC<AdminPageProps> = ({
   if (!isAdmin) {
     return (
       <div className="w-full max-w-lg mx-auto px-4 py-16 text-center">
-        <div className="p-7 rounded-2xl bg-[#0e0a24] border border-white/10 space-y-4 shadow-[0_20px_50px_rgba(0,0,0,0.7)] text-left">
-          <div className="w-12 h-12 rounded-xl bg-indigo-950/80 border border-indigo-500/30 mx-auto flex items-center justify-center mb-2 shadow-[0_0_20px_rgba(99,102,241,0.25)]">
+        <div className="p-7 rounded-2xl bg-[#131614] border border-white/10 space-y-4 shadow-[0_20px_50px_rgba(0,0,0,0.7)] text-left">
+          <div className="w-12 h-12 rounded-xl bg-indigo-950/80 border border-indigo-500/30 mx-auto flex items-center justify-center mb-2">
             <Shield className="w-6 h-6 text-indigo-400" />
           </div>
           <div className="text-center">
@@ -107,7 +107,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 placeholder="Enter secret passkey"
                 value={passkeyInput}
                 onChange={(e) => setPasskeyInput(e.target.value)}
-                className="w-full bg-[#070417] border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-400 font-mono"
+                className="w-full bg-[#0a0d0b] border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-400 font-mono"
                 required
                 autoFocus
               />
@@ -120,14 +120,14 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 placeholder="Vijay-1710"
                 value={passkeyUsername}
                 onChange={(e) => setPasskeyUsername(e.target.value)}
-                className="w-full bg-[#070417] border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-400 font-mono"
+                className="w-full bg-[#0a0d0b] border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-400 font-mono"
               />
             </div>
 
             <button
               type="submit"
               disabled={passkeyLoading || !passkeyInput.trim()}
-              className="w-full py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white text-xs font-semibold transition-all shadow-[0_0_15px_rgba(99,102,241,0.25)] flex items-center justify-center gap-2"
+              className="w-full py-2.5 px-4 rounded-xl bg-[#2eff7b] hover:bg-[#6bffa1] disabled:opacity-50 text-[#03140a] text-xs font-semibold transition-all flex items-center justify-center gap-2"
             >
               <span>{passkeyLoading ? 'Verifying...' : 'Unlock Admin Hub'}</span>
             </button>

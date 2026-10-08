@@ -1,20 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none">
-  <defs>
-    <linearGradient id="hackaaroh-grad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#6366f1" />
-      <stop offset="100%" stop-color="#9333ea" />
-    </linearGradient>
-  </defs>
-  <!-- Rounded gradient square -->
-  <rect width="32" height="32" rx="8" fill="url(#hackaaroh-grad)" />
-  <rect x="0.5" y="0.5" width="31" height="31" rx="7.5" stroke="rgba(255,255,255,0.2)" />
-  
-  <!-- White GitPullRequest icon matching lucide-react -->
-  <circle cx="10" cy="10" r="2.5" stroke="#ffffff" stroke-width="2" />
-  <circle cx="10" cy="22" r="2.5" stroke="#ffffff" stroke-width="2" />
-  <circle cx="22" cy="10" r="2.5" stroke="#ffffff" stroke-width="2" />
-  
+  <!-- Rounded green square (matches the navbar logo) -->
+  <rect width="32" height="32" rx="8" fill="#2eff7b" />
+
+  <!-- Dark GitPullRequest icon matching lucide-react -->
+  <circle cx="10" cy="10" r="2.5" stroke="#03140a" stroke-width="2" />
+  <circle cx="10" cy="22" r="2.5" stroke="#03140a" stroke-width="2" />
+  <circle cx="22" cy="10" r="2.5" stroke="#03140a" stroke-width="2" />
+
   <!-- PR connecting branch lines -->
-  <line x1="10" y1="12.5" x2="10" y2="19.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
-  <path d="M 22 12.5 C 22 17 10 16 10 19.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
+  <line x1="10" y1="12.5" x2="10" y2="19.5" stroke="#03140a" stroke-width="2" stroke-linecap="round" />
+  <path d="M 22 12.5 C 22 17 10 16 10 19.5" stroke="#03140a" stroke-width="2" stroke-linecap="round" />
 </svg>

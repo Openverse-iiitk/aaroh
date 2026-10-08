@@ -1,32 +1,12 @@
-import React, { useState } from 'react';
-import { Hero } from '../components/Hero';
-import { PreEventPage } from '../components/PreEventPage';
-import { ReflectBlackHole } from '../components/ReflectBlackHole';
-import { LivePullRequestMarquee } from '../components/LivePullRequestMarquee';
-import { SpotlightCard } from '../components/reactbits/SpotlightCard';
-import { LeaderboardItem, PullRequest, Sprint, User } from '../types';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from '@tanstack/react-router';
-import { 
-  Trophy, 
-  GitPullRequest, 
-  ArrowRight, 
-  ShieldCheck, 
-  CheckCircle2, 
-  Clock, 
-  Users, 
-  Code2, 
-  Flame, 
-  GitMerge, 
-  Award, 
-  Star, 
-  Sparkles, 
-  FileCheck2, 
-  Terminal, 
-  HelpCircle,
-  ExternalLink,
-  Shield,
-  Github
-} from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Github } from 'lucide-react';
+import '../styles/home.css';
+import { ReflectBlackHole } from '../components/ReflectBlackHole';
+import { PixelHeatmap } from '../components/PixelHeatmap';
+import { PreEventPage } from '../components/PreEventPage';
+import { LeaderboardItem, PullRequest, Sprint, User } from '../types';
+import { formatGithubPrUrl } from '../utils/github';
 
 interface HomePageProps {
   sprint: Sprint;
@@ -36,6 +16,116 @@ interface HomePageProps {
   onOpenAuth: () => void;
 }
 
+/* ---------- helpers ---------- */
+
+const pad = (n: number) => n.toString().padStart(2, '0');
+
+// Official event start date: October 9, 2026 at 00:00 IST = 2026-10-08T18:30:00.000Z
+const OFFICIAL_START_MS = new Date('2026-10-08T18:30:00.000Z').getTime();
+
+/* Before kickoff: counts down to the event start. After: counts down to the day's scoring cutoff. */
+function useEventCountdown(sprint: Sprint | undefined, enabled: boolean) {
+  const eventStartTime =
+    sprint?.startDate && new Date(sprint.startDate).getTime() >= OFFICIAL_START_MS
+      ? new Date(sprint.startDate).getTime()
+      : OFFICIAL_START_MS;
+  const [now, setNow] = useState(() => Date.now());
+
+  useEffect(() => {
+    if (!enabled) return;
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, [enabled]);
+
+  if (!enabled) return null;
+
+  const isUpcoming = now < eventStartTime;
+  const computedDay = isUpcoming ? 1 : Math.floor((now - eventStartTime) / 86400000) + 1;
+  const target = isUpcoming
+    ? eventStartTime
+    : sprint?.nextSyncAt
+    ? new Date(sprint.nextSyncAt).getTime()
+    : eventStartTime + computedDay * 86400000;
+  const secondsLeft = Math.max(0, Math.floor((target - now) / 1000));
+  const days = Math.floor(secondsLeft / 86400);
+
+  return {
+    isUpcoming,
+    computedDay,
+    d: days > 0 ? pad(days) : null,
+    h: pad(Math.floor((secondsLeft % 86400) / 3600)),
+    m: pad(Math.floor((secondsLeft % 3600) / 60)),
+    s: pad(secondsLeft % 60),
+    isDue: secondsLeft === 0,
+  };
+}
+
+const relativeTime = (iso: string) => {
+  const diffSec = (new Date(iso).getTime() - Date.now()) / 1000;
+  const rtf = new Intl.RelativeTimeFormat(undefined, { numeric: 'auto' });
+  const abs = Math.abs(diffSec);
+  if (abs < 3600) return rtf.format(Math.round(diffSec / 60), 'minute');
+  if (abs < 86400) return rtf.format(Math.round(diffSec / 3600), 'hour');
+  return rtf.format(Math.round(diffSec / 86400), 'day');
+};
+
+const formatNumber = (n: number) => new Intl.NumberFormat().format(n);
+
+const Avatar: React.FC<{ src?: string; name: string; size?: number }> = ({ src, name, size = 32 }) => {
+  const [failed, setFailed] = useState(false);
+  const initials = name
+    .replace(/^@/, '')
+    .split(/[\s-_]+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase())
+    .join('');
+
+  return (
+    <span
+      className="relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded bg-[#0e3a24] text-[11px] font-medium text-[var(--accent)]"
+      style={{ width: size, height: size }}
+      aria-hidden="true"
+    >
+      {src && !failed ? (
+        <img
+          src={src}
+          alt=""
+          width={size}
+          height={size}
+          loading="lazy"
+          onError={() => setFailed(true)}
+          className="h-full w-full object-cover"
+        />
+      ) : (
+        initials || '?'
+      )}
+    </span>
+  );
+};
+
+const DigitPair: React.FC<{ value: string; label: string }> = ({ value, label }) => (
+  <div className="flex flex-col items-center gap-1.5">
+    <div className="mono flex gap-1" aria-hidden="true">
+      <span className="clock-digit">{value[0]}</span>
+      <span className="clock-digit">{value[1]}</span>
+    </div>
+    <span className="mono text-[10px] text-[var(--faint)] sm:text-xs">{label}</span>
+  </div>
+);
+
+const SectionTitle: React.FC<{ title: string; body?: string; action?: React.ReactNode }> = ({ title, body, action }) => (
+  <div className="mb-8 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+    <div className="max-w-xl">
+      <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">{title}</h2>
+      {body && <p className="mt-2 text-[var(--muted)]">{body}</p>}
+    </div>
+    {action}
+  </div>
+);
+
+/* ---------- page ---------- */
+
 export const HomePage: React.FC<HomePageProps> = ({
   sprint,
   leaderboard = [],
@@ -43,10 +133,81 @@ export const HomePage: React.FC<HomePageProps> = ({
   currentUser,
   onOpenAuth,
 }) => {
+  const board = Array.isArray(leaderboard) ? leaderboard : [];
+  const prs = Array.isArray(pullRequests) ? pullRequests : [];
+
+  const countdown = useEventCountdown(sprint, !sprint?.isFinalized);
+  const updateTime = sprint?.dailyUpdateTime || '00:00';
+  const isAdmin = currentUser?.role === 'admin';
+
   const targetStartMs = new Date('2026-10-08T18:30:00.000Z').getTime();
   const isPreEvent = (Date.now() < targetStartMs) || Boolean(sprint?.isUpcoming);
-  const isAdmin = currentUser?.role === 'admin';
   const [adminPreviewLive, setAdminPreviewLive] = useState(false);
+
+  const totalCredits = board.reduce((sum, item) => sum + (item.totalCredits || 0), 0);
+  const mergedCount = prs.filter((p) => p.state === 'merged').length;
+  const topThree = board.slice(0, 3);
+
+  const sortedPrs = useMemo(
+    () => [...prs].sort((a, b) => +new Date(b.createdAt) - +new Date(a.createdAt)),
+    [prs]
+  );
+  const ticker = sortedPrs.slice(0, 12);
+  const repos = (sprint?.trackedRepos?.length ? sprint.trackedRepos : []).slice(0, 8);
+
+  const statusLine = sprint?.isFinalized
+    ? 'Sprint over. Final standings are locked.'
+    : countdown?.isUpcoming
+    ? 'Event starts Oct 9, 00:00 IST. PR tracking opens at midnight.'
+    : `Day ${countdown?.computedDay || 1} live. Scores refresh at ${updateTime} UTC.`;
+
+  /* One label per intent, used everywhere on this page */
+  const PrimaryAction = () => {
+    if (!currentUser) {
+      return (
+        <button type="button" onClick={onOpenAuth} className="btn btn-primary">
+          <Github className="h-4 w-4" aria-hidden="true" />
+          Sign in with GitHub
+        </button>
+      );
+    }
+    if (isAdmin) {
+      return (
+        <Link to="/admin" className="btn btn-primary">
+          Open admin portal
+          <ArrowRight className="h-4 w-4" aria-hidden="true" />
+        </Link>
+      );
+    }
+    return (
+      <Link to="/leaderboard" className="btn btn-primary">
+        Check my standing
+        <ArrowRight className="h-4 w-4" aria-hidden="true" />
+      </Link>
+    );
+  };
+
+  const steps = [
+    {
+      title: 'Sign in with GitHub',
+      body: 'One click links your account to the event. There is no form to fill in.',
+    },
+    {
+      title: 'Open pull requests anywhere',
+      body: 'Any public repository counts. We find your PRs on our own and read their commits and diffs.',
+    },
+    {
+      title: 'Get scored every night',
+      body: `Reviewers grade each PR on four criteria. The board updates at ${updateTime} UTC.`,
+    },
+  ];
+
+  const criteria = [
+    { name: 'Code quality', body: 'Clean, readable code that fits the project style and handles errors.' },
+    { name: 'Complexity', body: 'How hard the problem was: tricky logic, state, performance or refactors.' },
+    { name: 'Impact', body: 'Real value for the project, like fixing a painful bug or adding a wanted feature.' },
+    { name: 'Tests', body: 'Tests that cover edge cases and keep the change from breaking later.' },
+  ];
 
   if (isPreEvent && (!isAdmin || !adminPreviewLive)) {
     return (
@@ -59,33 +220,17 @@ export const HomePage: React.FC<HomePageProps> = ({
       />
     );
   }
-  const safeLeaderboard = Array.isArray(leaderboard) ? leaderboard : [];
-  const safePrs = Array.isArray(pullRequests) ? pullRequests : [];
-  const topThree = safeLeaderboard.slice(0, 3);
-  const totalCredits = safeLeaderboard.reduce((acc, curr) => acc + (curr.totalCredits || 0), 0);
-  const totalMerged = safePrs.filter((p) => p.state === 'merged').length;
-
-  const trackedRepositories = sprint.trackedRepos || [
-    'facebook/react',
-    'vercel/next.js',
-    'rust-lang/rust',
-    'oven-sh/bun',
-    'nodejs/node',
-    'tailwindlabs/tailwindcss',
-    'tanstack/table',
-    'shadcn-ui/ui',
-    'microsoft/vscode',
-    'astral-sh/uv',
-  ];
 
   return (
-    <div className="w-full pb-20 relative overflow-hidden">
-      {/* Reflect Notes Interactive 3D Black Hole Background (Horizontal Plane & Scroll-Driven Tilt/Zoom) */}
-      <ReflectBlackHole isFixed />
+    <div className="home-v3 w-full overflow-hidden">
+      {/* Original backdrop, tinted green */}
+      <div className="bh-green">
+        <ReflectBlackHole isFixed />
+      </div>
 
       {/* Admin Pre-event Live View Switcher */}
       {isAdmin && isPreEvent && (
-        <div className="w-full bg-amber-950/40 border-b border-amber-500/30 py-2 px-4 text-xs relative z-30">
+        <div className="layer w-full bg-amber-950/40 border-b border-amber-500/30 py-2 px-4 text-xs">
           <div className="max-w-5xl mx-auto flex items-center justify-between gap-2">
             <span className="text-amber-200">
               ⚡ <strong>Organizer Preview:</strong> You are viewing the live event platform. Participants are seeing the Pre-Event landing page.
@@ -100,516 +245,294 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       )}
 
-      {/* Logged In Welcome Banner (if authenticated) */}
+      {/* Signed-in strip */}
       {currentUser && (
-        <div className="w-full bg-blue-950/30 border-b border-blue-500/20 py-2.5 px-4 animate-fade-in">
-          <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-zinc-300">
-                {currentUser.role === 'admin' ? (
-                  <>Signed in as <strong className="text-white">HackAaroh Admin</strong></>
-                ) : (
-                  <>Signed in as <strong className="text-white">@{currentUser.username}</strong></>
-                )}
-                {currentUser.role === 'admin' ? (
-                  <span className="ml-1.5 px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-semibold border border-indigo-500/30">
-                    Lead Administrator
-                  </span>
-                ) : (
-                  <span className="ml-1.5 px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 font-medium">
-                    Contributor
-                  </span>
-                )}
-              </span>
-            </div>
-
-            <div className="flex items-center gap-2">
-              {currentUser.role === 'admin' ? (
-                <Link
-                  to="/admin"
-                  className="text-blue-400 hover:text-blue-300 flex items-center gap-1 font-medium transition-colors"
-                >
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  <span>Open Admin Review Portal</span>
-                  <ArrowRight className="w-3 h-3" />
-                </Link>
-              ) : (
-                <Link
-                  to="/leaderboard"
-                  className="text-blue-400 hover:text-blue-300 flex items-center gap-1 font-medium transition-colors"
-                >
-                  <Trophy className="w-3.5 h-3.5" />
-                  <span>View My Ranking on Leaderboard</span>
-                  <ArrowRight className="w-3 h-3" />
-                </Link>
-              )}
-            </div>
+        <div className="layer border-b border-[var(--line)] bg-[var(--panel)]">
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-2.5 text-sm sm:px-6">
+            <p className="text-[var(--muted)]">
+              Signed in as{' '}
+              <span className="text-[var(--text)]">{isAdmin ? 'HackAaroh admin' : `@${currentUser.username}`}</span>
+            </p>
+            <Link to={isAdmin ? '/admin' : '/leaderboard'} className="link text-sm">
+              {isAdmin ? 'Review pull requests' : 'See my ranking'}
+            </Link>
           </div>
         </div>
       )}
 
-      {/* Hero Section */}
-      <Hero
-        sprint={sprint}
-        onOpenAuth={onOpenAuth}
-        isAuthenticated={!!currentUser}
-        isAdmin={currentUser?.role === 'admin'}
-      />
+      {/* ---------- Hero ---------- */}
+      <section className="layer mx-auto flex max-w-5xl flex-col items-center px-4 pb-16 pt-14 text-center sm:px-6 sm:pt-20">
+        <p className="mono rise mb-8 text-xs tracking-[0.28em] text-[var(--accent)] sm:text-sm">
+          &gt; THE OPEN SOURCE TRACKING PLATFORM
+        </p>
 
-      {/* Live PR Stream Ticker */}
-      <div className="mb-14">
-        <LivePullRequestMarquee pullRequests={safePrs} />
-      </div>
+        <h1 className="sr-only">HackAaroh Sprint, the open source tracking platform</h1>
+        <PixelHeatmap label="HackAaroh Sprint" />
 
-      {/* Live Event Stats Bar with ReactBits SpotlightCard */}
-      <div className="max-w-5xl mx-auto px-4 mb-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5">
-          {/* Status */}
-          <SpotlightCard className="p-4 flex flex-col justify-between">
-            <span className="text-[11px] font-medium text-zinc-400 uppercase tracking-wider block mb-1">
-              Event Status
-            </span>
-            <div className="flex items-center gap-2 my-1">
+        <p className="rise rise-2 mt-10 max-w-xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
+          Open pull requests on any public GitHub repo. Reviewers score each one out of 100, and the leaderboard
+          refreshes every night.
+        </p>
+
+        <div className="rise rise-2 mt-8 flex flex-wrap items-center justify-center gap-3">
+          <PrimaryAction />
+          <Link to={currentUser && !isAdmin ? '/pull-requests' : '/leaderboard'} className="btn btn-ghost">
+            {currentUser && !isAdmin ? 'Browse pull requests' : 'See the leaderboard'}
+          </Link>
+        </div>
+
+        {/* Countdown to the next scoring run */}
+        <div className="mt-12 flex flex-col items-center gap-3">
+          <p className="mono text-xs text-[var(--faint)]">{statusLine}</p>
+          {countdown ? (
+            <div
+              role="timer"
+              aria-label={`${countdown.d ? `${countdown.d} days ` : ''}${countdown.h} hours ${countdown.m} minutes ${countdown.s} seconds until ${countdown.isUpcoming ? 'the event starts' : 'scoring'}`}
+            >
+              <div className="flex items-start gap-2 sm:gap-3">
+                {countdown.d && (
+                  <>
+                    <DigitPair value={countdown.d} label="days" />
+                    <span className="mono pt-2 text-2xl text-[var(--faint)] sm:pt-3" aria-hidden="true">:</span>
+                  </>
+                )}
+                <DigitPair value={countdown.h} label="hours" />
+                <span className="mono pt-2 text-2xl text-[var(--faint)] sm:pt-3" aria-hidden="true">:</span>
+                <DigitPair value={countdown.m} label="minutes" />
+                <span className="mono pt-2 text-2xl text-[var(--faint)] sm:pt-3" aria-hidden="true">:</span>
+                <DigitPair value={countdown.s} label="seconds" />
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </section>
+
+      {/* ---------- Live PR ticker ---------- */}
+      {ticker.length > 0 && (
+        <section className="layer border-y border-[var(--line)] bg-[var(--panel)]" aria-label="Latest pull requests">
+          <div className="animate-marquee flex items-center gap-3 whitespace-nowrap py-3 will-change-transform">
+            {[...ticker, ...ticker, ...ticker].map((pr, i) => (
               <span
-                className={`w-2 h-2 rounded-full ${
-                  sprint.status === 'ACTIVE'
-                    ? 'bg-emerald-400 animate-pulse'
-                    : 'bg-zinc-500'
-                }`}
-              />
-              <span className="text-base font-semibold text-white">
-                {sprint.status === 'ACTIVE'
-                  ? `Day ${sprint.currentDay} Active`
-                  : sprint.isFinalized
-                  ? 'Concluded'
-                  : 'Pending Start'}
-              </span>
-            </div>
-            <span className="text-[11px] text-zinc-500 mt-1">
-              Syncs at {sprint.dailyUpdateTime || '00:00'} UTC
-            </span>
-          </SpotlightCard>
-
-          {/* Registered Contributors */}
-          <SpotlightCard className="p-4 flex flex-col justify-between">
-            <span className="text-[11px] font-medium text-zinc-400 uppercase tracking-wider block mb-1">
-              Contributors
-            </span>
-            <div className="flex items-baseline gap-1.5 my-1">
-              <span className="text-2xl font-semibold text-white">
-                {safeLeaderboard.length}
-              </span>
-              <span className="text-xs text-zinc-500">participants</span>
-            </div>
-            <span className="text-[11px] text-zinc-500 mt-1">
-              Across all teams
-            </span>
-          </SpotlightCard>
-
-          {/* Tracked PRs */}
-          <SpotlightCard className="p-4 flex flex-col justify-between">
-            <span className="text-[11px] font-medium text-zinc-400 uppercase tracking-wider block mb-1">
-              Tracked Pull Requests
-            </span>
-            <div className="flex items-baseline gap-1.5 my-1">
-              <span className="text-2xl font-semibold text-white">
-                {safePrs.length}
-              </span>
-              <span className="text-xs text-emerald-400 font-medium">
-                ({totalMerged} merged)
-              </span>
-            </div>
-            <span className="text-[11px] text-zinc-500 mt-1">
-              Tracked across GitHub
-            </span>
-          </SpotlightCard>
-
-          {/* Points Distributed */}
-          <SpotlightCard className="p-4 flex flex-col justify-between">
-            <span className="text-[11px] font-medium text-zinc-400 uppercase tracking-wider block mb-1">
-              Credits Awarded
-            </span>
-            <div className="flex items-baseline gap-1.5 my-1">
-              <span className="text-2xl font-semibold text-white">
-                {totalCredits}
-              </span>
-              <span className="text-xs text-amber-400 font-medium">pts</span>
-            </div>
-            <span className="text-[11px] text-zinc-500 mt-1">
-              Evaluated by admins
-            </span>
-          </SpotlightCard>
-        </div>
-      </div>
-
-      {/* How It Works */}
-      <div className="max-w-5xl mx-auto px-4 mb-20">
-        <div className="text-center max-w-xl mx-auto mb-10">
-          <span className="text-xs font-semibold text-blue-400 uppercase tracking-wider">
-            Simple &amp; Transparent
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-semibold text-white mt-1.5 tracking-tight">
-            How It Works
-          </h2>
-          <p className="text-xs sm:text-sm text-zinc-400 mt-2">
-            Automated discovery means you write code, open PRs on GitHub, and our platform handles the rest.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {/* Step 1 */}
-          <SpotlightCard 
-            spotlightColor="rgba(80, 70, 228, 0.18)" 
-            className="p-6 flex flex-col justify-between group"
-          >
-            <div>
-              <div className="w-10 h-10 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
-                <Terminal className="w-5 h-5" />
-              </div>
-              <span className="text-[11px] font-semibold text-indigo-400 uppercase tracking-wider">
-                Step 01
-              </span>
-              <h3 className="text-base font-semibold text-white mt-1 mb-2">
-                1-Click GitHub Connect
-              </h3>
-              <p className="text-xs text-zinc-400 leading-relaxed">
-                Authenticate with your GitHub account. No complex registration forms. Your GitHub profile is automatically linked to the event roster.
-              </p>
-            </div>
-            <div className="pt-4 mt-4 border-t border-white/5 text-[11px] text-zinc-400 flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Instant OAuth authorization</span>
-            </div>
-          </SpotlightCard>
-
-          {/* Step 2 */}
-          <SpotlightCard 
-            spotlightColor="rgba(147, 130, 255, 0.18)" 
-            className="p-6 flex flex-col justify-between group"
-          >
-            <div>
-              <div className="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
-                <GitPullRequest className="w-5 h-5" />
-              </div>
-              <span className="text-[11px] font-semibold text-purple-400 uppercase tracking-wider">
-                Step 02
-              </span>
-              <h3 className="text-base font-semibold text-white mt-1 mb-2">
-                Automatic PR Tracking
-              </h3>
-              <p className="text-xs text-zinc-400 leading-relaxed">
-                Open pull requests in any public GitHub repository. We find them automatically and send them to reviewers for scoring.
-              </p>
-            </div>
-            <div className="pt-4 mt-4 border-t border-white/5 text-[11px] text-zinc-400 flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Tracks additions, diffs &amp; commits</span>
-            </div>
-          </SpotlightCard>
-
-          {/* Step 3 */}
-          <SpotlightCard 
-            spotlightColor="rgba(251, 191, 36, 0.16)" 
-            className="p-6 flex flex-col justify-between group"
-          >
-            <div>
-              <div className="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
-                <Award className="w-5 h-5" />
-              </div>
-              <span className="text-[11px] font-semibold text-amber-400 uppercase tracking-wider">
-                Step 03
-              </span>
-              <h3 className="text-base font-semibold text-white mt-1 mb-2">
-                Daily Rubric Evaluation
-              </h3>
-              <p className="text-xs text-zinc-400 leading-relaxed">
-                Reviewers evaluate code on 4 core criteria (Quality, Complexity, Impact, Tests) to distribute points. Standings update nightly at 00:00 UTC.
-              </p>
-            </div>
-            <div className="pt-4 mt-4 border-t border-white/5 text-[11px] text-zinc-400 flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Permanent leaderboard podium</span>
-            </div>
-          </SpotlightCard>
-        </div>
-      </div>
-
-      {/* 4-Pillar Evaluation Rubric Section */}
-      <div className="max-w-5xl mx-auto px-4 mb-20">
-        <div className="p-8 rounded-card bg-[#090520]/80 border border-white/10 backdrop-blur-xl relative overflow-hidden">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
-            <div className="max-w-2xl">
-              <span className="text-xs font-semibold text-indigo-400 uppercase tracking-wider">
-                Scoring Transparency
-              </span>
-              <h2 className="text-2xl font-semibold text-white mt-1 tracking-tight">
-                The 4-Pillar Evaluation Rubric
-              </h2>
-              <p className="text-xs text-zinc-400 mt-2">
-                Every pull request is graded up to 100 points based on four equal pillars to reward well-architected, impactful contributions over spam.
-              </p>
-            </div>
-            <Link
-              to="/faq"
-              className="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1 font-medium transition-colors self-start sm:self-auto px-3 py-1.5 rounded-lg bg-indigo-500/10 border border-indigo-500/20"
-            >
-              <span>Learn More in FAQ</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <SpotlightCard 
-              spotlightColor="rgba(80, 70, 228, 0.18)" 
-              className="p-4 flex flex-col justify-between"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-semibold text-white">Code Quality</span>
-                <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                  25 pts
-                </span>
-              </div>
-              <p className="text-[11px] text-zinc-400 leading-relaxed">
-                Clean formatting, idiomatic coding patterns, proper error boundaries, and self-documenting code structure.
-              </p>
-            </SpotlightCard>
-
-            <SpotlightCard 
-              spotlightColor="rgba(147, 130, 255, 0.18)" 
-              className="p-4 flex flex-col justify-between"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-semibold text-white">Complexity</span>
-                <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                  25 pts
-                </span>
-              </div>
-              <p className="text-[11px] text-zinc-400 leading-relaxed">
-                Technical depth, algorithmic difficulty, concurrency management, and solving intricate architectural hurdles.
-              </p>
-            </SpotlightCard>
-
-            <SpotlightCard 
-              spotlightColor="rgba(16, 185, 129, 0.18)" 
-              className="p-4 flex flex-col justify-between"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-semibold text-white">Project Impact</span>
-                <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                  25 pts
-                </span>
-              </div>
-              <p className="text-[11px] text-zinc-400 leading-relaxed">
-                Real-world value delivered, fixing critical user pain points, meaningful feature velocity, and performance gains.
-              </p>
-            </SpotlightCard>
-
-            <SpotlightCard 
-              spotlightColor="rgba(245, 158, 11, 0.18)" 
-              className="p-4 flex flex-col justify-between"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-semibold text-white">Test Coverage</span>
-                <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                  25 pts
-                </span>
-              </div>
-              <p className="text-[11px] text-zinc-400 leading-relaxed">
-                Automated unit and integration tests, defensive edge case assertions, and resilience to regressions.
-              </p>
-            </SpotlightCard>
-          </div>
-        </div>
-      </div>
-
-      {/* Contributor Rewards */}
-      <div className="max-w-5xl mx-auto px-4 mb-20">
-        <div className="relative overflow-hidden rounded-3xl border border-orange-400/30 bg-gradient-to-br from-[#29120b] via-[#17102b] to-[#0b071d] p-6 sm:p-10 shadow-[0_0_45px_rgba(251,146,60,0.12)]">
-          <div className="absolute -right-12 -top-16 h-48 w-48 rounded-full bg-orange-500/20 blur-3xl" />
-          <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-            <div className="max-w-xl">
-              <span className="inline-flex items-center gap-2 text-xs font-bold text-orange-300 uppercase tracking-[0.2em]">
-                <Trophy className="w-4 h-4" /> Contributor Rewards
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mt-2">20 meals on us.</h2>
-              <p className="text-base text-zinc-300 mt-3">Reach the top 20 on the leaderboard and get a Zomato food voucher for your next meal.</p>
-              <p className="text-xs text-zinc-500 mt-2">One voucher for each of the final top 20 contributors.</p>
-            </div>
-            <div className="grid grid-cols-5 gap-2 max-w-[220px]" aria-label="20 Zomato vouchers available">
-              {Array.from({ length: 20 }, (_, index) => (
-                <div key={index} className="flex h-9 w-9 items-center justify-center rounded-lg border border-orange-300/30 bg-orange-400/10 text-xs font-bold text-orange-200 shadow-inner">
-                  {index + 1}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Tracked Ecosystem Repositories */}
-      <div className="max-w-5xl mx-auto px-4 mb-20">
-        <div className="border-t border-white/10 pt-10">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
-            <div>
-              <span className="text-xs font-semibold text-blue-400 uppercase tracking-wider">
-                Ecosystem Scope
-              </span>
-              <h2 className="text-xl font-semibold text-white mt-1">
-                Monitored Open Source Repositories
-              </h2>
-              <p className="text-xs text-zinc-400 mt-1">
-                Pull requests from any public GitHub repository are eligible for scoring.
-              </p>
-            </div>
-            <Link
-              to="/pull-requests"
-              className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1 font-medium transition-colors"
-            >
-              <span>Explore All PRs</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-
-          <div className="flex flex-wrap gap-2.5">
-            {trackedRepositories.map((repo) => (
-              <a
-                key={repo}
-                href={`https://github.com/${repo}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-3 py-1.5 rounded-btn bg-[#121215] border border-white/10 hover:border-blue-500/40 hover:bg-[#18181d] text-xs text-zinc-300 hover:text-white transition-all flex items-center gap-2 group"
+                key={`${pr.id}-${i}`}
+                className="mono inline-flex items-center gap-2.5 rounded border border-[var(--line)] px-3 py-1.5 text-xs"
               >
-                <Code2 className="w-3.5 h-3.5 text-zinc-500 group-hover:text-blue-400 transition-colors" />
-                <span className="font-mono">{repo}</span>
-                <ExternalLink className="w-3 h-3 text-zinc-600 group-hover:text-zinc-400 transition-colors" />
-              </a>
+                <span className="text-[var(--text)]">@{pr.author}</span>
+                <span className="text-[var(--faint)]">{pr.repo}</span>
+                <span className={pr.state === 'merged' ? 'text-[var(--accent)]' : 'text-[var(--muted)]'}>
+                  {pr.state === 'merged' ? 'merged' : pr.isRepoOnly || !pr.githubPrNumber ? 'repo project' : `#${pr.githubPrNumber}`}
+                </span>
+                {typeof pr.additions === 'number' && (
+                  <span>
+                    <span className="text-[var(--accent)]">+{pr.additions}</span>{' '}
+                    <span className="text-[#ff6b7a]">-{pr.deletions}</span>
+                  </span>
+                )}
+                {pr.reviewStatus === 'REVIEWED' && <span className="text-[var(--accent)]">{pr.creditScore} pts</span>}
+              </span>
             ))}
           </div>
-        </div>
-      </div>
-
-      {/* Top Champions Spotlight (if leaderboard has items) */}
-      {topThree.length > 0 && (
-        <div className="max-w-5xl mx-auto px-4 mb-20">
-          <div className="border-t border-white/10 pt-10">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <span className="text-xs font-semibold text-amber-400 uppercase tracking-wider">
-                  Live Standings Preview
-                </span>
-                <h2 className="text-xl font-semibold text-white mt-1">
-                  Current Leaders
-                </h2>
-              </div>
-              <Link
-                to="/leaderboard"
-                className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1 font-medium transition-colors"
-              >
-                <span>View Full Table</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {topThree.map((item, idx) => (
-                <SpotlightCard
-                  key={item.user.id}
-                  spotlightColor={
-                    idx === 0
-                      ? 'rgba(251, 191, 36, 0.25)'
-                      : idx === 1
-                      ? 'rgba(203, 213, 225, 0.2)'
-                      : 'rgba(217, 119, 6, 0.2)'
-                  }
-                  className={`p-5 flex flex-col justify-between ${
-                    idx === 0
-                      ? 'border-amber-400/40 shadow-[0_0_25px_rgba(251,191,36,0.12)]'
-                      : ''
-                  }`}
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <span
-                        className={`inline-flex items-center justify-center w-6 h-6 rounded text-xs font-bold ${
-                          idx === 0
-                            ? 'bg-amber-400 text-black'
-                            : idx === 1
-                            ? 'bg-zinc-300 text-black'
-                            : 'bg-amber-700 text-white'
-                        }`}
-                      >
-                        #{idx + 1}
-                      </span>
-                      <span className="text-xs font-semibold text-amber-300">
-                        {item.totalCredits} pts
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-3 mb-3">
-                      <img
-                        src={item.user.avatarUrl}
-                        alt={item.user.username}
-                        className="w-10 h-10 rounded-full object-cover border border-white/10"
-                      />
-                      <div>
-                        <h4 className="text-sm font-semibold text-white">
-                          {item.user.name}
-                        </h4>
-                        <span className="text-xs text-zinc-500">@{item.user.username}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-zinc-400">
-                    <span>{item.totalPrs} PRs Submitted</span>
-                    <span className="text-emerald-400 font-medium">{item.mergedPrs} Merged</span>
-                  </div>
-                </SpotlightCard>
-              ))}
-            </div>
-          </div>
-        </div>
+        </section>
       )}
 
-      {/* Call to action bottom banner */}
-      <div id="cta-banner" className="max-w-5xl mx-auto px-4">
-        <div className="relative group overflow-hidden rounded-3xl border border-indigo-500/30 bg-[#070417]/70 backdrop-blur-xl p-8 sm:p-12 text-center shadow-[0_25px_60px_rgba(0,0,0,0.8),0_0_35px_rgba(147,130,255,0.2)] hover:border-indigo-500/50 transition-all duration-300">
-          <div 
-            aria-hidden="true" 
-            className="pointer-events-none absolute -bottom-10 left-1/2 -translate-x-1/2 w-96 h-40 bg-indigo-500/25 blur-3xl -z-10 rounded-full"
-          />
-          <div 
-            aria-hidden="true" 
-            className="pointer-events-none absolute -top-12 left-1/2 -translate-x-1/2 w-80 h-32 bg-purple-500/20 blur-3xl -z-10 rounded-full"
-          />
+      {/* ---------- Numbers ---------- */}
+      <section className="layer mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <dl className="panel grid grid-cols-2 divide-[var(--line)] rounded-lg lg:grid-cols-4 lg:divide-x">
+          {[
+            { label: 'Contributors', value: formatNumber(board.length) },
+            { label: 'Pull requests tracked', value: formatNumber(prs.length) },
+            { label: 'Merged so far', value: formatNumber(mergedCount) },
+            { label: 'Points awarded', value: formatNumber(totalCredits) },
+          ].map((item, i) => (
+            <div
+              key={item.label}
+              className={`px-5 py-6 sm:px-6 ${i % 2 === 1 ? 'border-l border-[var(--line)] lg:border-l-0' : ''} ${i > 1 ? 'border-t border-[var(--line)] lg:border-t-0' : ''}`}
+            >
+              <dt className="text-sm text-[var(--muted)]">{item.label}</dt>
+              <dd className="mono mt-2 text-3xl font-semibold text-[var(--accent)]">{item.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
 
-          <h2 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mb-2">
-            Ready to participate in HackAaroh?
-          </h2>
-          <p className="text-xs sm:text-sm text-zinc-400 max-w-md mx-auto mb-6">
-            Sign in with GitHub, open a pull request from any public repository, and climb the leaderboard.
+      {/* ---------- How it works ---------- */}
+      <section className="layer mx-auto grid max-w-6xl gap-10 px-4 pb-20 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+        <div className="lg:sticky lg:top-24 lg:self-start">
+          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">No forms. Just code.</h2>
+          <p className="mt-3 max-w-sm text-[var(--muted)]">
+            Keep working on GitHub the way you already do. We handle the tracking.
           </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            {currentUser ? (
-              <Link to="/leaderboard" className="btn-primary !px-5 !py-2.5">
-                <Trophy className="w-4 h-4" />
-                <span>Go to Leaderboard</span>
-              </Link>
-            ) : (
-              <button onClick={onOpenAuth} className="btn-primary !px-5 !py-2.5">
-                <Github className="w-4 h-4" />
-                <span>Authenticate with GitHub</span>
-              </button>
-            )}
-
-            <Link to="/pull-requests" className="btn-secondary !px-5 !py-2.5">
-              <span>View Tracked PRs</span>
-            </Link>
-          </div>
         </div>
-      </div>
+        <ol className="divide-y divide-[var(--line)] border-y border-[var(--line)]">
+          {steps.map((step, i) => (
+            <li key={step.title} className="grid grid-cols-[2.5rem_1fr] gap-4 py-6">
+              <span className="mono text-sm text-[var(--accent)]">{pad(i + 1)}</span>
+              <div>
+                <h3 className="text-lg font-medium">{step.title}</h3>
+                <p className="mt-1.5 max-w-lg text-[var(--muted)]">{step.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* ---------- Rubric ---------- */}
+      <section className="layer mx-auto max-w-6xl px-4 pb-20 sm:px-6">
+        <SectionTitle
+          title="Scored out of 100."
+          body="Four criteria, 25 points each. Careful, meaningful work beats a pile of tiny PRs."
+          action={
+            <Link to="/faq" className="link self-start text-sm sm:self-auto">
+              How scoring works
+            </Link>
+          }
+        />
+        <div className="mb-8 grid grid-cols-4 gap-1" aria-hidden="true">
+          {[1, 2, 3, 4].map((n) => (
+            <span key={n} className="h-2 rounded-sm" style={{ background: ['#0e3a24', '#1d8a49', '#27d968', '#2eff7b'][n - 1] }} />
+          ))}
+        </div>
+        <dl className="grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+          {criteria.map((c) => (
+            <div key={c.name} className="border-t border-[var(--line-strong)] pt-4">
+              <dt className="flex items-baseline justify-between gap-3">
+                <span className="font-medium">{c.name}</span>
+                <span className="mono text-sm text-[var(--accent)]">25</span>
+              </dt>
+              <dd className="mt-3 text-sm leading-relaxed text-[var(--muted)]">{c.body}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      {/* ---------- Rewards ---------- */}
+      <section className="layer border-y border-[var(--line)] bg-[var(--panel)]">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 md:grid-cols-[1fr_auto] md:gap-16">
+          <div>
+            <p className="mono text-6xl font-semibold text-[var(--accent)] sm:text-7xl">20</p>
+            <h2 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">The top 20 eat on us.</h2>
+            <p className="mt-3 max-w-md text-[var(--muted)]">
+              Finish in the final top 20 and you get a Zomato voucher for a meal. One each, no catch.
+            </p>
+          </div>
+          <ol className="grid max-w-[18rem] grid-cols-5 gap-1.5 sm:max-w-xs" aria-label="20 Zomato vouchers">
+            {Array.from({ length: 20 }, (_, i) => (
+              <li
+                key={i}
+                className="reward-cell mono"
+                style={{ background: ['#27d968', '#2eff7b', '#1d8a49', '#6bffa1'][(i * 7 + (i % 3)) % 4] }}
+              >
+                {i + 1}
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* ---------- Current leaders ---------- */}
+      {topThree.length > 0 && (
+        <section className="layer mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <SectionTitle
+            title="Current leaders"
+            action={
+              <Link to="/leaderboard" className="link inline-flex items-center gap-1 self-start text-sm sm:self-auto">
+                Full leaderboard <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+              </Link>
+            }
+          />
+          <ol className="panel divide-y divide-[var(--line)] rounded-lg">
+            {topThree.map((item, i) => (
+              <li key={item.user.id} className={`flex items-center gap-4 px-5 sm:px-6 ${i === 0 ? 'py-6' : 'py-4'}`}>
+                <span className={`mono w-6 text-sm ${i === 0 ? 'text-[var(--accent)]' : 'text-[var(--faint)]'}`}>{i + 1}</span>
+                <Avatar src={item.user.avatarUrl} name={item.user.username} size={i === 0 ? 44 : 36} />
+                <div className="min-w-0 flex-1">
+                  <p className={`truncate font-medium ${i === 0 ? 'text-lg' : ''}`}>@{item.user.username}</p>
+                  <p className="mono text-xs text-[var(--muted)]">
+                    {item.totalPrs} PRs, {item.mergedPrs} merged
+                  </p>
+                </div>
+                <p className={`mono tnum ${i === 0 ? 'text-2xl text-[var(--accent)]' : 'text-lg'}`}>
+                  {formatNumber(item.totalCredits)} <span className="text-sm text-[var(--faint)]">pts</span>
+                </p>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
+      {/* ---------- Repositories + latest PRs ---------- */}
+      <section className="layer mx-auto max-w-6xl px-4 pb-20 sm:px-6">
+        <SectionTitle
+          title="Latest pull requests"
+          body="Pull requests from any public GitHub repository can earn points."
+          action={
+            <Link to="/pull-requests" className="link self-start text-sm sm:self-auto">
+              All pull requests
+            </Link>
+          }
+        />
+        {repos.length > 0 && (
+          <ul className="mb-8 flex flex-wrap gap-2">
+            {repos.map((repo) => (
+              <li key={repo}>
+                <a
+                  href={`https://github.com/${repo}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  translate="no"
+                  className="mono inline-flex items-center gap-1.5 rounded border border-[var(--line)] px-3 py-1.5 text-xs text-[var(--muted)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                >
+                  {repo}
+                  <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+        {sortedPrs.length > 0 ? (
+          <ul className="divide-y divide-[var(--line)] border-y border-[var(--line)]">
+            {sortedPrs.slice(0, 5).map((pr) => (
+              <li key={pr.id}>
+                <a
+                  href={formatGithubPrUrl(pr.url, pr.repo, pr.githubPrNumber)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-4 py-4 transition-colors hover:bg-white/[0.02]"
+                >
+                  <span
+                    className={`h-2.5 w-2.5 shrink-0 rounded-[2px] ${pr.state === 'merged' ? 'bg-[var(--accent)]' : 'bg-[#1d8a49]'}`}
+                    aria-hidden="true"
+                  />
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate font-medium group-hover:text-[var(--accent)]">{pr.title}</span>
+                    <span className="mono block truncate text-xs text-[var(--faint)]" translate="no">
+                      {pr.repo}{pr.isRepoOnly || !pr.githubPrNumber ? ' (repo project)' : `#${pr.githubPrNumber}`} by @{pr.author},{' '}
+                      {relativeTime(pr.createdAt)}
+                    </span>
+                  </span>
+                  <span className="mono shrink-0 text-xs text-[var(--muted)]">
+                    {pr.reviewStatus === 'REVIEWED' ? <span className="text-[var(--accent)]">+{pr.creditScore} pts</span> : 'In review'}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="border-y border-[var(--line)] py-10 text-center text-[var(--muted)]">
+            No pull requests yet. Open one on any public repo and it will appear here.
+          </p>
+        )}
+      </section>
+
+      {/* ---------- Closing ---------- */}
+      <section className="layer border-t border-[var(--line)] bg-[var(--panel)]">
+        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-4 py-14 sm:flex-row sm:items-center sm:px-6">
+          <div>
+            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Your next PR could count tonight.</h2>
+            <p className="mt-2 text-[var(--muted)]">Open it anywhere on GitHub. It shows up here on its own.</p>
+          </div>
+          <PrimaryAction />
+        </div>
+      </section>
     </div>
   );
 };

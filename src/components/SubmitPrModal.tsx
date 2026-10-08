@@ -107,7 +107,7 @@ export const SubmitPrModal: React.FC<SubmitPrModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
-      <div className="w-full max-w-xl max-h-[92vh] overflow-y-auto p-6 sm:p-7 rounded-2xl bg-[#0e0a24] border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.8)] relative text-left">
+      <div className="w-full max-w-xl max-h-[92vh] overflow-y-auto p-6 sm:p-7 rounded-2xl bg-[#131614] border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.8)] relative text-left">
         <button
           onClick={onClose}
           className="absolute top-5 right-5 text-zinc-400 hover:text-white p-1 rounded-lg hover:bg-white/5 transition-colors"
@@ -153,7 +153,7 @@ export const SubmitPrModal: React.FC<SubmitPrModalProps> = ({
                 setPrUrl(e.target.value);
                 setSubmissionError(null);
               }}
-              className="w-full p-2.5 rounded-xl bg-[#070417] border border-white/10 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-indigo-400 font-mono transition-colors"
+              className="w-full p-2.5 rounded-xl bg-[#0a0d0b] border border-white/10 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-indigo-400 font-mono transition-colors"
               autoFocus
             />
 
@@ -187,7 +187,7 @@ export const SubmitPrModal: React.FC<SubmitPrModalProps> = ({
               placeholder="Leave blank to automatically fetch title from GitHub"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full p-2.5 rounded-xl bg-[#070417] border border-white/10 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-indigo-400"
+              className="w-full p-2.5 rounded-xl bg-[#0a0d0b] border border-white/10 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-indigo-400"
             />
           </div>
 
@@ -200,7 +200,7 @@ export const SubmitPrModal: React.FC<SubmitPrModalProps> = ({
               placeholder="Highlight key architecture improvements, bug fixes, or performance gains."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full p-2.5 rounded-xl bg-[#070417] border border-white/10 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-indigo-400 resize-none"
+              className="w-full p-2.5 rounded-xl bg-[#0a0d0b] border border-white/10 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-indigo-400 resize-none"
             />
           </div>
 
@@ -213,7 +213,7 @@ export const SubmitPrModal: React.FC<SubmitPrModalProps> = ({
               placeholder="e.g. backend, algorithm, optimization, bugfix"
               value={tagsInput}
               onChange={(e) => setTagsInput(e.target.value)}
-              className="w-full p-2.5 rounded-xl bg-[#070417] border border-white/10 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-indigo-400"
+              className="w-full p-2.5 rounded-xl bg-[#0a0d0b] border border-white/10 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-indigo-400"
             />
           </div>
 
@@ -229,7 +229,7 @@ export const SubmitPrModal: React.FC<SubmitPrModalProps> = ({
             <button
               type="submit"
               disabled={isSubmitting || !prAnalysis?.isValid}
-              className="py-2.5 px-5 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 text-white text-xs font-semibold flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(99,102,241,0.3)] cursor-pointer disabled:cursor-not-allowed"
+              className="py-2.5 px-5 rounded-xl bg-[#2eff7b] hover:bg-[#6bffa1] disabled:opacity-40 text-[#03140a] text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer disabled:cursor-not-allowed"
             >
               {isSubmitting ? (
                 <span>Validating with GitHub...</span>

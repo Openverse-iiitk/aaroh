@@ -171,7 +171,7 @@ export const FaqPage: React.FC = () => {
             placeholder="Search questions (e.g., rubric, repositories, 00:00 UTC, scoring)..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#0e0a22] border border-white/10 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-indigo-500 transition-colors shadow-inner"
+            className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#121513] border border-white/10 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-indigo-500 transition-colors shadow-inner"
           />
           {searchQuery && (
             <button
@@ -197,8 +197,8 @@ export const FaqPage: React.FC = () => {
               onClick={() => setActiveCategory(cat.id)}
               className={`px-3 py-1.5 rounded-lg font-medium transition-all ${
                 activeCategory === cat.id
-                  ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-500/30'
-                  : 'bg-[#151226] text-zinc-400 hover:text-white border border-white/5'
+                  ? 'bg-[#2eff7b] text-[#03140a] shadow-sm'
+                  : 'bg-[#191c1a] text-zinc-400 hover:text-white border border-white/5'
               }`}
             >
               {cat.label}
@@ -216,7 +216,7 @@ export const FaqPage: React.FC = () => {
             return (
               <div
                 key={item.id}
-                className="rounded-xl bg-[#090520]/80 border border-white/10 overflow-hidden transition-all duration-200 hover:border-indigo-500/30"
+                className="rounded-xl bg-[#0e110f]/80 border border-white/10 overflow-hidden transition-all duration-200 hover:border-indigo-500/30"
               >
                 <button
                   onClick={() => toggleItem(item.id)}
@@ -256,7 +256,7 @@ export const FaqPage: React.FC = () => {
             );
           })
         ) : (
-          <div className="p-10 rounded-xl bg-[#0e0a22] border border-white/10 text-center space-y-2">
+          <div className="p-10 rounded-xl bg-[#121513] border border-white/10 text-center space-y-2">
             <FileQuestion className="w-8 h-8 text-zinc-500 mx-auto" />
             <h3 className="text-sm font-semibold text-white">No questions found</h3>
             <p className="text-xs text-zinc-400">
@@ -276,7 +276,7 @@ export const FaqPage: React.FC = () => {
       </div>
 
       {/* Still Have Questions Box */}
-      <div className="p-6 sm:p-8 rounded-2xl bg-[#0a0718] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div className="p-6 sm:p-8 rounded-2xl bg-[#0d100e] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
         <div className="space-y-1 text-center sm:text-left">
           <h3 className="text-base font-semibold text-white">Still have questions?</h3>
           <p className="text-xs text-zinc-400">

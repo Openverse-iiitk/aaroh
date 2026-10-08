@@ -1,0 +1,96 @@
+/* Home page redesign: scoped to .home-v3 so other pages are untouched. */
+.home-v3 {
+  --bg: #060507;
+  --panel: rgba(8, 12, 10, 0.72);
+  --line: rgba(255, 255, 255, 0.09);
+  --line-strong: rgba(255, 255, 255, 0.16);
+  --text: #ecf1ee;
+  --muted: #a6b1ab;
+  --faint: #8a958f;
+  --accent: #2eff7b;
+  --accent-dim: rgba(46, 255, 123, 0.14);
+  --accent-ink: #03140a;
+
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+.home-v3 .mono {
+  font-family: 'Geist Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-variant-numeric: tabular-nums;
+}
+.home-v3 .tnum { font-variant-numeric: tabular-nums; }
+.home-v3 h1, .home-v3 h2 { text-wrap: balance; }
+.home-v3 p { text-wrap: pretty; }
+.home-v3 .layer { position: relative; z-index: 10; }
+
+/* Original black-hole backdrop, tinted from violet to green */
+.bh-green video { filter: hue-rotate(-128deg) saturate(1.15) brightness(0.95); }
+.bh-green .blur-\[80px\] { display: none; }
+.bh-green [class*='from-[#030014']  { --tw-gradient-from: #060507 var(--tw-gradient-from-position); --tw-gradient-to: rgba(6, 5, 7, 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), rgba(6, 5, 7, 0.8) var(--tw-gradient-via-position), var(--tw-gradient-to); }
+
+/* Buttons */
+.home-v3 .btn,
+.home-nav .btn-primary {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  height: 2.75rem; padding: 0 1.125rem; border-radius: 6px;
+  font-size: 0.9375rem; font-weight: 500; white-space: nowrap;
+  touch-action: manipulation;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+.home-v3 .btn-primary, .home-nav .btn-primary {
+  background: #2eff7b; color: #03140a; border: 0; box-shadow: none; transform: none;
+}
+.home-nav .btn-primary { height: auto; font-size: 0.75rem; padding: 0.375rem 0.75rem; }
+.home-v3 .btn-primary:hover, .home-nav .btn-primary:hover { background: #6bffa1; box-shadow: none; transform: none; }
+.home-v3 .btn-ghost { border: 1px solid var(--line-strong); color: var(--text); background: rgba(6, 5, 7, 0.5); }
+.home-v3 .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.home-v3 .btn:focus-visible, .home-v3 a:focus-visible, .home-v3 button:focus-visible,
+.home-nav a:focus-visible, .home-nav button:focus-visible { outline: 2px solid #2eff7b; outline-offset: 2px; }
+
+.home-v3 .link {
+  color: var(--text); text-decoration: underline; text-decoration-color: var(--line-strong);
+  text-underline-offset: 4px; transition: text-decoration-color 150ms ease, color 150ms ease;
+}
+.home-v3 .link:hover { text-decoration-color: var(--accent); color: var(--accent); }
+
+.home-v3 .panel { background: var(--panel); border: 1px solid var(--line); backdrop-filter: blur(6px); }
+
+/* Contribution-graph squares */
+.hm-grid { display: grid; grid-auto-flow: column; gap: clamp(2px, 0.45vw, 5px); }
+.hm-cell { aspect-ratio: 1 / 1; border-radius: 2px; display: block; }
+.hm-l0 { background: rgba(255, 255, 255, 0.035); }
+.hm-l1 { background: #0e3a24; }
+.hm-l2 { background: #14582f; }
+.hm-l3 { background: #1d8a49; }
+.hm-l4 { background: #27d968; }
+.hm-l5 { background: #2eff7b; }
+
+/* Segmented clock */
+.clock-digit {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2rem; height: 2.75rem; border-radius: 4px;
+  background: #0e3a24; color: #2eff7b; font-size: 1.5rem; font-weight: 600;
+}
+@media (min-width: 640px) { .clock-digit { width: 2.5rem; height: 3.25rem; font-size: 1.875rem; } }
+
+/* Reward squares */
+.reward-cell {
+  aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center;
+  border-radius: 3px; font-size: 0.8125rem; font-weight: 600; color: #03140a;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hm-cell { animation: hm-in 450ms ease-out both; }
+  .home-v3 .rise { animation: home-rise 600ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .home-v3 .rise-2 { animation-delay: 120ms; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-v3 .animate-marquee { animation: none; overflow-x: auto; }
+}
+
+@keyframes hm-in { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: none; } }
+@keyframes home-rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }

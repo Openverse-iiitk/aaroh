@@ -61,9 +61,9 @@ export const SecretAdminPage: React.FC = () => {
 
   return (
     <div className="w-full min-h-[80vh] flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md p-6 sm:p-8 rounded-2xl bg-[#0e0a24] border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.8)] relative">
+      <div className="w-full max-w-md p-6 sm:p-8 rounded-2xl bg-[#131614] border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.8)] relative">
         <div className="text-center mb-6">
-          <div className="w-12 h-12 rounded-xl bg-indigo-950/80 border border-indigo-500/30 mx-auto flex items-center justify-center mb-3 shadow-[0_0_25px_rgba(99,102,241,0.3)]">
+          <div className="w-12 h-12 rounded-xl bg-indigo-950/80 border border-indigo-500/30 mx-auto flex items-center justify-center mb-3">
             <Shield className="w-6 h-6 text-indigo-400" />
           </div>
           <h1 className="text-xl font-bold text-white tracking-tight">
@@ -92,7 +92,7 @@ export const SecretAdminPage: React.FC = () => {
               placeholder="Enter secret key (e.g. aaroh-admin-2026)"
               value={passkey}
               onChange={(e) => setPasskey(e.target.value)}
-              className="w-full bg-[#070417] border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-400 font-mono transition-colors"
+              className="w-full bg-[#0a0d0b] border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-400 font-mono transition-colors"
               required
               autoFocus
             />
@@ -108,14 +108,14 @@ export const SecretAdminPage: React.FC = () => {
               placeholder="Vijay-1710"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full bg-[#070417] border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-400 font-mono transition-colors"
+              className="w-full bg-[#0a0d0b] border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-400 font-mono transition-colors"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading || !passkey.trim()}
-            className="w-full py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(99,102,241,0.3)]"
+            className="w-full py-2.5 px-4 rounded-xl bg-[#2eff7b] hover:bg-[#6bffa1] disabled:opacity-50 text-[#03140a] text-xs font-semibold flex items-center justify-center gap-2 transition-all"
           >
             {loading ? (
               <span>Verifying credentials...</span>
@@ -136,7 +136,7 @@ export const SecretAdminPage: React.FC = () => {
               <span>Shareable Direct Link (Organizers Only):</span>
             </span>
           </div>
-          <div className="flex items-center gap-2 bg-[#070417] p-2 rounded-lg border border-white/5">
+          <div className="flex items-center gap-2 bg-[#0a0d0b] p-2 rounded-lg border border-white/5">
             <input
               type="text"
               readOnly

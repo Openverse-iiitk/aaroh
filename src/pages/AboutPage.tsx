@@ -34,7 +34,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ currentUser, onOpenAuth })
           <span>The Open Source Tracking Platform</span>
         </div>
         <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
-          About <span className="bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">HackAaroh</span> PR Tracker
+          About <span className="text-[#2eff7b]">HackAaroh</span> PR Tracker
         </h1>
         <p className="text-sm sm:text-base text-zinc-400 leading-relaxed max-w-2xl mx-auto">
           HackAaroh is an open-source sprint where meaningful pull requests earn points, recognition, and rewards.
@@ -63,7 +63,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ currentUser, onOpenAuth })
 
       {/* Mission & Purpose */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="p-6 rounded-2xl bg-[#090520]/80 border border-white/10 backdrop-blur-xl relative overflow-hidden flex flex-col justify-between">
+        <div className="p-6 rounded-2xl bg-[#0e110f]/80 border border-white/10 backdrop-blur-xl relative overflow-hidden flex flex-col justify-between">
           <div className="space-y-3">
             <div className="w-10 h-10 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center">
               <Zap className="w-5 h-5" />
@@ -82,7 +82,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ currentUser, onOpenAuth })
           </div>
         </div>
 
-        <div className="p-6 rounded-2xl bg-[#090520]/80 border border-white/10 backdrop-blur-xl relative overflow-hidden flex flex-col justify-between">
+        <div className="p-6 rounded-2xl bg-[#0e110f]/80 border border-white/10 backdrop-blur-xl relative overflow-hidden flex flex-col justify-between">
           <div className="space-y-3">
             <div className="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center">
               <Globe className="w-5 h-5" />
@@ -117,7 +117,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ currentUser, onOpenAuth })
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="p-5 rounded-xl bg-[#0d0a1f] border border-white/10 hover:border-indigo-500/30 transition-all">
+          <div className="p-5 rounded-xl bg-[#111412] border border-white/10 hover:border-indigo-500/30 transition-all">
             <span className="text-xs font-mono font-bold text-indigo-400">01</span>
             <h3 className="text-sm font-semibold text-white mt-2 mb-1">GitHub OAuth Connect</h3>
             <p className="text-xs text-zinc-400 leading-relaxed">
@@ -125,7 +125,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ currentUser, onOpenAuth })
             </p>
           </div>
 
-          <div className="p-5 rounded-xl bg-[#0d0a1f] border border-white/10 hover:border-purple-500/30 transition-all">
+          <div className="p-5 rounded-xl bg-[#111412] border border-white/10 hover:border-purple-500/30 transition-all">
             <span className="text-xs font-mono font-bold text-purple-400">02</span>
             <h3 className="text-sm font-semibold text-white mt-2 mb-1">Automated Discovery</h3>
             <p className="text-xs text-zinc-400 leading-relaxed">
@@ -133,7 +133,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ currentUser, onOpenAuth })
             </p>
           </div>
 
-          <div className="p-5 rounded-xl bg-[#0d0a1f] border border-white/10 hover:border-pink-500/30 transition-all">
+          <div className="p-5 rounded-xl bg-[#111412] border border-white/10 hover:border-pink-500/30 transition-all">
             <span className="text-xs font-mono font-bold text-pink-400">03</span>
             <h3 className="text-sm font-semibold text-white mt-2 mb-1">Daily Rubric Scoring</h3>
             <p className="text-xs text-zinc-400 leading-relaxed">
@@ -141,7 +141,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ currentUser, onOpenAuth })
             </p>
           </div>
 
-          <div className="p-5 rounded-xl bg-[#0d0a1f] border border-white/10 hover:border-amber-500/30 transition-all">
+          <div className="p-5 rounded-xl bg-[#111412] border border-white/10 hover:border-amber-500/30 transition-all">
             <span className="text-xs font-mono font-bold text-amber-400">04</span>
             <h3 className="text-sm font-semibold text-white mt-2 mb-1">00:00 UTC Standings</h3>
             <p className="text-xs text-zinc-400 leading-relaxed">
@@ -152,7 +152,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ currentUser, onOpenAuth })
       </div>
 
       {/* 4 Pillars Scoring Deep Dive */}
-      <div className="p-8 rounded-2xl bg-[#08041a]/80 border border-white/10 backdrop-blur-xl space-y-6">
+      <div className="p-8 rounded-2xl bg-[#0c0f0d]/80 border border-white/10 backdrop-blur-xl space-y-6">
         <div>
           <span className="text-xs font-semibold text-indigo-400 uppercase tracking-wider">
             Evaluation Standard
@@ -164,7 +164,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ currentUser, onOpenAuth })
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="p-4 rounded-xl bg-[#120d2b] border border-white/5 space-y-2">
+          <div className="p-4 rounded-xl bg-[#181b19] border border-white/5 space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-sm font-semibold text-white">1. Code Quality &amp; Idiomatic Design</span>
               <span className="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 text-xs font-mono font-bold">25 pts</span>
@@ -174,7 +174,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ currentUser, onOpenAuth })
             </p>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#120d2b] border border-white/5 space-y-2">
+          <div className="p-4 rounded-xl bg-[#181b19] border border-white/5 space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-sm font-semibold text-white">2. Technical Complexity &amp; Architecture</span>
               <span className="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 text-xs font-mono font-bold">25 pts</span>
@@ -184,7 +184,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ currentUser, onOpenAuth })
             </p>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#120d2b] border border-white/5 space-y-2">
+          <div className="p-4 rounded-xl bg-[#181b19] border border-white/5 space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-sm font-semibold text-white">3. Real-World Project Impact</span>
               <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-xs font-mono font-bold">25 pts</span>
@@ -194,7 +194,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ currentUser, onOpenAuth })
             </p>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#120d2b] border border-white/5 space-y-2">
+          <div className="p-4 rounded-xl bg-[#181b19] border border-white/5 space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-sm font-semibold text-white">4. Testing &amp; Regression Resilience</span>
               <span className="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-xs font-mono font-bold">25 pts</span>
@@ -207,7 +207,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ currentUser, onOpenAuth })
       </div>
 
       {/* Call to action */}
-      <div className="p-8 sm:p-10 rounded-2xl bg-gradient-to-r from-indigo-950/60 via-purple-950/40 to-[#0a061d] border border-indigo-500/20 text-center space-y-4">
+      <div className="p-8 sm:p-10 rounded-2xl bg-[#0b0f0d]/80 border border-white/10 text-center space-y-4">
         <h2 className="text-2xl font-bold text-white">Ready to Make an Impact?</h2>
         <p className="text-xs sm:text-sm text-zinc-400 max-w-lg mx-auto">
           Join hundreds of developers making meaningful contributions, earning recognition, and learning production-grade engineering practices.

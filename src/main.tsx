@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider } from '@tanstack/react-router';
 import { router } from './router';
+import '@fontsource-variable/geist';
+import '@fontsource-variable/geist-mono';
 import './styles/globals.css';
 
 const queryClient = new QueryClient({

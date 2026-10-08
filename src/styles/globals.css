@@ -3,28 +3,28 @@
 @tailwind utilities;
 
 :root {
-  /* Refero Design System Tokens (Reflect Notes Specification) */
-  --color-void-canvas: #030014;
-  --color-midnight-surface: #060317;
-  --color-deep-indigo: #10093a;
-  --color-lilac-white: #f4f0ff;
+  /* Site-wide green theme tokens (match the home page in home.css) */
+  --color-void-canvas: #060507;
+  --color-midnight-surface: #0b0f0d;
+  --color-deep-indigo: #121614;
+  --color-lilac-white: #ecf1ee;
   --color-pearl: #ffffff;
-  --color-ash: #a8a6b7;
-  --color-fog: #918ea0;
+  --color-ash: #a6b1ab;
+  --color-fog: #8a958f;
   --color-steel: #54525f;
   --color-mercury: #cdccd0;
   --color-dusk: #72707b;
-  --color-lavender-accent: #9382ff;
-  --color-iris: #5046e4;
+  --color-lavender-accent: #2eff7b;
+  --color-iris: #1d8a49;
 
   /* Typography */
-  --font-inter: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-inter: 'Geist Variable', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
 
-  /* Border Radius from Refero */
+  /* Border Radius */
   --radius-buttons: 6px;
   --radius-inputs: 6px;
-  --radius-cards: 16px;
+  --radius-cards: 8px;
   --radius-badges: 9999px;
   --radius-navpill: 9999px;
 }
@@ -33,34 +33,27 @@ body {
   background-color: var(--color-void-canvas);
   color: var(--color-lilac-white);
   font-family: var(--font-inter);
+  -webkit-font-smoothing: antialiased;
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background-image: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(147, 130, 255, 0.14), transparent),
-    radial-gradient(rgba(147, 130, 255, 0.08) 1px, transparent 1px);
-  background-size: 100% 100%, 36px 36px;
-  background-position: top center, 0 0;
-  background-repeat: no-repeat, repeat;
 }
 
-/* Refero Starlit Cosmos Glass Panels */
+/* Flat panels with thin borders */
 .panel-glass {
-  background-color: rgba(6, 3, 23, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background-color: rgba(8, 12, 10, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border-radius: var(--radius-cards);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.09);
 }
 
 .panel-glass-elevated {
-  background-color: rgba(16, 9, 58, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background-color: rgba(11, 15, 13, 0.9);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border-radius: var(--radius-cards);
-  border: 1px solid rgba(147, 130, 255, 0.25);
-  box-shadow: 0 12px 40px -4px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 0 24px rgba(147, 130, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 /* Nav Pill Floating */
@@ -85,17 +78,16 @@ body {
   height: 1px;
 }
 
-/* Refero CTA Buttons */
+/* Buttons */
 .btn-primary {
-  background: #5046e4;
-  color: #ffffff;
+  background: #2eff7b;
+  color: #03140a;
   border-radius: var(--radius-buttons);
   font-size: 14px;
   font-weight: 500;
   padding: 8px 18px;
-  transition: all 0.2s ease;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 2px 12px rgba(80, 70, 228, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+  border: 0;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -103,24 +95,18 @@ body {
   gap: 8px;
 }
 .btn-primary:hover {
-  background: #5f55ed;
-  box-shadow: 0 4px 18px rgba(80, 70, 228, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  transform: translateY(-1px);
-}
-.btn-primary:active {
-  transform: translateY(0);
+  background: #6bffa1;
 }
 
 .btn-secondary {
-  background-color: rgba(16, 9, 58, 0.7);
-  backdrop-filter: blur(8px);
+  background-color: rgba(6, 5, 7, 0.5);
   color: var(--color-lilac-white);
   border-radius: var(--radius-buttons);
   font-size: 14px;
   font-weight: 500;
   padding: 8px 16px;
-  transition: all 0.2s ease;
-  border: 1px solid rgba(147, 130, 255, 0.2);
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -128,11 +114,8 @@ body {
   gap: 8px;
 }
 .btn-secondary:hover {
-  background-color: rgba(22, 13, 75, 0.9);
-  border-color: rgba(147, 130, 255, 0.4);
-  color: #ffffff;
-  box-shadow: 0 2px 14px rgba(147, 130, 255, 0.2);
-  transform: translateY(-1px);
+  border-color: #2eff7b;
+  color: #2eff7b;
 }
 
 .btn-ghost {
@@ -237,11 +220,11 @@ h1, h2, h3, h4 {
   background: var(--color-void-canvas);
 }
 ::-webkit-scrollbar-thumb {
-  background: #252233;
+  background: #232624;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3b3752;
+  background: #14582f;
 }
 
 /* Cybernetic Purple Countdown Glitch Effect */

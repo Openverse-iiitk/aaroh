@@ -145,11 +145,11 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
         </div>
 
         <div className="flex items-center gap-2 self-start sm:self-auto">
-          <div className="text-xs text-zinc-300 px-3 py-1.5 rounded-lg bg-[#120f24] border border-white/10 flex items-center gap-2">
+          <div className="text-xs text-zinc-300 px-3 py-1.5 rounded-lg bg-[#161917] border border-white/10 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500" />
             <span><strong>{allDistinctRepos.length}</strong> Repos Tracked</span>
           </div>
-          <div className="text-xs text-zinc-300 px-3 py-1.5 rounded-lg bg-[#120f24] border border-white/10 flex items-center gap-2">
+          <div className="text-xs text-zinc-300 px-3 py-1.5 rounded-lg bg-[#161917] border border-white/10 flex items-center gap-2">
             <GitPullRequest className="w-3.5 h-3.5 text-indigo-400" />
             <span><strong>{safePrs.length}</strong> Total PRs</span>
           </div>
@@ -157,7 +157,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
             <button
               onClick={() => onSyncGitHub()}
               disabled={isSyncingGitHub}
-              className="text-xs px-3 py-1.5 rounded-lg bg-[#15112f] hover:bg-[#1e1942] text-zinc-200 border border-indigo-500/30 flex items-center gap-1.5 transition-colors disabled:opacity-50 ml-1"
+              className="text-xs px-3 py-1.5 rounded-lg bg-[#1b1e1c] hover:bg-[#272a28] text-zinc-200 border border-indigo-500/30 flex items-center gap-1.5 transition-colors disabled:opacity-50 ml-1"
               title="Automatically sync your pull requests from any public repository on GitHub"
             >
               <RefreshCw className={`w-3.5 h-3.5 text-indigo-400 ${isSyncingGitHub ? 'animate-spin' : ''}`} />
@@ -167,7 +167,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
           {onOpenSubmitPr && (
             <button
               onClick={currentUser ? onOpenSubmitPr : (onOpenAuth || onOpenSubmitPr)}
-              className="btn-primary !text-xs !py-1.5 !px-3.5 flex items-center gap-1.5 shadow-[0_0_12px_rgba(99,102,241,0.3)] hover:scale-[1.02] transition-transform ml-1"
+              className="btn-primary !text-xs !py-1.5 !px-3.5 flex items-center gap-1.5 hover:scale-[1.02] transition-transform ml-1"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Submit PR</span>
@@ -177,13 +177,13 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
       </div>
 
       {/* Primary View Switcher: All PRs vs My PRs */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-1.5 rounded-xl bg-[#0e0a22] border border-white/10">
-        <div className="inline-flex rounded-lg p-1 bg-[#080517]">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-1.5 rounded-xl bg-[#121513] border border-white/10">
+        <div className="inline-flex rounded-lg p-1 bg-[#0b0e0c]">
           <button
             onClick={() => setViewMode('ALL')}
             className={`px-4 py-1.5 rounded-md text-xs font-semibold transition-all flex items-center gap-2 ${
               viewMode === 'ALL'
-                ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-500/30'
+                ? 'bg-[#2eff7b] text-[#03140a] shadow-sm'
                 : 'text-zinc-400 hover:text-white'
             }`}
           >
@@ -198,7 +198,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
             onClick={() => setViewMode('MINE')}
             className={`px-4 py-1.5 rounded-md text-xs font-semibold transition-all flex items-center gap-2 ${
               viewMode === 'MINE'
-                ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-500/30'
+                ? 'bg-[#2eff7b] text-[#03140a] shadow-sm'
                 : 'text-zinc-400 hover:text-white'
             }`}
           >
@@ -228,7 +228,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
 
       {/* Personal Dashboard Summary Card (when viewing My PRs) */}
       {viewMode === 'MINE' && currentUser && (
-        <div className="p-5 rounded-2xl bg-[#0e0a22]/90 border border-indigo-500/20 shadow-lg space-y-4">
+        <div className="p-5 rounded-2xl bg-[#121513]/90 border border-indigo-500/20 shadow-lg space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-white/5">
             <div className="flex items-center gap-3">
               <img
@@ -253,14 +253,14 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
 
             <div className="px-4 py-2 rounded-xl bg-indigo-950/40 border border-indigo-500/30 text-right">
               <span className="text-[11px] text-zinc-400 uppercase tracking-wider block">Total Credits Earned</span>
-              <span className="text-xl font-bold bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent">
+              <span className="text-xl font-bold text-[#2eff7b]">
                 +{myStats.totalCredits} pts
               </span>
             </div>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-            <div className="p-3 rounded-xl bg-[#140f2e] border border-white/5">
+            <div className="p-3 rounded-xl bg-[#1a1d1b] border border-white/5">
               <span className="text-zinc-400 block text-[11px]">Tracked PRs</span>
               <span className="text-lg font-bold text-white block mt-0.5">
                 {myStats.totalPrs}
@@ -268,7 +268,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
               <span className="text-[10px] text-zinc-500">Across ecosystem</span>
             </div>
 
-            <div className="p-3 rounded-xl bg-[#140f2e] border border-white/5">
+            <div className="p-3 rounded-xl bg-[#1a1d1b] border border-white/5">
               <span className="text-zinc-400 block text-[11px]">Scored by Reviewers</span>
               <span className="text-lg font-bold text-emerald-400 block mt-0.5">
                 {myStats.reviewedPrs}
@@ -276,7 +276,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
               <span className="text-[10px] text-zinc-500">Avg {myStats.avgScore} pts / PR</span>
             </div>
 
-            <div className="p-3 rounded-xl bg-[#140f2e] border border-white/5">
+            <div className="p-3 rounded-xl bg-[#1a1d1b] border border-white/5">
               <span className="text-zinc-400 block text-[11px]">Awaiting Scoring</span>
               <span className="text-lg font-bold text-amber-300 block mt-0.5">
                 {myStats.pendingPrs}
@@ -284,7 +284,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
               <span className="text-[10px] text-zinc-500">Nightly evaluation</span>
             </div>
 
-            <div className="p-3 rounded-xl bg-[#140f2e] border border-white/5">
+            <div className="p-3 rounded-xl bg-[#1a1d1b] border border-white/5">
               <span className="text-zinc-400 block text-[11px]">Repositories</span>
               <span className="text-lg font-bold text-purple-300 block mt-0.5">
                 {myStats.distinctRepos.length}
@@ -299,7 +299,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
 
       {/* Guest Notice if "My PRs" selected while logged out */}
       {viewMode === 'MINE' && !currentUser && (
-        <div className="p-8 rounded-2xl bg-[#0e0a22]/90 border border-indigo-500/20 text-center space-y-4">
+        <div className="p-8 rounded-2xl bg-[#121513]/90 border border-indigo-500/20 text-center space-y-4">
           <div className="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center mx-auto">
             <UserCheck className="w-6 h-6" />
           </div>
@@ -324,7 +324,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
       )}
 
       {/* Filter Toolbar */}
-      <div className="p-4 rounded-xl bg-[#090520]/80 border border-white/10 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 text-xs">
+      <div className="p-4 rounded-xl bg-[#0e110f]/80 border border-white/10 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 text-xs">
         {/* Sprint Day selector pills */}
         <div className="flex flex-wrap items-center gap-1.5">
           <span className="text-zinc-400 mr-1 font-medium">Sprint Day:</span>
@@ -332,8 +332,8 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
             onClick={() => setSelectedDay('ALL')}
             className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
               selectedDay === 'ALL'
-                ? 'bg-indigo-600 text-white font-semibold shadow-sm'
-                : 'bg-[#151226] text-zinc-400 hover:text-white border border-white/5'
+                ? 'bg-[#2eff7b] text-[#03140a] font-semibold shadow-sm'
+                : 'bg-[#191c1a] text-zinc-400 hover:text-white border border-white/5'
             }`}
           >
             All Days
@@ -344,8 +344,8 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
               onClick={() => setSelectedDay(day)}
               className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
                 selectedDay === day
-                  ? 'bg-indigo-600 text-white font-semibold shadow-sm'
-                  : 'bg-[#151226] text-zinc-400 hover:text-white border border-white/5'
+                  ? 'bg-[#2eff7b] text-[#03140a] font-semibold shadow-sm'
+                  : 'bg-[#191c1a] text-zinc-400 hover:text-white border border-white/5'
               }`}
             >
               Day {day}
@@ -359,7 +359,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
           <select
             value={selectedRepo}
             onChange={(e) => setSelectedRepo(e.target.value)}
-            className="px-2.5 py-1.5 rounded-lg bg-[#140f2b] border border-white/10 text-xs text-white focus:outline-none focus:border-indigo-500 cursor-pointer"
+            className="px-2.5 py-1.5 rounded-lg bg-[#191c1a] border border-white/10 text-xs text-white focus:outline-none focus:border-indigo-500 cursor-pointer"
           >
             <option value="ALL">All Repositories ({allDistinctRepos.length})</option>
             {allDistinctRepos.map((repo) => (
@@ -373,7 +373,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
           <select
             value={selectedStatus}
             onChange={(e) => setSelectedStatus(e.target.value)}
-            className="px-2.5 py-1.5 rounded-lg bg-[#140f2b] border border-white/10 text-xs text-white focus:outline-none focus:border-indigo-500 cursor-pointer"
+            className="px-2.5 py-1.5 rounded-lg bg-[#191c1a] border border-white/10 text-xs text-white focus:outline-none focus:border-indigo-500 cursor-pointer"
           >
             <option value="ALL">All Statuses</option>
             <option value="REVIEWED">Scored PRs</option>
@@ -389,7 +389,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
               placeholder="Search title, repo, tags..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full sm:w-48 pl-8 pr-7 py-1.5 rounded-lg bg-[#140f2b] border border-white/10 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-indigo-500"
+              className="w-full sm:w-48 pl-8 pr-7 py-1.5 rounded-lg bg-[#191c1a] border border-white/10 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-indigo-500"
             />
             {searchQuery && (
               <button
@@ -423,8 +423,8 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
                 key={pr.id}
                 className={`p-5 rounded-2xl border transition-all duration-200 ${
                   isMyPr
-                    ? 'bg-[#0f0b29] border-indigo-500/40 shadow-[0_4px_24px_rgba(99,102,241,0.12)]'
-                    : 'bg-[#090520]/80 border-white/10 hover:border-indigo-500/30'
+                    ? 'bg-[#151816] border-indigo-500/40'
+                    : 'bg-[#0e110f]/80 border-white/10 hover:border-indigo-500/30'
                 }`}
               >
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
@@ -461,7 +461,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
                       <span className="text-zinc-600">•</span>
 
                       {/* Sprint Day */}
-                      <span className="px-2 py-0.5 rounded-full bg-[#181432] text-indigo-300 text-[11px] font-medium border border-indigo-500/20">
+                      <span className="px-2 py-0.5 rounded-full bg-[#1e211f] text-indigo-300 text-[11px] font-medium border border-indigo-500/20">
                         Day {pr.dayOfSprint}
                       </span>
 
@@ -544,7 +544,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
 
                     {/* Rubric Evaluation Breakdown (when reviewed) */}
                     {pr.reviewStatus === 'REVIEWED' && (
-                      <div className="mt-3 p-3.5 rounded-xl bg-[#120d2c] border border-indigo-500/20 space-y-2.5">
+                      <div className="mt-3 p-3.5 rounded-xl bg-[#181b19] border border-indigo-500/20 space-y-2.5">
                         <div className="flex items-center justify-between text-xs">
                           <span className="text-indigo-300 font-semibold flex items-center gap-1.5">
                             <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
@@ -574,25 +574,25 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
 
                         {pr.adminCriteria && (
                           <div className="pt-2 border-t border-white/5 grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px]">
-                            <div className="p-2 rounded-lg bg-[#0a071c] border border-white/5 flex items-center justify-between">
+                            <div className="p-2 rounded-lg bg-[#0e110f] border border-white/5 flex items-center justify-between">
                               <span className="text-zinc-400 text-[10px]">Quality</span>
                               <span className="text-white font-mono font-semibold">
                                 {pr.adminCriteria.quality || 20}/25
                               </span>
                             </div>
-                            <div className="p-2 rounded-lg bg-[#0a071c] border border-white/5 flex items-center justify-between">
+                            <div className="p-2 rounded-lg bg-[#0e110f] border border-white/5 flex items-center justify-between">
                               <span className="text-zinc-400 text-[10px]">Complexity</span>
                               <span className="text-white font-mono font-semibold">
                                 {pr.adminCriteria.complexity || 20}/25
                               </span>
                             </div>
-                            <div className="p-2 rounded-lg bg-[#0a071c] border border-white/5 flex items-center justify-between">
+                            <div className="p-2 rounded-lg bg-[#0e110f] border border-white/5 flex items-center justify-between">
                               <span className="text-zinc-400 text-[10px]">Impact</span>
                               <span className="text-white font-mono font-semibold">
                                 {pr.adminCriteria.impact || 20}/25
                               </span>
                             </div>
-                            <div className="p-2 rounded-lg bg-[#0a071c] border border-white/5 flex items-center justify-between">
+                            <div className="p-2 rounded-lg bg-[#0e110f] border border-white/5 flex items-center justify-between">
                               <span className="text-zinc-400 text-[10px]">Tests</span>
                               <span className="text-white font-mono font-semibold">
                                 {pr.adminCriteria.testCoverage || 15}/25
@@ -618,7 +618,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
                         Credit Score
                       </span>
                       {pr.reviewStatus === 'REVIEWED' ? (
-                        <div className="mt-0.5 px-3 py-1 rounded-xl bg-gradient-to-r from-emerald-500/20 to-indigo-500/20 border border-emerald-500/30 text-white font-bold text-sm font-mono shadow-sm">
+                        <div className="mt-0.5 px-3 py-1 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-white font-bold text-sm font-mono shadow-sm">
                           +{pr.creditScore} pts
                         </div>
                       ) : (
@@ -643,7 +643,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
             );
           })
         ) : (
-          <div className="p-12 rounded-2xl bg-[#090520]/80 border border-white/10 text-center space-y-3">
+          <div className="p-12 rounded-2xl bg-[#0e110f]/80 border border-white/10 text-center space-y-3">
             <GitPullRequest className="w-8 h-8 text-zinc-500 mx-auto" />
             <h3 className="text-sm font-semibold text-white">No pull requests match this filter</h3>
             <p className="text-xs text-zinc-400 max-w-sm mx-auto">

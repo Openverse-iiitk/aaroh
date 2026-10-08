@@ -45,17 +45,17 @@ const TINTS: Record<string, { icon: string; label: string; spot: string }> = {
   indigo: {
     icon: 'border-indigo-500/20 bg-indigo-500/10 text-indigo-400',
     label: 'text-indigo-400',
-    spot: 'rgba(99, 102, 241, 0.18)'
+    spot: 'rgba(46,255,123, 0.18)'
   },
   purple: {
     icon: 'border-purple-500/20 bg-purple-500/10 text-purple-400',
     label: 'text-purple-400',
-    spot: 'rgba(168, 85, 247, 0.18)'
+    spot: 'rgba(46,255,123, 0.18)'
   },
   pink: {
     icon: 'border-pink-500/20 bg-pink-500/10 text-pink-400',
     label: 'text-pink-400',
-    spot: 'rgba(236, 72, 153, 0.18)'
+    spot: 'rgba(46,255,123, 0.18)'
   }
 };
 
@@ -114,9 +114,6 @@ export const PreEventPage: React.FC<PreEventPageProps> = ({
 
   return (
     <div className="relative w-full flex-1 flex flex-col">
-      {/* Background ambient cosmic glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[350px] bg-purple-600/15 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Admin Quick Jump Bar (if organizer is signed in) */}
       {isAdmin && (
@@ -152,7 +149,7 @@ export const PreEventPage: React.FC<PreEventPageProps> = ({
       {/* Hero Section */}
       <section className="relative z-10 flex flex-col items-center text-center px-4 pt-16 sm:pt-24 pb-16 max-w-4xl mx-auto space-y-6">
         {/* Openverse presents badge */}
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold uppercase tracking-wider shadow-[0_0_15px_rgba(99,102,241,0.15)]">
+        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold uppercase tracking-wider">
           <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
           <span>Openverse presents</span>
         </div>
@@ -168,7 +165,7 @@ export const PreEventPage: React.FC<PreEventPageProps> = ({
         </p>
 
         {/* Digital Split-flap Countdown Container */}
-        <div className="w-full max-w-2xl rounded-3xl border border-indigo-500/25 bg-gradient-to-br from-[#140d33]/85 to-[#0a0618]/85 backdrop-blur-md p-5 sm:p-7 space-y-5 shadow-[0_0_40px_rgba(99,102,241,0.15)] mt-3">
+        <div className="w-full max-w-2xl rounded-3xl border border-indigo-500/25 bg-[#0b0f0d]/85 backdrop-blur-md p-5 sm:p-7 space-y-5 mt-3">
           <div className="flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-widest text-white">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
             <span>Event starts in</span>
@@ -222,7 +219,7 @@ export const PreEventPage: React.FC<PreEventPageProps> = ({
             <SpotlightCard
               key={card.label}
               spotlightColor={tintConfig.spot}
-              className="p-6 flex flex-col justify-between group rounded-2xl border border-white/10 bg-[#0e0a24]/90 shadow-xl"
+              className="p-6 flex flex-col justify-between group rounded-2xl border border-white/10 bg-[#131614]/90 shadow-xl"
             >
               <div>
                 <div
