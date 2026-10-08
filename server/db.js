@@ -99,7 +99,7 @@ class Database {
     if (process.env.VERCEL && fs.existsSync(DB_FILE)) {
       try { fs.unlinkSync(DB_FILE); } catch (_) {}
     }
-    await this.save();
+    await this.save(true);
     return this.data;
   }
 
@@ -180,7 +180,7 @@ class Database {
     }
   }
 
-  async save() {
+  async save(isFullReset = false) {
     this.lastLoadedAt = Date.now();
     try {
       fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
@@ -191,11 +191,59 @@ class Database {
     const token = process.env.BLOB_READ_WRITE_TOKEN;
     if (token) {
       try {
+        // CONCURRENCY-SAFE MERGE: Unless this is an explicit admin reset or deletion,
+        // merge with any concurrent submissions from other lambda instances
+        // before writing to Vercel Blob to prevent race condition data loss.
+        if (process.env.VERCEL && !isFullReset) {
+          try {
+            const checkRes = await fetch(`${BLOB_URL}?t=${Date.now()}`, {
+              cache: 'no-store',
+              headers: { 'Cache-Control': 'no-cache, no-store' }
+            });
+            if (checkRes.ok) {
+              const remote = await checkRes.json();
+              if (remote && Array.isArray(remote.pullRequests)) {
+                // Merge pull requests without losing any submitted PR
+                const prMap = new Map();
+                // 1. Add remote PRs
+                remote.pullRequests.forEach(p => {
+                  const key = p.id || `${p.repo}#${p.githubPrNumber}`;
+                  prMap.set(key, p);
+                });
+                // 2. Overlay local PRs (newer local state overrides)
+                (this.data.pullRequests || []).forEach(p => {
+                  const key = p.id || `${p.repo}#${p.githubPrNumber}`;
+                  prMap.set(key, p);
+                });
+                this.data.pullRequests = Array.from(prMap.values());
+
+                // Merge users without losing any registered contributors
+                if (Array.isArray(remote.users)) {
+                  const userMap = new Map();
+                  remote.users.forEach(u => userMap.set(u.username.toLowerCase(), u));
+                  (this.data.users || []).forEach(u => userMap.set(u.username.toLowerCase(), u));
+                  this.data.users = Array.from(userMap.values());
+                }
+
+                // Merge audit logs
+                if (Array.isArray(remote.auditLogs)) {
+                  const logMap = new Map();
+                  remote.auditLogs.forEach(l => logMap.set(l.id, l));
+                  (this.data.auditLogs || []).forEach(l => logMap.set(l.id, l));
+                  this.data.auditLogs = Array.from(logMap.values())
+                    .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+                    .slice(0, 80);
+                }
+              }
+            }
+          } catch (_) {}
+        }
+
         await put('hackaaroh_data.json', JSON.stringify(this.data), {
           access: 'public',
           addRandomSuffix: false,
           allowOverwrite: true,
-          abortSignal: AbortSignal.timeout(4000),
+          abortSignal: AbortSignal.timeout(8000),
           token
         });
       } catch (err) {
@@ -206,7 +254,7 @@ class Database {
 
   async reset() {
     this.data = getInitialSeed();
-    await this.save();
+    await this.save(true);
     return this.data;
   }
 
@@ -286,7 +334,7 @@ class Database {
     const initialLen = this.data.users.length;
     this.data.users = this.data.users.filter(u => u.username.toLowerCase() !== username.toLowerCase());
     this.data.pullRequests = this.data.pullRequests.filter(pr => pr.author.toLowerCase() !== username.toLowerCase());
-    await this.save();
+    await this.save(true);
     return this.data.users.length < initialLen;
   }
 
@@ -328,7 +376,7 @@ class Database {
     this.data.pullRequests = (this.data.pullRequests || []).filter(
       pr => pr.id !== id && String(pr.githubPrNumber) !== String(id)
     );
-    await this.save();
+    await this.save(true);
     return this.data.pullRequests.length < initialLen;
   }
 
