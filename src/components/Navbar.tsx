@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from '@tanstack/react-router';
 import { User, Sprint } from '../types';
-import { GitPullRequest, Trophy, Shield, LogOut, Github, ShieldCheck } from 'lucide-react';
+import { GitPullRequest, Trophy, Shield, LogOut, Github, ShieldCheck, Info, HelpCircle } from 'lucide-react';
 
 interface NavbarProps {
   user: User | null;
@@ -21,27 +21,27 @@ export const Navbar: React.FC<NavbarProps> = ({
   const currentPath = location.pathname;
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-[#121215]/95 backdrop-blur-sm">
+    <header className="sticky top-0 z-40 w-full border-b border-indigo-500/15 bg-[#0a0815]/80 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
       <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
         {/* Brand / Logo */}
-        <Link to="/" className="flex items-center gap-2.5 text-decoration-none">
-          <div className="w-8 h-8 rounded bg-[#1f1f23] flex items-center justify-center border border-white/10">
+        <Link to="/" className="flex items-center gap-2.5 text-decoration-none group">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center border border-white/20 shadow-[0_0_14px_rgba(99,102,241,0.4)] group-hover:scale-105 transition-transform">
             <GitPullRequest className="w-4 h-4 text-white" />
           </div>
           <span className="text-sm font-semibold text-white tracking-tight">
-            HackAaroh <span className="text-zinc-400 font-normal">PR Tracker</span>
+            HackAaroh <span className="bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent font-medium">PR Tracker</span>
           </span>
         </Link>
 
         {/* Navigation links */}
-        <nav className="flex items-center gap-6 text-sm">
+        <nav className="flex items-center gap-5 text-sm">
           <Link
             to="/leaderboard"
             className={`transition-colors flex items-center gap-1.5 ${
               currentPath === '/leaderboard' ? 'text-white font-medium' : 'text-zinc-400 hover:text-white'
             }`}
           >
-            <Trophy className="w-4 h-4 text-zinc-400" />
+            <Trophy className="w-3.5 h-3.5 text-zinc-400" />
             <span>Leaderboard</span>
           </Link>
 
@@ -51,28 +51,38 @@ export const Navbar: React.FC<NavbarProps> = ({
               currentPath === '/pull-requests' ? 'text-white font-medium' : 'text-zinc-400 hover:text-white'
             }`}
           >
-            <GitPullRequest className="w-4 h-4 text-zinc-400" />
+            <GitPullRequest className="w-3.5 h-3.5 text-zinc-400" />
             <span>Submitted PRs</span>
           </Link>
 
-          {user?.role === 'admin' ? (
+          <Link
+            to="/about"
+            className={`hidden sm:flex transition-colors items-center gap-1.5 ${
+              currentPath === '/about' ? 'text-white font-medium' : 'text-zinc-400 hover:text-white'
+            }`}
+          >
+            <Info className="w-3.5 h-3.5 text-zinc-400" />
+            <span>About</span>
+          </Link>
+
+          <Link
+            to="/faq"
+            className={`hidden sm:flex transition-colors items-center gap-1.5 ${
+              currentPath === '/faq' ? 'text-white font-medium' : 'text-zinc-400 hover:text-white'
+            }`}
+          >
+            <HelpCircle className="w-3.5 h-3.5 text-zinc-400" />
+            <span>FAQ</span>
+          </Link>
+
+          {user?.role === 'admin' && (
             <Link
               to="/admin"
               className={`transition-colors flex items-center gap-1.5 ${
                 currentPath === '/admin' ? 'text-white font-medium' : 'text-zinc-400 hover:text-white'
               }`}
             >
-              <Shield className="w-4 h-4 text-blue-400" />
-              <span>Admin</span>
-            </Link>
-          ) : (
-            <Link
-              to="/admin"
-              className={`hidden sm:flex transition-colors items-center gap-1.5 ${
-                currentPath === '/admin' ? 'text-white font-medium' : 'text-zinc-500 hover:text-zinc-300'
-              }`}
-            >
-              <Shield className="w-3.5 h-3.5" />
+              <Shield className="w-4 h-4 text-indigo-400" />
               <span>Admin Portal</span>
             </Link>
           )}
@@ -103,18 +113,18 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {user ? (
             <div className="flex items-center gap-2 pl-2 border-l border-white/10">
-              <div className="flex items-center gap-2 px-2.5 py-1 rounded bg-[#18181b] border border-white/10">
+              <div className="flex items-center gap-2 px-2.5 py-1 rounded-btn bg-[#161326] border border-indigo-500/30 shadow-[0_0_12px_rgba(99,102,241,0.15)]">
                 <img
-                  src={user.avatarUrl}
-                  alt={user.username}
-                  className="w-5 h-5 rounded-full object-cover"
+                  src={user.role === 'admin' ? 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&auto=format&fit=crop&q=80' : user.avatarUrl}
+                  alt={user.role === 'admin' ? 'HackAaroh Admin' : user.username}
+                  className="w-5 h-5 rounded-full object-cover border border-indigo-400/30"
                 />
                 <span className="text-xs font-medium text-white">
-                  @{user.username}
+                  {user.role === 'admin' ? '@hackaaroh' : `@${user.username}`}
                 </span>
                 {user.role === 'admin' && (
-                  <span className="text-[10px] px-1.5 py-0.2 rounded bg-blue-500/20 text-blue-400 border border-blue-500/30">
-                    Admin
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-semibold">
+                    HackAaroh Admin
                   </span>
                 )}
                 <button

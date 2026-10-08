@@ -29,8 +29,8 @@ export const SubmitPrModal: React.FC<SubmitPrModalProps> = ({
   isSubmitting
 }) => {
   const [repo, setRepo] = useState(sprint?.trackedRepos?.[0] || 'openverse/hackaaroh');
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState('feat: optimize reactive fiber work reconciliation loop');
+  const [description, setDescription] = useState('Enhanced async reconciliation batching, reducing redundant tree traversals by 40%.');
   const [url, setUrl] = useState('');
   const [additions, setAdditions] = useState(140);
   const [deletions, setDeletions] = useState(18);

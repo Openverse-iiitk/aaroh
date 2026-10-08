@@ -8,7 +8,8 @@ import {
   getExpandedRowModel,
   ColumnDef,
   flexRender,
-  SortingState
+  SortingState,
+  ExpandedState
 } from '@tanstack/react-table';
 import { LeaderboardItem, Sprint, PullRequest, User } from '../types';
 import {
@@ -50,7 +51,7 @@ export const LeaderboardPage: React.FC<LeaderboardPageProps> = ({
     { id: 'totalCredits', desc: true }
   ]);
   const [globalFilter, setGlobalFilter] = useState('');
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+  const [expanded, setExpanded] = useState<ExpandedState>({});
 
   // PR Filters
   const [prViewFilter, setPrViewFilter] = useState<'ALL' | 'MINE'>('ALL');

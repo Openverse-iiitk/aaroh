@@ -7,15 +7,17 @@ import {
   ShieldCheck,
   GitCommit,
   Search,
-  Globe,
-  UserCheck,
-  Star,
-  Award,
-  Layers,
-  Sparkles,
   CheckCircle2,
   Clock,
-  Github
+  Github,
+  Award,
+  Sparkles,
+  UserCheck,
+  Filter,
+  Layers,
+  ChevronDown,
+  X,
+  Plus
 } from 'lucide-react';
 
 interface PullRequestsPageProps {
@@ -24,6 +26,7 @@ interface PullRequestsPageProps {
   currentUser: User | null;
   onSelectPrForReview: (pr: PullRequest) => void;
   onOpenAuth?: () => void;
+  onOpenSubmitPr?: () => void;
 }
 
 export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
@@ -31,9 +34,9 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
   sprint,
   currentUser,
   onSelectPrForReview,
-  onOpenAuth
+  onOpenAuth,
+  onOpenSubmitPr
 }) => {
-  // Check URL query parameters if view=mine is specified
   const initialMode = typeof window !== 'undefined' && window.location.search.includes('view=mine')
     ? 'MINE'
     : 'ALL';
@@ -47,7 +50,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
   const isAdmin = currentUser?.role === 'admin';
   const safePrs = Array.isArray(pullRequests) ? pullRequests : [];
 
-  // Extract distinct repositories across all tracked PRs
+  // Extract distinct repositories
   const allDistinctRepos = useMemo(() => {
     return Array.from(new Set(safePrs.map((pr) => pr.repo))).filter(Boolean);
   }, [safePrs]);
@@ -76,7 +79,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
     };
   }, [myPrs]);
 
-  // Base list depending on view mode
+  // Base list
   const basePrs = viewMode === 'MINE' ? myPrs : safePrs;
 
   const filteredPrs = basePrs.filter((pr) => {
@@ -100,141 +103,175 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
     (_, i) => i + 1
   );
 
+  const resetFilters = () => {
+    setSelectedDay('ALL');
+    setSelectedRepo('ALL');
+    setSelectedStatus('ALL');
+    setSearchQuery('');
+  };
+
+  const hasActiveFilters =
+    selectedDay !== 'ALL' ||
+    selectedRepo !== 'ALL' ||
+    selectedStatus !== 'ALL' ||
+    searchQuery.trim().length > 0;
+
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 py-8 space-y-6">
+    <div className="w-full max-w-5xl mx-auto px-4 py-8 space-y-6 animate-fade-in">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-white/5">
         <div>
-          <h1 className="text-2xl font-semibold text-white tracking-tight">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-[11px] font-semibold text-indigo-400 uppercase tracking-wider">
+              Live Ingestion Pipeline
+            </span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
             Submitted Pull Requests
           </h1>
-          <p className="text-xs text-zinc-400 mt-1 max-w-2xl leading-relaxed">
-            All pull requests authored by registered participants across repositories.
-            Daily evaluation calculated at <span className="text-white font-medium">{sprint.dailyUpdateTime || '00:00'} UTC</span>.
+          <p className="text-xs sm:text-sm text-zinc-400 mt-1 max-w-2xl leading-relaxed">
+            All pull requests authored across monitored open-source repositories.
+            Evaluations run nightly with scores locked at{' '}
+            <span className="text-white font-medium">{sprint.dailyUpdateTime || '00:00'} UTC</span>.
           </p>
         </div>
 
-        {/* Repositories Counter */}
-        <div className="text-xs text-zinc-400 px-3 py-1.5 rounded bg-[#18181b] border border-white/10 flex items-center gap-2 self-start sm:self-auto">
-          <span className="w-2 h-2 rounded-full bg-emerald-500" />
-          <span>{allDistinctRepos.length} Repositories Tracked</span>
+        <div className="flex items-center gap-2 self-start sm:self-auto">
+          <div className="text-xs text-zinc-300 px-3 py-1.5 rounded-lg bg-[#120f24] border border-white/10 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-500" />
+            <span><strong>{allDistinctRepos.length}</strong> Repos Tracked</span>
+          </div>
+          <div className="text-xs text-zinc-300 px-3 py-1.5 rounded-lg bg-[#120f24] border border-white/10 flex items-center gap-2">
+            <GitPullRequest className="w-3.5 h-3.5 text-indigo-400" />
+            <span><strong>{safePrs.length}</strong> Total PRs</span>
+          </div>
+          {onOpenSubmitPr && (
+            <button
+              onClick={currentUser ? onOpenSubmitPr : (onOpenAuth || onOpenSubmitPr)}
+              className="btn-primary !text-xs !py-1.5 !px-3.5 flex items-center gap-1.5 shadow-[0_0_12px_rgba(99,102,241,0.3)] hover:scale-[1.02] transition-transform ml-1"
+            >
+              <Plus className="w-3.5 h-3.5" />
+              <span>Submit PR</span>
+            </button>
+          )}
         </div>
       </div>
 
-      {/* Primary View Switcher: All PRs vs My PR Reviews */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-1 rounded bg-[#18181b] border border-white/10">
-        <div className="grid grid-cols-2 gap-1.5 p-1 bg-[#121215] rounded">
+      {/* Primary View Switcher: All PRs vs My PRs */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-1.5 rounded-xl bg-[#0e0a22] border border-white/10">
+        <div className="inline-flex rounded-lg p-1 bg-[#080517]">
           <button
             onClick={() => setViewMode('ALL')}
-            className={`px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center justify-center gap-2 ${
+            className={`px-4 py-1.5 rounded-md text-xs font-semibold transition-all flex items-center gap-2 ${
               viewMode === 'ALL'
-                ? 'bg-zinc-800 text-white shadow-sm'
+                ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-500/30'
                 : 'text-zinc-400 hover:text-white'
             }`}
           >
-            <GitPullRequest className="w-3.5 h-3.5 text-zinc-400" />
+            <GitPullRequest className="w-3.5 h-3.5" />
             <span>All Pull Requests</span>
-            <span className="px-1.5 py-0.2 rounded bg-white/10 text-[10px] text-zinc-400">
+            <span className="px-1.5 py-0.2 rounded bg-white/15 text-[10px] font-mono">
               {safePrs.length}
             </span>
           </button>
 
           <button
             onClick={() => setViewMode('MINE')}
-            className={`px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center justify-center gap-2 ${
+            className={`px-4 py-1.5 rounded-md text-xs font-semibold transition-all flex items-center gap-2 ${
               viewMode === 'MINE'
-                ? 'bg-zinc-800 text-white shadow-sm'
+                ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-500/30'
                 : 'text-zinc-400 hover:text-white'
             }`}
           >
-            <ShieldCheck className="w-3.5 h-3.5 text-zinc-400" />
+            <ShieldCheck className="w-3.5 h-3.5" />
             <span>My PRs</span>
             {currentUser && (
-              <span className="px-1.5 py-0.2 rounded bg-white/10 text-[10px] text-zinc-300 font-semibold">
+              <span className="px-1.5 py-0.2 rounded bg-white/15 text-[10px] font-mono">
                 {myPrs.length}
               </span>
             )}
           </button>
         </div>
 
-        {/* Quick summary text */}
-        <div className="text-xs text-zinc-400 px-3 py-1 flex items-center justify-between sm:justify-end gap-2">
-          <span>Viewing:</span>
+        <div className="text-xs text-zinc-400 px-2 flex items-center gap-1.5">
+          <span>Active View:</span>
           <span className="text-white font-medium">
             {viewMode === 'MINE'
               ? currentUser
-                ? `@${currentUser.username}'s PRs`
-                : 'Personal PRs (Sign-in Required)'
-              : 'All Participants'}
+                ? currentUser.role === 'admin'
+                  ? 'HackAaroh Admin PRs'
+                  : `@${currentUser.username}'s PRs`
+                : 'Personal Contributions (Sign in)'
+              : 'Ecosystem Submissions'}
           </span>
         </div>
       </div>
 
-      {/* Personal Dashboard Card when "My PR Reviews Only" is selected */}
+      {/* Personal Dashboard Summary Card (when viewing My PRs) */}
       {viewMode === 'MINE' && currentUser && (
-        <div className="p-4 rounded bg-[#121215] border border-white/10 space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10">
+        <div className="p-5 rounded-2xl bg-[#0e0a22]/90 border border-indigo-500/20 shadow-lg space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-white/5">
             <div className="flex items-center gap-3">
               <img
-                src={currentUser.avatarUrl}
+                src={currentUser.role === 'admin' ? 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&auto=format&fit=crop&q=80' : currentUser.avatarUrl}
                 alt={currentUser.username}
-                className="w-9 h-9 rounded-full object-cover border border-white/10"
+                className="w-10 h-10 rounded-full object-cover border border-indigo-500/30"
               />
               <div>
                 <div className="flex items-center gap-2">
                   <h3 className="text-sm font-semibold text-white">
-                    Contributor Summary
+                    {currentUser.role === 'admin' ? 'HackAaroh Admin' : currentUser.name}
                   </h3>
-                  <span className="px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 text-[11px] font-medium border border-white/10">
-                    @{currentUser.username}
+                  <span className="px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 text-[11px] font-mono border border-indigo-500/30">
+                    {currentUser.role === 'admin' ? '@hackaaroh' : `@${currentUser.username}`}
                   </span>
                 </div>
                 <p className="text-xs text-zinc-400 mt-0.5">
-                  Tracked pull requests and review scores.
+                  Your tracked open-source pull requests and nightly evaluation scores.
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-zinc-400">Total Points:</span>
-              <span className="text-lg font-semibold text-white">
+            <div className="px-4 py-2 rounded-xl bg-indigo-950/40 border border-indigo-500/30 text-right">
+              <span className="text-[11px] text-zinc-400 uppercase tracking-wider block">Total Credits Earned</span>
+              <span className="text-xl font-bold bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent">
                 +{myStats.totalCredits} pts
               </span>
             </div>
           </div>
 
-          {/* 4 Stat Pills */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-            <div className="p-3 rounded-btn bg-midnight-surface/80 border border-white/5">
-              <span className="text-fog block text-[11px]">Tracked PRs</span>
-              <span className="text-lg font-semibold text-lilac-white block mt-0.5">
-                {myStats.totalPrs} PRs
+            <div className="p-3 rounded-xl bg-[#140f2e] border border-white/5">
+              <span className="text-zinc-400 block text-[11px]">Tracked PRs</span>
+              <span className="text-lg font-bold text-white block mt-0.5">
+                {myStats.totalPrs}
               </span>
-              <span className="text-[10px] text-steel">Across all repositories</span>
+              <span className="text-[10px] text-zinc-500">Across ecosystem</span>
             </div>
 
-            <div className="p-3 rounded-btn bg-midnight-surface/80 border border-white/5">
-              <span className="text-fog block text-[11px]">Scored by Admin</span>
-              <span className="text-lg font-semibold text-emerald-400 block mt-0.5">
-                {myStats.reviewedPrs} Reviewed
+            <div className="p-3 rounded-xl bg-[#140f2e] border border-white/5">
+              <span className="text-zinc-400 block text-[11px]">Scored by Reviewers</span>
+              <span className="text-lg font-bold text-emerald-400 block mt-0.5">
+                {myStats.reviewedPrs}
               </span>
-              <span className="text-[10px] text-steel">Avg {myStats.avgScore} pts / review</span>
+              <span className="text-[10px] text-zinc-500">Avg {myStats.avgScore} pts / PR</span>
             </div>
 
-            <div className="p-3 rounded-btn bg-midnight-surface/80 border border-white/5">
-              <span className="text-fog block text-[11px]">Pending Admin Grading</span>
-              <span className="text-lg font-semibold text-amber-300 block mt-0.5">
-                {myStats.pendingPrs} in Queue
+            <div className="p-3 rounded-xl bg-[#140f2e] border border-white/5">
+              <span className="text-zinc-400 block text-[11px]">Awaiting Scoring</span>
+              <span className="text-lg font-bold text-amber-300 block mt-0.5">
+                {myStats.pendingPrs}
               </span>
-              <span className="text-[10px] text-steel">Daily sprint evaluation</span>
+              <span className="text-[10px] text-zinc-500">Nightly evaluation</span>
             </div>
 
-            <div className="p-3 rounded-btn bg-midnight-surface/80 border border-white/5">
-              <span className="text-fog block text-[11px]">Active Repositories</span>
-              <span className="text-lg font-semibold text-lavender-accent block mt-0.5">
-                {myStats.distinctRepos.length} Repos
+            <div className="p-3 rounded-xl bg-[#140f2e] border border-white/5">
+              <span className="text-zinc-400 block text-[11px]">Repositories</span>
+              <span className="text-lg font-bold text-purple-300 block mt-0.5">
+                {myStats.distinctRepos.length}
               </span>
-              <span className="text-[10px] text-steel truncate block">
+              <span className="text-[10px] text-zinc-500 truncate block">
                 {myStats.distinctRepos.slice(0, 2).join(', ') || 'None yet'}
               </span>
             </div>
@@ -242,46 +279,43 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
         </div>
       )}
 
-      {/* Guest Notice if "My PR Reviews" chosen while not authenticated */}
+      {/* Guest Notice if "My PRs" selected while logged out */}
       {viewMode === 'MINE' && !currentUser && (
-        <div className="panel-glass p-8 text-center space-y-4 border border-lavender-accent/30 animate-fade-in">
-          <div className="w-12 h-12 rounded bg-[#18181b] border border-white/10 flex items-center justify-center mx-auto text-zinc-300">
+        <div className="p-8 rounded-2xl bg-[#0e0a22]/90 border border-indigo-500/20 text-center space-y-4">
+          <div className="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center mx-auto">
             <UserCheck className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="text-lg font-medium text-lilac-white">
-              Connect GitHub to View Only Your PR Reviews
+            <h3 className="text-base font-semibold text-white">
+              Connect Your GitHub Account
             </h3>
-            <p className="text-xs text-ash max-w-md mx-auto mt-1 leading-relaxed">
-              When connected, your pull requests across any GitHub repository are tracked automatically.
-              You can view admin feedback, rubric evaluations, and personal credit totals here.
+            <p className="text-xs text-zinc-400 max-w-md mx-auto mt-1 leading-relaxed">
+              Sign in with your GitHub profile to view your personal pull request submissions, official rubric evaluations, and earned points.
             </p>
           </div>
           {onOpenAuth && (
-            <div className="pt-2">
-              <button
-                onClick={onOpenAuth}
-                className="btn-primary !px-5 !py-2.5 mx-auto"
-              >
-                <Github className="w-4 h-4" />
-                <span>Connect GitHub Account</span>
-              </button>
-            </div>
+            <button
+              onClick={onOpenAuth}
+              className="btn-primary !px-5 !py-2.5 mx-auto"
+            >
+              <Github className="w-4 h-4" />
+              <span>Sign in with GitHub</span>
+            </button>
           )}
         </div>
       )}
 
       {/* Filter Toolbar */}
-      <div className="panel-glass p-4 flex flex-wrap items-center justify-between gap-4 text-xs">
-        {/* Day Pills filter */}
+      <div className="p-4 rounded-xl bg-[#090520]/80 border border-white/10 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 text-xs">
+        {/* Sprint Day selector pills */}
         <div className="flex flex-wrap items-center gap-1.5">
-          <span className="text-fog mr-1 font-medium">Sprint Day:</span>
+          <span className="text-zinc-400 mr-1 font-medium">Sprint Day:</span>
           <button
             onClick={() => setSelectedDay('ALL')}
-            className={`px-2.5 py-1 rounded-btn transition-colors ${
+            className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
               selectedDay === 'ALL'
-                ? 'bg-deep-indigo text-lilac-white border border-lavender-accent/40 font-medium'
-                : 'bg-midnight-surface text-fog hover:text-lilac-white border border-white/5'
+                ? 'bg-indigo-600 text-white font-semibold shadow-sm'
+                : 'bg-[#151226] text-zinc-400 hover:text-white border border-white/5'
             }`}
           >
             All Days
@@ -290,10 +324,10 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
             <button
               key={day}
               onClick={() => setSelectedDay(day)}
-              className={`px-2.5 py-1 rounded-btn transition-colors ${
+              className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
                 selectedDay === day
-                  ? 'bg-deep-indigo text-lilac-white border border-lavender-accent/40 font-medium'
-                  : 'bg-midnight-surface text-fog hover:text-lilac-white border border-white/5'
+                  ? 'bg-indigo-600 text-white font-semibold shadow-sm'
+                  : 'bg-[#151226] text-zinc-400 hover:text-white border border-white/5'
               }`}
             >
               Day {day}
@@ -301,13 +335,13 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
           ))}
         </div>
 
-        {/* Dropdowns & Search */}
-        <div className="flex flex-wrap items-center gap-2.5 w-full sm:w-auto">
-          {/* Repository Dropdown */}
+        {/* Search & dropdown filters */}
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Repo Filter */}
           <select
             value={selectedRepo}
             onChange={(e) => setSelectedRepo(e.target.value)}
-            className="px-2.5 py-1.5 rounded-btn bg-midnight-surface border border-white/10 text-xs text-lilac-white focus:outline-none focus:border-lavender-accent"
+            className="px-2.5 py-1.5 rounded-lg bg-[#140f2b] border border-white/10 text-xs text-white focus:outline-none focus:border-indigo-500 cursor-pointer"
           >
             <option value="ALL">All Repositories ({allDistinctRepos.length})</option>
             {allDistinctRepos.map((repo) => (
@@ -317,34 +351,51 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
             ))}
           </select>
 
-          {/* Status Dropdown */}
+          {/* Status Filter */}
           <select
             value={selectedStatus}
             onChange={(e) => setSelectedStatus(e.target.value)}
-            className="px-2.5 py-1.5 rounded-btn bg-midnight-surface border border-white/10 text-xs text-lilac-white focus:outline-none focus:border-lavender-accent"
+            className="px-2.5 py-1.5 rounded-lg bg-[#140f2b] border border-white/10 text-xs text-white focus:outline-none focus:border-indigo-500 cursor-pointer"
           >
-            <option value="ALL">All Review Statuses</option>
-            <option value="REVIEWED">Scored by Admin</option>
-            <option value="PENDING_REVIEW">Needs Admin Review</option>
+            <option value="ALL">All Statuses</option>
+            <option value="REVIEWED">Scored PRs</option>
+            <option value="PENDING_REVIEW">Awaiting Review</option>
             <option value="REJECTED">Rejected</option>
           </select>
 
           {/* Search box */}
-          <div className="relative">
-            <Search className="w-3.5 h-3.5 text-fog absolute left-2.5 top-1/2 -translate-y-1/2" />
+          <div className="relative flex-1 sm:flex-none">
+            <Search className="w-3.5 h-3.5 text-zinc-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search title, repo, tags..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-8 pr-3 py-1.5 rounded-btn bg-midnight-surface border border-white/10 text-xs text-lilac-white placeholder:text-steel focus:outline-none focus:border-lavender-accent"
+              className="w-full sm:w-48 pl-8 pr-7 py-1.5 rounded-lg bg-[#140f2b] border border-white/10 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-indigo-500"
             />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white"
+              >
+                <X className="w-3 h-3" />
+              </button>
+            )}
           </div>
+
+          {hasActiveFilters && (
+            <button
+              onClick={resetFilters}
+              className="text-xs text-indigo-400 hover:text-indigo-300 px-2 py-1 underline font-medium"
+            >
+              Reset
+            </button>
+          )}
         </div>
       </div>
 
-      {/* PR Cards Grid */}
-      <div className="space-y-4">
+      {/* PR Cards List */}
+      <div className="space-y-3.5">
         {filteredPrs.length > 0 ? (
           filteredPrs.map((pr) => {
             const isMyPr = currentUser && pr.author.toLowerCase() === currentUser.username.toLowerCase();
@@ -352,99 +403,120 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
             return (
               <div
                 key={pr.id}
-                className={`panel-glass p-5 hover:border-lavender-accent/30 transition-all ${
-                  isMyPr ? 'border-lavender-accent/20 bg-deep-indigo/10' : ''
+                className={`p-5 rounded-2xl border transition-all duration-200 ${
+                  isMyPr
+                    ? 'bg-[#0f0b29] border-indigo-500/40 shadow-[0_4px_24px_rgba(99,102,241,0.12)]'
+                    : 'bg-[#090520]/80 border-white/10 hover:border-indigo-500/30'
                 }`}
               >
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-                  <div className="space-y-2 flex-1">
-                    {/* Top metadata row */}
+                  <div className="space-y-2.5 flex-1 min-w-0">
+                    {/* Top Row: Author, Repo, Sprint Day, State Badges */}
                     <div className="flex flex-wrap items-center gap-2 text-xs">
-                      <img
-                        src={pr.authorAvatar}
-                        alt={pr.author}
-                        className="w-5 h-5 rounded-full object-cover border border-white/10"
-                      />
-                      <span className="font-medium text-lilac-white">@{pr.author}</span>
-                      {isMyPr && (
-                        <span className="px-1.5 py-0.2 rounded-full bg-iris/30 text-lavender-accent text-[10px] font-semibold border border-iris/40">
-                          You
-                        </span>
-                      )}
-                      <span className="text-steel">•</span>
-                      <span className="px-2 py-0.5 rounded bg-white/5 text-lilac-white font-mono text-[11px]">
-                        {pr.repo}
-                      </span>
-                      <span className="text-steel">•</span>
-                      <span className="px-2 py-0.5 rounded-full bg-deep-indigo text-lavender-accent text-[11px] font-medium">
+                      <div className="flex items-center gap-1.5">
+                        <img
+                          src={pr.authorAvatar}
+                          alt={pr.author}
+                          className="w-5 h-5 rounded-full object-cover border border-white/15"
+                        />
+                        <span className="font-semibold text-white">@{pr.author}</span>
+                        {isMyPr && (
+                          <span className="px-1.5 py-0.2 rounded-full bg-indigo-500/20 text-indigo-300 text-[10px] font-semibold border border-indigo-500/30">
+                            You
+                          </span>
+                        )}
+                      </div>
+
+                      <span className="text-zinc-600">•</span>
+
+                      {/* Repo Badge with link */}
+                      <a
+                        href={`https://github.com/${pr.repo}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-2 py-0.5 rounded-md bg-white/5 hover:bg-white/10 text-zinc-300 hover:text-white font-mono text-[11px] border border-white/5 transition-colors flex items-center gap-1"
+                      >
+                        <Github className="w-3 h-3 text-zinc-400" />
+                        <span>{pr.repo}</span>
+                      </a>
+
+                      <span className="text-zinc-600">•</span>
+
+                      {/* Sprint Day */}
+                      <span className="px-2 py-0.5 rounded-full bg-[#181432] text-indigo-300 text-[11px] font-medium border border-indigo-500/20">
                         Day {pr.dayOfSprint}
                       </span>
-                      <span className="text-steel">•</span>
+
+                      {/* Merge / Open State */}
                       <span
-                        className={`px-2 py-0.5 rounded-full text-[11px] font-medium flex items-center gap-1 ${
+                        className={`px-2 py-0.5 rounded-full text-[11px] font-medium flex items-center gap-1 border ${
                           pr.state === 'merged'
-                            ? 'bg-purple-950/40 text-purple-300 border border-purple-500/30'
-                            : 'bg-emerald-950/40 text-emerald-300 border border-emerald-500/30'
+                            ? 'bg-purple-950/40 text-purple-300 border-purple-500/30'
+                            : pr.state === 'closed'
+                            ? 'bg-zinc-800 text-zinc-400 border-zinc-700'
+                            : 'bg-emerald-950/40 text-emerald-300 border-emerald-500/30'
                         }`}
                       >
                         <GitMerge className="w-3 h-3" />
-                        {pr.state}
+                        <span className="capitalize">{pr.state}</span>
                       </span>
                     </div>
 
-                    {/* PR Title & link */}
-                    <h3 className="text-base font-medium text-lilac-white hover:text-lavender-accent transition-colors">
-                      <a
-                        href={pr.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5"
-                      >
-                        <span>#{pr.githubPrNumber}: {pr.title}</span>
-                        <ExternalLink className="w-3.5 h-3.5 text-fog flex-shrink-0" />
-                      </a>
-                    </h3>
+                    {/* PR Title & Link */}
+                    <div>
+                      <h3 className="text-base font-semibold text-white hover:text-indigo-300 transition-colors leading-snug">
+                        <a
+                          href={pr.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 group"
+                        >
+                          <span className="font-mono text-indigo-400 font-bold">#{pr.githubPrNumber}</span>
+                          <span>{pr.title}</span>
+                          <ExternalLink className="w-3.5 h-3.5 text-zinc-500 group-hover:text-indigo-300 transition-colors flex-shrink-0" />
+                        </a>
+                      </h3>
 
-                    {/* PR Description */}
-                    {pr.description && (
-                      <p className="text-xs text-ash leading-relaxed">
-                        {pr.description}
-                      </p>
-                    )}
+                      {pr.description && (
+                        <p className="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
+                          {pr.description}
+                        </p>
+                      )}
+                    </div>
 
-                    {/* Code Stats & Tags */}
-                    <div className="flex flex-wrap items-center gap-3 pt-1 text-[11px] text-fog">
-                      <span className="text-emerald-400 font-medium">
-                        +{pr.additions} lines
+                    {/* Diff stats, commits & tags */}
+                    <div className="flex flex-wrap items-center gap-2.5 text-xs text-zinc-400 pt-0.5">
+                      <span className="px-2 py-0.5 rounded bg-emerald-950/30 text-emerald-400 border border-emerald-500/20 font-mono text-[11px] font-medium">
+                        +{pr.additions}
                       </span>
-                      <span className="text-rose-400 font-medium">
-                        -{pr.deletions} lines
+                      <span className="px-2 py-0.5 rounded bg-rose-950/30 text-rose-400 border border-rose-500/20 font-mono text-[11px] font-medium">
+                        -{pr.deletions}
                       </span>
-                      <span className="flex items-center gap-1">
-                        <GitCommit className="w-3 h-3 text-lavender-accent" />
-                        {pr.commitsCount} commits
+                      <span className="flex items-center gap-1 text-[11px] text-zinc-400">
+                        <GitCommit className="w-3 h-3 text-indigo-400" />
+                        <span>{pr.commitsCount} commits</span>
                       </span>
 
                       {pr.tags?.map((tag) => (
                         <span
                           key={tag}
-                          className="px-2 py-0.2 rounded-btn bg-white/5 text-fog text-[10px]"
+                          className="px-2 py-0.2 rounded bg-white/5 text-zinc-400 text-[10px] font-medium"
                         >
                           #{tag}
                         </span>
                       ))}
                     </div>
 
-                    {/* Detailed Admin Review Card */}
+                    {/* Rubric Evaluation Breakdown (when reviewed) */}
                     {pr.reviewStatus === 'REVIEWED' && (
-                      <div className="mt-3 p-3.5 rounded-btn bg-midnight-surface border border-white/5 space-y-2.5">
-                        <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-                          <span className="text-fog font-medium flex items-center gap-1">
+                      <div className="mt-3 p-3.5 rounded-xl bg-[#120d2c] border border-indigo-500/20 space-y-2.5">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-indigo-300 font-semibold flex items-center gap-1.5">
                             <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                            Admin Review by @{pr.reviewedBy || 'admin-starlit'}:
+                            Official HackAaroh Rubric Evaluation
                           </span>
                           {pr.reviewedAt && (
-                            <span className="text-steel text-[10px]">
+                            <span className="text-zinc-500 text-[10px]">
                               {new Date(pr.reviewedAt).toLocaleDateString('en-US', {
                                 month: 'short',
                                 day: 'numeric',
@@ -456,39 +528,38 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
                         </div>
 
                         {pr.adminFeedback ? (
-                          <div className="text-xs text-lilac-white italic pl-2 border-l-2 border-lavender-accent/40">
+                          <p className="text-xs text-zinc-200 italic pl-2.5 border-l-2 border-indigo-500/50 leading-relaxed">
                             &ldquo;{pr.adminFeedback}&rdquo;
-                          </div>
+                          </p>
                         ) : (
-                          <div className="text-xs text-steel italic">
-                            No written notes provided by reviewer.
-                          </div>
+                          <p className="text-xs text-zinc-500 italic">
+                            Evaluated without specific reviewer notes.
+                          </p>
                         )}
 
-                        {/* 4 Rubric Criteria Breakdown */}
                         {pr.adminCriteria && (
                           <div className="pt-2 border-t border-white/5 grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px]">
-                            <div className="p-1.5 rounded bg-void-canvas/70 border border-white/5">
-                              <span className="text-steel block text-[10px]">Quality</span>
-                              <span className="text-lilac-white font-mono font-medium">
+                            <div className="p-2 rounded-lg bg-[#0a071c] border border-white/5 flex items-center justify-between">
+                              <span className="text-zinc-400 text-[10px]">Quality</span>
+                              <span className="text-white font-mono font-semibold">
                                 {pr.adminCriteria.quality || 20}/25
                               </span>
                             </div>
-                            <div className="p-1.5 rounded bg-void-canvas/70 border border-white/5">
-                              <span className="text-steel block text-[10px]">Complexity</span>
-                              <span className="text-lilac-white font-mono font-medium">
+                            <div className="p-2 rounded-lg bg-[#0a071c] border border-white/5 flex items-center justify-between">
+                              <span className="text-zinc-400 text-[10px]">Complexity</span>
+                              <span className="text-white font-mono font-semibold">
                                 {pr.adminCriteria.complexity || 20}/25
                               </span>
                             </div>
-                            <div className="p-1.5 rounded bg-void-canvas/70 border border-white/5">
-                              <span className="text-steel block text-[10px]">Impact</span>
-                              <span className="text-lilac-white font-mono font-medium">
+                            <div className="p-2 rounded-lg bg-[#0a071c] border border-white/5 flex items-center justify-between">
+                              <span className="text-zinc-400 text-[10px]">Impact</span>
+                              <span className="text-white font-mono font-semibold">
                                 {pr.adminCriteria.impact || 20}/25
                               </span>
                             </div>
-                            <div className="p-1.5 rounded bg-void-canvas/70 border border-white/5">
-                              <span className="text-steel block text-[10px]">Test Coverage</span>
-                              <span className="text-lilac-white font-mono font-medium">
+                            <div className="p-2 rounded-lg bg-[#0a071c] border border-white/5 flex items-center justify-between">
+                              <span className="text-zinc-400 text-[10px]">Tests</span>
+                              <span className="text-white font-mono font-semibold">
                                 {pr.adminCriteria.testCoverage || 15}/25
                               </span>
                             </div>
@@ -498,26 +569,26 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
                     )}
 
                     {pr.reviewStatus === 'PENDING_REVIEW' && (
-                      <div className="mt-2 p-2.5 rounded bg-amber-950/20 border border-amber-500/20 text-xs text-amber-200/80 flex items-center gap-2">
+                      <div className="mt-2 p-2.5 rounded-lg bg-amber-950/20 border border-amber-500/20 text-xs text-amber-300/80 flex items-center gap-2">
                         <Clock className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
-                        <span>Awaiting admin review &amp; manual credit scoring.</span>
+                        <span>Queued for daily 00:00 UTC rubric evaluation.</span>
                       </div>
                     )}
                   </div>
 
-                  {/* Right Score Column & Admin Action */}
+                  {/* Right Column: Score Badge & Admin Action */}
                   <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-start gap-3 flex-shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-white/5">
                     <div className="text-right">
-                      <span className="text-fog block text-[10px] uppercase tracking-wider">
+                      <span className="text-zinc-500 block text-[10px] uppercase font-semibold tracking-wider">
                         Credit Score
                       </span>
                       {pr.reviewStatus === 'REVIEWED' ? (
-                        <span className="text-base font-semibold text-white block">
+                        <div className="mt-0.5 px-3 py-1 rounded-xl bg-gradient-to-r from-emerald-500/20 to-indigo-500/20 border border-emerald-500/30 text-white font-bold text-sm font-mono shadow-sm">
                           +{pr.creditScore} pts
-                        </span>
+                        </div>
                       ) : (
-                        <span className="px-2.5 py-1 rounded bg-zinc-800 text-zinc-300 border border-white/10 text-[11px] font-medium inline-block mt-0.5">
-                          Needs Review
+                        <span className="mt-0.5 px-2.5 py-1 rounded-lg bg-zinc-800 text-zinc-300 border border-white/10 text-[11px] font-medium inline-block">
+                          Awaiting Grade
                         </span>
                       )}
                     </div>
@@ -527,7 +598,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
                         onClick={() => onSelectPrForReview(pr)}
                         className="btn-secondary !text-xs !py-1 !px-2.5 flex items-center gap-1.5"
                       >
-                        <ShieldCheck className="w-3.5 h-3.5 text-blue-400" />
+                        <ShieldCheck className="w-3.5 h-3.5 text-indigo-400" />
                         <span>{pr.reviewStatus === 'REVIEWED' ? 'Adjust Score' : 'Grade PR'}</span>
                       </button>
                     )}
@@ -537,23 +608,20 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
             );
           })
         ) : (
-          <div className="panel-glass p-12 text-center text-fog text-xs space-y-2">
-            <p>
+          <div className="p-12 rounded-2xl bg-[#090520]/80 border border-white/10 text-center space-y-3">
+            <GitPullRequest className="w-8 h-8 text-zinc-500 mx-auto" />
+            <h3 className="text-sm font-semibold text-white">No pull requests match this filter</h3>
+            <p className="text-xs text-zinc-400 max-w-sm mx-auto">
               {viewMode === 'MINE'
-                ? "You don't have any pull requests matching this filter."
-                : 'No pull requests match the selected filters.'}
+                ? "You haven't authored any pull requests matching the current filters."
+                : 'Try adjusting the sprint day, repository, or review status filters.'}
             </p>
-            {viewMode === 'MINE' && (
+            {hasActiveFilters && (
               <button
-                onClick={() => {
-                  setSelectedDay('ALL');
-                  setSelectedRepo('ALL');
-                  setSelectedStatus('ALL');
-                  setSearchQuery('');
-                }}
-                className="btn-ghost !text-xs !py-1 !px-3 text-lavender-accent hover:underline"
+                onClick={resetFilters}
+                className="btn-secondary !text-xs !py-1 !px-3"
               >
-                Clear Filters
+                Clear Active Filters
               </button>
             )}
           </div>

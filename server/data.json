@@ -5,11 +5,11 @@
     "description": "Automated GitHub pull request tracking across all repositories for registered users. Admins review PRs daily and award credits.",
     "status": "ACTIVE",
     "dailyUpdateTime": "00:00",
-    "startDate": "2026-10-03T09:42:45.191Z",
+    "startDate": "2026-10-05T05:12:25.053Z",
     "endDate": null,
-    "currentDay": 5,
-    "lastSyncAt": "2026-10-06T09:51:09.360Z",
-    "nextSyncAt": "2026-10-07T00:00:00.000Z",
+    "currentDay": 10,
+    "lastSyncAt": "2026-10-08T05:33:35.111Z",
+    "nextSyncAt": "2026-10-09T00:00:00.000Z",
     "trackingScope": "ALL_REPOSITORIES",
     "trackedRepos": [
       "facebook/react",
@@ -36,7 +36,7 @@
       "bio": "Full-stack builder & open source enthusiast",
       "htmlUrl": "https://github.com/manav-codes",
       "role": "contributor",
-      "createdAt": "2026-10-03T09:42:45.191Z"
+      "createdAt": "2026-10-05T05:12:25.053Z"
     },
     {
       "id": "usr_sarah",
@@ -46,7 +46,7 @@
       "bio": "Systems engineer & TypeScript fanatic",
       "htmlUrl": "https://github.com/sarah-dev",
       "role": "contributor",
-      "createdAt": "2026-10-03T09:42:45.191Z"
+      "createdAt": "2026-10-05T05:12:25.053Z"
     },
     {
       "id": "usr_alex",
@@ -56,7 +56,7 @@
       "bio": "Rust & WebAssembly specialist",
       "htmlUrl": "https://github.com/alex-rustacean",
       "role": "contributor",
-      "createdAt": "2026-10-03T09:42:45.191Z"
+      "createdAt": "2026-10-05T05:12:25.053Z"
     },
     {
       "id": "usr_elena",
@@ -66,7 +66,7 @@
       "bio": "Distributed systems & TanStack fan",
       "htmlUrl": "https://github.com/elena-cloud",
       "role": "contributor",
-      "createdAt": "2026-10-03T09:42:45.191Z"
+      "createdAt": "2026-10-05T05:12:25.053Z"
     },
     {
       "id": "usr_devon",
@@ -76,7 +76,7 @@
       "bio": "Frontend architect and performance junkie",
       "htmlUrl": "https://github.com/devon-craft",
       "role": "contributor",
-      "createdAt": "2026-10-03T09:42:45.191Z"
+      "createdAt": "2026-10-05T05:12:25.053Z"
     },
     {
       "id": "usr_admin",
@@ -86,32 +86,178 @@
       "bio": "Sprint Administrator & Lead Code Reviewer",
       "htmlUrl": "https://github.com/admin-starlit",
       "role": "admin",
-      "createdAt": "2026-10-03T09:42:45.191Z"
-    },
-    {
-      "id": "usr_jordan-dev",
-      "username": "jordan-dev",
-      "name": "Jordan Taylor",
-      "avatarUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
-      "bio": "GitHub Contributor",
-      "htmlUrl": "https://github.com/jordan-dev",
-      "role": "contributor",
-      "createdAt": "2026-10-06T09:50:37.604Z"
+      "createdAt": "2026-10-05T05:12:25.053Z"
     }
   ],
   "pullRequests": [
     {
-      "id": "pr-1791280269371-iy4f",
-      "githubPrNumber": 406,
+      "id": "pr-1791437615118-hvs4",
+      "githubPrNumber": 769,
+      "repo": "tanstack/table",
+      "title": "feat: add virtualized row windowing model adapter",
+      "description": "Automatically detected on GitHub for @devon-craft in tanstack/table during the Day 10 scheduled calculation.",
+      "url": "https://github.com/tanstack/table/pull/769",
+      "state": "merged",
+      "author": "devon-craft",
+      "authorAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:33:35.111Z",
+      "dayOfSprint": 10,
+      "additions": 340,
+      "deletions": 50,
+      "commitsCount": 2,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "table",
+        "performance"
+      ]
+    },
+    {
+      "id": "pr-1791437615113-mbaf",
+      "githubPrNumber": 442,
+      "repo": "tanstack/table",
+      "title": "feat: add virtualized row windowing model adapter",
+      "description": "Automatically detected on GitHub for @elena-cloud in tanstack/table during the Day 10 scheduled calculation.",
+      "url": "https://github.com/tanstack/table/pull/442",
+      "state": "merged",
+      "author": "elena-cloud",
+      "authorAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:33:35.111Z",
+      "dayOfSprint": 10,
+      "additions": 340,
+      "deletions": 50,
+      "commitsCount": 3,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "table",
+        "performance"
+      ]
+    },
+    {
+      "id": "pr-1791437615111-22dq",
+      "githubPrNumber": 461,
+      "repo": "facebook/react",
+      "title": "feat: optimize concurrent fiber reconciler work loop",
+      "description": "Automatically detected on GitHub for @sarah-dev in facebook/react during the Day 10 scheduled calculation.",
+      "url": "https://github.com/facebook/react/pull/461",
+      "state": "merged",
+      "author": "sarah-dev",
+      "authorAvatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:33:35.111Z",
+      "dayOfSprint": 10,
+      "additions": 215,
+      "deletions": 30,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "react",
+        "concurrency"
+      ]
+    },
+    {
+      "id": "pr-1791437599443-p8eq",
+      "githubPrNumber": 196,
+      "repo": "openverse/hackaaroh",
+      "title": "feat: optimize reactive fiber work reconciliation loop",
+      "description": "Enhanced async reconciliation batching, reducing redundant tree traversals by 40%.",
+      "url": "https://github.com/openverse/hackaaroh/pull/263",
+      "state": "open",
+      "author": "sarah-dev",
+      "authorAvatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:33:19.443Z",
+      "dayOfSprint": 9,
+      "additions": 140,
+      "deletions": 18,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "feature",
+        "tanstack",
+        "ui"
+      ]
+    },
+    {
+      "id": "pr-1791437549807-g6tr",
+      "githubPrNumber": 877,
+      "repo": "microsoft/vscode",
+      "title": "docs: document automated daily tracking schedule and scoring rubric",
+      "description": "Automatically detected on GitHub for @devon-craft in microsoft/vscode during the Day 9 scheduled calculation.",
+      "url": "https://github.com/microsoft/vscode/pull/877",
+      "state": "merged",
+      "author": "devon-craft",
+      "authorAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:32:29.805Z",
+      "dayOfSprint": 9,
+      "additions": 120,
+      "deletions": 8,
+      "commitsCount": 3,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "docs",
+        "rubric"
+      ]
+    },
+    {
+      "id": "pr-1791437549805-1s4n",
+      "githubPrNumber": 531,
       "repo": "oven-sh/bun",
       "title": "perf: optimize AST traversal in query compiler",
-      "description": "Automatically detected on GitHub for @jordan-dev in oven-sh/bun during the Day 5 scheduled calculation.",
-      "url": "https://github.com/oven-sh/bun/pull/406",
+      "description": "Automatically detected on GitHub for @alex-rustacean in oven-sh/bun during the Day 9 scheduled calculation.",
+      "url": "https://github.com/oven-sh/bun/pull/531",
       "state": "merged",
-      "author": "jordan-dev",
-      "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
-      "createdAt": "2026-10-06T09:51:09.360Z",
-      "dayOfSprint": 5,
+      "author": "alex-rustacean",
+      "authorAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:32:29.805Z",
+      "dayOfSprint": 9,
       "additions": 180,
       "deletions": 54,
       "commitsCount": 4,
@@ -132,17 +278,17 @@
       ]
     },
     {
-      "id": "pr-1791280269370-dnwh",
-      "githubPrNumber": 247,
+      "id": "pr-1791437549805-wckj",
+      "githubPrNumber": 590,
       "repo": "openverse/hackaaroh",
       "title": "fix: resolve race condition in concurrent daily sync scheduler",
-      "description": "Automatically detected on GitHub for @elena-cloud in openverse/hackaaroh during the Day 5 scheduled calculation.",
-      "url": "https://github.com/openverse/hackaaroh/pull/247",
+      "description": "Automatically detected on GitHub for @manav-codes in openverse/hackaaroh during the Day 9 scheduled calculation.",
+      "url": "https://github.com/openverse/hackaaroh/pull/590",
       "state": "merged",
-      "author": "elena-cloud",
-      "authorAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
-      "createdAt": "2026-10-06T09:51:09.360Z",
-      "dayOfSprint": 5,
+      "author": "manav-codes",
+      "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:32:29.805Z",
+      "dayOfSprint": 9,
       "additions": 95,
       "deletions": 12,
       "commitsCount": 4,
@@ -163,51 +309,20 @@
       ]
     },
     {
-      "id": "pr-1791280269362-fz22",
-      "githubPrNumber": 461,
-      "repo": "tanstack/table",
-      "title": "feat: add virtualized row windowing model adapter",
-      "description": "Automatically detected on GitHub for @alex-rustacean in tanstack/table during the Day 5 scheduled calculation.",
-      "url": "https://github.com/tanstack/table/pull/461",
-      "state": "merged",
-      "author": "alex-rustacean",
-      "authorAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
-      "createdAt": "2026-10-06T09:51:09.360Z",
-      "dayOfSprint": 5,
-      "additions": 340,
-      "deletions": 50,
-      "commitsCount": 1,
-      "reviewStatus": "PENDING_REVIEW",
-      "creditScore": 0,
-      "adminFeedback": "",
-      "adminCriteria": {
-        "quality": 0,
-        "complexity": 0,
-        "impact": 0,
-        "testCoverage": 0
-      },
-      "reviewedBy": null,
-      "reviewedAt": null,
-      "tags": [
-        "table",
-        "performance"
-      ]
-    },
-    {
-      "id": "pr-1791280269361-tfpy",
-      "githubPrNumber": 736,
+      "id": "pr-1791437412526-mtip",
+      "githubPrNumber": 405,
       "repo": "torvalds/linux",
       "title": "fix: handle memory compaction deadlock in eBPF filter allocator",
-      "description": "Automatically detected on GitHub for @manav-codes in torvalds/linux during the Day 5 scheduled calculation.",
-      "url": "https://github.com/torvalds/linux/pull/736",
+      "description": "Automatically detected on GitHub for @elena-cloud in torvalds/linux during the Day 8 scheduled calculation.",
+      "url": "https://github.com/torvalds/linux/pull/405",
       "state": "merged",
-      "author": "manav-codes",
-      "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
-      "createdAt": "2026-10-06T09:51:09.360Z",
-      "dayOfSprint": 5,
+      "author": "elena-cloud",
+      "authorAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:30:12.523Z",
+      "dayOfSprint": 8,
       "additions": 160,
       "deletions": 48,
-      "commitsCount": 3,
+      "commitsCount": 2,
       "reviewStatus": "PENDING_REVIEW",
       "creditScore": 0,
       "adminFeedback": "",
@@ -225,18 +340,266 @@
       ]
     },
     {
-      "id": "pr-1791280237607-1-bd2",
-      "githubPrNumber": 862,
-      "repo": "tailwindlabs/tailwindcss",
-      "title": "feat: add container queries runtime polyfill for tailwind engine",
-      "description": "Automatically detected on GitHub across all repositories for @jordan-dev.",
-      "url": "https://github.com/tailwindlabs/tailwindcss/pull/862",
+      "id": "pr-1791437412525-nd3m",
+      "githubPrNumber": 314,
+      "repo": "shadcn-ui/ui",
+      "title": "feat: add accessible modal primitive with focus trapping",
+      "description": "Automatically detected on GitHub for @alex-rustacean in shadcn-ui/ui during the Day 8 scheduled calculation.",
+      "url": "https://github.com/shadcn-ui/ui/pull/314",
+      "state": "merged",
+      "author": "alex-rustacean",
+      "authorAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:30:12.523Z",
+      "dayOfSprint": 8,
+      "additions": 210,
+      "deletions": 15,
+      "commitsCount": 3,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "a11y",
+        "ui"
+      ]
+    },
+    {
+      "id": "pr-1791437412525-0lt0",
+      "githubPrNumber": 723,
+      "repo": "microsoft/vscode",
+      "title": "docs: document automated daily tracking schedule and scoring rubric",
+      "description": "Automatically detected on GitHub for @sarah-dev in microsoft/vscode during the Day 8 scheduled calculation.",
+      "url": "https://github.com/microsoft/vscode/pull/723",
       "state": "open",
-      "author": "jordan-dev",
-      "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
-      "createdAt": "2026-10-06T09:50:37.607Z",
-      "dayOfSprint": 4,
-      "additions": 175,
+      "author": "sarah-dev",
+      "authorAvatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:30:12.523Z",
+      "dayOfSprint": 8,
+      "additions": 120,
+      "deletions": 8,
+      "commitsCount": 2,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "docs",
+        "rubric"
+      ]
+    },
+    {
+      "id": "pr-1791437412523-dc6e",
+      "githubPrNumber": 867,
+      "repo": "tanstack/react-router",
+      "title": "refactor: decouple router state cache from hydration tree",
+      "description": "Automatically detected on GitHub for @manav-codes in tanstack/react-router during the Day 8 scheduled calculation.",
+      "url": "https://github.com/tanstack/react-router/pull/867",
+      "state": "open",
+      "author": "manav-codes",
+      "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:30:12.523Z",
+      "dayOfSprint": 8,
+      "additions": 240,
+      "deletions": 38,
+      "commitsCount": 4,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "tanstack",
+        "refactor"
+      ]
+    },
+    {
+      "id": "pr-1791437240864-638m",
+      "githubPrNumber": 589,
+      "repo": "microsoft/vscode",
+      "title": "docs: document automated daily tracking schedule and scoring rubric",
+      "description": "Automatically detected on GitHub for @devon-craft in microsoft/vscode during the Day 7 scheduled calculation.",
+      "url": "https://github.com/microsoft/vscode/pull/589",
+      "state": "merged",
+      "author": "devon-craft",
+      "authorAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:27:20.862Z",
+      "dayOfSprint": 7,
+      "additions": 120,
+      "deletions": 8,
+      "commitsCount": 3,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "docs",
+        "rubric"
+      ]
+    },
+    {
+      "id": "pr-1791437240863-12d9",
+      "githubPrNumber": 681,
+      "repo": "shadcn-ui/ui",
+      "title": "feat: add accessible modal primitive with focus trapping",
+      "description": "Automatically detected on GitHub for @alex-rustacean in shadcn-ui/ui during the Day 7 scheduled calculation.",
+      "url": "https://github.com/shadcn-ui/ui/pull/681",
+      "state": "open",
+      "author": "alex-rustacean",
+      "authorAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:27:20.862Z",
+      "dayOfSprint": 7,
+      "additions": 210,
+      "deletions": 15,
+      "commitsCount": 3,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "a11y",
+        "ui"
+      ]
+    },
+    {
+      "id": "pr-1791437240862-srmf",
+      "githubPrNumber": 1038,
+      "repo": "astral-sh/uv",
+      "title": "feat: add zero-allocation byte serializer in rust microservice",
+      "description": "Automatically detected on GitHub for @sarah-dev in astral-sh/uv during the Day 7 scheduled calculation.",
+      "url": "https://github.com/astral-sh/uv/pull/1038",
+      "state": "open",
+      "author": "sarah-dev",
+      "authorAvatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:27:20.862Z",
+      "dayOfSprint": 7,
+      "additions": 275,
+      "deletions": 45,
+      "commitsCount": 4,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "rust",
+        "perf"
+      ]
+    },
+    {
+      "id": "pr-1791437170532-kl73",
+      "githubPrNumber": 545,
+      "repo": "torvalds/linux",
+      "title": "fix: handle memory compaction deadlock in eBPF filter allocator",
+      "description": "Automatically detected on GitHub for @devon-craft in torvalds/linux during the Day 6 scheduled calculation.",
+      "url": "https://github.com/torvalds/linux/pull/545",
+      "state": "open",
+      "author": "devon-craft",
+      "authorAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:26:10.529Z",
+      "dayOfSprint": 6,
+      "additions": 160,
+      "deletions": 48,
+      "commitsCount": 4,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "linux",
+        "kernel"
+      ]
+    },
+    {
+      "id": "pr-1791437170531-ihez",
+      "githubPrNumber": 1034,
+      "repo": "oven-sh/bun",
+      "title": "perf: optimize AST traversal in query compiler",
+      "description": "Automatically detected on GitHub for @elena-cloud in oven-sh/bun during the Day 6 scheduled calculation.",
+      "url": "https://github.com/oven-sh/bun/pull/1034",
+      "state": "open",
+      "author": "elena-cloud",
+      "authorAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:26:10.529Z",
+      "dayOfSprint": 6,
+      "additions": 180,
+      "deletions": 54,
+      "commitsCount": 4,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "compiler",
+        "perf"
+      ]
+    },
+    {
+      "id": "pr-1791437170531-oh08",
+      "githubPrNumber": 631,
+      "repo": "shadcn-ui/ui",
+      "title": "feat: add accessible modal primitive with focus trapping",
+      "description": "Automatically detected on GitHub for @alex-rustacean in shadcn-ui/ui during the Day 6 scheduled calculation.",
+      "url": "https://github.com/shadcn-ui/ui/pull/631",
+      "state": "merged",
+      "author": "alex-rustacean",
+      "authorAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:26:10.529Z",
+      "dayOfSprint": 6,
+      "additions": 210,
       "deletions": 15,
       "commitsCount": 1,
       "reviewStatus": "PENDING_REVIEW",
@@ -251,24 +614,24 @@
       "reviewedBy": null,
       "reviewedAt": null,
       "tags": [
-        "tailwind",
-        "css"
+        "a11y",
+        "ui"
       ]
     },
     {
-      "id": "pr-1791280237606-0-y1j",
-      "githubPrNumber": 891,
-      "repo": "vercel/next.js",
-      "title": "feat: implement concurrent task scheduler with priority queue",
-      "description": "Automatically detected on GitHub across all repositories for @jordan-dev.",
-      "url": "https://github.com/vercel/next.js/pull/891",
-      "state": "open",
-      "author": "jordan-dev",
-      "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
-      "createdAt": "2026-10-06T09:50:37.606Z",
-      "dayOfSprint": 4,
-      "additions": 310,
-      "deletions": 25,
+      "id": "pr-1791437170530-y11h",
+      "githubPrNumber": 210,
+      "repo": "tanstack/react-router",
+      "title": "refactor: decouple router state cache from hydration tree",
+      "description": "Automatically detected on GitHub for @sarah-dev in tanstack/react-router during the Day 6 scheduled calculation.",
+      "url": "https://github.com/tanstack/react-router/pull/210",
+      "state": "merged",
+      "author": "sarah-dev",
+      "authorAvatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:26:10.529Z",
+      "dayOfSprint": 6,
+      "additions": 240,
+      "deletions": 38,
       "commitsCount": 1,
       "reviewStatus": "PENDING_REVIEW",
       "creditScore": 0,
@@ -282,8 +645,163 @@
       "reviewedBy": null,
       "reviewedAt": null,
       "tags": [
-        "scheduler",
-        "nextjs"
+        "tanstack",
+        "refactor"
+      ]
+    },
+    {
+      "id": "pr-1791437170529-6vpf",
+      "githubPrNumber": 433,
+      "repo": "torvalds/linux",
+      "title": "fix: handle memory compaction deadlock in eBPF filter allocator",
+      "description": "Automatically detected on GitHub for @manav-codes in torvalds/linux during the Day 6 scheduled calculation.",
+      "url": "https://github.com/torvalds/linux/pull/433",
+      "state": "open",
+      "author": "manav-codes",
+      "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:26:10.529Z",
+      "dayOfSprint": 6,
+      "additions": 160,
+      "deletions": 48,
+      "commitsCount": 2,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "linux",
+        "kernel"
+      ]
+    },
+    {
+      "id": "pr-1791437033457-343j",
+      "githubPrNumber": 917,
+      "repo": "shadcn-ui/ui",
+      "title": "feat: add accessible modal primitive with focus trapping",
+      "description": "Automatically detected on GitHub for @elena-cloud in shadcn-ui/ui during the Day 5 scheduled calculation.",
+      "url": "https://github.com/shadcn-ui/ui/pull/917",
+      "state": "merged",
+      "author": "elena-cloud",
+      "authorAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:23:53.454Z",
+      "dayOfSprint": 5,
+      "additions": 210,
+      "deletions": 15,
+      "commitsCount": 2,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "a11y",
+        "ui"
+      ]
+    },
+    {
+      "id": "pr-1791437033456-uhgs",
+      "githubPrNumber": 855,
+      "repo": "facebook/react",
+      "title": "feat: optimize concurrent fiber reconciler work loop",
+      "description": "Automatically detected on GitHub for @alex-rustacean in facebook/react during the Day 5 scheduled calculation.",
+      "url": "https://github.com/facebook/react/pull/855",
+      "state": "merged",
+      "author": "alex-rustacean",
+      "authorAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:23:53.454Z",
+      "dayOfSprint": 5,
+      "additions": 215,
+      "deletions": 30,
+      "commitsCount": 3,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "react",
+        "concurrency"
+      ]
+    },
+    {
+      "id": "pr-1791437033455-t8ng",
+      "githubPrNumber": 882,
+      "repo": "shadcn-ui/ui",
+      "title": "feat: add accessible modal primitive with focus trapping",
+      "description": "Automatically detected on GitHub for @sarah-dev in shadcn-ui/ui during the Day 5 scheduled calculation.",
+      "url": "https://github.com/shadcn-ui/ui/pull/882",
+      "state": "merged",
+      "author": "sarah-dev",
+      "authorAvatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:23:53.454Z",
+      "dayOfSprint": 5,
+      "additions": 210,
+      "deletions": 15,
+      "commitsCount": 4,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "a11y",
+        "ui"
+      ]
+    },
+    {
+      "id": "pr-1791437033454-awkp",
+      "githubPrNumber": 967,
+      "repo": "openverse/hackaaroh",
+      "title": "fix: resolve race condition in concurrent daily sync scheduler",
+      "description": "Automatically detected on GitHub for @manav-codes in openverse/hackaaroh during the Day 5 scheduled calculation.",
+      "url": "https://github.com/openverse/hackaaroh/pull/967",
+      "state": "merged",
+      "author": "manav-codes",
+      "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T05:23:53.454Z",
+      "dayOfSprint": 5,
+      "additions": 95,
+      "deletions": 12,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "bugfix",
+        "concurrency"
       ]
     },
     {
@@ -296,7 +814,7 @@
       "state": "merged",
       "author": "manav-codes",
       "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
-      "createdAt": "2026-10-03T19:42:45.191Z",
+      "createdAt": "2026-10-05T15:12:25.053Z",
       "dayOfSprint": 1,
       "additions": 384,
       "deletions": 42,
@@ -311,7 +829,7 @@
         "testCoverage": 20
       },
       "reviewedBy": "admin-starlit",
-      "reviewedAt": "2026-10-03T23:42:45.191Z",
+      "reviewedAt": "2026-10-05T19:12:25.053Z",
       "tags": [
         "react",
         "caching",
@@ -328,7 +846,7 @@
       "state": "merged",
       "author": "sarah-dev",
       "authorAvatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
-      "createdAt": "2026-10-04T01:42:45.191Z",
+      "createdAt": "2026-10-05T21:12:25.053Z",
       "dayOfSprint": 1,
       "additions": 128,
       "deletions": 19,
@@ -343,7 +861,7 @@
         "testCoverage": 19
       },
       "reviewedBy": "admin-starlit",
-      "reviewedAt": "2026-10-04T05:42:45.191Z",
+      "reviewedAt": "2026-10-06T01:12:25.053Z",
       "tags": [
         "bugfix",
         "nodejs",
@@ -360,7 +878,7 @@
       "state": "merged",
       "author": "alex-rustacean",
       "authorAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
-      "createdAt": "2026-10-04T17:42:45.191Z",
+      "createdAt": "2026-10-06T13:12:25.053Z",
       "dayOfSprint": 2,
       "additions": 64,
       "deletions": 88,
@@ -375,7 +893,7 @@
         "testCoverage": 21
       },
       "reviewedBy": "admin-starlit",
-      "reviewedAt": "2026-10-04T23:42:45.191Z",
+      "reviewedAt": "2026-10-06T19:12:25.053Z",
       "tags": [
         "perf",
         "rust",
@@ -392,7 +910,7 @@
       "state": "merged",
       "author": "manav-codes",
       "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
-      "createdAt": "2026-10-04T21:42:45.191Z",
+      "createdAt": "2026-10-06T17:12:25.053Z",
       "dayOfSprint": 2,
       "additions": 512,
       "deletions": 110,
@@ -407,7 +925,7 @@
         "testCoverage": 22
       },
       "reviewedBy": "admin-starlit",
-      "reviewedAt": "2026-10-05T03:42:45.191Z",
+      "reviewedAt": "2026-10-06T23:12:25.053Z",
       "tags": [
         "ui",
         "tailwind",
@@ -424,7 +942,7 @@
       "state": "merged",
       "author": "sarah-dev",
       "authorAvatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
-      "createdAt": "2026-10-05T15:42:45.191Z",
+      "createdAt": "2026-10-07T11:12:25.053Z",
       "dayOfSprint": 3,
       "additions": 430,
       "deletions": 35,
@@ -439,7 +957,7 @@
         "testCoverage": 22
       },
       "reviewedBy": "admin-starlit",
-      "reviewedAt": "2026-10-03T10:42:45.191Z",
+      "reviewedAt": "2026-10-05T06:12:25.053Z",
       "tags": [
         "tanstack-table",
         "ui",
@@ -456,7 +974,7 @@
       "state": "merged",
       "author": "elena-cloud",
       "authorAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
-      "createdAt": "2026-10-05T19:42:45.191Z",
+      "createdAt": "2026-10-07T15:12:25.053Z",
       "dayOfSprint": 3,
       "additions": 195,
       "deletions": 12,
@@ -471,7 +989,7 @@
         "testCoverage": 17
       },
       "reviewedBy": "admin-starlit",
-      "reviewedAt": "2026-10-06T01:42:45.191Z",
+      "reviewedAt": "2026-10-07T21:12:25.053Z",
       "tags": [
         "docs",
         "vscode",
@@ -488,7 +1006,7 @@
       "state": "open",
       "author": "devon-craft",
       "authorAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
-      "createdAt": "2026-10-06T12:42:45.191Z",
+      "createdAt": "2026-10-08T08:12:25.053Z",
       "dayOfSprint": 4,
       "additions": 290,
       "deletions": 22,
@@ -520,7 +1038,7 @@
       "state": "open",
       "author": "manav-codes",
       "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
-      "createdAt": "2026-10-06T15:42:45.191Z",
+      "createdAt": "2026-10-08T11:12:25.053Z",
       "dayOfSprint": 4,
       "additions": 340,
       "deletions": 15,
@@ -552,7 +1070,7 @@
       "state": "open",
       "author": "alex-rustacean",
       "authorAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
-      "createdAt": "2026-10-06T19:42:45.191Z",
+      "createdAt": "2026-10-08T15:12:25.053Z",
       "dayOfSprint": 4,
       "additions": 410,
       "deletions": 18,
@@ -577,74 +1095,186 @@
   ],
   "auditLogs": [
     {
-      "id": "log-1791284798917-4oul",
-      "action": "USER_LOGIN",
-      "actor": "admin-starlit",
-      "details": "User connected with role admin",
-      "timestamp": "2026-10-06T11:06:38.917Z"
-    },
-    {
-      "id": "log-1791284797547-5mqk",
-      "action": "USER_LOGIN",
-      "actor": "admin-starlit",
-      "details": "User connected with role admin",
-      "timestamp": "2026-10-06T11:06:37.547Z"
-    },
-    {
-      "id": "log-1791284794617-r0x2",
-      "action": "USER_LOGIN",
-      "actor": "admin-starlit",
-      "details": "User connected with role admin",
-      "timestamp": "2026-10-06T11:06:34.617Z"
-    },
-    {
-      "id": "log-1791280323290-kv5e",
-      "action": "USER_LOGIN",
-      "actor": "manav-codes",
-      "details": "User connected with role contributor",
-      "timestamp": "2026-10-06T09:52:03.290Z"
-    },
-    {
-      "id": "log-1791280269372-swuy",
+      "id": "log-1791437615125-4y9i",
       "action": "MANUAL_DAILY_UPDATE",
       "actor": "ADMIN",
-      "details": "Day 5 daily calculation completed across all repositories. Ingested 4 PRs across 4 distinct repositories for registered contributors into the admin review queue.",
-      "timestamp": "2026-10-06T09:51:09.372Z"
+      "details": "Day 10 daily calculation completed across all repositories. Ingested 3 PRs across 2 distinct repositories for registered contributors into the admin review queue.",
+      "timestamp": "2026-10-08T05:33:35.125Z"
     },
     {
-      "id": "log-1791280237608-ch47",
+      "id": "log-1791437605937-yy7a",
       "action": "USER_LOGIN",
-      "actor": "jordan-dev",
+      "actor": "admin-starlit",
+      "details": "User connected with role admin",
+      "timestamp": "2026-10-08T05:33:25.937Z"
+    },
+    {
+      "id": "log-1791437599444-jokg",
+      "action": "PR_SUBMITTED",
+      "actor": "sarah-dev",
+      "details": "@sarah-dev submitted PR #196 in openverse/hackaaroh",
+      "timestamp": "2026-10-08T05:33:19.444Z"
+    },
+    {
+      "id": "log-1791437590002-63ar",
+      "action": "USER_LOGIN",
+      "actor": "sarah-dev",
       "details": "User connected with role contributor",
-      "timestamp": "2026-10-06T09:50:37.608Z"
+      "timestamp": "2026-10-08T05:33:10.002Z"
+    },
+    {
+      "id": "log-1791437549809-8ctt",
+      "action": "MANUAL_DAILY_UPDATE",
+      "actor": "ADMIN",
+      "details": "Day 9 daily calculation completed across all repositories. Ingested 3 PRs across 3 distinct repositories for registered contributors into the admin review queue.",
+      "timestamp": "2026-10-08T05:32:29.809Z"
+    },
+    {
+      "id": "log-1791437540584-822j",
+      "action": "USER_LOGIN",
+      "actor": "admin-starlit",
+      "details": "User connected with role admin",
+      "timestamp": "2026-10-08T05:32:20.584Z"
+    },
+    {
+      "id": "log-1791437525869-87fk",
+      "action": "USER_LOGIN",
+      "actor": "sarah-dev",
+      "details": "User connected with role contributor",
+      "timestamp": "2026-10-08T05:32:05.869Z"
+    },
+    {
+      "id": "log-1791437412528-70bt",
+      "action": "MANUAL_DAILY_UPDATE",
+      "actor": "ADMIN",
+      "details": "Day 8 daily calculation completed across all repositories. Ingested 4 PRs across 4 distinct repositories for registered contributors into the admin review queue.",
+      "timestamp": "2026-10-08T05:30:12.528Z"
+    },
+    {
+      "id": "log-1791437403184-yalt",
+      "action": "USER_LOGIN",
+      "actor": "admin-starlit",
+      "details": "User connected with role admin",
+      "timestamp": "2026-10-08T05:30:03.184Z"
+    },
+    {
+      "id": "log-1791437388452-6edf",
+      "action": "USER_LOGIN",
+      "actor": "sarah-dev",
+      "details": "User connected with role contributor",
+      "timestamp": "2026-10-08T05:29:48.452Z"
+    },
+    {
+      "id": "log-1791437240868-h8gh",
+      "action": "MANUAL_DAILY_UPDATE",
+      "actor": "ADMIN",
+      "details": "Day 7 daily calculation completed across all repositories. Ingested 3 PRs across 3 distinct repositories for registered contributors into the admin review queue.",
+      "timestamp": "2026-10-08T05:27:20.868Z"
+    },
+    {
+      "id": "log-1791437231690-80mi",
+      "action": "USER_LOGIN",
+      "actor": "admin-starlit",
+      "details": "User connected with role admin",
+      "timestamp": "2026-10-08T05:27:11.690Z"
+    },
+    {
+      "id": "log-1791437215475-7f9u",
+      "action": "USER_LOGIN",
+      "actor": "sarah-dev",
+      "details": "User connected with role contributor",
+      "timestamp": "2026-10-08T05:26:55.475Z"
+    },
+    {
+      "id": "log-1791437170533-7f2z",
+      "action": "MANUAL_DAILY_UPDATE",
+      "actor": "ADMIN",
+      "details": "Day 6 daily calculation completed across all repositories. Ingested 5 PRs across 4 distinct repositories for registered contributors into the admin review queue.",
+      "timestamp": "2026-10-08T05:26:10.533Z"
+    },
+    {
+      "id": "log-1791437161302-n6si",
+      "action": "USER_LOGIN",
+      "actor": "admin-starlit",
+      "details": "User connected with role admin",
+      "timestamp": "2026-10-08T05:26:01.302Z"
+    },
+    {
+      "id": "log-1791437145951-2yjr",
+      "action": "USER_LOGIN",
+      "actor": "sarah-dev",
+      "details": "User connected with role contributor",
+      "timestamp": "2026-10-08T05:25:45.951Z"
+    },
+    {
+      "id": "log-1791437033458-8pde",
+      "action": "MANUAL_DAILY_UPDATE",
+      "actor": "ADMIN",
+      "details": "Day 5 daily calculation completed across all repositories. Ingested 4 PRs across 3 distinct repositories for registered contributors into the admin review queue.",
+      "timestamp": "2026-10-08T05:23:53.458Z"
+    },
+    {
+      "id": "log-1791437024183-apsz",
+      "action": "USER_LOGIN",
+      "actor": "admin-starlit",
+      "details": "User connected with role admin",
+      "timestamp": "2026-10-08T05:23:44.183Z"
+    },
+    {
+      "id": "log-1791437008896-3bt2",
+      "action": "USER_LOGIN",
+      "actor": "sarah-dev",
+      "details": "User connected with role contributor",
+      "timestamp": "2026-10-08T05:23:28.896Z"
+    },
+    {
+      "id": "log-1791436920824-3qhb",
+      "action": "USER_LOGIN",
+      "actor": "admin-starlit",
+      "details": "User connected with role admin",
+      "timestamp": "2026-10-08T05:22:00.824Z"
+    },
+    {
+      "id": "log-1791436905389-cc96",
+      "action": "USER_LOGIN",
+      "actor": "sarah-dev",
+      "details": "User connected with role contributor",
+      "timestamp": "2026-10-08T05:21:45.389Z"
+    },
+    {
+      "id": "log-1791436728839-taqq",
+      "action": "USER_LOGIN",
+      "actor": "sarah-dev",
+      "details": "User connected with role contributor",
+      "timestamp": "2026-10-08T05:18:48.839Z"
     },
     {
       "id": "log-1",
       "action": "SPRINT_STARTED",
       "actor": "admin-starlit",
       "details": "Admin officially started PR tracking event. Daily update scheduled at 00:00 UTC.",
-      "timestamp": "2026-10-03T09:42:45.191Z"
+      "timestamp": "2026-10-05T05:12:25.053Z"
     },
     {
       "id": "log-2",
       "action": "AUTOMATIC_DAILY_UPDATE",
       "actor": "SCHEDULED_WORKER",
       "details": "Daily PR calculation completed for Day 2. Synced with tracked repositories.",
-      "timestamp": "2026-10-04T09:42:45.191Z"
+      "timestamp": "2026-10-06T05:12:25.053Z"
     },
     {
       "id": "log-3",
       "action": "PR_REVIEWED",
       "actor": "admin-starlit",
       "details": "Admin reviewed PR #144 (alex-rustacean) -> Awarded 92 credits",
-      "timestamp": "2026-10-04T23:42:45.191Z"
+      "timestamp": "2026-10-06T19:12:25.053Z"
     },
     {
       "id": "log-4",
       "action": "AUTOMATIC_DAILY_UPDATE",
       "actor": "SCHEDULED_WORKER",
       "details": "Daily PR calculation completed for Day 3. Synced with tracked repositories.",
-      "timestamp": "2026-10-05T09:42:45.191Z"
+      "timestamp": "2026-10-07T05:12:25.053Z"
     }
   ]
 }

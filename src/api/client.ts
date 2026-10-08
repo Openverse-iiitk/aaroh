@@ -2,10 +2,28 @@ import { LeaderboardResponse, PullRequest, Sprint, User, AuditLog } from '../typ
 
 const BASE_URL = '/api';
 
+function authHeaders(): Record<string, string> {
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  };
+  try {
+    const user = typeof window !== 'undefined' ? localStorage.getItem('reflect_active_user') : null;
+    if (user) {
+      headers['x-session-user'] = user;
+    }
+  } catch {}
+  return headers;
+}
+
 export async function fetchCurrentUser(): Promise<User | null> {
-  const res = await fetch(`${BASE_URL}/auth/me`);
+  const res = await fetch(`${BASE_URL}/auth/me`, {
+    headers: authHeaders()
+  });
   if (!res.ok) return null;
   const data = await res.json();
+  if (data.user) {
+    try { localStorage.setItem('reflect_active_user', data.user.username); } catch {}
+  }
   return data.user;
 }
 
@@ -17,11 +35,15 @@ export async function mockLogin(username: string, role: 'admin' | 'contributor' 
   });
   if (!res.ok) throw new Error('Failed to login');
   const data = await res.json();
+  if (data.user) {
+    try { localStorage.setItem('reflect_active_user', data.user.username); } catch {}
+  }
   return data.user;
 }
 
 export async function logout(): Promise<void> {
-  await fetch(`${BASE_URL}/auth/logout`, { method: 'POST' });
+  try { localStorage.removeItem('reflect_active_user'); } catch {}
+  await fetch(`${BASE_URL}/auth/logout`, { method: 'POST', headers: authHeaders() });
 }
 
 export async function fetchGitHubOAuthUrl(): Promise<{ configured: boolean; url?: string; message?: string }> {
@@ -36,19 +58,19 @@ export async function fetchSprint(): Promise<Sprint> {
 }
 
 export async function startSprint(): Promise<Sprint> {
-  const res = await fetch(`${BASE_URL}/sprint/start`, { method: 'POST' });
+  const res = await fetch(`${BASE_URL}/sprint/start`, { method: 'POST', headers: authHeaders() });
   if (!res.ok) throw new Error('Failed to start sprint');
   return res.json();
 }
 
 export async function toggleSprintStatus(): Promise<Sprint> {
-  const res = await fetch(`${BASE_URL}/sprint/toggle-status`, { method: 'POST' });
+  const res = await fetch(`${BASE_URL}/sprint/toggle-status`, { method: 'POST', headers: authHeaders() });
   if (!res.ok) throw new Error('Failed to toggle sprint status');
   return res.json();
 }
 
 export async function endSprint(): Promise<{ sprint: Sprint; podium: any[] }> {
-  const res = await fetch(`${BASE_URL}/sprint/end`, { method: 'POST' });
+  const res = await fetch(`${BASE_URL}/sprint/end`, { method: 'POST', headers: authHeaders() });
   if (!res.ok) throw new Error('Failed to end sprint');
   return res.json();
 }
@@ -56,7 +78,7 @@ export async function endSprint(): Promise<{ sprint: Sprint; podium: any[] }> {
 export async function updateSprintSettings(payload: { dailyUpdateTime?: string; name?: string; trackedRepos?: string[] }): Promise<Sprint> {
   const res = await fetch(`${BASE_URL}/sprint/update-settings`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: authHeaders(),
     body: JSON.stringify(payload)
   });
   if (!res.ok) throw new Error('Failed to update sprint settings');
@@ -64,13 +86,13 @@ export async function updateSprintSettings(payload: { dailyUpdateTime?: string; 
 }
 
 export async function resetToNotStarted(): Promise<Sprint> {
-  const res = await fetch(`${BASE_URL}/sprint/reset-to-not-started`, { method: 'POST' });
+  const res = await fetch(`${BASE_URL}/sprint/reset-to-not-started`, { method: 'POST', headers: authHeaders() });
   if (!res.ok) throw new Error('Failed to reset sprint to not started');
   return res.json();
 }
 
 export async function triggerDailySync(): Promise<{ success: boolean; sprint: Sprint; ingestedPrs: PullRequest[] }> {
-  const res = await fetch(`${BASE_URL}/sprint/sync-daily`, { method: 'POST' });
+  const res = await fetch(`${BASE_URL}/sprint/sync-daily`, { method: 'POST', headers: authHeaders() });
   if (!res.ok) throw new Error('Failed to run daily sync');
   return res.json();
 }
@@ -83,13 +105,17 @@ export async function fetchPullRequests(filters?: { author?: string; status?: st
   if (filters?.repo) query.set('repo', filters.repo);
   if (filters?.mine) query.set('mine', 'true');
 
-  const res = await fetch(`${BASE_URL}/pull-requests?${query.toString()}`);
+  const res = await fetch(`${BASE_URL}/pull-requests?${query.toString()}`, {
+    headers: authHeaders()
+  });
   if (!res.ok) throw new Error('Failed to fetch pull requests');
   return res.json();
 }
 
 export async function fetchMyReviewsSummary(): Promise<any> {
-  const res = await fetch(`${BASE_URL}/pull-requests/my`);
+  const res = await fetch(`${BASE_URL}/pull-requests/my`, {
+    headers: authHeaders()
+  });
   if (!res.ok) throw new Error('Failed to fetch personal PR reviews');
   return res.json();
 }
@@ -112,7 +138,7 @@ export async function submitPullRequest(payload: {
 }): Promise<PullRequest> {
   const res = await fetch(`${BASE_URL}/pull-requests`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: authHeaders(),
     body: JSON.stringify(payload)
   });
   if (!res.ok) throw new Error('Failed to submit pull request');
@@ -133,7 +159,7 @@ export async function reviewPullRequest(payload: {
 }): Promise<{ message: string; pr: PullRequest }> {
   const res = await fetch(`${BASE_URL}/admin/review-pr`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: authHeaders(),
     body: JSON.stringify(payload)
   });
   if (!res.ok) {
@@ -150,12 +176,17 @@ export async function fetchLeaderboard(): Promise<LeaderboardResponse> {
 }
 
 export async function fetchAuditLogs(): Promise<AuditLog[]> {
-  const res = await fetch(`${BASE_URL}/admin/audit-logs`);
+  const res = await fetch(`${BASE_URL}/admin/audit-logs`, {
+    headers: authHeaders()
+  });
   if (!res.ok) throw new Error('Failed to fetch audit logs');
   return res.json();
 }
 
 export async function resetDatabase(): Promise<void> {
-  const res = await fetch(`${BASE_URL}/admin/reset-db`, { method: 'POST' });
+  const res = await fetch(`${BASE_URL}/admin/reset-db`, {
+    method: 'POST',
+    headers: authHeaders()
+  });
   if (!res.ok) throw new Error('Failed to reset database');
 }

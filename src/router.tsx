@@ -4,7 +4,8 @@ import {
   createRoute,
   createRouter,
   Outlet,
-  useNavigate
+  useNavigate,
+  Link
 } from '@tanstack/react-router';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
@@ -20,18 +21,23 @@ import {
   updateSprintSettings,
   resetToNotStarted,
   reviewPullRequest,
+  submitPullRequest,
   mockLogin,
   logout,
   resetDatabase
 } from './api/client';
 import { Navbar } from './components/Navbar';
+import { TopCountdownBanner } from './components/TopCountdownBanner';
 import { AuthModal } from './components/AuthModal';
 import { ReviewModal } from './components/ReviewModal';
+import { SubmitPrModal } from './components/SubmitPrModal';
 import { FinalLeaderboardModal } from './components/FinalLeaderboardModal';
 import { HomePage } from './pages/HomePage';
 import { LeaderboardPage } from './pages/LeaderboardPage';
 import { PullRequestsPage } from './pages/PullRequestsPage';
 import { AdminPage } from './pages/AdminPage';
+import { AboutPage } from './pages/AboutPage';
+import { FaqPage } from './pages/FaqPage';
 import { PullRequest } from './types';
 
 // Root layout component
@@ -161,6 +167,15 @@ function RootLayout() {
     },
   });
 
+  const submitPrMutation = useMutation({
+    mutationFn: submitPullRequest,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['pullRequests'] });
+      queryClient.invalidateQueries({ queryKey: ['leaderboard'] });
+      setSubmitPrModalOpen(false);
+    },
+  });
+
   const navigate = useNavigate();
 
   const handleSelectMockUser = async (
@@ -197,9 +212,9 @@ function RootLayout() {
       dailyUpdateTime: '00:00',
       startDate: new Date().toISOString(),
       endDate: null,
-      currentDay: 4,
+      currentDay: 6,
       lastSyncAt: new Date().toISOString(),
-      nextSyncAt: new Date().toISOString(),
+      nextSyncAt: new Date(Math.ceil(Date.now() / 86400000) * 86400000).toISOString(),
       trackedRepos: ['openverse/hackaaroh'],
       isFinalized: false,
       finalizedAt: null,
@@ -221,18 +236,22 @@ function RootLayout() {
     onSelectPrForReview: (pr: PullRequest) => setReviewPrModalPr(pr),
     onResetDatabase: () => resetDbMutation.mutate(),
     onSwitchToAdmin: handleSwitchToAdmin,
+    onOpenSubmitPr: () => setSubmitPrModalOpen(true),
     isSyncing: syncMutation.isPending,
   };
 
   return (
     <RouteContextShim.Provider value={outletContext}>
-      <div className="min-h-screen flex flex-col bg-[#09090b] text-[#f4f4f5]">
+      <div className="min-h-screen flex flex-col bg-[#06040d] text-[#f5f3ff]">
+        {/* Top Live Sticky Countdown Ribbon */}
+        <TopCountdownBanner sprint={sprint} />
+
         {/* Navigation */}
         <Navbar
           user={currentUser || null}
           sprint={sprint}
           onOpenAuth={() => setAuthModalOpen(true)}
-          onOpenSubmitPr={() => {}}
+          onOpenSubmitPr={() => setSubmitPrModalOpen(true)}
           onLogout={() => logoutMutation.mutate()}
         />
 
@@ -242,14 +261,28 @@ function RootLayout() {
         </main>
 
         {/* Footer */}
-        <footer className="w-full py-6 border-t border-white/10 text-center text-xs text-zinc-500">
+        <footer className="w-full py-8 border-t border-white/10 text-xs text-zinc-500 bg-[#04020a]">
           <div className="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              <span>HackAaroh PR Tracker — Event Platform</span>
+              <span className="text-zinc-300 font-medium">HackAaroh PR Tracker</span>
+              <span className="text-zinc-600 hidden sm:inline">•</span>
+              <span className="text-zinc-500 hidden sm:inline">Open Source Sprint Event Platform</span>
             </div>
-            <div className="text-zinc-500">
-              Automated PR Ingestion • Daily Review &amp; Scoring • Contributor Rankings
+
+            <div className="flex flex-wrap items-center gap-4 text-xs text-zinc-400">
+              <Link to="/about" className="hover:text-white transition-colors">
+                About
+              </Link>
+              <Link to="/faq" className="hover:text-white transition-colors">
+                FAQ
+              </Link>
+              <Link to="/leaderboard" className="hover:text-white transition-colors">
+                Leaderboard
+              </Link>
+              <Link to="/pull-requests" className="hover:text-white transition-colors">
+                Submitted PRs
+              </Link>
             </div>
           </div>
         </footer>
@@ -260,6 +293,17 @@ function RootLayout() {
           onClose={() => setAuthModalOpen(false)}
           onSelectMockUser={handleSelectMockUser}
           isLoading={loginMutation.isPending}
+        />
+
+        <SubmitPrModal
+          isOpen={submitPrModalOpen}
+          onClose={() => setSubmitPrModalOpen(false)}
+          currentUser={currentUser || null}
+          sprint={sprint}
+          onSubmitPr={async (payload) => {
+            await submitPrMutation.mutateAsync(payload);
+          }}
+          isSubmitting={submitPrMutation.isPending}
         />
 
         <ReviewModal
@@ -295,8 +339,6 @@ const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
   component: function IndexComponent() {
-    const routeContext = (rootRoute.useRouteContext ? {} : {}) as any;
-    // We retrieve context passed from Outlet
     return <HomeView />;
   },
 });
@@ -347,6 +389,7 @@ function PullRequestsView() {
       currentUser={context.currentUser}
       onSelectPrForReview={context.onSelectPrForReview}
       onOpenAuth={context.onOpenAuth}
+      onOpenSubmitPr={context.onOpenSubmitPr}
     />
   );
 }
@@ -371,13 +414,48 @@ function AdminView() {
       onSelectPrForReview={context.onSelectPrForReview}
       onToggleStatus={context.onToggleStatus}
       onEndTracking={context.onEndTracking}
+      onStartSprint={context.onStartSprint}
       onStartNewSprint={context.onStartNewSprint}
       onSyncDaily={context.onSyncDaily}
+      onUpdateSettings={context.onUpdateSettings}
+      onResetToNotStarted={context.onResetToNotStarted}
       onResetDatabase={context.onResetDatabase}
       onSwitchToAdmin={context.onSwitchToAdmin}
       isSyncing={context.isSyncing}
     />
   );
+}
+
+// About Route
+const aboutRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/about',
+  component: function AboutComponent() {
+    return <AboutView />;
+  },
+});
+
+function AboutView() {
+  const context = (React as any).useContext(RouteContextShim);
+  return (
+    <AboutPage
+      currentUser={context.currentUser}
+      onOpenAuth={context.onOpenAuth}
+    />
+  );
+}
+
+// FAQ Route
+const faqRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/faq',
+  component: function FaqComponent() {
+    return <FaqView />;
+  },
+});
+
+function FaqView() {
+  return <FaqPage />;
 }
 
 // Create route tree
@@ -386,6 +464,8 @@ const routeTree = rootRoute.addChildren([
   leaderboardRoute,
   pullRequestsRoute,
   adminRoute,
+  aboutRoute,
+  faqRoute,
 ]);
 
 export const router = createRouter({ routeTree });
