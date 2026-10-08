@@ -153,17 +153,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
             <GitPullRequest className="w-3.5 h-3.5 text-indigo-400" />
             <span><strong>{safePrs.length}</strong> Total PRs</span>
           </div>
-          {currentUser && onSyncGitHub && (
-            <button
-              onClick={() => onSyncGitHub()}
-              disabled={isSyncingGitHub}
-              className="text-xs px-3 py-1.5 rounded-lg bg-[#1b1e1c] hover:bg-[#272a28] text-zinc-200 border border-indigo-500/30 flex items-center gap-1.5 transition-colors disabled:opacity-50 ml-1"
-              title="Automatically sync your pull requests from any public repository on GitHub"
-            >
-              <RefreshCw className={`w-3.5 h-3.5 text-indigo-400 ${isSyncingGitHub ? 'animate-spin' : ''}`} />
-              <span>{isSyncingGitHub ? 'Syncing...' : 'Sync from GitHub'}</span>
-            </button>
-          )}
+
           {onOpenSubmitPr && (
             <button
               onClick={currentUser ? onOpenSubmitPr : (onOpenAuth || onOpenSubmitPr)}

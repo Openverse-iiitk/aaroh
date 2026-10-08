@@ -8,8 +8,8 @@
     "startDate": "2026-10-08T18:30:00.000Z",
     "endDate": null,
     "currentDay": 1,
-    "lastSyncAt": "2026-10-08T17:50:01.247Z",
-    "nextSyncAt": "2026-10-09T00:00:00.000Z",
+    "lastSyncAt": "2026-10-09T00:00:00.000Z",
+    "nextSyncAt": "2026-10-10T00:00:00.000Z",
     "trackingScope": "ALL_REPOSITORIES",
     "trackedRepos": [],
     "isFinalized": false,
@@ -27,76 +27,23 @@
       "htmlUrl": "https://github.com/Vijay-1710",
       "role": "admin",
       "createdAt": "2026-10-08T00:00:00.000Z"
-    },
-    {
-      "id": "gh_67535496",
-      "githubId": 67535496,
-      "username": "manvith12",
-      "name": "Manvith",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/67535496?v=4",
-      "bio": "GitHub Contributor",
-      "htmlUrl": "https://github.com/manvith12",
-      "role": "contributor",
-      "createdAt": "2026-10-08T18:51:20.611Z"
     }
   ],
   "pullRequests": [],
   "auditLogs": [
     {
-      "id": "log-1791487185738-unoz",
-      "action": "USER_LOGIN",
-      "actor": "manvith12",
-      "details": "User connected with role contributor",
-      "timestamp": "2026-10-08T19:19:45.738Z"
-    },
-    {
-      "id": "log-1791485919512-pzju",
+      "id": "log-1791489160877-h2zv",
       "action": "ADMIN_SECRET_LOGIN",
       "actor": "Vijay-1710",
-      "details": "Admin authenticated via secret passkey",
-      "timestamp": "2026-10-08T18:58:39.512Z"
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-08T19:52:40.877Z"
     },
     {
-      "id": "log-1791485316356-wrpy",
-      "action": "PR_SUBMITTED",
-      "actor": "Vijay-1710",
-      "details": "@Vijay-1710 submitted verified PR #171 in IIITK-Football/super-league",
-      "timestamp": "2026-10-08T18:48:36.356Z"
-    },
-    {
-      "id": "log-1791485256202-d43m",
-      "action": "SETTINGS_UPDATED",
-      "actor": "Vijay-1710",
-      "details": "Updated sprint settings: Daily calculation time set to 00:00 UTC",
-      "timestamp": "2026-10-08T18:47:36.202Z"
-    },
-    {
-      "id": "log-1791485241833-xjld",
-      "action": "SETTINGS_UPDATED",
-      "actor": "Vijay-1710",
-      "details": "Updated sprint settings: Daily calculation time set to 00:00 UTC",
-      "timestamp": "2026-10-08T18:47:21.833Z"
-    },
-    {
-      "id": "log-1791485144043-609d",
-      "action": "ADMIN_SECRET_LOGIN",
-      "actor": "Vijay-1710",
-      "details": "Admin authenticated via secret passkey",
-      "timestamp": "2026-10-08T18:45:44.043Z"
-    },
-    {
-      "id": "log-1791481801325-5fk8",
-      "action": "EVENT_RESET",
-      "actor": "ORGANIZER",
-      "details": "Sprint reset to Day 1 clean event state",
-      "timestamp": "2026-10-08T17:50:01.325Z"
-    },
-    {
-      "id": "log-1791481801247-init",
+      "id": "log-event-kickoff",
       "action": "SPRINT_INITIALIZED",
       "actor": "Vijay-1710",
-      "details": "HackAaroh Sprint initialized for October 9 kickoff. Participant logins paused. Secret admin portal active.",
-      "timestamp": "2026-10-08T17:50:01.247Z"
+      "details": "HackAaroh 2026 Open Source Sprint initialized. Review queue clean. Real-time PR evaluation active.",
+      "timestamp": "2026-10-09T00:00:00.000Z"
     }
   ]
 }

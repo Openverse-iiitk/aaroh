@@ -52,7 +52,7 @@ app.get('/api', (req, res) => {
 // -------------------------------------------------------------
 // Security & Authentication Helpers (Cryptographically Enforced)
 // -------------------------------------------------------------
-const SESSION_SECRET = process.env.SESSION_SECRET || (process.env.ADMIN_SECRET_KEY || 'aaroh-admin-2026') + '_session_salt_8f92b74a12';
+const SESSION_SECRET = process.env.SESSION_SECRET || (process.env.ADMIN_SECRET_KEY || 'aaroh-admin-2026') + '_event_kickoff_clean_2026_x7a91';
 
 // In-memory rate limiting for secret admin passkey attempts
 const failedAdminAttempts = new Map(); // ip -> { count, lockedUntil }
@@ -207,94 +207,8 @@ const requireAdmin = (req, res, next) => {
 
 
 // Sync real pull requests from GitHub across any public project for a user (strictly within event timeframe)
+// Automatic scraping disabled: Contributors submit their event PRs explicitly via verified PR URLs
 async function syncUserGitHubPullRequests(user, currentDay = 1) {
-  if (!user || !user.username) return [];
-  try {
-    const sprint = db.getSprint();
-    const sprintStartMs = sprint.startDate ? new Date(sprint.startDate).getTime() : 0;
-    const minAllowedMs = sprintStartMs > 0 ? sprintStartMs - (3 * 60 * 60 * 1000) : 0; // 3 hour setup grace
-    const startDateFilter = sprint.startDate ? `+created:>=${new Date(minAllowedMs).toISOString().split('T')[0]}` : '';
-
-    const headers = { 'User-Agent': 'HackAaroh-PR-Tracker' };
-    const token = userAccessTokens.get(user.username.toLowerCase()) || user.accessToken || process.env.GITHUB_TOKEN;
-    if (token) {
-      headers['Authorization'] = `Bearer ${token}`;
-    }
-
-    const queryUrl = `https://api.github.com/search/issues?q=type:pr+author:${encodeURIComponent(user.username)}${startDateFilter}&sort=created&order=desc&per_page=30`;
-    const res = await fetch(queryUrl, { headers });
-    
-    if (res.ok) {
-      const data = await res.json();
-      if (Array.isArray(data.items) && data.items.length > 0) {
-        const existingPrs = db.getPullRequests();
-        const existingUrls = new Set(existingPrs.map(p => p.url));
-        const newPrs = [];
-
-        for (const item of data.items) {
-          if (existingUrls.has(item.html_url)) continue;
-
-          // STRICT CHECK: Reject any PR created before the sprint started
-          if (minAllowedMs > 0 && new Date(item.created_at).getTime() < minAllowedMs) {
-            continue;
-          }
-
-          // STRICT CHECK: Author on GitHub MUST match user.username
-          const itemAuthor = item.user?.login;
-          if (itemAuthor && itemAuthor.toLowerCase() !== user.username.toLowerCase()) {
-            continue;
-          }
-
-          const repo = item.repository_url.replace('https://api.github.com/repos/', '');
-          const isMerged = Boolean(item.pull_request?.merged_at || (item.state === 'closed' && item.pull_request?.html_url));
-          const state = isMerged ? 'merged' : item.state;
-
-          const pr = {
-            id: `pr-gh-${item.id || Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
-            githubPrNumber: item.number,
-            repo: repo,
-            title: item.title,
-            description: item.body ? item.body.substring(0, 300) : `Tracked from ${repo} for @${user.username}`,
-            url: item.html_url,
-            state: state,
-            author: user.username,
-            authorAvatar: user.avatarUrl || item.user?.avatar_url,
-            createdAt: item.created_at || new Date().toISOString(),
-            dayOfSprint: currentDay,
-            additions: Math.floor(Math.random() * 180) + 25,
-            deletions: Math.floor(Math.random() * 30) + 5,
-            commitsCount: 1,
-            reviewStatus: 'PENDING_REVIEW',
-            creditScore: 0,
-            adminFeedback: '',
-            adminCriteria: { quality: 0, complexity: 0, impact: 0, testCoverage: 0 },
-            reviewedBy: null,
-            reviewedAt: null,
-            tags: (item.labels || []).map(l => l.name?.toLowerCase()).filter(Boolean)
-          };
-
-          if (pr.tags.length === 0) {
-            pr.tags = [repo.split('/')[1] || 'contribution'];
-          }
-
-          await db.addPullRequest(pr);
-          newPrs.push(pr);
-        }
-
-        if (newPrs.length > 0) {
-          await db.addAuditLog(
-            'GITHUB_SYNC',
-            user.username,
-            `Synced ${newPrs.length} event PRs across repositories for @${user.username}`
-          );
-        }
-        return newPrs;
-      }
-    }
-  } catch (err) {
-    console.error(`Error syncing GitHub PRs for @${user.username}:`, err.message);
-  }
-
   return [];
 }
 
@@ -955,24 +869,12 @@ app.post('/api/pull-requests', async (req, res) => {
   res.status(201).json({ message: 'Pull request submitted successfully for review', pr: newPr });
 });
 
-// On-demand sync of real pull requests from GitHub across any public project
-app.post('/api/pull-requests/sync', async (req, res) => {
-  const sessionUser = getUserFromSession(req);
-  if (!sessionUser) {
-    return res.status(401).json({ error: 'Please sign in to sync GitHub PRs' });
-  }
-
-  const sprint = db.getSprint();
-  if (sprint.loginsPaused && sessionUser.role !== 'admin') {
-    return res.status(403).json({ error: 'GitHub PR sync is paused until the event starts.' });
-  }
-  const syncedPrs = await syncUserGitHubPullRequests(sessionUser, sprint.currentDay || 1);
-  const allUserPrs = db.getPullRequests().filter(pr => pr.author.toLowerCase() === sessionUser.username.toLowerCase());
+app.post('/api/pull-requests/sync', (req, res) => {
   res.json({
     success: true,
-    message: `Synced ${syncedPrs.length} new PRs from GitHub across your public repositories.`,
-    syncedCount: syncedPrs.length,
-    prs: allUserPrs
+    message: 'Automatic PR scraping is disabled. Contributors must submit PRs explicitly using the Submit PR button.',
+    syncedCount: 0,
+    prs: []
   });
 });
 
