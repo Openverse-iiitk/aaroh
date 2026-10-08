@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from '@tanstack/react-router';
 import { User, Sprint } from '../types';
 import { GitPullRequest, Trophy, Shield, LogOut, Github, ShieldCheck, Info, HelpCircle } from 'lucide-react';
+import { ReflectLogo } from './ReflectLogo';
 
 interface NavbarProps {
   user: User | null;
@@ -25,11 +26,11 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
         {/* Brand / Logo */}
         <Link to="/" className="flex items-center gap-2.5 text-decoration-none group">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center border border-white/20 shadow-[0_0_14px_rgba(99,102,241,0.4)] group-hover:scale-105 transition-transform">
-            <GitPullRequest className="w-4 h-4 text-white" />
+          <div className="group-hover:scale-105 transition-transform flex items-center justify-center">
+            <ReflectLogo size={32} />
           </div>
-          <span className="text-sm font-semibold text-white tracking-tight">
-            HackAaroh <span className="bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent font-medium">PR Tracker</span>
+          <span className="text-sm font-semibold text-white tracking-tight flex items-center gap-1">
+            Reflect<span className="bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent font-medium">PR</span>
           </span>
         </Link>
 

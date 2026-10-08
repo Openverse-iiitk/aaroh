@@ -38,6 +38,7 @@ import { PullRequestsPage } from './pages/PullRequestsPage';
 import { AdminPage } from './pages/AdminPage';
 import { AboutPage } from './pages/AboutPage';
 import { FaqPage } from './pages/FaqPage';
+import { ReflectLogo } from './components/ReflectLogo';
 import { PullRequest } from './types';
 
 // Root layout component
@@ -281,10 +282,10 @@ function RootLayout() {
         <footer className="w-full py-8 border-t border-white/10 text-xs text-zinc-500 bg-[#04020a]">
           <div className="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              <span className="text-zinc-300 font-medium">HackAaroh PR Tracker</span>
+              <ReflectLogo size={20} />
+              <span className="text-zinc-300 font-medium">ReflectPR</span>
               <span className="text-zinc-600 hidden sm:inline">•</span>
-              <span className="text-zinc-500 hidden sm:inline">Open Source Sprint Event Platform</span>
+              <span className="text-zinc-500 hidden sm:inline">HackAaroh Open Source Sprint Platform</span>
             </div>
 
             <div className="flex flex-wrap items-center gap-4 text-xs text-zinc-400">
