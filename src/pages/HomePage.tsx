@@ -150,7 +150,6 @@ export const HomePage: React.FC<HomePageProps> = ({
     () => [...prs].sort((a, b) => +new Date(b.createdAt) - +new Date(a.createdAt)),
     [prs]
   );
-  const ticker = sortedPrs.slice(0, 12);
   const repos = (sprint?.trackedRepos?.length ? sprint.trackedRepos : []).slice(0, 8);
 
   const statusLine = sprint?.isFinalized
@@ -256,33 +255,6 @@ export const HomePage: React.FC<HomePageProps> = ({
           ) : null}
         </div>
       </section>
-
-      {/* ---------- Live PR ticker ---------- */}
-      {ticker.length > 0 && (
-        <section className="layer border-y border-[var(--line)] bg-[var(--panel)]" aria-label="Latest pull requests">
-          <div className="animate-marquee flex items-center gap-3 whitespace-nowrap py-3 will-change-transform">
-            {[...ticker, ...ticker, ...ticker].map((pr, i) => (
-              <span
-                key={`${pr.id}-${i}`}
-                className="mono inline-flex items-center gap-2.5 rounded border border-[var(--line)] px-3 py-1.5 text-xs"
-              >
-                <span className="text-[var(--text)]">@{pr.author}</span>
-                <span className="text-[var(--faint)]">{pr.repo}</span>
-                <span className={pr.state === 'merged' ? 'text-[var(--accent)]' : 'text-[var(--muted)]'}>
-                  {pr.state === 'merged' ? 'merged' : pr.isRepoOnly || !pr.githubPrNumber ? 'repo project' : `#${pr.githubPrNumber}`}
-                </span>
-                {typeof pr.additions === 'number' && (
-                  <span>
-                    <span className="text-[var(--accent)]">+{pr.additions}</span>{' '}
-                    <span className="text-[#ff6b7a]">-{pr.deletions}</span>
-                  </span>
-                )}
-                {pr.reviewStatus === 'REVIEWED' && <span className="text-[var(--accent)]">{pr.creditScore} pts</span>}
-              </span>
-            ))}
-          </div>
-        </section>
-      )}
 
       {/* ---------- Numbers ---------- */}
       <section className="layer mx-auto max-w-6xl px-4 py-16 sm:px-6">
