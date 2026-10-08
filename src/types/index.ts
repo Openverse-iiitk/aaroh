@@ -41,6 +41,7 @@ export interface Sprint {
   totalDiscoveredRepos?: number;
   isFinalized: boolean;
   loginsPaused?: boolean;
+  isUpcoming?: boolean;
   finalizedAt: string | null;
   finalPodium: FinalPodiumItem[];
 }

@@ -24,7 +24,7 @@ app.use(cookieParser());
 
 // Normalize /api prefix if rewritten by Vercel serverless functions
 app.use((req, res, next) => {
-  if (!req.url.startsWith('/api') && !req.url.startsWith('/static') && !req.url.startsWith('/assets') && !req.url.includes('.')) {
+  if (process.env.VERCEL && !req.url.startsWith('/api') && !req.url.startsWith('/static') && !req.url.startsWith('/assets') && !req.url.includes('.')) {
     req.url = '/api' + (req.url.startsWith('/') ? req.url : '/' + req.url);
   }
   next();
