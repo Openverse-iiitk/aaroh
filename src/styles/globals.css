@@ -29,6 +29,26 @@
   --radius-navpill: 9999px;
 }
 
+* {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+input,
+textarea {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+@keyframes arrow-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+
+.scroll-btn:hover svg {
+  animation: arrow-bob 0.7s ease-in-out infinite;
+}
+
 body {
   background-color: var(--color-void-canvas);
   color: var(--color-lilac-white);
@@ -361,14 +381,16 @@ h1, h2, h3, h4 {
 
 .animate-flip-top-fast {
   transform-origin: 50% 50%;
-  animation: flip-card-top-fast 0.1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: flip-card-top-fast 0.16s cubic-bezier(0.55, 0.05, 0.9, 0.6) both;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  will-change: transform;
 }
 
 .animate-flip-bottom-fast {
   transform-origin: 50% 50%;
-  animation: flip-card-bottom-fast 0.1s cubic-bezier(0.4, 0, 0.2, 1) 0.09s forwards;
+  animation: flip-card-bottom-fast 0.2s cubic-bezier(0.2, 0.7, 0.3, 1) 0.15s both;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  will-change: transform;
 }

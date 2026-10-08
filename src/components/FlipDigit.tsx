@@ -28,7 +28,7 @@ export const FlipDigit: React.FC<FlipDigitProps> = ({
 
       const timer = setTimeout(() => {
         setIsFlipping(false);
-      }, 190);
+      }, 360);
 
       return () => clearTimeout(timer);
     }
@@ -105,7 +105,7 @@ export const FlipDigit: React.FC<FlipDigitProps> = ({
           <span className={digitStyle}>{current}</span>
           {/* Subtle light sheen when landing into place */}
           <div
-            className="absolute inset-0 bg-purple-400/20 pointer-events-none animate-pulse"
+            className="absolute inset-0 bg-purple-400/20 pointer-events-none "
             style={{ clipPath: 'polygon(0 50%, 100% 50%, 100% 100%, 0 100%)' }}
           />
         </div>
