@@ -38,6 +38,7 @@ import { PullRequestsPage } from './pages/PullRequestsPage';
 import { AdminPage } from './pages/AdminPage';
 import { AboutPage } from './pages/AboutPage';
 import { FaqPage } from './pages/FaqPage';
+import { SecretAdminPage } from './pages/SecretAdminPage';
 import { PullRequest } from './types';
 
 // Root layout component
@@ -221,9 +222,9 @@ function RootLayout() {
       description: '',
       status: 'ACTIVE',
       dailyUpdateTime: '00:00',
-      startDate: new Date().toISOString(),
+      startDate: '2026-10-08T18:30:00.000Z',
       endDate: null,
-      currentDay: 6,
+      currentDay: 1,
       lastSyncAt: new Date().toISOString(),
       nextSyncAt: new Date(Math.ceil(Date.now() / 86400000) * 86400000).toISOString(),
       trackedRepos: ['openverse/hackaaroh'],
@@ -471,6 +472,15 @@ function FaqView() {
   return <FaqPage />;
 }
 
+// Secret Organizer Portal Route
+const secretAdminRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/secret-admin',
+  component: function SecretAdminComponent() {
+    return <SecretAdminPage />;
+  },
+});
+
 // Create route tree
 const routeTree = rootRoute.addChildren([
   indexRoute,
@@ -479,6 +489,7 @@ const routeTree = rootRoute.addChildren([
   adminRoute,
   aboutRoute,
   faqRoute,
+  secretAdminRoute,
 ]);
 
 export const router = createRouter({ routeTree });

@@ -21,7 +21,7 @@
       "microsoft/vscode"
     ],
     "isFinalized": false,
-    "loginsPaused": false,
+    "loginsPaused": true,
     "finalizedAt": null,
     "finalPodium": []
   },
@@ -43,7 +43,7 @@
       "id": "log-event-init",
       "action": "SPRINT_INITIALIZED",
       "actor": "Vijay-1710",
-      "details": "HackAaroh Sprint initialized for live participants. Logins and tracking active.",
+      "details": "HackAaroh Sprint initialized for October 9 kickoff. Participant logins paused. Secret admin portal active.",
       "timestamp": "2026-10-08T00:00:00.000Z"
     }
   ]

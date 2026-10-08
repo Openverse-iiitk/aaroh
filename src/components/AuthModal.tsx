@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { X, Github, AlertTriangle, Lock, ShieldCheck, GitPullRequest, Sparkles } from 'lucide-react';
-import { fetchGitHubOAuthUrl } from '../api/client';
+import { X, Github, AlertTriangle, Lock, ShieldCheck, GitPullRequest, Sparkles, Key, Shield, ArrowRight } from 'lucide-react';
+import { fetchGitHubOAuthUrl, adminSecretLogin } from '../api/client';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -17,6 +17,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 }) => {
   const [oauthError, setOauthError] = useState<string | null>(null);
   const [isRedirecting, setIsRedirecting] = useState(false);
+  const [showAdminPasskey, setShowAdminPasskey] = useState(false);
+  const [adminPasskey, setAdminPasskey] = useState('');
+  const [adminUsername, setAdminUsername] = useState('Vijay-1710');
+  const [adminLoading, setAdminLoading] = useState(false);
+  const [adminError, setAdminError] = useState<string | null>(null);
 
   if (!isOpen) return null;
 
@@ -34,6 +39,20 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     } catch (err) {
       setIsRedirecting(false);
       setOauthError('Unable to connect to GitHub authentication service. Please check your internet connection.');
+    }
+  };
+
+  const handleAdminPasskeySubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!adminPasskey.trim()) return;
+    setAdminLoading(true);
+    setAdminError(null);
+    try {
+      await adminSecretLogin(adminPasskey.trim(), adminUsername.trim() || 'Vijay-1710');
+      window.location.href = '/admin';
+    } catch (err: any) {
+      setAdminError(err.message || 'Invalid secret passkey');
+      setAdminLoading(false);
     }
   };
 
@@ -67,7 +86,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             <AlertTriangle className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
             <div>
               <span className="font-semibold block text-amber-300 mb-0.5">Participant Logins Temporarily Paused</span>
-              Event organizers have temporarily paused logins while finalizing sprint settings. Please check back shortly!
+              Event organizers have paused participant logins until kickoff on October 9. Stand by for the live start!
             </div>
           </div>
         )}
@@ -104,24 +123,88 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           </span>
         </button>
 
+        {/* Organizer Secret Access Box */}
+        <div className="mt-4 pt-3 border-t border-white/10">
+          {!showAdminPasskey ? (
+            <div className="text-center">
+              <button
+                type="button"
+                onClick={() => setShowAdminPasskey(true)}
+                className="text-[11px] text-zinc-400 hover:text-indigo-300 inline-flex items-center gap-1.5 transition-colors underline-offset-2 hover:underline"
+              >
+                <Key className="w-3.5 h-3.5 text-indigo-400" />
+                <span>Organizer / Admin Secret Access</span>
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleAdminPasskeySubmit} className="p-3.5 rounded-xl bg-indigo-950/40 border border-indigo-500/30 space-y-2.5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold text-indigo-200 flex items-center gap-1.5">
+                  <Shield className="w-3.5 h-3.5 text-indigo-400" />
+                  Secret Organizer Access
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setShowAdminPasskey(false)}
+                  className="text-[10px] text-zinc-400 hover:text-white"
+                >
+                  Cancel
+                </button>
+              </div>
+
+              {adminError && (
+                <div className="text-[11px] text-rose-300 bg-rose-500/10 border border-rose-500/20 rounded p-1.5">
+                  {adminError}
+                </div>
+              )}
+
+              <div>
+                <label className="text-[10px] text-zinc-400 block mb-1">Secret Passkey</label>
+                <input
+                  type="password"
+                  placeholder="Enter secret admin key"
+                  value={adminPasskey}
+                  onChange={(e) => setAdminPasskey(e.target.value)}
+                  className="w-full bg-[#0a071c] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-indigo-400 font-mono"
+                  autoFocus
+                />
+              </div>
+
+              <div>
+                <label className="text-[10px] text-zinc-400 block mb-1">Admin Username</label>
+                <input
+                  type="text"
+                  placeholder="Vijay-1710"
+                  value={adminUsername}
+                  onChange={(e) => setAdminUsername(e.target.value)}
+                  className="w-full bg-[#0a071c] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-indigo-400 font-mono"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={adminLoading || !adminPasskey.trim()}
+                className="w-full py-2 px-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium flex items-center justify-center gap-1.5 transition-colors disabled:opacity-50"
+              >
+                <span>{adminLoading ? 'Authenticating...' : 'Unlock Admin Portal'}</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </form>
+          )}
+        </div>
+
         {/* Key Information & Privacy Assurance */}
-        <div className="mt-5 pt-5 border-t border-white/10 space-y-2.5 text-[11px] text-zinc-400">
+        <div className="mt-4 pt-4 border-t border-white/10 space-y-2 text-[11px] text-zinc-400">
           <div className="flex items-start gap-2">
             <GitPullRequest className="w-3.5 h-3.5 text-indigo-400 flex-shrink-0 mt-0.5" />
             <span>
-              <strong className="text-zinc-200">Live PR Tracking:</strong> Your public contributions and pull requests are indexed automatically for daily evaluations.
+              <strong className="text-zinc-200">Live PR Tracking:</strong> Automated PR tracking activates at October 9 event start.
             </span>
           </div>
           <div className="flex items-start gap-2">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
             <span>
-              <strong className="text-zinc-200">Public &amp; Read-Only:</strong> We only read your public GitHub profile and public contributions. No private access required.
-            </span>
-          </div>
-          <div className="flex items-start gap-2">
-            <Sparkles className="w-3.5 h-3.5 text-lavender-accent flex-shrink-0 mt-0.5" />
-            <span>
-              <strong className="text-zinc-200">Organizer Access:</strong> Authorized organizers signing in with their GitHub account (@Vijay-1710) will automatically receive administrator privileges.
+              <strong className="text-zinc-200">Public &amp; Read-Only:</strong> We only read your public GitHub profile and public contributions.
             </span>
           </div>
         </div>
