@@ -56,7 +56,7 @@ const getUserFromSession = (req) => {
 };
 
 // Seed initial realistic cross-repository pull requests for newly registered contributors
-function seedUserInitialPullRequests(user, currentDay = 1) {
+async function seedUserInitialPullRequests(user, currentDay = 1) {
   const catalog = [
     { title: 'feat: implement concurrent task scheduler with priority queue', repo: 'vercel/next.js', tags: ['scheduler', 'nextjs'], additions: 310, deletions: 25 },
     { title: 'fix: optimize reactive subscriber reconciliation loop', repo: 'facebook/react', tags: ['react', 'bugfix'], additions: 145, deletions: 32 },
@@ -68,7 +68,8 @@ function seedUserInitialPullRequests(user, currentDay = 1) {
 
   const assigned = catalog.sort(() => 0.5 - Math.random()).slice(0, 2);
   const createdPrs = [];
-  assigned.forEach((item, idx) => {
+  for (let idx = 0; idx < assigned.length; idx++) {
+    const item = assigned[idx];
     const prNumber = Math.floor(Math.random() * 800) + 120;
     const pr = {
       id: `pr-${Date.now()}-${idx}-${Math.random().toString(36).substring(2, 5)}`,
@@ -93,9 +94,9 @@ function seedUserInitialPullRequests(user, currentDay = 1) {
       reviewedAt: null,
       tags: item.tags
     };
-    db.addPullRequest(pr);
+    await db.addPullRequest(pr);
     createdPrs.push(pr);
-  });
+  }
   return createdPrs;
 }
 
@@ -132,7 +133,7 @@ async function performDailyCalculation(isManualTrigger = false) {
   const ingestedPrs = [];
 
   // Automatically track PRs for ALL registered contributors across all repositories
-  contributors.forEach((contributor) => {
+  for (const contributor of contributors) {
     // 80% probability this contributor had PR activity on this day
     if (Math.random() > 0.2 || contributors.length <= 3) {
       const item = featurePool[Math.floor(Math.random() * featurePool.length)];
@@ -162,19 +163,19 @@ async function performDailyCalculation(isManualTrigger = false) {
         tags: item.tags
       };
 
-      db.addPullRequest(newPr);
+      await db.addPullRequest(newPr);
       ingestedPrs.push(newPr);
     }
-  });
+  }
 
-  const updatedSprint = db.updateSprint({
+  const updatedSprint = await db.updateSprint({
     currentDay: nextDay,
     lastSyncAt: now.toISOString(),
     nextSyncAt: calculateNextSync(sprint.dailyUpdateTime || '00:00')
   });
 
   const uniqueRepos = Array.from(new Set(ingestedPrs.map(p => p.repo)));
-  db.addAuditLog(
+  await db.addAuditLog(
     isManualTrigger ? 'MANUAL_DAILY_UPDATE' : 'AUTOMATIC_DAILY_UPDATE',
     isManualTrigger ? 'ADMIN' : 'SCHEDULED_TICKER',
     `Day ${nextDay} daily calculation completed across all repositories. Ingested ${ingestedPrs.length} PRs across ${uniqueRepos.length} distinct repositories for registered contributors into the admin review queue.`
@@ -216,7 +217,7 @@ app.get('/api/auth/me', (req, res) => {
 });
 
 // Mock login (1-click test login for judges & testers)
-app.post('/api/auth/mock-login', (req, res) => {
+app.post('/api/auth/mock-login', async (req, res) => {
   const { username, role = 'contributor', name, avatarUrl } = req.body;
   if (!username) {
     return res.status(400).json({ error: 'Username is required' });
@@ -224,7 +225,7 @@ app.post('/api/auth/mock-login', (req, res) => {
 
   let user = db.getUserByUsername(username);
   if (!user) {
-    user = db.upsertUser({
+    user = await db.upsertUser({
       id: `usr_${username}`,
       username,
       name: name || username,
@@ -235,14 +236,14 @@ app.post('/api/auth/mock-login', (req, res) => {
       createdAt: new Date().toISOString()
     });
   } else if (role && user.role !== role) {
-    user = db.upsertUser({ ...user, role });
+    user = await db.upsertUser({ ...user, role });
   }
 
   // Automatically ensure cross-repository PRs are tracked for newly connected contributors
   const existingPrs = db.getPullRequests().filter(pr => pr.author.toLowerCase() === user.username.toLowerCase());
   if (existingPrs.length === 0 && user.role !== 'admin') {
     const sprint = db.getSprint();
-    seedUserInitialPullRequests(user, sprint.currentDay || 1);
+    await seedUserInitialPullRequests(user, sprint.currentDay || 1);
   }
 
   res.cookie('reflect_session', user.username, {
@@ -251,7 +252,7 @@ app.post('/api/auth/mock-login', (req, res) => {
     sameSite: 'lax'
   });
 
-  db.addAuditLog('USER_LOGIN', user.username, `User connected with role ${user.role}`);
+  await db.addAuditLog('USER_LOGIN', user.username, `User connected with role ${user.role}`);
   res.json({ user });
 });
 
@@ -329,7 +330,7 @@ app.get('/api/auth/github/callback', async (req, res) => {
       .map(u => u.trim());
     const isAdmin = adminUsers.includes(ghUser.login.toLowerCase());
 
-    const user = db.upsertUser({
+    const user = await db.upsertUser({
       id: `gh_${ghUser.id}`,
       githubId: ghUser.id,
       username: ghUser.login,
@@ -348,7 +349,7 @@ app.get('/api/auth/github/callback', async (req, res) => {
     const existingPrs = db.getPullRequests().filter(pr => pr.author.toLowerCase() === user.username.toLowerCase());
     if (existingPrs.length === 0 && user.role !== 'admin') {
       const sprint = db.getSprint();
-      seedUserInitialPullRequests(user, sprint.currentDay || 1);
+      await seedUserInitialPullRequests(user, sprint.currentDay || 1);
     }
 
     res.cookie('reflect_session', user.username, {
@@ -373,11 +374,11 @@ app.post('/api/auth/logout', (req, res) => {
 });
 
 // Remove / forget user and their PRs (for testing OAuth re-authorization)
-app.all('/api/auth/forget-user', (req, res) => {
+app.all('/api/auth/forget-user', async (req, res) => {
   const username = req.query.username || req.body?.username || 'Rohan-Satheesh';
-  const deleted = db.deleteUser(username);
+  const deleted = await db.deleteUser(username);
   res.clearCookie('reflect_session');
-  db.addAuditLog('USER_REMOVED', 'SYSTEM', `Removed user @${username} and all associated PRs`);
+  await db.addAuditLog('USER_REMOVED', 'SYSTEM', `Removed user @${username} and all associated PRs`);
   res.json({ success: true, removed: username, deleted });
 });
 
@@ -392,7 +393,7 @@ app.get('/api/sprint', (req, res) => {
 });
 
 // Admin START TRACKING EVENT
-app.post('/api/sprint/start', (req, res) => {
+app.post('/api/sprint/start', async (req, res) => {
   const user = getUserFromSession(req);
   if (user?.role !== 'admin') {
     return res.status(403).json({ error: 'Admin privileges required' });
@@ -401,7 +402,7 @@ app.post('/api/sprint/start', (req, res) => {
   const sprint = db.getSprint();
   const now = new Date();
 
-  const updated = db.updateSprint({
+  const updated = await db.updateSprint({
     status: 'ACTIVE',
     startDate: now.toISOString(),
     endDate: null,
@@ -413,12 +414,12 @@ app.post('/api/sprint/start', (req, res) => {
     nextSyncAt: calculateNextSync(sprint.dailyUpdateTime || '00:00')
   });
 
-  db.addAuditLog('SPRINT_STARTED', user.username, `Admin officially started PR tracking event. Scheduled daily calculation set for ${updated.dailyUpdateTime} UTC.`);
+  await db.addAuditLog('SPRINT_STARTED', user.username, `Admin officially started PR tracking event. Scheduled daily calculation set for ${updated.dailyUpdateTime} UTC.`);
   res.json(updated);
 });
 
 // Admin PAUSE / RESUME TRACKING
-app.post('/api/sprint/toggle-status', (req, res) => {
+app.post('/api/sprint/toggle-status', async (req, res) => {
   const user = getUserFromSession(req);
   if (user?.role !== 'admin') {
     return res.status(403).json({ error: 'Admin privileges required' });
@@ -430,13 +431,13 @@ app.post('/api/sprint/toggle-status', (req, res) => {
   }
 
   const nextStatus = sprint.status === 'ACTIVE' ? 'PAUSED' : 'ACTIVE';
-  const updated = db.updateSprint({ status: nextStatus });
-  db.addAuditLog('SPRINT_STATUS_TOGGLED', user.username, `Tracking status changed to ${nextStatus}`);
+  const updated = await db.updateSprint({ status: nextStatus });
+  await db.addAuditLog('SPRINT_STATUS_TOGGLED', user.username, `Tracking status changed to ${nextStatus}`);
   res.json(updated);
 });
 
 // Admin END TRACKING & FINALIZE LEADERBOARD
-app.post('/api/sprint/end', (req, res) => {
+app.post('/api/sprint/end', async (req, res) => {
   const user = getUserFromSession(req);
   if (user?.role !== 'admin') {
     return res.status(403).json({ error: 'Admin privileges required' });
@@ -460,7 +461,7 @@ app.post('/api/sprint/end', (req, res) => {
     mergedPrs: item.mergedPrs
   }));
 
-  const updatedSprint = db.updateSprint({
+  const updatedSprint = await db.updateSprint({
     status: 'FINALIZED',
     isFinalized: true,
     endDate: now.toISOString(),
@@ -468,12 +469,12 @@ app.post('/api/sprint/end', (req, res) => {
     finalPodium: podium
   });
 
-  db.addAuditLog('SPRINT_FINALIZED', user.username, `Admin officially ended tracking. Final Leaderboard frozen with ${leaderboard.length} ranked contributors.`);
+  await db.addAuditLog('SPRINT_FINALIZED', user.username, `Admin officially ended tracking. Final Leaderboard frozen with ${leaderboard.length} ranked contributors.`);
   res.json({ sprint: updatedSprint, podium });
 });
 
 // Admin update sprint settings (Daily update time, name, tracked repos)
-app.post('/api/sprint/update-settings', (req, res) => {
+app.post('/api/sprint/update-settings', async (req, res) => {
   const user = getUserFromSession(req);
   if (user?.role !== 'admin') {
     return res.status(403).json({ error: 'Admin privileges required' });
@@ -490,8 +491,8 @@ app.post('/api/sprint/update-settings', (req, res) => {
   if (name) updates.name = name;
   if (Array.isArray(trackedRepos)) updates.trackedRepos = trackedRepos;
 
-  const updated = db.updateSprint(updates);
-  db.addAuditLog('SETTINGS_UPDATED', user.username, `Updated sprint settings: Daily calculation time set to ${updated.dailyUpdateTime} UTC`);
+  const updated = await db.updateSprint(updates);
+  await db.addAuditLog('SETTINGS_UPDATED', user.username, `Updated sprint settings: Daily calculation time set to ${updated.dailyUpdateTime} UTC`);
   res.json(updated);
 });
 
@@ -505,13 +506,13 @@ app.post('/api/sprint/sync-daily', async (req, res) => {
 });
 
 // Admin reset to NOT_STARTED (to test from scratch)
-app.post('/api/sprint/reset-to-not-started', (req, res) => {
+app.post('/api/sprint/reset-to-not-started', async (req, res) => {
   const user = getUserFromSession(req);
   if (user?.role !== 'admin') {
     return res.status(403).json({ error: 'Admin privileges required' });
   }
 
-  const updated = db.updateSprint({
+  const updated = await db.updateSprint({
     status: 'NOT_STARTED',
     startDate: null,
     endDate: null,
@@ -523,7 +524,7 @@ app.post('/api/sprint/reset-to-not-started', (req, res) => {
     nextSyncAt: null
   });
 
-  db.addAuditLog('SPRINT_RESET_NOT_STARTED', user.username, 'Admin reset sprint to NOT_STARTED state');
+  await db.addAuditLog('SPRINT_RESET_NOT_STARTED', user.username, 'Admin reset sprint to NOT_STARTED state');
   res.json(updated);
 });
 
@@ -587,7 +588,7 @@ app.get('/api/pull-requests/:id', (req, res) => {
 });
 
 // Manual PR submission by authenticated contributor
-app.post('/api/pull-requests', (req, res) => {
+app.post('/api/pull-requests', async (req, res) => {
   const sessionUser = getUserFromSession(req);
   if (!sessionUser) {
     return res.status(401).json({ error: 'Please sign in to submit a pull request' });
@@ -624,8 +625,8 @@ app.post('/api/pull-requests', (req, res) => {
     tags: Array.isArray(tags) ? tags : []
   };
 
-  db.addPullRequest(newPr);
-  db.addAuditLog('PR_SUBMITTED', sessionUser.username, `@${sessionUser.username} submitted PR #${prNumber} in ${repo}`);
+  await db.addPullRequest(newPr);
+  await db.addAuditLog('PR_SUBMITTED', sessionUser.username, `@${sessionUser.username} submitted PR #${prNumber} in ${repo}`);
   res.status(201).json({ pr: newPr });
 });
 
@@ -634,7 +635,7 @@ app.post('/api/pull-requests', (req, res) => {
 // -------------------------------------------------------------
 
 // Admin manually reviews and assigns credit score to a PR
-app.post('/api/admin/review-pr', (req, res) => {
+app.post('/api/admin/review-pr', async (req, res) => {
   const user = getUserFromSession(req);
   if (user?.role !== 'admin') {
     return res.status(403).json({ error: 'Admin privileges required to review and score PRs' });
@@ -647,7 +648,7 @@ app.post('/api/admin/review-pr', (req, res) => {
 
   const numericScore = Math.max(0, parseInt(creditScore, 10) || 0);
 
-  const updatedPr = db.updatePullRequest(prId, {
+  const updatedPr = await db.updatePullRequest(prId, {
     creditScore: numericScore,
     adminFeedback: feedback || '',
     adminCriteria: criteria || { quality: 20, complexity: 20, impact: 20, testCoverage: 20 },
@@ -660,7 +661,7 @@ app.post('/api/admin/review-pr', (req, res) => {
     return res.status(404).json({ error: 'Pull request not found' });
   }
 
-  db.addAuditLog(
+  await db.addAuditLog(
     'PR_MANUALLY_REVIEWED',
     user.role === 'admin' ? 'hackaaroh' : user.username,
     `Admin reviewed PR #${updatedPr.githubPrNumber} (${updatedPr.author}) -> Awarded ${numericScore} credits with status ${reviewStatus}`
@@ -678,12 +679,12 @@ app.get('/api/admin/audit-logs', (req, res) => {
 });
 
 // Reset database to initial seed (for testing)
-app.post('/api/admin/reset-db', (req, res) => {
+app.post('/api/admin/reset-db', async (req, res) => {
   const user = getUserFromSession(req);
   if (user?.role !== 'admin') {
     return res.status(403).json({ error: 'Admin privileges required' });
   }
-  const data = db.reset();
+  const data = await db.reset();
   res.json({ message: 'Database reset to initial state', data });
 });
 

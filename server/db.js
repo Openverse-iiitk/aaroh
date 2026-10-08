@@ -364,15 +364,38 @@ class Database {
     this.loadedFromBlob = false;
   }
 
-  async ensureLoaded() {
-    if (this.loadedFromBlob) return;
+  async ensureLoaded(force = false) {
+    const now = Date.now();
+    if (!force && this.lastLoadedAt && (now - this.lastLoadedAt < 3000)) return;
     try {
-      const res = await fetch(`${BLOB_URL}?t=${Date.now()}`);
+      const res = await fetch(`${BLOB_URL}?t=${now}`, {
+        cache: 'no-store',
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate'
+        }
+      });
       if (res.ok) {
         const remoteData = await res.json();
         if (remoteData && remoteData.sprint && Array.isArray(remoteData.pullRequests)) {
+          // Safety merge: NEVER drop PRs created in local memory that might not yet be in remoteData!
+          if (this.data && Array.isArray(this.data.pullRequests)) {
+            const remotePrIds = new Set(remoteData.pullRequests.map(p => p.id));
+            const localOnlyPrs = this.data.pullRequests.filter(p => !remotePrIds.has(p.id));
+            if (localOnlyPrs.length > 0) {
+              remoteData.pullRequests = [...localOnlyPrs, ...remoteData.pullRequests];
+            }
+
+            if (Array.isArray(this.data.users)) {
+              const remoteUsernames = new Set((remoteData.users || []).map(u => u.username.toLowerCase()));
+              const localOnlyUsers = this.data.users.filter(u => !remoteUsernames.has(u.username.toLowerCase()));
+              if (localOnlyUsers.length > 0) {
+                remoteData.users = [...(remoteData.users || []), ...localOnlyUsers];
+              }
+            }
+          }
+
           this.data = remoteData;
-          this.loadedFromBlob = true;
+          this.lastLoadedAt = now;
           try {
             fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
           } catch (_) {}
@@ -418,7 +441,8 @@ class Database {
     }
   }
 
-  save() {
+  async save() {
+    this.lastLoadedAt = Date.now();
     try {
       fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
     } catch (err) {
@@ -427,20 +451,23 @@ class Database {
 
     const token = process.env.BLOB_READ_WRITE_TOKEN;
     if (token) {
-      put('hackaaroh_data.json', JSON.stringify(this.data), {
-        access: 'public',
-        addRandomSuffix: false,
-        allowOverwrite: true,
-        token
-      }).catch(err => {
+      try {
+        await put('hackaaroh_data.json', JSON.stringify(this.data), {
+          access: 'public',
+          addRandomSuffix: false,
+          allowOverwrite: true,
+          cacheControlMaxAge: 0,
+          token
+        });
+      } catch (err) {
         console.error('Failed to sync to Vercel Blob:', err.message);
-      });
+      }
     }
   }
 
-  reset() {
+  async reset() {
     this.data = getInitialSeed();
-    this.save();
+    await this.save();
     return this.data;
   }
 
@@ -477,9 +504,9 @@ class Database {
     };
   }
 
-  updateSprint(updates) {
+  async updateSprint(updates) {
     this.data.sprint = { ...this.data.sprint, ...updates };
-    this.save();
+    await this.save();
     return this.data.sprint;
   }
 
@@ -491,23 +518,23 @@ class Database {
     return this.data.users.find(u => u.username.toLowerCase() === username.toLowerCase());
   }
 
-  upsertUser(user) {
+  async upsertUser(user) {
     const idx = this.data.users.findIndex(u => u.username.toLowerCase() === user.username.toLowerCase());
     if (idx >= 0) {
       this.data.users[idx] = { ...this.data.users[idx], ...user };
     } else {
       this.data.users.push(user);
     }
-    this.save();
+    await this.save();
     return this.getUserByUsername(user.username);
   }
 
-  deleteUser(username) {
+  async deleteUser(username) {
     if (!username) return false;
     const initialLen = this.data.users.length;
     this.data.users = this.data.users.filter(u => u.username.toLowerCase() !== username.toLowerCase());
     this.data.pullRequests = this.data.pullRequests.filter(pr => pr.author.toLowerCase() !== username.toLowerCase());
-    this.save();
+    await this.save();
     return this.data.users.length < initialLen;
   }
 
@@ -519,23 +546,23 @@ class Database {
     return this.data.pullRequests.find(pr => pr.id === id);
   }
 
-  addPullRequest(pr) {
+  async addPullRequest(pr) {
     this.data.pullRequests.unshift(pr);
-    this.save();
+    await this.save();
     return pr;
   }
 
-  updatePullRequest(id, updates) {
+  async updatePullRequest(id, updates) {
     const idx = this.data.pullRequests.findIndex(pr => pr.id === id);
     if (idx >= 0) {
       this.data.pullRequests[idx] = { ...this.data.pullRequests[idx], ...updates };
-      this.save();
+      await this.save();
       return this.data.pullRequests[idx];
     }
     return null;
   }
 
-  addAuditLog(action, actor, details) {
+  async addAuditLog(action, actor, details) {
     const entry = {
       id: `log-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
       action,
@@ -547,7 +574,7 @@ class Database {
     if (this.data.auditLogs.length > 60) {
       this.data.auditLogs.pop();
     }
-    this.save();
+    await this.save();
     return entry;
   }
 
