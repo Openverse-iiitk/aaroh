@@ -2,9 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from '@tanstack/react-router';
 import { ArrowRight, ArrowUpRight, Github } from 'lucide-react';
 import '../styles/home.css';
-import { ReflectBlackHole } from '../components/ReflectBlackHole';
 import { PixelHeatmap } from '../components/PixelHeatmap';
-import { PreEventPage } from '../components/PreEventPage';
 import { LeaderboardItem, PullRequest, Sprint, User } from '../types';
 import { formatGithubPrUrl } from '../utils/github';
 
@@ -209,56 +207,8 @@ export const HomePage: React.FC<HomePageProps> = ({
     { name: 'Tests', body: 'Tests that cover edge cases and keep the change from breaking later.' },
   ];
 
-  if (isPreEvent && (!isAdmin || !adminPreviewLive)) {
-    return (
-      <PreEventPage
-        sprint={sprint}
-        currentUser={currentUser}
-        onOpenAuth={onOpenAuth}
-        isAdmin={isAdmin}
-        onToggleLiveView={isAdmin ? () => setAdminPreviewLive(true) : undefined}
-      />
-    );
-  }
-
   return (
     <div className="home-v3 w-full overflow-hidden">
-      {/* Original backdrop, tinted green */}
-      <div className="bh-green">
-        <ReflectBlackHole isFixed />
-      </div>
-
-      {/* Admin Pre-event Live View Switcher */}
-      {isAdmin && isPreEvent && (
-        <div className="layer w-full bg-amber-950/40 border-b border-amber-500/30 py-2 px-4 text-xs">
-          <div className="max-w-5xl mx-auto flex items-center justify-between gap-2">
-            <span className="text-amber-200">
-              ⚡ <strong>Organizer Preview:</strong> You are viewing the live event platform. Participants are seeing the Pre-Event landing page.
-            </span>
-            <button
-              onClick={() => setAdminPreviewLive(false)}
-              className="text-amber-300 hover:text-white underline font-medium cursor-pointer flex-shrink-0"
-            >
-              Switch back to Pre-Event Page
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Signed-in strip */}
-      {currentUser && (
-        <div className="layer border-b border-[var(--line)] bg-[var(--panel)]">
-          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-2.5 text-sm sm:px-6">
-            <p className="text-[var(--muted)]">
-              Signed in as{' '}
-              <span className="text-[var(--text)]">{isAdmin ? 'HackAaroh admin' : `@${currentUser.username}`}</span>
-            </p>
-            <Link to={isAdmin ? '/admin' : '/leaderboard'} className="link text-sm">
-              {isAdmin ? 'Review pull requests' : 'See my ranking'}
-            </Link>
-          </div>
-        </div>
-      )}
 
       {/* ---------- Hero ---------- */}
       <section className="layer mx-auto flex max-w-5xl flex-col items-center px-4 pb-16 pt-14 text-center sm:px-6 sm:pt-20">
@@ -276,8 +226,8 @@ export const HomePage: React.FC<HomePageProps> = ({
 
         <div className="rise rise-2 mt-8 flex flex-wrap items-center justify-center gap-3">
           <PrimaryAction />
-          <Link to={currentUser && !isAdmin ? '/pull-requests' : '/leaderboard'} className="btn btn-ghost">
-            {currentUser && !isAdmin ? 'Browse pull requests' : 'See the leaderboard'}
+          <Link to="/leaderboard" className="btn btn-ghost">
+            See the leaderboard
           </Link>
         </div>
 

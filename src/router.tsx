@@ -261,15 +261,6 @@ function RootLayout() {
   return (
     <RouteContextShim.Provider value={outletContext}>
       <div className="min-h-screen flex flex-col bg-[#060507] text-[#ecf1ee]">
-        {/* Top Announcement Banner (Pre-event) */}
-        {isPreEvent && (
-          <div className="w-full bg-indigo-950/80 border-b border-indigo-500/20 text-xs py-2 px-4 backdrop-blur-md relative z-50 text-center">
-            <span className="inline-flex items-center justify-center bg-black/40 px-4 h-6 pt-px leading-none rounded-full border border-indigo-500/30 text-[11px] text-zinc-200 font-medium tracking-wide">
-              More updates will reach you soon
-            </span>
-          </div>
-        )}
-
         {/* Navigation */}
         <Navbar
           user={currentUser || null}

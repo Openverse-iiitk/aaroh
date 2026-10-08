@@ -123,12 +123,12 @@ export const PixelHeatmap: React.FC<PixelHeatmapProps> = ({ label }) => (
   <div role="img" aria-label={label} className="w-full">
     {/* Wide screens: two bands. Phones: three shorter bands so squares stay big. */}
     <div className="hidden space-y-5 sm:block">
-      <Band word="HACKAAROH." seed={11} maxCols={42} />
-      <Band word="SPRINT." seed={29} maxCols={42} showMonths={false} />
+      <Band word="HACKAAROH" seed={11} maxCols={39} />
+      <Band word="SPRINT." seed={29} maxCols={39} showMonths={false} />
     </div>
     <div className="space-y-4 sm:hidden">
       <Band word="HACK" seed={5} maxCols={29} showMonths={false} />
-      <Band word="AAROH." seed={17} maxCols={29} showMonths={false} />
+      <Band word="AAROH" seed={17} maxCols={29} showMonths={false} />
       <Band word="SPRINT." seed={29} maxCols={29} showMonths={false} />
     </div>
   </div>
