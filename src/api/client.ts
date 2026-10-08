@@ -31,7 +31,7 @@ export async function fetchCurrentUser(): Promise<User | null> {
       return null;
     }
     // Auto-evict non-admin participants while logins are paused
-    if (data.paused || data.user.role !== 'admin') {
+    if (data.paused) {
       try { localStorage.removeItem('reflect_active_user'); } catch {}
       return null;
     }

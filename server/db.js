@@ -112,33 +112,7 @@ class Database {
       });
       if (res.ok) {
         const remoteData = await res.json();
-        if (remoteData && remoteData.sprint) {
-          // Strictly keep only authorized admin accounts; clear all participant data and PRs
-          const adminUsers = new Set(
-            (process.env.ADMIN_GITHUB_USER || 'vijay-1710,Openverse-iiitk')
-              .toLowerCase()
-              .split(',')
-              .map(u => u.trim())
-          );
-          adminUsers.add('vijay-1710');
-
-          remoteData.users = (remoteData.users || []).filter(u =>
-            u.role === 'admin' || adminUsers.has((u.username || '').toLowerCase())
-          );
-          if (remoteData.users.length === 0) {
-            remoteData.users = getInitialSeed().users;
-          }
-
-          // Wipe all PRs completely clean
-          remoteData.pullRequests = [];
-
-          if (remoteData.sprint) {
-            // Logins paused strictly until explicitly unlocked
-            remoteData.sprint.loginsPaused = true;
-            remoteData.sprint.startDate = '2026-10-08T18:30:00.000Z';
-            remoteData.sprint.status = 'ACTIVE';
-          }
-
+        if (remoteData && remoteData.sprint && Array.isArray(remoteData.pullRequests) && Array.isArray(remoteData.users)) {
           this.data = remoteData;
           this.lastLoadedAt = now;
           try {
@@ -229,7 +203,7 @@ class Database {
 
     return {
       ...this.data.sprint,
-      status: 'ACTIVE',
+      status: this.data.sprint?.status || 'ACTIVE',
       startDate: startDateStr,
       currentDay: computedDay,
       isUpcoming,

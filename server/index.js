@@ -693,6 +693,11 @@ app.post('/api/pull-requests', async (req, res) => {
     return res.status(401).json({ error: 'Please sign in to submit a pull request' });
   }
 
+  const sprint = db.getSprint();
+  if (sprint.loginsPaused && sessionUser.role !== 'admin') {
+    return res.status(403).json({ error: 'Pull request submissions are paused until the event starts.' });
+  }
+
   const rawInput = (req.body.url || req.body.repo || '').trim();
   // Match forms like https://github.com/owner/repo/pull/123 or owner/repo/pull/123
   const prMatch = rawInput.match(/(?:https?:\/\/github\.com\/)?([a-zA-Z0-9_.-]+)\/([a-zA-Z0-9_.-]+)\/pull\/(\d+)/i);
@@ -750,7 +755,6 @@ app.post('/api/pull-requests', async (req, res) => {
     }
   }
 
-  const sprint = db.getSprint();
   const finalTitle = (prData?.title || req.body.title || `PR #${prNumber}: Contribution to ${cleanRepo}`).trim();
   const finalUrl = prData?.html_url || `https://github.com/${cleanRepo}/pull/${prNumber}`;
   const isMerged = Boolean(prData?.merged_at || prData?.merged);
@@ -797,6 +801,9 @@ app.post('/api/pull-requests/sync', async (req, res) => {
   }
 
   const sprint = db.getSprint();
+  if (sprint.loginsPaused && sessionUser.role !== 'admin') {
+    return res.status(403).json({ error: 'GitHub PR sync is paused until the event starts.' });
+  }
   const syncedPrs = await syncUserGitHubPullRequests(sessionUser, sprint.currentDay || 1);
   const allUserPrs = db.getPullRequests().filter(pr => pr.author.toLowerCase() === sessionUser.username.toLowerCase());
   res.json({

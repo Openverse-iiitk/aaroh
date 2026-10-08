@@ -254,9 +254,20 @@ function RootLayout() {
     isSyncingGitHub: syncGitHubMutation.isPending,
   };
 
+  const targetStartMs = new Date('2026-10-08T18:30:00.000Z').getTime();
+  const isPreEvent = (Date.now() < targetStartMs) || Boolean(sprint?.isUpcoming);
+
   return (
     <RouteContextShim.Provider value={outletContext}>
       <div className="min-h-screen flex flex-col bg-[#06040d] text-[#f5f3ff]">
+        {/* Top Announcement Banner (Pre-event) */}
+        {isPreEvent && (
+          <div className="w-full bg-gradient-to-r from-indigo-950/80 via-purple-950/70 to-indigo-950/80 border-b border-indigo-500/20 text-xs py-2 px-4 backdrop-blur-md relative z-50 text-center">
+            <span className="inline-flex items-center justify-center bg-black/40 px-4 h-6 pt-px leading-none rounded-full border border-indigo-500/30 shadow-[0_0_12px_rgba(99,102,241,0.2)] text-[11px] text-zinc-200 font-medium tracking-wide">
+              More updates will reach you soon
+            </span>
+          </div>
+        )}
 
         {/* Navigation */}
         <Navbar
@@ -273,31 +284,50 @@ function RootLayout() {
         </main>
 
         {/* Footer */}
-        <footer className="w-full py-8 border-t border-white/10 text-xs text-zinc-500 bg-[#04020a]">
-          <div className="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              <span className="text-zinc-300 font-medium">HackAaroh PR Tracker</span>
-              <span className="text-zinc-600 hidden sm:inline">•</span>
-              <span className="text-zinc-500 hidden sm:inline">Open Source Sprint Event Platform</span>
+        {isPreEvent ? (
+          <footer className="relative z-20 w-full py-6 border-t border-white/15 text-xs text-zinc-300 bg-white/[0.06] backdrop-blur-xl backdrop-saturate-150 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_-8px_32px_rgba(0,0,0,0.25)]">
+            <div className="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <span>© Openverse · HackAaroh</span>
+              <div className="flex items-center gap-4 text-zinc-400">
+                <Link to="/about" className="hover:text-white transition-colors">
+                  About
+                </Link>
+                <Link to="/faq" className="hover:text-white transition-colors">
+                  FAQ
+                </Link>
+                <Link to="/secret-admin" className="text-zinc-500 hover:text-zinc-300 text-[11px] transition-colors">
+                  Admin Access
+                </Link>
+              </div>
             </div>
+          </footer>
+        ) : (
+          <footer className="w-full py-8 border-t border-white/10 text-xs text-zinc-500 bg-[#04020a]">
+            <div className="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                <span className="text-zinc-300 font-medium">HackAaroh PR Tracker</span>
+                <span className="text-zinc-600 hidden sm:inline">•</span>
+                <span className="text-zinc-500 hidden sm:inline">Open Source Sprint Event Platform</span>
+              </div>
 
-            <div className="flex flex-wrap items-center gap-4 text-xs text-zinc-400">
-              <Link to="/about" className="hover:text-white transition-colors">
-                About
-              </Link>
-              <Link to="/faq" className="hover:text-white transition-colors">
-                FAQ
-              </Link>
-              <Link to="/leaderboard" className="hover:text-white transition-colors">
-                Leaderboard
-              </Link>
-              <Link to="/pull-requests" className="hover:text-white transition-colors">
-                Submitted PRs
-              </Link>
+              <div className="flex flex-wrap items-center gap-4 text-xs text-zinc-400">
+                <Link to="/about" className="hover:text-white transition-colors">
+                  About
+                </Link>
+                <Link to="/faq" className="hover:text-white transition-colors">
+                  FAQ
+                </Link>
+                <Link to="/leaderboard" className="hover:text-white transition-colors">
+                  Leaderboard
+                </Link>
+                <Link to="/pull-requests" className="hover:text-white transition-colors">
+                  Submitted PRs
+                </Link>
+              </div>
             </div>
-          </div>
-        </footer>
+          </footer>
+        )}
 
         {/* Dialog Modals */}
         <AuthModal

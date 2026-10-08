@@ -1,4 +1,6 @@
+import React, { useState } from 'react';
 import { Hero } from '../components/Hero';
+import { PreEventPage } from '../components/PreEventPage';
 import { ReflectBlackHole } from '../components/ReflectBlackHole';
 import { LivePullRequestMarquee } from '../components/LivePullRequestMarquee';
 import { SpotlightCard } from '../components/reactbits/SpotlightCard';
@@ -41,6 +43,22 @@ export const HomePage: React.FC<HomePageProps> = ({
   currentUser,
   onOpenAuth,
 }) => {
+  const targetStartMs = new Date('2026-10-08T18:30:00.000Z').getTime();
+  const isPreEvent = (Date.now() < targetStartMs) || Boolean(sprint?.isUpcoming);
+  const isAdmin = currentUser?.role === 'admin';
+  const [adminPreviewLive, setAdminPreviewLive] = useState(false);
+
+  if (isPreEvent && (!isAdmin || !adminPreviewLive)) {
+    return (
+      <PreEventPage
+        sprint={sprint}
+        currentUser={currentUser}
+        onOpenAuth={onOpenAuth}
+        isAdmin={isAdmin}
+        onToggleLiveView={isAdmin ? () => setAdminPreviewLive(true) : undefined}
+      />
+    );
+  }
   const safeLeaderboard = Array.isArray(leaderboard) ? leaderboard : [];
   const safePrs = Array.isArray(pullRequests) ? pullRequests : [];
   const topThree = safeLeaderboard.slice(0, 3);
@@ -64,6 +82,23 @@ export const HomePage: React.FC<HomePageProps> = ({
     <div className="w-full pb-20 relative overflow-hidden">
       {/* Reflect Notes Interactive 3D Black Hole Background (Horizontal Plane & Scroll-Driven Tilt/Zoom) */}
       <ReflectBlackHole isFixed />
+
+      {/* Admin Pre-event Live View Switcher */}
+      {isAdmin && isPreEvent && (
+        <div className="w-full bg-amber-950/40 border-b border-amber-500/30 py-2 px-4 text-xs relative z-30">
+          <div className="max-w-5xl mx-auto flex items-center justify-between gap-2">
+            <span className="text-amber-200">
+              ⚡ <strong>Organizer Preview:</strong> You are viewing the live event platform. Participants are seeing the Pre-Event landing page.
+            </span>
+            <button
+              onClick={() => setAdminPreviewLive(false)}
+              className="text-amber-300 hover:text-white underline font-medium cursor-pointer flex-shrink-0"
+            >
+              Switch back to Pre-Event Page
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Logged In Welcome Banner (if authenticated) */}
       {currentUser && (

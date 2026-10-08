@@ -20,6 +20,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   const location = useLocation();
   const currentPath = location.pathname;
 
+  const targetStartMs = new Date('2026-10-08T18:30:00.000Z').getTime();
+  const isPreEvent = (Date.now() < targetStartMs) || Boolean(sprint?.isUpcoming);
+  const isAdmin = user?.role === 'admin';
+
   return (
     <header className="sticky top-0 z-40 w-full border-b border-indigo-500/15 bg-[#0a0815]/80 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
       <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
@@ -29,35 +33,39 @@ export const Navbar: React.FC<NavbarProps> = ({
             <GitPullRequest className="w-4 h-4 text-white" />
           </div>
           <span className="text-sm font-semibold text-white tracking-tight">
-            HackAaroh <span className="bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent font-medium">PR Tracker</span>
+            HackAaroh {!isPreEvent && <span className="bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent font-medium">PR Tracker</span>}
           </span>
         </Link>
 
         {/* Navigation links */}
         <nav className="flex items-center gap-5 text-sm">
-          <Link
-            to="/leaderboard"
-            className={`transition-colors flex items-center gap-1.5 ${
-              currentPath === '/leaderboard' ? 'text-white font-medium' : 'text-zinc-400 hover:text-white'
-            }`}
-          >
-            <Trophy className="w-3.5 h-3.5 text-zinc-400" />
-            <span>Leaderboard</span>
-          </Link>
+          {(!isPreEvent || isAdmin) && (
+            <>
+              <Link
+                to="/leaderboard"
+                className={`transition-colors flex items-center gap-1.5 ${
+                  currentPath === '/leaderboard' ? 'text-white font-medium' : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                <Trophy className="w-3.5 h-3.5 text-zinc-400" />
+                <span>Leaderboard</span>
+              </Link>
 
-          <Link
-            to="/pull-requests"
-            className={`transition-colors flex items-center gap-1.5 ${
-              currentPath === '/pull-requests' ? 'text-white font-medium' : 'text-zinc-400 hover:text-white'
-            }`}
-          >
-            <GitPullRequest className="w-3.5 h-3.5 text-zinc-400" />
-            <span>Submitted PRs</span>
-          </Link>
+              <Link
+                to="/pull-requests"
+                className={`transition-colors flex items-center gap-1.5 ${
+                  currentPath === '/pull-requests' ? 'text-white font-medium' : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                <GitPullRequest className="w-3.5 h-3.5 text-zinc-400" />
+                <span>Submitted PRs</span>
+              </Link>
+            </>
+          )}
 
           <Link
             to="/about"
-            className={`hidden sm:flex transition-colors items-center gap-1.5 ${
+            className={`flex transition-colors items-center gap-1.5 ${
               currentPath === '/about' ? 'text-white font-medium' : 'text-zinc-400 hover:text-white'
             }`}
           >
@@ -67,7 +75,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <Link
             to="/faq"
-            className={`hidden sm:flex transition-colors items-center gap-1.5 ${
+            className={`flex transition-colors items-center gap-1.5 ${
               currentPath === '/faq' ? 'text-white font-medium' : 'text-zinc-400 hover:text-white'
             }`}
           >
@@ -75,11 +83,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span>FAQ</span>
           </Link>
 
-          {user?.role === 'admin' && (
+          {isAdmin && (
             <Link
               to="/admin"
               className={`transition-colors flex items-center gap-1.5 ${
-                currentPath === '/admin' ? 'text-white font-medium' : 'text-zinc-400 hover:text-white'
+                currentPath === '/admin' ? 'text-white font-medium' : 'text-indigo-400 hover:text-indigo-300'
               }`}
             >
               <Shield className="w-4 h-4 text-indigo-400" />
@@ -137,13 +145,23 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
             </div>
           ) : (
-            <button
-              onClick={onOpenAuth}
-              className="btn-primary !text-xs !py-1.5 !px-3"
-            >
-              <Github className="w-3.5 h-3.5" />
-              <span>Sign in with GitHub</span>
-            </button>
+            <div className="flex items-center gap-2">
+              <Link
+                to="/secret-admin"
+                className="text-xs text-zinc-400 hover:text-white px-2.5 py-1.5 rounded-lg border border-white/10 hover:border-indigo-500/30 transition-all flex items-center gap-1.5"
+                title="Admin Access"
+              >
+                <Shield className="w-3.5 h-3.5 text-indigo-400" />
+                <span className="hidden sm:inline">Admin</span>
+              </Link>
+              <button
+                onClick={onOpenAuth}
+                className="btn-primary !text-xs !py-1.5 !px-3"
+              >
+                <Github className="w-3.5 h-3.5" />
+                <span>Sign in with GitHub</span>
+              </button>
+            </div>
           )}
         </div>
       </div>
