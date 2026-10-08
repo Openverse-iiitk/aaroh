@@ -19,10 +19,20 @@ export async function fetchCurrentUser(): Promise<User | null> {
   const res = await fetch(`${BASE_URL}/auth/me`, {
     headers: authHeaders()
   });
-  if (!res.ok) return null;
+  if (!res.ok) {
+    try { localStorage.removeItem('reflect_active_user'); } catch {}
+    return null;
+  }
   const data = await res.json();
   if (data.user) {
+    const purged = ['rohan-satheesh', 'deva4509', 'manav-codes', 'sarah-dev', 'admin-starlit'];
+    if (purged.includes((data.user.username || '').toLowerCase())) {
+      try { localStorage.removeItem('reflect_active_user'); } catch {}
+      return null;
+    }
     try { localStorage.setItem('reflect_active_user', data.user.username); } catch {}
+  } else {
+    try { localStorage.removeItem('reflect_active_user'); } catch {}
   }
   return data.user;
 }

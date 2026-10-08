@@ -247,7 +247,7 @@ function RootLayout() {
     onResetToNotStarted: () => resetToNotStartedMutation.mutate(),
     onSelectPrForReview: (pr: PullRequest) => setReviewPrModalPr(pr),
     onResetDatabase: () => resetDbMutation.mutate(),
-    onSwitchToAdmin: handleSwitchToAdmin,
+    onSwitchToAdmin: () => navigate({ to: '/admin' }),
     onOpenSubmitPr: () => setSubmitPrModalOpen(true),
     onSyncGitHub: () => syncGitHubMutation.mutateAsync(),
     isSyncing: syncMutation.isPending,
@@ -305,7 +305,6 @@ function RootLayout() {
         <AuthModal
           isOpen={authModalOpen}
           onClose={() => setAuthModalOpen(false)}
-          onSelectMockUser={handleSelectMockUser}
           isLoading={loginMutation.isPending}
           loginsPaused={sprint?.loginsPaused}
         />
