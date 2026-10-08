@@ -30,6 +30,14 @@ app.use((req, res, next) => {
   next();
 });
 
+// Ensure persistent database is loaded from Vercel Blob store
+app.use(async (req, res, next) => {
+  if (req.url.startsWith('/api')) {
+    await db.ensureLoaded();
+  }
+  next();
+});
+
 // Health check / API status endpoint
 app.get('/api', (req, res) => {
   res.json({

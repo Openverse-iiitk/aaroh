@@ -1,11 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { put } from '@vercel/blob';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const SEED_FILE = path.join(__dirname, 'data.json');
 const DB_FILE = process.env.VERCEL ? path.join('/tmp', 'hackaaroh_data.json') : SEED_FILE;
+const BLOB_URL = 'https://ae1nkbba9sxv7ktd.public.blob.vercel-storage.com/hackaaroh_data.json';
 
 export function calculateNextSync(timeStr = '00:00') {
   const [hours, minutes] = (timeStr || '00:00').split(':').map(Number);
@@ -359,6 +361,28 @@ const getInitialSeed = () => {
 class Database {
   constructor() {
     this.init();
+    this.loadedFromBlob = false;
+  }
+
+  async ensureLoaded() {
+    if (this.loadedFromBlob) return;
+    try {
+      const res = await fetch(`${BLOB_URL}?t=${Date.now()}`);
+      if (res.ok) {
+        const remoteData = await res.json();
+        if (remoteData && remoteData.sprint && Array.isArray(remoteData.pullRequests)) {
+          this.data = remoteData;
+          this.loadedFromBlob = true;
+          try {
+            fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
+          } catch (_) {}
+          return true;
+        }
+      }
+    } catch (err) {
+      // Remote blob not yet initialized or network issue
+    }
+    return false;
   }
 
   init() {
@@ -399,6 +423,18 @@ class Database {
       fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
     } catch (err) {
       console.error('Failed to persist database:', err);
+    }
+
+    const token = process.env.BLOB_READ_WRITE_TOKEN;
+    if (token) {
+      put('hackaaroh_data.json', JSON.stringify(this.data), {
+        access: 'public',
+        addRandomSuffix: false,
+        allowOverwrite: true,
+        token
+      }).catch(err => {
+        console.error('Failed to sync to Vercel Blob:', err.message);
+      });
     }
   }
 

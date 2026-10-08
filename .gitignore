@@ -7,3 +7,5 @@ verify_*.png
 verify_*.cjs
 .vercel
 scratch/
+
+.env*
