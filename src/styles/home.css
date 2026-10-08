@@ -59,15 +59,9 @@
 
 .home-v3 .panel { background: var(--panel); border: 1px solid var(--line); backdrop-filter: blur(6px); }
 
-/* Contribution-graph squares */
-.hm-grid { display: grid; grid-auto-flow: column; gap: clamp(2px, 0.45vw, 5px); }
-.hm-cell { aspect-ratio: 1 / 1; border-radius: 2px; display: block; }
-.hm-l0 { background: rgba(255, 255, 255, 0.035); }
-.hm-l1 { background: #0e3a24; }
-.hm-l2 { background: #14582f; }
-.hm-l3 { background: #1d8a49; }
-.hm-l4 { background: #27d968; }
-.hm-l5 { background: #2eff7b; }
+/* Contribution-graph panel (the squares are drawn on a canvas in PixelHeatmap). No backdrop blur, so the
+   graph does not force the video behind it to be re-blurred on every frame. */
+.hm-panel { background: rgba(6, 5, 7, 0.78); border: 1px solid var(--line); }
 
 /* Segmented clock */
 .clock-digit {
@@ -84,7 +78,6 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .hm-cell { animation: hm-in 450ms ease-out both; }
   .home-v3 .rise { animation: home-rise 600ms cubic-bezier(0.16, 1, 0.3, 1) both; }
   .home-v3 .rise-2 { animation-delay: 120ms; }
 }
@@ -92,5 +85,4 @@
   .home-v3 .animate-marquee { animation: none; overflow-x: auto; }
 }
 
-@keyframes hm-in { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: none; } }
 @keyframes home-rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }

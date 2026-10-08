@@ -17,7 +17,7 @@ export const ShinyText: React.FC<ShinyTextProps> = ({
     <span
       className={`inline-block relative overflow-hidden bg-clip-text text-transparent ${className}`}
       style={{
-        backgroundImage: `linear-gradient(120deg, rgba(236, 241, 238, 0.7) 0%, ${shimmerColor} 50%, rgba(236, 241, 238, 0.7) 100%)`,
+        backgroundImage: `linear-gradient(120deg, rgba(244, 240, 255, 0.7) 0%, ${shimmerColor} 50%, rgba(244, 240, 255, 0.7) 100%)`,
         backgroundSize: '200% 100%',
         animation: `shiny-sweep ${speed}s ease-in-out infinite`,
       }}
