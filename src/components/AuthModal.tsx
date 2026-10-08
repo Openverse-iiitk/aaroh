@@ -87,11 +87,15 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         {/* Primary GitHub OAuth button */}
         <button
           onClick={handleOAuthLogin}
-          className="w-full py-2.5 px-4 rounded bg-[#24292e] hover:bg-[#2f363d] text-white border border-white/15 text-xs font-medium flex items-center justify-center gap-2 transition-colors mb-3"
+          className="w-full py-2.5 px-4 rounded bg-[#24292e] hover:bg-[#2f363d] text-white border border-white/15 text-xs font-medium flex items-center justify-center gap-2 transition-colors mb-2"
         >
           <Github className="w-4 h-4" />
           <span>Authenticate with GitHub OAuth</span>
         </button>
+
+        <p className="text-[10px] text-zinc-500 text-center mb-3">
+          OAuth Callback: <code className="text-zinc-400 font-mono select-all bg-black/40 px-1 py-0.5 rounded">https://hackaaroh-main.vercel.app/api/auth/github/callback</code>
+        </p>
 
         {oauthError && (
           <div className="p-2.5 rounded bg-zinc-900 border border-zinc-800 text-[11px] text-zinc-400 mb-4">
