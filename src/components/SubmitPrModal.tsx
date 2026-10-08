@@ -29,13 +29,13 @@ export const SubmitPrModal: React.FC<SubmitPrModalProps> = ({
   isSubmitting
 }) => {
   const [repo, setRepo] = useState('');
-  const [title, setTitle] = useState('feat: optimize reactive fiber work reconciliation loop');
-  const [description, setDescription] = useState('Enhanced async reconciliation batching, reducing redundant tree traversals by 40%.');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
-  const [additions, setAdditions] = useState(140);
-  const [deletions, setDeletions] = useState(18);
-  const [commitsCount, setCommitsCount] = useState(2);
-  const [tagsInput, setTagsInput] = useState('feature, tanstack, ui');
+  const [additions, setAdditions] = useState(0);
+  const [deletions, setDeletions] = useState(0);
+  const [commitsCount, setCommitsCount] = useState(1);
+  const [tagsInput, setTagsInput] = useState('');
 
   if (!isOpen) return null;
 

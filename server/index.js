@@ -55,50 +55,6 @@ const getUserFromSession = (req) => {
   return db.getUserByUsername(sessionToken);
 };
 
-// Seed initial realistic cross-repository pull requests for newly registered contributors
-async function seedUserInitialPullRequests(user, currentDay = 1) {
-  const catalog = [
-    { title: 'feat: implement concurrent task scheduler with priority queue', repo: 'vercel/next.js', tags: ['scheduler', 'nextjs'], additions: 310, deletions: 25 },
-    { title: 'fix: optimize reactive subscriber reconciliation loop', repo: 'facebook/react', tags: ['react', 'bugfix'], additions: 145, deletions: 32 },
-    { title: 'perf: add SIMD-accelerated JSON string unescaper', repo: 'oven-sh/bun', tags: ['bun', 'simd', 'perf'], additions: 280, deletions: 40 },
-    { title: 'feat: add zero-cost abstraction for async error handling', repo: 'rust-lang/rust', tags: ['rust', 'async'], additions: 220, deletions: 18 },
-    { title: 'feat: add container queries runtime polyfill for tailwind engine', repo: 'tailwindlabs/tailwindcss', tags: ['tailwind', 'css'], additions: 175, deletions: 15 },
-    { title: 'feat: add accessible combobox primitive with keyboard navigation', repo: 'shadcn-ui/ui', tags: ['ui', 'a11y'], additions: 230, deletions: 12 }
-  ];
-
-  const assigned = catalog.sort(() => 0.5 - Math.random()).slice(0, 2);
-  const createdPrs = [];
-  for (let idx = 0; idx < assigned.length; idx++) {
-    const item = assigned[idx];
-    const prNumber = Math.floor(Math.random() * 800) + 120;
-    const pr = {
-      id: `pr-${Date.now()}-${idx}-${Math.random().toString(36).substring(2, 5)}`,
-      githubPrNumber: prNumber,
-      repo: item.repo,
-      title: item.title,
-      description: `Automatically detected on GitHub across all repositories for @${user.username}.`,
-      url: `https://github.com/${item.repo}/pull/${prNumber}`,
-      state: 'open',
-      author: user.username,
-      authorAvatar: user.avatarUrl,
-      createdAt: new Date().toISOString(),
-      dayOfSprint: currentDay,
-      additions: item.additions,
-      deletions: item.deletions,
-      commitsCount: Math.floor(Math.random() * 3) + 1,
-      reviewStatus: 'PENDING_REVIEW',
-      creditScore: 0,
-      adminFeedback: '',
-      adminCriteria: { quality: 0, complexity: 0, impact: 0, testCoverage: 0 },
-      reviewedBy: null,
-      reviewedAt: null,
-      tags: item.tags
-    };
-    await db.addPullRequest(pr);
-    createdPrs.push(pr);
-  }
-  return createdPrs;
-}
 
 // Automatically sync real pull requests from GitHub across any public project for a user
 async function syncUserGitHubPullRequests(user, currentDay = 1) {
@@ -173,11 +129,6 @@ async function syncUserGitHubPullRequests(user, currentDay = 1) {
     console.error(`Error syncing GitHub PRs for @${user.username}:`, err.message);
   }
 
-  // Fallback to seed initial catalog if user has 0 PRs on GitHub
-  const currentPrs = db.getPullRequests().filter(p => p.author.toLowerCase() === user.username.toLowerCase());
-  if (currentPrs.length === 0 && user.role !== 'admin') {
-    return await seedUserInitialPullRequests(user, currentDay);
-  }
   return [];
 }
 
@@ -277,7 +228,7 @@ app.post('/api/auth/mock-login', async (req, res) => {
   }
 
   const sprint = db.getSprint();
-  const adminUsers = (process.env.ADMIN_GITHUB_USER || 'Vijay-1710,admin-starlit,Openverse-iiitk')
+  const adminUsers = (process.env.ADMIN_GITHUB_USER || 'Vijay-1710,Openverse-iiitk')
     .toLowerCase()
     .split(',')
     .map(u => u.trim());
@@ -398,7 +349,7 @@ app.get('/api/auth/github/callback', async (req, res) => {
     });
     const ghUser = await userRes.json();
 
-    const adminUsers = (process.env.ADMIN_GITHUB_USER || 'Vijay-1710,admin-starlit,Openverse-iiitk')
+    const adminUsers = (process.env.ADMIN_GITHUB_USER || 'Vijay-1710,Openverse-iiitk')
       .toLowerCase()
       .split(',')
       .map(u => u.trim());
@@ -413,12 +364,10 @@ app.get('/api/auth/github/callback', async (req, res) => {
       id: `gh_${ghUser.id}`,
       githubId: ghUser.id,
       username: ghUser.login,
-      name: isAdmin ? 'HackAaroh Admin' : (ghUser.name || ghUser.login),
-      avatarUrl: isAdmin 
-        ? 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&auto=format&fit=crop&q=80'
-        : ghUser.avatar_url,
-      bio: isAdmin ? 'Official HackAaroh Event Administrator' : (ghUser.bio || 'GitHub Contributor'),
-      htmlUrl: isAdmin ? 'https://github.com/hackaaroh' : ghUser.html_url,
+      name: ghUser.name || (isAdmin ? 'HackAaroh Admin' : ghUser.login),
+      avatarUrl: ghUser.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
+      bio: ghUser.bio || (isAdmin ? 'Official HackAaroh Event Administrator' : 'GitHub Contributor'),
+      htmlUrl: ghUser.html_url || `https://github.com/${ghUser.login}`,
       role: isAdmin ? 'admin' : 'contributor',
       accessToken: tokenData.access_token,
       createdAt: new Date().toISOString()
@@ -454,7 +403,8 @@ app.post('/api/auth/logout', (req, res) => {
 
 // Remove / forget user and their PRs (for testing OAuth re-authorization)
 app.all('/api/auth/forget-user', async (req, res) => {
-  const username = req.query.username || req.body?.username || 'Rohan-Satheesh';
+  const username = req.query.username || req.body?.username;
+  if (!username) return res.status(400).json({ error: 'Username required' });
   const deleted = await db.deleteUser(username);
   res.clearCookie('reflect_session');
   await db.addAuditLog('USER_REMOVED', 'SYSTEM', `Removed user @${username} and all associated PRs`);
@@ -479,6 +429,13 @@ app.post('/api/admin/toggle-logins', async (req, res) => {
   const newPaused = req.body.paused !== undefined ? req.body.paused : !sprint.loginsPaused;
   await db.updateSprint({ loginsPaused: newPaused });
   res.json({ success: true, loginsPaused: newPaused });
+});
+
+// Full reset to clean event-ready state (Day 1, 0 PRs, logins active, overwrites Vercel Blob)
+app.all(['/api/admin/reset-db', '/api/admin/reset-event', '/api/admin/purge-demo-data'], async (req, res) => {
+  await db.resetToCleanEvent();
+  await db.addAuditLog('EVENT_RESET', 'ORGANIZER', 'Sprint reset to Day 1 clean event state');
+  res.json({ success: true, message: 'Event reset successfully. Ready for live event.', sprint: db.getSprint() });
 });
 
 // -------------------------------------------------------------

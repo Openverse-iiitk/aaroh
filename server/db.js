@@ -20,349 +20,75 @@ export function calculateNextSync(timeStr = '00:00') {
   return next.toISOString();
 }
 
-// Initial seed data with admin-controlled tracking lifecycle
+// Initial seed data with admin-controlled tracking lifecycle for live event
 const getInitialSeed = () => {
   const now = new Date();
-  const sprintStart = new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000); // Started 3 days ago
 
   return {
     sprint: {
       id: 'sprint-hackaaroh-current',
-      name: 'Global Open Source PR Tracking Sprint',
-      description: 'Automated GitHub pull request tracking across all repositories for registered users. Admins review PRs daily and award credits.',
-      status: 'ACTIVE', // 'NOT_STARTED' | 'ACTIVE' | 'PAUSED' | 'FINALIZED'
-      dailyUpdateTime: '00:00', // Specific time everyday (UTC)
-      startDate: sprintStart.toISOString(),
+      name: 'HackAaroh 2026 - Global Open Source Sprint',
+      description: 'Automated GitHub pull request tracking and repository project submissions. Evaluators review contributions daily and award credits.',
+      status: 'ACTIVE',
+      dailyUpdateTime: '00:00',
+      startDate: now.toISOString(),
       endDate: null,
-      currentDay: 4, // Day 4 since started
-      lastSyncAt: new Date(now.getTime() - 4 * 60 * 60 * 1000).toISOString(),
+      currentDay: 1,
+      lastSyncAt: now.toISOString(),
       nextSyncAt: calculateNextSync('00:00'),
       trackingScope: 'ALL_REPOSITORIES',
       trackedRepos: [
+        'openverse/hackaaroh',
         'facebook/react',
         'nodejs/node',
-        'rust-lang/rust',
         'tailwindlabs/tailwindcss',
         'tanstack/table',
-        'microsoft/vscode',
         'shadcn-ui/ui',
-        'astral-sh/uv',
-        'torvalds/linux',
-        'openverse/hackaaroh'
+        'microsoft/vscode'
       ],
       isFinalized: false,
-      loginsPaused: true,
+      loginsPaused: false,
       finalizedAt: null,
       finalPodium: []
     },
     users: [
       {
-        id: 'usr_manav',
-        username: 'manav-codes',
-        name: 'Manav Sharma',
-        avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
-        bio: 'Full-stack builder & open source enthusiast',
-        htmlUrl: 'https://github.com/manav-codes',
-        role: 'contributor',
-        createdAt: sprintStart.toISOString()
-      },
-      {
-        id: 'usr_sarah',
-        username: 'sarah-dev',
-        name: 'Sarah Chen',
-        avatarUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80',
-        bio: 'Systems engineer & TypeScript fanatic',
-        htmlUrl: 'https://github.com/sarah-dev',
-        role: 'contributor',
-        createdAt: sprintStart.toISOString()
-      },
-      {
-        id: 'usr_alex',
-        username: 'alex-rustacean',
-        name: 'Alex Rivera',
-        avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
-        bio: 'Rust & WebAssembly specialist',
-        htmlUrl: 'https://github.com/alex-rustacean',
-        role: 'contributor',
-        createdAt: sprintStart.toISOString()
-      },
-      {
-        id: 'usr_elena',
-        username: 'elena-cloud',
-        name: 'Elena Rostova',
-        avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
-        bio: 'Distributed systems & TanStack fan',
-        htmlUrl: 'https://github.com/elena-cloud',
-        role: 'contributor',
-        createdAt: sprintStart.toISOString()
-      },
-      {
-        id: 'usr_devon',
-        username: 'devon-craft',
-        name: 'Devon Patel',
-        avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
-        bio: 'Frontend architect and performance junkie',
-        htmlUrl: 'https://github.com/devon-craft',
-        role: 'contributor',
-        createdAt: sprintStart.toISOString()
-      },
-      {
-        id: 'usr_admin',
-        username: 'admin-starlit',
-        name: 'Admin Chief (Lead Reviewer)',
-        avatarUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80',
-        bio: 'Sprint Administrator & Lead Code Reviewer',
-        htmlUrl: 'https://github.com/admin-starlit',
+        id: 'usr_Vijay-1710',
+        username: 'Vijay-1710',
+        name: 'Vijay-1710',
+        avatarUrl: 'https://avatars.githubusercontent.com/u/Vijay-1710?v=4',
+        bio: 'Official HackAaroh Event Administrator',
+        htmlUrl: 'https://github.com/Vijay-1710',
         role: 'admin',
-        createdAt: sprintStart.toISOString()
+        createdAt: now.toISOString()
       }
     ],
-    pullRequests: [
-      {
-        id: 'pr-101',
-        githubPrNumber: 142,
-        repo: 'facebook/react',
-        title: 'feat: add resilient TanStack Query caching layer for PR ingestion',
-        description: 'Automatically tracked from facebook/react. Optimistic updates and multi-level query invalidation.',
-        url: 'https://github.com/facebook/react/pull/142',
-        state: 'merged',
-        author: 'manav-codes',
-        authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
-        createdAt: new Date(sprintStart.getTime() + 10 * 60 * 60 * 1000).toISOString(),
-        dayOfSprint: 1,
-        additions: 384,
-        deletions: 42,
-        commitsCount: 4,
-        reviewStatus: 'REVIEWED',
-        creditScore: 85,
-        adminFeedback: 'Exceptional test coverage and cleanly structured caching boundaries. Great impact!',
-        adminCriteria: { quality: 23, complexity: 22, impact: 20, testCoverage: 20 },
-        reviewedBy: 'admin-starlit',
-        reviewedAt: new Date(sprintStart.getTime() + 14 * 60 * 60 * 1000).toISOString(),
-        tags: ['react', 'caching', 'feat']
-      },
-      {
-        id: 'pr-102',
-        githubPrNumber: 143,
-        repo: 'nodejs/node',
-        title: 'fix: handle rate-limit throttling in HTTP client connection pool',
-        description: 'Automatically tracked from nodejs/node. Exponential backoff and token pool rotation.',
-        url: 'https://github.com/nodejs/node/pull/143',
-        state: 'merged',
-        author: 'sarah-dev',
-        authorAvatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80',
-        createdAt: new Date(sprintStart.getTime() + 16 * 60 * 60 * 1000).toISOString(),
-        dayOfSprint: 1,
-        additions: 128,
-        deletions: 19,
-        commitsCount: 2,
-        reviewStatus: 'REVIEWED',
-        creditScore: 78,
-        adminFeedback: 'Solid retry policy and defensive error handling. Saved the sync pipeline.',
-        adminCriteria: { quality: 20, complexity: 19, impact: 20, testCoverage: 19 },
-        reviewedBy: 'admin-starlit',
-        reviewedAt: new Date(sprintStart.getTime() + 20 * 60 * 60 * 1000).toISOString(),
-        tags: ['bugfix', 'nodejs', 'resilience']
-      },
-      {
-        id: 'pr-103',
-        githubPrNumber: 144,
-        repo: 'rust-lang/rust',
-        title: 'perf: optimize daily snapshot aggregation query index in compiler',
-        description: 'Automatically tracked from rust-lang/rust. Reduced aggregation overhead from 450ms down to 14ms.',
-        url: 'https://github.com/rust-lang/rust/pull/144',
-        state: 'merged',
-        author: 'alex-rustacean',
-        authorAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
-        createdAt: new Date(sprintStart.getTime() + 32 * 60 * 60 * 1000).toISOString(),
-        dayOfSprint: 2,
-        additions: 64,
-        deletions: 88,
-        commitsCount: 3,
-        reviewStatus: 'REVIEWED',
-        creditScore: 92,
-        adminFeedback: 'Brilliant index optimization and benchmark proof included. Huge performance win.',
-        adminCriteria: { quality: 24, complexity: 23, impact: 24, testCoverage: 21 },
-        reviewedBy: 'admin-starlit',
-        reviewedAt: new Date(sprintStart.getTime() + 38 * 60 * 60 * 1000).toISOString(),
-        tags: ['perf', 'rust', 'compiler']
-      },
-      {
-        id: 'pr-104',
-        githubPrNumber: 145,
-        repo: 'tailwindlabs/tailwindcss',
-        title: 'ui: implement starlit cosmos glass panels and aurora dividers',
-        description: 'Automatically tracked from tailwindlabs/tailwindcss. DESIGN.md tokens with inset rim-light glows.',
-        url: 'https://github.com/tailwindlabs/tailwindcss/pull/145',
-        state: 'merged',
-        author: 'manav-codes',
-        authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
-        createdAt: new Date(sprintStart.getTime() + 36 * 60 * 60 * 1000).toISOString(),
-        dayOfSprint: 2,
-        additions: 512,
-        deletions: 110,
-        commitsCount: 5,
-        reviewStatus: 'REVIEWED',
-        creditScore: 90,
-        adminFeedback: 'Flawless adherence to DESIGN.md tokens and monochromatic quiet aesthetic.',
-        adminCriteria: { quality: 24, complexity: 21, impact: 23, testCoverage: 22 },
-        reviewedBy: 'admin-starlit',
-        reviewedAt: new Date(sprintStart.getTime() + 42 * 60 * 60 * 1000).toISOString(),
-        tags: ['ui', 'tailwind', 'design-system']
-      },
-      {
-        id: 'pr-105',
-        githubPrNumber: 146,
-        repo: 'tanstack/table',
-        title: 'feat: add TanStack Table column sorting and pagination for leaderboard',
-        description: 'Automatically tracked from tanstack/table. Integrates @tanstack/react-table headless grid.',
-        url: 'https://github.com/tanstack/table/pull/146',
-        state: 'merged',
-        author: 'sarah-dev',
-        authorAvatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80',
-        createdAt: new Date(sprintStart.getTime() + 54 * 60 * 60 * 1000).toISOString(),
-        dayOfSprint: 3,
-        additions: 430,
-        deletions: 35,
-        commitsCount: 3,
-        reviewStatus: 'REVIEWED',
-        creditScore: 88,
-        adminFeedback: 'Clean table abstraction and responsive scroll controls. Very snappy.',
-        adminCriteria: { quality: 22, complexity: 22, impact: 22, testCoverage: 22 },
-        reviewedBy: 'admin-starlit',
-        reviewedAt: new Date(sprintStart.getTime() + 60 * 60 * 1000).toISOString(),
-        tags: ['tanstack-table', 'ui', 'virtualization']
-      },
-      {
-        id: 'pr-106',
-        githubPrNumber: 147,
-        repo: 'microsoft/vscode',
-        title: 'docs: comprehensive guide for manual admin credit scoring rubric',
-        description: 'Automatically tracked from microsoft/vscode. Scoring guidelines across 4 core axes.',
-        url: 'https://github.com/microsoft/vscode/pull/147',
-        state: 'merged',
-        author: 'elena-cloud',
-        authorAvatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
-        createdAt: new Date(sprintStart.getTime() + 58 * 60 * 60 * 1000).toISOString(),
-        dayOfSprint: 3,
-        additions: 195,
-        deletions: 12,
-        commitsCount: 2,
-        reviewStatus: 'REVIEWED',
-        creditScore: 65,
-        adminFeedback: 'Well written and transparent criteria documentation. Helpful for all new reviewers.',
-        adminCriteria: { quality: 18, complexity: 12, impact: 18, testCoverage: 17 },
-        reviewedBy: 'admin-starlit',
-        reviewedAt: new Date(sprintStart.getTime() + 64 * 60 * 60 * 1000).toISOString(),
-        tags: ['docs', 'vscode', 'rubric']
-      },
-      {
-        id: 'pr-107',
-        githubPrNumber: 148,
-        repo: 'shadcn-ui/ui',
-        title: 'feat: add accessible starlit modal primitive with focus trapping',
-        description: 'Automatically tracked across repositories during daily scheduled ingestion. In review queue for admin score.',
-        url: 'https://github.com/shadcn-ui/ui/pull/148',
-        state: 'open',
-        author: 'devon-craft',
-        authorAvatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
-        createdAt: new Date(sprintStart.getTime() + 75 * 60 * 60 * 1000).toISOString(),
-        dayOfSprint: 4,
-        additions: 290,
-        deletions: 22,
-        commitsCount: 3,
-        reviewStatus: 'PENDING_REVIEW', // Needs Admin Review!
-        creditScore: 0,
-        adminFeedback: '',
-        adminCriteria: { quality: 0, complexity: 0, impact: 0, testCoverage: 0 },
-        reviewedBy: null,
-        reviewedAt: null,
-        tags: ['shadcn', 'ui', 'a11y']
-      },
-      {
-        id: 'pr-108',
-        githubPrNumber: 149,
-        repo: 'astral-sh/uv',
-        title: 'feat: add zero-allocation byte serializer in rust microservice',
-        description: 'Automatically tracked across repositories during daily scheduled ingestion. In review queue for admin score.',
-        url: 'https://github.com/astral-sh/uv/pull/149',
-        state: 'open',
-        author: 'manav-codes',
-        authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
-        createdAt: new Date(sprintStart.getTime() + 78 * 60 * 60 * 1000).toISOString(),
-        dayOfSprint: 4,
-        additions: 340,
-        deletions: 15,
-        commitsCount: 4,
-        reviewStatus: 'PENDING_REVIEW', // Needs Admin Review!
-        creditScore: 0,
-        adminFeedback: '',
-        adminCriteria: { quality: 0, complexity: 0, impact: 0, testCoverage: 0 },
-        reviewedBy: null,
-        reviewedAt: null,
-        tags: ['rust', 'uv', 'perf']
-      },
-      {
-        id: 'pr-109',
-        githubPrNumber: 150,
-        repo: 'torvalds/linux',
-        title: 'test: add end-to-end integration tests for eBPF security telemetry',
-        description: 'Automatically tracked across repositories during daily scheduled ingestion. In review queue for admin score.',
-        url: 'https://github.com/torvalds/linux/pull/150',
-        state: 'open',
-        author: 'alex-rustacean',
-        authorAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
-        createdAt: new Date(sprintStart.getTime() + 82 * 60 * 60 * 1000).toISOString(),
-        dayOfSprint: 4,
-        additions: 410,
-        deletions: 18,
-        commitsCount: 3,
-        reviewStatus: 'PENDING_REVIEW', // Needs Admin Review!
-        creditScore: 0,
-        adminFeedback: '',
-        adminCriteria: { quality: 0, complexity: 0, impact: 0, testCoverage: 0 },
-        reviewedBy: null,
-        reviewedAt: null,
-        tags: ['linux', 'kernel', 'tests']
-      }
-    ],
+    pullRequests: [],
     auditLogs: [
       {
-        id: 'log-1',
-        action: 'SPRINT_STARTED',
-        actor: 'admin-starlit',
-        details: 'Admin officially started PR tracking event. Daily update scheduled at 00:00 UTC.',
-        timestamp: sprintStart.toISOString()
-      },
-      {
-        id: 'log-2',
-        action: 'AUTOMATIC_DAILY_UPDATE',
-        actor: 'SCHEDULED_WORKER',
-        details: 'Daily PR calculation completed for Day 2. Synced with tracked repositories.',
-        timestamp: new Date(sprintStart.getTime() + 24 * 60 * 60 * 1000).toISOString()
-      },
-      {
-        id: 'log-3',
-        action: 'PR_REVIEWED',
-        actor: 'admin-starlit',
-        details: 'Admin reviewed PR #144 (alex-rustacean) -> Awarded 92 credits',
-        timestamp: new Date(sprintStart.getTime() + 38 * 60 * 60 * 1000).toISOString()
-      },
-      {
-        id: 'log-4',
-        action: 'AUTOMATIC_DAILY_UPDATE',
-        actor: 'SCHEDULED_WORKER',
-        details: 'Daily PR calculation completed for Day 3. Synced with tracked repositories.',
-        timestamp: new Date(sprintStart.getTime() + 48 * 60 * 60 * 1000).toISOString()
+        id: `log-${Date.now()}-init`,
+        action: 'SPRINT_INITIALIZED',
+        actor: 'Vijay-1710',
+        details: 'HackAaroh Sprint initialized for live participants. Logins and tracking active.',
+        timestamp: now.toISOString()
       }
     ]
   };
 };
 
+const DEMO_USERNAMES = new Set(['manav-codes', 'sarah-dev', 'alex-rustacean', 'elena-cloud', 'devon-craft', 'admin-starlit']);
+
 class Database {
   constructor() {
     this.init();
     this.loadedFromBlob = false;
+  }
+
+  async resetToCleanEvent() {
+    this.data = getInitialSeed();
+    this.lastLoadedAt = Date.now();
+    await this.save();
+    return this.data;
   }
 
   async ensureLoaded(force = false) {
@@ -378,17 +104,29 @@ class Database {
       if (res.ok) {
         const remoteData = await res.json();
         if (remoteData && remoteData.sprint && Array.isArray(remoteData.pullRequests)) {
-          // Safety merge: NEVER drop PRs created in local memory that might not yet be in remoteData!
+          // Purge legacy demo users and mock PRs if loaded from remote blob store
+          remoteData.users = (remoteData.users || []).filter(u => !DEMO_USERNAMES.has(u.username.toLowerCase()));
+          remoteData.pullRequests = (remoteData.pullRequests || []).filter(p => 
+            !DEMO_USERNAMES.has((p.author || '').toLowerCase()) && !p.id.startsWith('pr-10')
+          );
+          if (remoteData.auditLogs) {
+            remoteData.auditLogs = remoteData.auditLogs.filter(l => !DEMO_USERNAMES.has((l.actor || '').toLowerCase()));
+          }
+          if (remoteData.sprint) {
+            remoteData.sprint.loginsPaused = false;
+          }
+
+          // Safety merge: keep valid non-demo PRs
           if (this.data && Array.isArray(this.data.pullRequests)) {
             const remotePrIds = new Set(remoteData.pullRequests.map(p => p.id));
-            const localOnlyPrs = this.data.pullRequests.filter(p => !remotePrIds.has(p.id));
+            const localOnlyPrs = this.data.pullRequests.filter(p => !remotePrIds.has(p.id) && !DEMO_USERNAMES.has((p.author || '').toLowerCase()));
             if (localOnlyPrs.length > 0) {
               remoteData.pullRequests = [...localOnlyPrs, ...remoteData.pullRequests];
             }
 
             if (Array.isArray(this.data.users)) {
               const remoteUsernames = new Set((remoteData.users || []).map(u => u.username.toLowerCase()));
-              const localOnlyUsers = this.data.users.filter(u => !remoteUsernames.has(u.username.toLowerCase()));
+              const localOnlyUsers = this.data.users.filter(u => !remoteUsernames.has(u.username.toLowerCase()) && !DEMO_USERNAMES.has(u.username.toLowerCase()));
               if (localOnlyUsers.length > 0) {
                 remoteData.users = [...(remoteData.users || []), ...localOnlyUsers];
               }

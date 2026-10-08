@@ -1,215 +1,128 @@
 import React, { useState } from 'react';
-import { X, Github, ArrowRight, AlertTriangle, Lock } from 'lucide-react';
+import { X, Github, AlertTriangle, Lock, ShieldCheck, GitPullRequest, Sparkles } from 'lucide-react';
 import { fetchGitHubOAuthUrl } from '../api/client';
 
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSelectMockUser: (username: string, role: 'admin' | 'contributor', name?: string, avatarUrl?: string) => Promise<void>;
-  isLoading: boolean;
+  isLoading?: boolean;
   loginsPaused?: boolean;
+  onSelectMockUser?: (username: string, role: 'admin' | 'contributor', name?: string, avatarUrl?: string) => Promise<void>;
 }
 
 export const AuthModal: React.FC<AuthModalProps> = ({
   isOpen,
   onClose,
-  onSelectMockUser,
-  isLoading,
   loginsPaused = false
 }) => {
-  const [customUsername, setCustomUsername] = useState('');
-  const [customRole, setCustomRole] = useState<'admin' | 'contributor'>('contributor');
   const [oauthError, setOauthError] = useState<string | null>(null);
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   if (!isOpen) return null;
 
   const handleOAuthLogin = async () => {
+    setIsRedirecting(true);
+    setOauthError(null);
     try {
       const data = await fetchGitHubOAuthUrl();
       if (data.configured && data.url) {
         window.location.href = data.url;
       } else {
-        setOauthError(data.message || 'GitHub OAuth App is not configured in .env. See setup instructions or use test accounts below.');
+        setIsRedirecting(false);
+        setOauthError(data.message || 'GitHub OAuth App is not configured. Please contact event administrators.');
       }
     } catch (err) {
-      setOauthError('Unable to connect to OAuth service. You can use test login below.');
+      setIsRedirecting(false);
+      setOauthError('Unable to connect to GitHub authentication service. Please check your internet connection.');
     }
   };
 
-  const demoAccounts = [
-    {
-      username: 'admin-starlit',
-      name: 'Admin Reviewer',
-      role: 'admin' as const,
-      avatarUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150',
-      badge: 'Admin',
-      desc: 'Full review privileges: grade PRs, manage sprint settings.'
-    },
-    {
-      username: 'manav-codes',
-      name: 'Manav Sharma',
-      role: 'contributor' as const,
-      avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
-      badge: 'Contributor',
-      desc: 'Registered participant with 3 tracked PRs.'
-    },
-    {
-      username: 'sarah-dev',
-      name: 'Sarah Chen',
-      role: 'contributor' as const,
-      avatarUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150',
-      badge: 'Contributor',
-      desc: 'TypeScript contributor with 2 merged PRs.'
-    }
-  ];
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
-      <div className="w-full max-w-md p-6 rounded bg-[#121215] border border-white/10 relative shadow-xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
+      <div className="w-full max-w-md p-6 sm:p-7 rounded-2xl bg-[#0e0a24] border border-white/10 relative shadow-[0_16px_50px_rgba(0,0,0,0.7)] text-left">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-zinc-400 hover:text-white p-1 rounded hover:bg-white/5 transition-colors"
+          className="absolute top-4 right-4 text-zinc-400 hover:text-white p-1 rounded-lg hover:bg-white/5 transition-colors"
+          aria-label="Close dialog"
         >
           <X className="w-4 h-4" />
         </button>
 
-        {/* Header */}
+        {/* Brand Icon Header */}
         <div className="text-center mb-6">
-          <div className="w-10 h-10 rounded bg-[#18181b] border border-white/10 mx-auto flex items-center justify-center mb-3">
-            <Github className="w-5 h-5 text-white" />
+          <div className="w-12 h-12 rounded-xl bg-[#17113a] border border-indigo-500/30 mx-auto flex items-center justify-center mb-3 shadow-[0_0_20px_rgba(99,102,241,0.2)]">
+            <Github className="w-6 h-6 text-white" />
           </div>
-          <h2 className="text-xl font-semibold text-white">
-            Sign in to HackAaroh
+          <h2 className="text-xl font-semibold text-white tracking-tight">
+            Sign in with GitHub
           </h2>
-          <p className="text-xs text-zinc-400 mt-1 max-w-xs mx-auto">
-            Authorize with GitHub to register for tracking and participate on the leaderboard.
+          <p className="text-xs text-zinc-400 mt-1.5 max-w-sm mx-auto leading-relaxed">
+            Connect your official GitHub account to participate in HackAaroh, submit pull requests, and rank on the live leaderboard.
           </p>
         </div>
 
         {/* Logins Paused Alert */}
         {loginsPaused && (
-          <div className="p-3.5 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-200 text-xs mb-4 flex items-start gap-2.5 leading-relaxed">
+          <div className="p-3.5 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-200 text-xs mb-4 flex items-start gap-2.5 leading-relaxed">
             <AlertTriangle className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
             <div>
               <span className="font-semibold block text-amber-300 mb-0.5">Participant Logins Temporarily Paused</span>
-              Event organizers have temporarily paused logins and new contributor registrations while configuring the sprint. Please check back shortly!
+              Event organizers have temporarily paused logins while finalizing sprint settings. Please check back shortly!
             </div>
           </div>
         )}
 
-        {/* Primary GitHub OAuth button */}
-        <button
-          onClick={handleOAuthLogin}
-          disabled={loginsPaused}
-          className={`w-full py-2.5 px-4 rounded text-white border text-xs font-medium flex items-center justify-center gap-2 transition-colors mb-2 ${
-            loginsPaused
-              ? 'bg-zinc-800/80 border-white/5 text-zinc-400 cursor-not-allowed opacity-60'
-              : 'bg-[#24292e] hover:bg-[#2f363d] border-white/15'
-          }`}
-        >
-          {loginsPaused ? <Lock className="w-4 h-4 text-amber-400" /> : <Github className="w-4 h-4" />}
-          <span>{loginsPaused ? 'Participant Logins Paused' : 'Authenticate with GitHub OAuth'}</span>
-        </button>
-
-        <p className="text-[10px] text-zinc-500 text-center mb-3">
-          OAuth Callback: <code className="text-zinc-400 font-mono select-all bg-black/40 px-1 py-0.5 rounded">https://hackaaroh-main.vercel.app/api/auth/github/callback</code>
-        </p>
-
+        {/* OAuth Error Alert */}
         {oauthError && (
-          <div className="p-2.5 rounded bg-zinc-900 border border-zinc-800 text-[11px] text-zinc-400 mb-4">
-            {oauthError}
+          <div className="p-3 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-200 text-xs mb-4 flex items-start gap-2">
+            <AlertTriangle className="w-4 h-4 text-rose-400 flex-shrink-0 mt-0.5" />
+            <span>{oauthError}</span>
           </div>
         )}
 
-        <div className="relative flex py-2 items-center mb-4">
-          <div className="flex-grow border-t border-white/10"></div>
-          <span className="flex-shrink mx-3 text-[11px] uppercase tracking-wider text-zinc-500">
-            {loginsPaused ? 'Admin test access only' : 'Or test with instant accounts'}
+        {/* Primary GitHub OAuth action */}
+        <button
+          onClick={handleOAuthLogin}
+          disabled={loginsPaused || isRedirecting}
+          className={`w-full py-3 px-4 rounded-xl text-white border text-xs font-semibold flex items-center justify-center gap-2.5 transition-all shadow-lg ${
+            loginsPaused
+              ? 'bg-zinc-800/60 border-white/5 text-zinc-500 cursor-not-allowed opacity-60'
+              : 'bg-[#24292e] hover:bg-[#2f363d] border-white/20 hover:border-indigo-400/50 hover:shadow-[0_0_20px_rgba(99,102,241,0.25)]'
+          }`}
+        >
+          {loginsPaused ? (
+            <Lock className="w-4 h-4 text-amber-400" />
+          ) : (
+            <Github className={`w-4 h-4 ${isRedirecting ? 'animate-spin' : ''}`} />
+          )}
+          <span>
+            {loginsPaused
+              ? 'Participant Logins Paused'
+              : isRedirecting
+              ? 'Redirecting to GitHub...'
+              : 'Continue with GitHub'}
           </span>
-          <div className="flex-grow border-t border-white/10"></div>
-        </div>
+        </button>
 
-        {/* Instant Profile Switcher */}
-        <div className="space-y-2 mb-5">
-          {demoAccounts.map((account) => {
-            const isPausedForAccount = loginsPaused && account.role !== 'admin';
-            return (
-              <button
-                key={account.username}
-                onClick={() => onSelectMockUser(account.username, account.role, account.name, account.avatarUrl)}
-                disabled={isLoading || isPausedForAccount}
-                className={`w-full p-2.5 rounded bg-[#18181b] border text-left flex items-center justify-between gap-3 transition-colors group ${
-                  isPausedForAccount
-                    ? 'opacity-40 cursor-not-allowed border-white/5'
-                    : 'hover:bg-[#202025] border-white/5 hover:border-white/15'
-                }`}
-              >
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <img
-                    src={account.avatarUrl}
-                    alt={account.username}
-                    className="w-7 h-7 rounded-full object-cover flex-shrink-0"
-                  />
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-xs font-medium text-white truncate">
-                        {account.name}
-                      </span>
-                      <span className={`text-[10px] px-1.5 py-0.2 rounded ${
-                        account.role === 'admin'
-                          ? 'bg-blue-900/40 text-blue-300 border border-blue-800/50'
-                          : 'bg-zinc-800 text-zinc-400'
-                      }`}>
-                        {account.badge}
-                      </span>
-                      {isPausedForAccount && (
-                        <span className="text-[10px] text-amber-400 font-medium">
-                          (Paused)
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-[11px] text-zinc-500 truncate">@{account.username}</p>
-                  </div>
-                </div>
-
-                <ArrowRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white transition-colors flex-shrink-0" />
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Custom Username Input */}
-        <div className="pt-3 border-t border-white/10">
-          <label className="text-[11px] uppercase tracking-wider text-zinc-500 block mb-1.5">
-            Or log in as any GitHub username:
-          </label>
-          <div className="flex gap-2">
-            <input
-              type="text"
-              placeholder="e.g. torvalds"
-              value={customUsername}
-              onChange={(e) => setCustomUsername(e.target.value)}
-              className="flex-1 px-3 py-1.5 rounded bg-[#18181b] border border-white/10 text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-zinc-700"
-            />
-            <select
-              value={customRole}
-              onChange={(e) => setCustomRole(e.target.value as any)}
-              className="px-2.5 py-1.5 rounded bg-[#18181b] border border-white/10 text-xs text-zinc-300 focus:outline-none"
-            >
-              <option value="contributor">Contributor</option>
-              <option value="admin">Admin</option>
-            </select>
-            <button
-              onClick={() => {
-                if (customUsername.trim()) {
-                  onSelectMockUser(customUsername.trim(), customRole);
-                }
-              }}
-              disabled={!customUsername.trim() || isLoading || (loginsPaused && customRole !== 'admin')}
-              className="btn-primary !text-xs !py-1.5 !px-3 disabled:opacity-40"
-            >
-              Login
-            </button>
+        {/* Key Information & Privacy Assurance */}
+        <div className="mt-5 pt-5 border-t border-white/10 space-y-2.5 text-[11px] text-zinc-400">
+          <div className="flex items-start gap-2">
+            <GitPullRequest className="w-3.5 h-3.5 text-indigo-400 flex-shrink-0 mt-0.5" />
+            <span>
+              <strong className="text-zinc-200">Live PR Tracking:</strong> Your public contributions and pull requests are indexed automatically for daily evaluations.
+            </span>
+          </div>
+          <div className="flex items-start gap-2">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
+            <span>
+              <strong className="text-zinc-200">Public &amp; Read-Only:</strong> We only read your public GitHub profile and public contributions. No private access required.
+            </span>
+          </div>
+          <div className="flex items-start gap-2">
+            <Sparkles className="w-3.5 h-3.5 text-lavender-accent flex-shrink-0 mt-0.5" />
+            <span>
+              <strong className="text-zinc-200">Organizer Access:</strong> Authorized organizers signing in with their GitHub account (@Vijay-1710) will automatically receive administrator privileges.
+            </span>
           </div>
         </div>
       </div>

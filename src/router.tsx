@@ -204,16 +204,6 @@ function RootLayout() {
     }
   };
 
-  const handleSwitchToAdmin = async () => {
-    await loginMutation.mutateAsync({
-      username: 'admin-starlit',
-      role: 'admin',
-      name: 'Admin Chief (Lead Reviewer)',
-      avatarUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150',
-    });
-    navigate({ to: '/admin' });
-  };
-
   React.useEffect(() => {
     try {
       const urlParams = new URLSearchParams(window.location.search);
@@ -221,18 +211,6 @@ function RootLayout() {
       if (sessionParam) {
         localStorage.setItem('reflect_active_user', sessionParam);
         queryClient.invalidateQueries({ queryKey: ['currentUser'] });
-      }
-
-      const loginParam = urlParams.get('login') || urlParams.get('role') || urlParams.get('demo');
-      if (loginParam === 'admin') {
-        handleSwitchToAdmin();
-      } else if (loginParam === 'participant' || loginParam === 'contributor') {
-        handleSelectMockUser(
-          'manav-codes',
-          'contributor',
-          'Manav Sharma',
-          'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150'
-        );
       }
     } catch {}
   }, []);
