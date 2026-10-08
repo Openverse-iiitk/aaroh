@@ -203,6 +203,23 @@ function RootLayout() {
     navigate({ to: '/admin' });
   };
 
+  React.useEffect(() => {
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const loginParam = urlParams.get('login') || urlParams.get('role') || urlParams.get('demo');
+      if (loginParam === 'admin') {
+        handleSwitchToAdmin();
+      } else if (loginParam === 'participant' || loginParam === 'contributor') {
+        handleSelectMockUser(
+          'manav-codes',
+          'contributor',
+          'Manav Sharma',
+          'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150'
+        );
+      }
+    } catch {}
+  }, []);
+
   const outletContext = {
     sprint: sprint || {
       id: 'sprint-hackaaroh-current',
