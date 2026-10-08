@@ -9,7 +9,7 @@ interface SpotlightCardProps {
 export const SpotlightCard: React.FC<SpotlightCardProps> = ({
   children,
   className = '',
-  spotlightColor = 'rgba(46,255,123, 0.18)',
+  spotlightColor = 'rgba(147, 130, 255, 0.18)',
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -33,7 +33,7 @@ export const SpotlightCard: React.FC<SpotlightCardProps> = ({
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative overflow-hidden rounded-card bg-[#0a0d0b] border border-white/10 transition-all duration-200 group ${className}`}
+      className={`relative overflow-hidden rounded-card bg-[#060317] border border-white/10 transition-all duration-200 group ${className}`}
     >
       {/* Spotlight Radial Follower */}
       <div
@@ -49,7 +49,7 @@ export const SpotlightCard: React.FC<SpotlightCardProps> = ({
         className="pointer-events-none absolute inset-0 rounded-card transition-opacity duration-300"
         style={{
           opacity,
-          boxShadow: `inset 0 0 0 1px rgba(46,255,123, 0.35)`,
+          boxShadow: `inset 0 0 0 1px rgba(147, 130, 255, 0.35)`,
         }}
       />
 

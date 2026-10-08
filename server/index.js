@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
+import crypto from 'crypto';
 import { fileURLToPath } from 'url';
 import { db, calculateNextSync } from './db.js';
 
@@ -48,25 +49,179 @@ app.get('/api', (req, res) => {
   });
 });
 
-// Helper auth middleware
+// -------------------------------------------------------------
+// Security & Authentication Helpers (Cryptographically Enforced)
+// -------------------------------------------------------------
+const SESSION_SECRET = process.env.SESSION_SECRET || (process.env.ADMIN_SECRET_KEY || 'aaroh-admin-2026') + '_session_salt_8f92b74a12';
+
+// In-memory rate limiting for secret admin passkey attempts
+const failedAdminAttempts = new Map(); // ip -> { count, lockedUntil }
+// In-memory token cache so OAuth tokens are never written to data.json on disk
+const userAccessTokens = new Map();
+
+function checkAdminRateLimit(ip) {
+  const now = Date.now();
+  const record = failedAdminAttempts.get(ip);
+  if (record && record.lockedUntil && record.lockedUntil > now) {
+    const remainingSec = Math.ceil((record.lockedUntil - now) / 1000);
+    return { locked: true, remainingSec };
+  }
+  return { locked: false, remainingSec: 0 };
+}
+
+function recordAdminAttempt(ip, success) {
+  const now = Date.now();
+  if (success) {
+    failedAdminAttempts.delete(ip);
+    return;
+  }
+  const record = failedAdminAttempts.get(ip) || { count: 0, lockedUntil: 0 };
+  record.count += 1;
+  if (record.count >= 5) {
+    record.lockedUntil = now + 15 * 60 * 1000; // 15 minute lockout
+  }
+  failedAdminAttempts.set(ip, record);
+}
+
+// Constant-time passkey verification to prevent timing attacks
+function verifySecretPasskey(providedKey) {
+  const expectedKey = (process.env.ADMIN_SECRET_KEY || 'aaroh-admin-2026').trim();
+  const a = Buffer.from(String(providedKey || '').trim());
+  const b = Buffer.from(expectedKey);
+  if (a.length !== b.length) return false;
+  return crypto.timingSafeEqual(a, b);
+}
+
+// Create cryptographically signed HMAC-SHA256 session token
+function createSignedSessionToken(username, role = 'contributor', isAdminAuth = false) {
+  const payload = JSON.stringify({
+    u: username,
+    r: role,
+    adm: Boolean(isAdminAuth),
+    t: Date.now()
+  });
+  const b64 = Buffer.from(payload).toString('base64url');
+  const sig = crypto.createHmac('sha256', SESSION_SECRET).update(b64).digest('base64url');
+  return `${b64}.${sig}`;
+}
+
+// Verify HMAC-SHA256 signature
+function verifySignedSessionToken(token) {
+  if (!token || typeof token !== 'string') return null;
+  const dotIndex = token.indexOf('.');
+  if (dotIndex === -1) return null;
+  const b64 = token.substring(0, dotIndex);
+  const sig = token.substring(dotIndex + 1);
+  try {
+    const expectedSig = crypto.createHmac('sha256', SESSION_SECRET).update(b64).digest('base64url');
+    const sigBuf = Buffer.from(sig);
+    const expBuf = Buffer.from(expectedSig);
+    if (sigBuf.length !== expBuf.length || !crypto.timingSafeEqual(sigBuf, expBuf)) {
+      return null;
+    }
+    const data = JSON.parse(Buffer.from(b64, 'base64url').toString('utf8'));
+    // 14 days expiration
+    if (Date.now() - data.t > 14 * 24 * 60 * 60 * 1000) {
+      return null;
+    }
+    return data;
+  } catch {
+    return null;
+  }
+}
+
+// Secure session extraction
+const getAuthenticatedSession = (req) => {
+  let rawToken = null;
+  const authHeader = req.headers['authorization'];
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    rawToken = authHeader.substring(7).trim();
+  }
+  if (!rawToken && req.headers['x-session-token']) {
+    rawToken = req.headers['x-session-token'];
+  }
+  if (!rawToken && req.cookies?.reflect_session) {
+    rawToken = req.cookies.reflect_session;
+  }
+
+  // 1. Check if token is cryptographically signed
+  if (rawToken && typeof rawToken === 'string' && rawToken.includes('.')) {
+    const payload = verifySignedSessionToken(rawToken);
+    if (payload && payload.u) {
+      const dbUser = db.getUserByUsername(payload.u);
+      if (dbUser) {
+        const isAdminVerified = Boolean(payload.adm && (dbUser.role === 'admin' || payload.r === 'admin'));
+        return {
+          user: {
+            ...dbUser,
+            role: isAdminVerified ? 'admin' : (dbUser.role === 'admin' && !isAdminVerified ? 'contributor' : dbUser.role)
+          },
+          isAdminVerified,
+          isSignedToken: true
+        };
+      }
+    }
+  }
+
+  // 2. Fallback for legacy unsigned cookies or x-session-user header:
+  // SECURITY CRITICAL DEFENSE: Unsigned plain text can NEVER grant admin privileges!
+  // This explicitly shuts down all browser Inspect / DevTools console tricks:
+  // document.cookie = "reflect_session=Vijay-1710" or x-session-user: Vijay-1710
+  const legacyUsername = (req.cookies?.reflect_session && !req.cookies.reflect_session.includes('.'))
+    ? req.cookies.reflect_session
+    : req.headers['x-session-user'];
+
+  if (legacyUsername && typeof legacyUsername === 'string') {
+    const dbUser = db.getUserByUsername(legacyUsername);
+    if (dbUser) {
+      return {
+        user: {
+          ...dbUser,
+          role: 'contributor' // NEVER grant admin role via unsigned plain identifiers!
+        },
+        isAdminVerified: false,
+        isSignedToken: false
+      };
+    }
+  }
+
+  return null;
+};
+
 const getUserFromSession = (req) => {
-  const sessionToken = req.cookies.reflect_session || req.headers['x-session-user'];
-  if (!sessionToken) return null;
-  return db.getUserByUsername(sessionToken);
+  const session = getAuthenticatedSession(req);
+  return session ? session.user : null;
+};
+
+// Strict admin authorization middleware for all admin endpoints
+const requireAdmin = (req, res, next) => {
+  const session = getAuthenticatedSession(req);
+  if (!session || !session.user || !session.isAdminVerified || session.user.role !== 'admin') {
+    return res.status(403).json({
+      error: 'Forbidden: Admin access denied. Cryptographically verified admin authentication required.'
+    });
+  }
+  req.adminUser = session.user;
+  next();
 };
 
 
-// Automatically sync real pull requests from GitHub across any public project for a user
+// Sync real pull requests from GitHub across any public project for a user (strictly within event timeframe)
 async function syncUserGitHubPullRequests(user, currentDay = 1) {
   if (!user || !user.username) return [];
   try {
+    const sprint = db.getSprint();
+    const sprintStartMs = sprint.startDate ? new Date(sprint.startDate).getTime() : 0;
+    const minAllowedMs = sprintStartMs > 0 ? sprintStartMs - (3 * 60 * 60 * 1000) : 0; // 3 hour setup grace
+    const startDateFilter = sprint.startDate ? `+created:>=${new Date(minAllowedMs).toISOString().split('T')[0]}` : '';
+
     const headers = { 'User-Agent': 'HackAaroh-PR-Tracker' };
-    const token = user.accessToken || process.env.GITHUB_TOKEN;
+    const token = userAccessTokens.get(user.username.toLowerCase()) || user.accessToken || process.env.GITHUB_TOKEN;
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
     }
 
-    const queryUrl = `https://api.github.com/search/issues?q=type:pr+author:${encodeURIComponent(user.username)}&sort=created&order=desc&per_page=30`;
+    const queryUrl = `https://api.github.com/search/issues?q=type:pr+author:${encodeURIComponent(user.username)}${startDateFilter}&sort=created&order=desc&per_page=30`;
     const res = await fetch(queryUrl, { headers });
     
     if (res.ok) {
@@ -79,6 +234,17 @@ async function syncUserGitHubPullRequests(user, currentDay = 1) {
         for (const item of data.items) {
           if (existingUrls.has(item.html_url)) continue;
 
+          // STRICT CHECK: Reject any PR created before the sprint started
+          if (minAllowedMs > 0 && new Date(item.created_at).getTime() < minAllowedMs) {
+            continue;
+          }
+
+          // STRICT CHECK: Author on GitHub MUST match user.username
+          const itemAuthor = item.user?.login;
+          if (itemAuthor && itemAuthor.toLowerCase() !== user.username.toLowerCase()) {
+            continue;
+          }
+
           const repo = item.repository_url.replace('https://api.github.com/repos/', '');
           const isMerged = Boolean(item.pull_request?.merged_at || (item.state === 'closed' && item.pull_request?.html_url));
           const state = isMerged ? 'merged' : item.state;
@@ -88,7 +254,7 @@ async function syncUserGitHubPullRequests(user, currentDay = 1) {
             githubPrNumber: item.number,
             repo: repo,
             title: item.title,
-            description: item.body ? item.body.substring(0, 300) : `Automatically tracked from ${repo} for @${user.username}`,
+            description: item.body ? item.body.substring(0, 300) : `Tracked from ${repo} for @${user.username}`,
             url: item.html_url,
             state: state,
             author: user.username,
@@ -119,7 +285,7 @@ async function syncUserGitHubPullRequests(user, currentDay = 1) {
           await db.addAuditLog(
             'GITHUB_SYNC',
             user.username,
-            `Automatically synced ${newPrs.length} real GitHub PRs across repositories for @${user.username}`
+            `Synced ${newPrs.length} event PRs across repositories for @${user.username}`
           );
         }
         return newPrs;
@@ -162,30 +328,20 @@ async function performDailyCalculation(isManualTrigger = false) {
     { title: 'feat: optimize concurrent fiber reconciler work loop', repo: 'facebook/react', tags: ['react', 'concurrency'], additions: 215, deletions: 30 }
   ];
 
-  const ingestedPrs = [];
-
-  // Automatically track and sync real PRs across GitHub for ALL registered contributors across any project
-  for (const contributor of contributors) {
-    const synced = await syncUserGitHubPullRequests(contributor, nextDay);
-    if (synced && synced.length > 0) {
-      ingestedPrs.push(...synced);
-    }
-  }
-
+  // Day roll without unsolicited scraping: PRs are evaluated based on participant submissions
   const updatedSprint = await db.updateSprint({
     currentDay: nextDay,
     lastSyncAt: now.toISOString(),
     nextSyncAt: calculateNextSync(sprint.dailyUpdateTime || '00:00')
   });
 
-  const uniqueRepos = Array.from(new Set(ingestedPrs.map(p => p.repo)));
   await db.addAuditLog(
     isManualTrigger ? 'MANUAL_DAILY_UPDATE' : 'AUTOMATIC_DAILY_UPDATE',
     isManualTrigger ? 'ADMIN' : 'SCHEDULED_TICKER',
-    `Day ${nextDay} daily calculation completed across all repositories. Ingested ${ingestedPrs.length} PRs across ${uniqueRepos.length} distinct repositories for registered contributors into the admin review queue.`
+    `Day ${nextDay} daily calculation completed. Event timeline advanced to Day ${nextDay}.`
   );
 
-  return { success: true, sprint: updatedSprint, ingestedPrs };
+  return { success: true, sprint: updatedSprint, ingestedPrs: [] };
 }
 
 // Background scheduler running every 30 seconds to check if it's the configured dailyUpdateTime
@@ -216,11 +372,12 @@ if (!process.env.VERCEL) {
 
 // Get current session user
 app.get('/api/auth/me', (req, res) => {
-  const user = getUserFromSession(req);
+  const session = getAuthenticatedSession(req);
+  const user = session ? session.user : null;
   if (user && user.role !== 'admin') {
     const sprint = db.getSprint();
     if (sprint.loginsPaused) {
-      res.clearCookie('reflect_session');
+      res.clearCookie('reflect_session', { httpOnly: true, sameSite: 'lax' });
       return res.json({ user: null, paused: true, message: 'Participant logins are temporarily paused.' });
     }
   }
@@ -229,12 +386,21 @@ app.get('/api/auth/me', (req, res) => {
 
 // Secret Admin Passkey Login (For organizers to access admin dashboard privately)
 app.post('/api/auth/admin-secret-login', async (req, res) => {
-  const { secretKey, username } = req.body || {};
-  const expectedKey = (process.env.ADMIN_SECRET_KEY || 'aaroh-admin-2026').trim();
+  const clientIp = req.ip || req.socket?.remoteAddress || 'unknown';
+  const rateLimit = checkAdminRateLimit(clientIp);
+  if (rateLimit.locked) {
+    return res.status(429).json({
+      error: `Too many failed attempts. Admin portal is locked for ${rateLimit.remainingSec}s.`
+    });
+  }
 
-  if (!secretKey || secretKey.trim() !== expectedKey) {
+  const { secretKey, username } = req.body || {};
+  if (!secretKey || !verifySecretPasskey(secretKey)) {
+    recordAdminAttempt(clientIp, false);
     return res.status(401).json({ error: 'Invalid organizer secret passkey' });
   }
+
+  recordAdminAttempt(clientIp, true);
 
   const adminUsername = (username && username.trim()) || 'Vijay-1710';
   let user = db.getUserByUsername(adminUsername);
@@ -255,36 +421,35 @@ app.post('/api/auth/admin-secret-login', async (req, res) => {
     user = await db.upsertUser({ ...user, role: 'admin' });
   }
 
-  res.cookie('reflect_session', user.username, {
-    httpOnly: false,
+  const token = createSignedSessionToken(user.username, 'admin', true);
+
+  res.cookie('reflect_session', token, {
+    httpOnly: true,
     maxAge: 7 * 24 * 60 * 60 * 1000,
-    sameSite: 'lax'
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production'
   });
 
-  await db.addAuditLog('ADMIN_SECRET_LOGIN', user.username, 'Admin authenticated via secret passkey');
-  res.json({ success: true, user });
+  await db.addAuditLog('ADMIN_SECRET_LOGIN', user.username, 'Admin authenticated via verified secret passkey');
+  res.json({ success: true, user, token });
 });
 
 // Mock login (1-click test login for judges & testers)
 app.post('/api/auth/mock-login', async (req, res) => {
-  const { username, role = 'contributor', name, avatarUrl } = req.body;
+  const { username, name, avatarUrl } = req.body;
   if (!username) {
     return res.status(400).json({ error: 'Username is required' });
   }
 
   const sprint = db.getSprint();
-  const adminUsers = (process.env.ADMIN_GITHUB_USER || 'Vijay-1710,Openverse-iiitk')
-    .toLowerCase()
-    .split(',')
-    .map(u => u.trim());
-  const isAdmin = (role === 'admin') || adminUsers.includes(username.toLowerCase());
-
-  if (sprint.loginsPaused && !isAdmin) {
+  if (sprint.loginsPaused) {
     return res.status(403).json({
       error: 'Logins are temporarily paused by event organizers. Please check back shortly!'
     });
   }
 
+  // SECURITY ENFORCEMENT: Mock login is STRICTLY for contributors!
+  // It NEVER grants admin privileges regardless of the username requested.
   let user = db.getUserByUsername(username);
   if (!user) {
     user = await db.upsertUser({
@@ -294,21 +459,22 @@ app.post('/api/auth/mock-login', async (req, res) => {
       avatarUrl: avatarUrl || `https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150`,
       bio: 'GitHub Contributor',
       htmlUrl: `https://github.com/${username}`,
-      role: role === 'admin' ? 'admin' : 'contributor',
+      role: 'contributor',
       createdAt: new Date().toISOString()
     });
-  } else if (role && user.role !== role) {
-    user = await db.upsertUser({ ...user, role });
   }
 
-  res.cookie('reflect_session', user.username, {
-    httpOnly: false,
+  const token = createSignedSessionToken(user.username, 'contributor', false);
+
+  res.cookie('reflect_session', token, {
+    httpOnly: true,
     maxAge: 7 * 24 * 60 * 60 * 1000,
-    sameSite: 'lax'
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production'
   });
 
-  await db.addAuditLog('USER_LOGIN', user.username, `User connected with role ${user.role}`);
-  res.json({ user });
+  await db.addAuditLog('USER_LOGIN', user.username, 'User connected with role contributor');
+  res.json({ user: { ...user, role: 'contributor' }, token });
 });
 
 // GitHub OAuth authorization URL
@@ -412,26 +578,26 @@ app.get('/api/auth/github/callback', async (req, res) => {
       bio: ghUser.bio || (isAdmin ? 'Official HackAaroh Event Administrator' : 'GitHub Contributor'),
       htmlUrl: ghUser.html_url || `https://github.com/${ghUser.login}`,
       role: isAdmin ? 'admin' : 'contributor',
-      accessToken: tokenData.access_token,
       createdAt: new Date().toISOString()
     });
 
-    // Automatically ensure cross-repository PRs are tracked for newly connected contributors
-    const existingPrs = db.getPullRequests().filter(pr => pr.author.toLowerCase() === user.username.toLowerCase());
-    if (existingPrs.length === 0 && user.role !== 'admin') {
-      const sprint = db.getSprint();
-      await syncUserGitHubPullRequests(user, sprint.currentDay || 1);
+    if (tokenData.access_token) {
+      userAccessTokens.set(user.username.toLowerCase(), tokenData.access_token);
     }
 
-    res.cookie('reflect_session', user.username, {
-      httpOnly: false,
+    // No automatic scraping of historical PRs upon login. Contributors submit their event PRs explicitly.
+
+    const sessionToken = createSignedSessionToken(user.username, user.role, isAdmin);
+
+    res.cookie('reflect_session', sessionToken, {
+      httpOnly: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
       sameSite: 'lax',
       secure: !isLocal
     });
 
     const targetPath = user.role === 'admin' ? '/admin' : '/leaderboard';
-    res.redirect(`${frontendUrl}${targetPath}?session=${encodeURIComponent(user.username)}`);
+    res.redirect(`${frontendUrl}${targetPath}?token=${encodeURIComponent(sessionToken)}`);
   } catch (err) {
     console.error('OAuth Callback Error:', err);
     res.redirect(`${frontendUrl}/?error=oauth_exception`);
@@ -440,44 +606,44 @@ app.get('/api/auth/github/callback', async (req, res) => {
 
 // Logout
 app.post('/api/auth/logout', (req, res) => {
-  res.clearCookie('reflect_session');
+  res.clearCookie('reflect_session', { httpOnly: true, sameSite: 'lax' });
   res.json({ success: true });
 });
 
-// Remove / forget user and their PRs (for testing OAuth re-authorization)
-app.all('/api/auth/forget-user', async (req, res) => {
+// Remove / forget user and their PRs (Admin-only)
+app.all('/api/auth/forget-user', requireAdmin, async (req, res) => {
   const username = req.query.username || req.body?.username;
   if (!username) return res.status(400).json({ error: 'Username required' });
   const deleted = await db.deleteUser(username);
-  res.clearCookie('reflect_session');
-  await db.addAuditLog('USER_REMOVED', 'SYSTEM', `Removed user @${username} and all associated PRs`);
+  await db.addAuditLog('USER_REMOVED', req.adminUser.username, `Removed user @${username} and all associated PRs`);
   res.json({ success: true, removed: username, deleted });
 });
 
-// Toggle logins paused / active
-app.all('/api/auth/pause-logins', async (req, res) => {
+// Toggle logins paused / active (Admin-only)
+app.all('/api/auth/pause-logins', requireAdmin, async (req, res) => {
   await db.updateSprint({ loginsPaused: true });
-  await db.addAuditLog('LOGINS_PAUSED', 'ORGANIZER', 'Participant logins temporarily paused');
+  await db.addAuditLog('LOGINS_PAUSED', req.adminUser.username, 'Participant logins temporarily paused');
   res.json({ success: true, loginsPaused: true, message: 'Logins are now PAUSED' });
 });
 
-app.all('/api/auth/resume-logins', async (req, res) => {
+app.all('/api/auth/resume-logins', requireAdmin, async (req, res) => {
   await db.updateSprint({ loginsPaused: false });
-  await db.addAuditLog('LOGINS_RESUMED', 'ORGANIZER', 'Participant logins resumed');
+  await db.addAuditLog('LOGINS_RESUMED', req.adminUser.username, 'Participant logins resumed');
   res.json({ success: true, loginsPaused: false, message: 'Logins are now ACTIVE' });
 });
 
-app.post('/api/admin/toggle-logins', async (req, res) => {
+app.post('/api/admin/toggle-logins', requireAdmin, async (req, res) => {
   const sprint = db.getSprint();
   const newPaused = req.body.paused !== undefined ? req.body.paused : !sprint.loginsPaused;
   await db.updateSprint({ loginsPaused: newPaused });
+  await db.addAuditLog('LOGINS_TOGGLED', req.adminUser.username, `Logins toggled to ${newPaused ? 'PAUSED' : 'ACTIVE'}`);
   res.json({ success: true, loginsPaused: newPaused });
 });
 
-// Full reset to clean event-ready state (Day 1, 0 PRs, logins active, overwrites Vercel Blob)
-app.all(['/api/admin/reset-db', '/api/admin/reset-event', '/api/admin/purge-demo-data'], async (req, res) => {
+// Full reset to clean event-ready state (Admin-only)
+app.all(['/api/admin/reset-db', '/api/admin/reset-event', '/api/admin/purge-demo-data'], requireAdmin, async (req, res) => {
   await db.resetToCleanEvent();
-  await db.addAuditLog('EVENT_RESET', 'ORGANIZER', 'Sprint reset to Day 1 clean event state');
+  await db.addAuditLog('EVENT_RESET', req.adminUser.username, 'Sprint reset to Day 1 clean event state');
   res.json({ success: true, message: 'Event reset successfully. Ready for live event.', sprint: db.getSprint() });
 });
 
@@ -492,12 +658,7 @@ app.get('/api/sprint', (req, res) => {
 });
 
 // Admin START TRACKING EVENT
-app.post('/api/sprint/start', async (req, res) => {
-  const user = getUserFromSession(req);
-  if (user?.role !== 'admin') {
-    return res.status(403).json({ error: 'Admin privileges required' });
-  }
-
+app.post('/api/sprint/start', requireAdmin, async (req, res) => {
   const sprint = db.getSprint();
   const now = new Date();
 
@@ -513,17 +674,12 @@ app.post('/api/sprint/start', async (req, res) => {
     nextSyncAt: calculateNextSync(sprint.dailyUpdateTime || '00:00')
   });
 
-  await db.addAuditLog('SPRINT_STARTED', user.username, `Admin officially started PR tracking event. Scheduled daily calculation set for ${updated.dailyUpdateTime} UTC.`);
+  await db.addAuditLog('SPRINT_STARTED', req.adminUser.username, `Admin officially started PR tracking event. Scheduled daily calculation set for ${updated.dailyUpdateTime} UTC.`);
   res.json(updated);
 });
 
 // Admin PAUSE / RESUME TRACKING
-app.post('/api/sprint/toggle-status', async (req, res) => {
-  const user = getUserFromSession(req);
-  if (user?.role !== 'admin') {
-    return res.status(403).json({ error: 'Admin privileges required' });
-  }
-
+app.post('/api/sprint/toggle-status', requireAdmin, async (req, res) => {
   const sprint = db.getSprint();
   if (sprint.isFinalized || sprint.status === 'NOT_STARTED') {
     return res.status(400).json({ error: 'Cannot toggle status in current sprint state' });
@@ -531,17 +687,12 @@ app.post('/api/sprint/toggle-status', async (req, res) => {
 
   const nextStatus = sprint.status === 'ACTIVE' ? 'PAUSED' : 'ACTIVE';
   const updated = await db.updateSprint({ status: nextStatus });
-  await db.addAuditLog('SPRINT_STATUS_TOGGLED', user.username, `Tracking status changed to ${nextStatus}`);
+  await db.addAuditLog('SPRINT_STATUS_TOGGLED', req.adminUser.username, `Tracking status changed to ${nextStatus}`);
   res.json(updated);
 });
 
 // Admin END TRACKING & FINALIZE LEADERBOARD
-app.post('/api/sprint/end', async (req, res) => {
-  const user = getUserFromSession(req);
-  if (user?.role !== 'admin') {
-    return res.status(403).json({ error: 'Admin privileges required' });
-  }
-
+app.post('/api/sprint/end', requireAdmin, async (req, res) => {
   const sprint = db.getSprint();
   if (sprint.isFinalized) {
     return res.json({ message: 'Sprint already finalized', sprint });
@@ -568,19 +719,13 @@ app.post('/api/sprint/end', async (req, res) => {
     finalPodium: podium
   });
 
-  await db.addAuditLog('SPRINT_FINALIZED', user.username, `Admin officially ended tracking. Final Leaderboard frozen with ${leaderboard.length} ranked contributors.`);
+  await db.addAuditLog('SPRINT_FINALIZED', req.adminUser.username, `Admin officially ended tracking. Final Leaderboard frozen with ${leaderboard.length} ranked contributors.`);
   res.json({ sprint: updatedSprint, podium });
 });
 
 // Admin update sprint settings (Daily update time, name, tracked repos)
-app.post('/api/sprint/update-settings', async (req, res) => {
-  const user = getUserFromSession(req);
-  if (user?.role !== 'admin') {
-    return res.status(403).json({ error: 'Admin privileges required' });
-  }
-
+app.post('/api/sprint/update-settings', requireAdmin, async (req, res) => {
   const { dailyUpdateTime, name, trackedRepos } = req.body;
-  const sprint = db.getSprint();
 
   const updates = {};
   if (dailyUpdateTime) {
@@ -591,12 +736,12 @@ app.post('/api/sprint/update-settings', async (req, res) => {
   if (Array.isArray(trackedRepos)) updates.trackedRepos = trackedRepos;
 
   const updated = await db.updateSprint(updates);
-  await db.addAuditLog('SETTINGS_UPDATED', user.username, `Updated sprint settings: Daily calculation time set to ${updated.dailyUpdateTime} UTC`);
+  await db.addAuditLog('SETTINGS_UPDATED', req.adminUser.username, `Updated sprint settings: Daily calculation time set to ${updated.dailyUpdateTime} UTC`);
   res.json(updated);
 });
 
 // Trigger daily calculation (manual admin or scheduled)
-app.post('/api/sprint/sync-daily', async (req, res) => {
+app.post('/api/sprint/sync-daily', requireAdmin, async (req, res) => {
   const result = await performDailyCalculation(true);
   if (!result.success) {
     return res.status(400).json({ error: result.reason });
@@ -605,12 +750,7 @@ app.post('/api/sprint/sync-daily', async (req, res) => {
 });
 
 // Admin reset to NOT_STARTED (to test from scratch)
-app.post('/api/sprint/reset-to-not-started', async (req, res) => {
-  const user = getUserFromSession(req);
-  if (user?.role !== 'admin') {
-    return res.status(403).json({ error: 'Admin privileges required' });
-  }
-
+app.post('/api/sprint/reset-to-not-started', requireAdmin, async (req, res) => {
   const updated = await db.updateSprint({
     status: 'NOT_STARTED',
     startDate: null,
@@ -623,7 +763,7 @@ app.post('/api/sprint/reset-to-not-started', async (req, res) => {
     nextSyncAt: null
   });
 
-  await db.addAuditLog('SPRINT_RESET_NOT_STARTED', user.username, 'Admin reset sprint to NOT_STARTED state');
+  await db.addAuditLog('SPRINT_RESET_NOT_STARTED', req.adminUser.username, 'Admin reset sprint to NOT_STARTED state');
   res.json(updated);
 });
 
@@ -725,7 +865,7 @@ app.post('/api/pull-requests', async (req, res) => {
 
   // Verify against real GitHub API
   let prData = null;
-  const token = sessionUser.accessToken || process.env.GITHUB_TOKEN;
+  const token = userAccessTokens.get(sessionUser.username.toLowerCase()) || sessionUser.accessToken || process.env.GITHUB_TOKEN;
   const headers = { 'User-Agent': 'HackAaroh-PR-Tracker' };
   if (token) headers['Authorization'] = `Bearer ${token}`;
 
@@ -735,33 +875,55 @@ app.post('/api/pull-requests', async (req, res) => {
       prData = await ghRes.json();
     } else if (ghRes.status === 404) {
       return res.status(404).json({
-        error: `Pull request #${prNumber} does not exist in repository ${cleanRepo} on GitHub.`
+        error: `Pull request #${prNumber} was not found in ${cleanRepo} on GitHub. Please ensure the repository is public and the PR number is correct.`
       });
     } else {
-      console.warn(`GitHub API returned status ${ghRes.status} for PR ${cleanRepo}#${prNumber}`);
+      const errText = await ghRes.text();
+      return res.status(400).json({
+        error: `GitHub returned error (${ghRes.status}): Unable to verify PR #${prNumber} in ${cleanRepo}.`
+      });
     }
   } catch (err) {
-    console.error('Error fetching PR from GitHub API:', err.message);
+    return res.status(502).json({
+      error: `Network error connecting to GitHub API: ${err.message}`
+    });
   }
 
-  // Validate author matches the current user (allow organizers/admins to submit test PRs)
-  if (prData && prData.user) {
-    const isAuthor = prData.user.login.toLowerCase() === sessionUser.username.toLowerCase();
-    const isAdmin = sessionUser.role === 'admin';
-    if (!isAuthor && !isAdmin) {
-      return res.status(403).json({
-        error: `This Pull Request was authored by @${prData.user.login}, not @${sessionUser.username}. You can only submit your own pull requests.`
+  if (!prData || !prData.user) {
+    return res.status(400).json({
+      error: `Could not retrieve author information from GitHub for PR #${prNumber} in ${cleanRepo}.`
+    });
+  }
+
+  // STRICT OWNERSHIP VALIDATION: Author on GitHub MUST match the authenticated user!
+  const prAuthor = prData.user.login;
+  if (prAuthor.toLowerCase() !== sessionUser.username.toLowerCase()) {
+    return res.status(403).json({
+      error: `You can only submit pull requests that you authored! This PR was created by @${prAuthor} on GitHub, but you are signed in as @${sessionUser.username}.`
+    });
+  }
+
+  // EVENT TIMELINE VALIDATION: Check that PR was created for this hackathon (no year-old PRs!)
+  if (sprint.startDate && prData.created_at) {
+    const prCreatedMs = new Date(prData.created_at).getTime();
+    const sprintStartMs = new Date(sprint.startDate).getTime();
+    const minAllowedMs = sprintStartMs - (3 * 60 * 60 * 1000); // 3 hours setup grace before kickoff
+
+    if (prCreatedMs < minAllowedMs) {
+      const prDateStr = new Date(prData.created_at).toLocaleDateString();
+      return res.status(400).json({
+        error: `This pull request was created on ${prDateStr}, before the event started. Only pull requests opened during the hackathon can be submitted.`
       });
     }
   }
 
-  const finalTitle = (prData?.title || req.body.title || `PR #${prNumber}: Contribution to ${cleanRepo}`).trim();
-  const finalUrl = prData?.html_url || `https://github.com/${cleanRepo}/pull/${prNumber}`;
-  const isMerged = Boolean(prData?.merged_at || prData?.merged);
-  const finalState = isMerged ? 'merged' : (prData?.state || 'open');
-  const finalAdditions = prData?.additions !== undefined ? prData.additions : (parseInt(req.body.additions, 10) || 50);
-  const finalDeletions = prData?.deletions !== undefined ? prData.deletions : (parseInt(req.body.deletions, 10) || 10);
-  const finalCommits = prData?.commits !== undefined ? prData.commits : (parseInt(req.body.commitsCount, 10) || 1);
+  const finalTitle = (prData.title || req.body.title || `PR #${prNumber}: Contribution to ${cleanRepo}`).trim();
+  const finalUrl = prData.html_url || `https://github.com/${cleanRepo}/pull/${prNumber}`;
+  const isMerged = Boolean(prData.merged_at || prData.merged);
+  const finalState = isMerged ? 'merged' : (prData.state || 'open');
+  const finalAdditions = prData.additions !== undefined ? prData.additions : (parseInt(req.body.additions, 10) || 50);
+  const finalDeletions = prData.deletions !== undefined ? prData.deletions : (parseInt(req.body.deletions, 10) || 10);
+  const finalCommits = prData.commits !== undefined ? prData.commits : (parseInt(req.body.commitsCount, 10) || 1);
 
   const newPr = {
     id: `pr-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
@@ -769,12 +931,12 @@ app.post('/api/pull-requests', async (req, res) => {
     isRepoOnly: false,
     repo: cleanRepo,
     title: finalTitle,
-    description: req.body.description?.trim() || (prData?.body ? prData.body.substring(0, 300) : `Pull request #${prNumber} submitted by @${sessionUser.username}`),
+    description: req.body.description?.trim() || (prData.body ? prData.body.substring(0, 300) : `Pull request #${prNumber} submitted by @${prAuthor}`),
     url: finalUrl,
     state: finalState,
-    author: sessionUser.username,
-    authorAvatar: sessionUser.avatarUrl,
-    createdAt: new Date().toISOString(),
+    author: prAuthor,
+    authorAvatar: prData.user.avatar_url || sessionUser.avatarUrl,
+    createdAt: prData.created_at || new Date().toISOString(),
     dayOfSprint: sprint.currentDay || 1,
     additions: finalAdditions,
     deletions: finalDeletions,
@@ -790,7 +952,7 @@ app.post('/api/pull-requests', async (req, res) => {
 
   await db.addPullRequest(newPr);
   await db.addAuditLog('PR_SUBMITTED', sessionUser.username, `@${sessionUser.username} submitted verified PR #${prNumber} in ${cleanRepo}`);
-  res.status(201).json({ pr: newPr });
+  res.status(201).json({ message: 'Pull request submitted successfully for review', pr: newPr });
 });
 
 // On-demand sync of real pull requests from GitHub across any public project
@@ -819,12 +981,7 @@ app.post('/api/pull-requests/sync', async (req, res) => {
 // -------------------------------------------------------------
 
 // Admin manually reviews and assigns credit score to a PR
-app.post('/api/admin/review-pr', async (req, res) => {
-  const user = getUserFromSession(req);
-  if (user?.role !== 'admin') {
-    return res.status(403).json({ error: 'Admin privileges required to review and score PRs' });
-  }
-
+app.post('/api/admin/review-pr', requireAdmin, async (req, res) => {
   const { prId, creditScore, feedback, criteria, reviewStatus = 'REVIEWED' } = req.body;
   if (!prId) {
     return res.status(400).json({ error: 'prId is required' });
@@ -837,7 +994,7 @@ app.post('/api/admin/review-pr', async (req, res) => {
     adminFeedback: feedback || '',
     adminCriteria: criteria || { quality: 20, complexity: 20, impact: 20, testCoverage: 20 },
     reviewStatus,
-    reviewedBy: user.role === 'admin' ? 'hackaaroh' : user.username,
+    reviewedBy: req.adminUser.username,
     reviewedAt: new Date().toISOString()
   });
 
@@ -847,7 +1004,7 @@ app.post('/api/admin/review-pr', async (req, res) => {
 
   await db.addAuditLog(
     'PR_MANUALLY_REVIEWED',
-    user.role === 'admin' ? 'hackaaroh' : user.username,
+    req.adminUser.username,
     `Admin reviewed PR #${updatedPr.githubPrNumber} (${updatedPr.author}) -> Awarded ${numericScore} credits with status ${reviewStatus}`
   );
 
@@ -857,8 +1014,8 @@ app.post('/api/admin/review-pr', async (req, res) => {
   });
 });
 
-// Audit logs
-app.get('/api/admin/audit-logs', (req, res) => {
+// Audit logs (Admin-only)
+app.get('/api/admin/audit-logs', requireAdmin, (req, res) => {
   res.json(db.getAuditLogs());
 });
 

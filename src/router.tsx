@@ -76,6 +76,7 @@ function RootLayout() {
   const { data: auditLogs = [] } = useQuery({
     queryKey: ['auditLogs'],
     queryFn: fetchAuditLogs,
+    enabled: currentUser?.role === 'admin',
   });
 
   // Mutations

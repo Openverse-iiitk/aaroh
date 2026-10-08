@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from '@tanstack/react-router';
-import { Sparkles, Code2, GitPullRequest, Users, Check, Shield, ArrowRight } from 'lucide-react';
-import { ShinyText } from './reactbits/ShinyText';
-import { SpotlightCard } from './reactbits/SpotlightCard';
-import { FlipUnit } from './FlipUnit';
+import { ArrowRight, Shield } from 'lucide-react';
+import '../styles/home.css';
+import { ReflectBlackHole } from './ReflectBlackHole';
+import { PixelHeatmap } from './PixelHeatmap';
 import { User, Sprint } from '../types';
 
 interface PreEventPageProps {
@@ -16,24 +16,18 @@ interface PreEventPageProps {
 
 const STEP_CARDS = [
   {
-    icon: Code2,
-    tint: 'indigo',
     label: 'Step 01',
     title: 'Build in the open',
     body: 'An open-source event where contributors ship real work to real projects.',
     footer: 'Real projects, real impact'
   },
   {
-    icon: GitPullRequest,
-    tint: 'purple',
     label: 'Step 02',
     title: 'Learn by contributing',
     body: 'Pick a project, explore the code, and make your mark one change at a time.',
     footer: 'Hands-on learning'
   },
   {
-    icon: Users,
-    tint: 'pink',
     label: 'Step 03',
     title: 'Grow together',
     body: 'Meet fellow builders, share what you learn, and level up as a community.',
@@ -41,23 +35,21 @@ const STEP_CARDS = [
   }
 ];
 
-const TINTS: Record<string, { icon: string; label: string; spot: string }> = {
-  indigo: {
-    icon: 'border-indigo-500/20 bg-indigo-500/10 text-indigo-400',
-    label: 'text-indigo-400',
-    spot: 'rgba(46,255,123, 0.18)'
-  },
-  purple: {
-    icon: 'border-purple-500/20 bg-purple-500/10 text-purple-400',
-    label: 'text-purple-400',
-    spot: 'rgba(46,255,123, 0.18)'
-  },
-  pink: {
-    icon: 'border-pink-500/20 bg-pink-500/10 text-pink-400',
-    label: 'text-pink-400',
-    spot: 'rgba(46,255,123, 0.18)'
-  }
-};
+const pad = (n: number) => n.toString().padStart(2, '0');
+
+const DigitPair: React.FC<{ value: string; label: string }> = ({ value, label }) => (
+  <div className="flex flex-col items-center gap-1.5">
+    <div className="mono flex gap-1" aria-hidden="true">
+      <span className="clock-digit">{value[0]}</span>
+      <span className="clock-digit">{value[1]}</span>
+    </div>
+    <span className="mono text-[10px] text-[var(--faint)] sm:text-xs">{label}</span>
+  </div>
+);
+
+const Colon: React.FC = () => (
+  <span className="mono pt-2 text-2xl text-[var(--faint)] sm:pt-3" aria-hidden="true">:</span>
+);
 
 export const PreEventPage: React.FC<PreEventPageProps> = ({
   currentUser,
@@ -113,138 +105,96 @@ export const PreEventPage: React.FC<PreEventPageProps> = ({
   const isAdmin = currentUser?.role === 'admin';
 
   return (
-    <div className="relative w-full flex-1 flex flex-col">
+    <div className="home-v3 w-full flex-1 overflow-hidden">
+      {/* Original backdrop, tinted green */}
+      <div className="bh-green">
+        <ReflectBlackHole isFixed />
+      </div>
 
       {/* Admin Quick Jump Bar (if organizer is signed in) */}
       {isAdmin && (
-        <div className="relative z-30 w-full bg-indigo-950/40 border-b border-indigo-500/20 py-2 px-4 text-center text-xs">
-          <div className="max-w-4xl mx-auto flex items-center justify-between">
-            <span className="text-zinc-300 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              Signed in as <strong className="text-white">HackAaroh Organizer</strong>
-            </span>
-            <div className="flex items-center gap-4">
+        <div className="layer border-b border-[var(--line)] bg-[var(--panel)]">
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-2.5 text-sm sm:px-6">
+            <p className="text-[var(--muted)]">
+              Signed in as <span className="text-[var(--text)]">HackAaroh Organizer</span>
+            </p>
+            <div className="flex items-center gap-5">
               {onToggleLiveView && (
-                <button
-                  onClick={onToggleLiveView}
-                  className="text-indigo-300 hover:text-white font-medium flex items-center gap-1 transition-colors underline-offset-2 hover:underline cursor-pointer"
-                >
-                  <span>Preview Live Tracker</span>
-                  <ArrowRight className="w-3 h-3" />
+                <button type="button" onClick={onToggleLiveView} className="link inline-flex cursor-pointer items-center gap-1 text-sm">
+                  Preview live tracker
+                  <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </button>
               )}
-              <Link
-                to="/admin"
-                className="text-emerald-400 hover:text-white font-medium flex items-center gap-1 transition-colors underline-offset-2 hover:underline"
-              >
-                <Shield className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Admin Dashboard</span>
-                <ArrowRight className="w-3 h-3" />
+              <Link to="/admin" className="link inline-flex items-center gap-1.5 text-sm">
+                <Shield className="h-3.5 w-3.5" aria-hidden="true" />
+                Admin dashboard
               </Link>
             </div>
           </div>
         </div>
       )}
 
-      {/* Hero Section */}
-      <section className="relative z-10 flex flex-col items-center text-center px-4 pt-16 sm:pt-24 pb-16 max-w-4xl mx-auto space-y-6">
-        {/* Openverse presents badge */}
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold uppercase tracking-wider">
-          <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
-          <span>Openverse presents</span>
-        </div>
+      {/* ---------- Hero ---------- */}
+      <section className="layer mx-auto flex max-w-5xl flex-col items-center px-4 pb-16 pt-14 text-center sm:px-6 sm:pt-20">
+        <p className="mono rise mb-8 text-xs tracking-[0.28em] text-[var(--accent)] sm:text-sm">
+          &gt; OPENVERSE PRESENTS
+        </p>
 
-        {/* Title */}
-        <h1 className="text-5xl sm:text-7xl font-bold tracking-tight leading-tight text-white select-none">
-          <ShinyText text="HackAaroh" speed={3} />
-        </h1>
+        <h1 className="sr-only">HackAaroh, the open source event by Openverse</h1>
+        <PixelHeatmap label="HackAaroh Sprint" />
 
-        {/* Subtitle */}
-        <p className="text-base sm:text-lg text-zinc-300 max-w-2xl leading-relaxed">
+        <p className="rise rise-2 mt-10 max-w-xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
           Welcome to HackAaroh, the open-source event by Openverse. Get ready to contribute, collaborate, and build something that matters.
         </p>
 
-        {/* Digital Split-flap Countdown Container */}
-        <div className="w-full max-w-2xl rounded-3xl border border-indigo-500/25 bg-[#0b0f0d]/85 backdrop-blur-md p-5 sm:p-7 space-y-5 mt-3">
-          <div className="flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-widest text-white">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span>Event starts in</span>
-          </div>
-
-          <div className="h-px bg-white/10" />
-
+        {/* Countdown to kickoff */}
+        <div className="mt-12 flex flex-col items-center gap-3">
+          <p className="mono text-xs text-[var(--faint)]">Event starts in</p>
           {timeLeft.isStarted ? (
-            <div className="py-6 text-center">
-              <span className="text-lg font-bold text-emerald-400">
-                The event has officially started!
-              </span>
-            </div>
+            <p className="mono text-lg font-semibold text-[var(--accent)]">The event has officially started!</p>
           ) : (
-            <div className="flex items-start justify-center gap-2 sm:gap-4 my-2">
-              {timeLeft.days > 0 && (
-                <>
-                  <FlipUnit val={String(timeLeft.days).padStart(2, '0')} label="Days" />
-                  <div className="flex flex-col gap-2 pt-10 sm:pt-14 lg:pt-16">
-                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-400/60" />
-                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-400/60" />
-                  </div>
-                </>
-              )}
-
-              <FlipUnit val={String(timeLeft.hours).padStart(2, '0')} label="Hours" />
-              <div className="flex flex-col gap-2 pt-10 sm:pt-14 lg:pt-16">
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-400/60" />
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-400/60" />
+            <div
+              role="timer"
+              aria-label={`${timeLeft.days > 0 ? `${timeLeft.days} days ` : ''}${timeLeft.hours} hours ${timeLeft.minutes} minutes ${timeLeft.seconds} seconds until the event starts`}
+            >
+              <div className="flex items-start gap-2 sm:gap-3">
+                {timeLeft.days > 0 && (
+                  <>
+                    <DigitPair value={pad(timeLeft.days)} label="days" />
+                    <Colon />
+                  </>
+                )}
+                <DigitPair value={pad(timeLeft.hours)} label="hours" />
+                <Colon />
+                <DigitPair value={pad(timeLeft.minutes)} label="minutes" />
+                <Colon />
+                <DigitPair value={pad(timeLeft.seconds)} label="seconds" />
               </div>
-
-              <FlipUnit val={String(timeLeft.minutes).padStart(2, '0')} label="Minutes" />
-              <div className="flex flex-col gap-2 pt-10 sm:pt-14 lg:pt-16">
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-400/60" />
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-400/60" />
-              </div>
-
-              <FlipUnit val={String(timeLeft.seconds).padStart(2, '0')} label="Seconds" isHighlight />
             </div>
           )}
         </div>
       </section>
 
-      {/* 3 Step Cards Grid */}
-      <section className="relative z-10 max-w-5xl mx-auto px-4 pb-24 grid gap-5 md:grid-cols-3 w-full">
-        {STEP_CARDS.map((card) => {
-          const tintConfig = TINTS[card.tint];
-          const Icon = card.icon;
-
-          return (
-            <SpotlightCard
-              key={card.label}
-              spotlightColor={tintConfig.spot}
-              className="p-6 flex flex-col justify-between group rounded-2xl border border-white/10 bg-[#131614]/90 shadow-xl"
-            >
+      {/* ---------- What to expect ---------- */}
+      <section className="layer mx-auto grid max-w-6xl gap-10 px-4 pb-24 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+        <div className="lg:sticky lg:top-24 lg:self-start">
+          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Get ready to contribute.</h2>
+          <p className="mt-3 max-w-sm text-[var(--muted)]">
+            Three things to look forward to when the event begins.
+          </p>
+        </div>
+        <ol className="divide-y divide-[var(--line)] border-y border-[var(--line)]">
+          {STEP_CARDS.map((card, i) => (
+            <li key={card.label} className="grid grid-cols-[2.5rem_1fr] gap-4 py-6">
+              <span className="mono text-sm text-[var(--accent)]">{pad(i + 1)}</span>
               <div>
-                <div
-                  className={`w-10 h-10 rounded-lg border flex items-center justify-center mb-4 group-hover:scale-105 transition-transform ${tintConfig.icon}`}
-                >
-                  <Icon className="w-5 h-5" />
-                </div>
-                <span className={`text-[11px] font-semibold uppercase tracking-wider ${tintConfig.label}`}>
-                  {card.label}
-                </span>
-                <h3 className="text-base font-semibold text-white mt-1 mb-2">
-                  {card.title}
-                </h3>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  {card.body}
-                </p>
+                <h3 className="text-lg font-medium">{card.title}</h3>
+                <p className="mt-1.5 max-w-lg text-[var(--muted)]">{card.body}</p>
+                <p className="mono mt-3 text-xs text-[var(--faint)]">{card.footer}</p>
               </div>
-
-              <div className="pt-4 mt-5 border-t border-white/5 text-[11px] text-zinc-400 flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
-                <span>{card.footer}</span>
-              </div>
-            </SpotlightCard>
-          );
-        })}
+            </li>
+          ))}
+        </ol>
       </section>
     </div>
   );
