@@ -12,6 +12,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 dotenv.config();
+if (fs.existsSync(path.join(__dirname, '../.env.local'))) {
+  dotenv.config({ path: path.join(__dirname, '../.env.local') });
+}
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -143,6 +146,22 @@ const getAuthenticatedSession = (req) => {
   }
   if (!rawToken && req.cookies?.reflect_session) {
     rawToken = req.cookies.reflect_session;
+  }
+
+  // 0. Check secret passkey passed in x-admin-key header
+  const adminKey = req.headers['x-admin-key'];
+  if (adminKey && verifySecretPasskey(adminKey)) {
+    const adminUser = db.getUserByUsername('Vijay-1710') || {
+      username: 'Vijay-1710',
+      role: 'admin',
+      name: 'Vijay-1710 (Organizer)',
+      avatarUrl: 'https://avatars.githubusercontent.com/u/Vijay-1710?v=4'
+    };
+    return {
+      user: adminUser,
+      isAdminVerified: true,
+      isSignedToken: true
+    };
   }
 
   // 1. Check if token is cryptographically signed
@@ -888,7 +907,7 @@ app.post('/api/pull-requests/sync', (req, res) => {
 
 // Admin Delete PR endpoint
 app.delete('/api/pull-requests/:id', requireAdmin, async (req, res) => {
-  const prId = req.params.id;
+  const prId = decodeURIComponent(req.params.id);
   const existing = (db.getPullRequests() || []).find(p => p.id === prId || String(p.githubPrNumber) === String(prId));
   const deleted = await db.deletePullRequest(prId);
   if (existing) {

@@ -62,6 +62,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
   const [passkeyUsername, setPasskeyUsername] = useState('Vijay-1710');
   const [passkeyLoading, setPasskeyLoading] = useState(false);
   const [passkeyError, setPasskeyError] = useState<string | null>(null);
+  const [deletingPrId, setDeletingPrId] = useState<string | null>(null);
 
   const handlePasskeySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -587,16 +588,33 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                     {onDeletePr && (
                       <button
                         id={`admin-delete-pr-btn-${pr.id}`}
+                        disabled={deletingPrId === pr.id}
                         onClick={async () => {
-                          if (window.confirm(`Are you sure you want to delete PR #${pr.githubPrNumber || pr.id} (${pr.repo})? This will permanently remove it from the review queue.`)) {
+                          const confirmMsg = `Are you sure you want to delete PR #${pr.githubPrNumber || pr.id} (${pr.repo})? This will permanently remove it from the review queue.`;
+                          if (!window.confirm(confirmMsg)) return;
+                          setDeletingPrId(pr.id);
+                          try {
                             await onDeletePr(pr.id);
+                          } catch (err: any) {
+                            alert(`Failed to delete pull request: ${err.message || 'Unknown error'}`);
+                          } finally {
+                            setDeletingPrId(null);
                           }
                         }}
-                        className="px-3 py-2 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 hover:text-rose-300 border border-rose-500/30 text-xs font-medium transition-colors flex items-center gap-1.5"
+                        className="px-3 py-2 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 hover:text-rose-300 border border-rose-500/30 text-xs font-medium transition-colors flex items-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed"
                         title="Delete pull request"
                       >
-                        <Trash2 className="w-3.5 h-3.5" />
-                        <span>Delete</span>
+                        {deletingPrId === pr.id ? (
+                          <>
+                            <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                            <span>Deleting...</span>
+                          </>
+                        ) : (
+                          <>
+                            <Trash2 className="w-3.5 h-3.5" />
+                            <span>Delete</span>
+                          </>
+                        )}
                       </button>
                     )}
                     <button
@@ -657,15 +675,26 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 {onDeletePr && (
                   <button
                     id={`admin-delete-graded-pr-btn-${pr.id}`}
+                    disabled={deletingPrId === pr.id}
                     onClick={async () => {
-                      if (window.confirm(`Are you sure you want to delete PR #${pr.githubPrNumber || pr.id} (${pr.repo})?`)) {
+                      if (!window.confirm(`Are you sure you want to delete PR #${pr.githubPrNumber || pr.id} (${pr.repo})?`)) return;
+                      setDeletingPrId(pr.id);
+                      try {
                         await onDeletePr(pr.id);
+                      } catch (err: any) {
+                        alert(`Failed to delete pull request: ${err.message || 'Unknown error'}`);
+                      } finally {
+                        setDeletingPrId(null);
                       }
                     }}
-                    className="p-1 rounded hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 text-[11px] transition-colors"
+                    className="p-1 rounded hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 text-[11px] transition-colors disabled:opacity-50"
                     title="Delete PR"
                   >
-                    <Trash2 className="w-3.5 h-3.5" />
+                    {deletingPrId === pr.id ? (
+                      <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                    ) : (
+                      <Trash2 className="w-3.5 h-3.5" />
+                    )}
                   </button>
                 )}
               </div>

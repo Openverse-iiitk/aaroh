@@ -255,6 +255,7 @@ export async function reviewPullRequest(payload: {
   const res = await fetch(`${BASE_URL}/admin/review-pr`, {
     method: 'POST',
     headers: authHeaders(),
+    credentials: 'include',
     body: JSON.stringify(payload)
   });
   if (!res.ok) {
@@ -265,25 +266,42 @@ export async function reviewPullRequest(payload: {
 }
 
 export async function deletePullRequest(id: string): Promise<void> {
-  const res = await fetch(`${BASE_URL}/pull-requests/${id}`, {
-    method: 'DELETE',
-    headers: authHeaders()
+  const cleanId = String(id || '').trim();
+  if (!cleanId) return;
+
+  // Try dedicated POST endpoint first for maximum proxy/CDN compatibility
+  const res = await fetch(`${BASE_URL}/admin/delete-pr`, {
+    method: 'POST',
+    headers: authHeaders(),
+    credentials: 'include',
+    body: JSON.stringify({ id: cleanId, prId: cleanId })
   });
+
   if (!res.ok) {
-    const errorData = await res.json().catch(() => ({}));
-    throw new Error(errorData.error || 'Failed to delete pull request');
+    // Fall back to DELETE /api/pull-requests/:id
+    const fallbackRes = await fetch(`${BASE_URL}/pull-requests/${encodeURIComponent(cleanId)}`, {
+      method: 'DELETE',
+      headers: authHeaders(),
+      credentials: 'include'
+    });
+    if (!fallbackRes.ok) {
+      const errData = await fallbackRes.json().catch(() => ({}));
+      const primaryErr = await res.json().catch(() => ({}));
+      throw new Error(errData.error || primaryErr.error || 'Failed to delete pull request');
+    }
   }
 }
 
 export async function fetchLeaderboard(): Promise<LeaderboardResponse> {
-  const res = await fetch(`${BASE_URL}/leaderboard`);
+  const res = await fetch(`${BASE_URL}/leaderboard`, { credentials: 'include' });
   if (!res.ok) throw new Error('Failed to fetch leaderboard');
   return res.json();
 }
 
 export async function fetchAuditLogs(): Promise<AuditLog[]> {
   const res = await fetch(`${BASE_URL}/admin/audit-logs`, {
-    headers: authHeaders()
+    headers: authHeaders(),
+    credentials: 'include'
   });
   if (!res.ok) throw new Error('Failed to fetch audit logs');
   return res.json();
@@ -292,7 +310,8 @@ export async function fetchAuditLogs(): Promise<AuditLog[]> {
 export async function resetDatabase(): Promise<void> {
   const res = await fetch(`${BASE_URL}/admin/reset-db`, {
     method: 'POST',
-    headers: authHeaders()
+    headers: authHeaders(),
+    credentials: 'include'
   });
   if (!res.ok) throw new Error('Failed to reset database');
 }
@@ -300,7 +319,8 @@ export async function resetDatabase(): Promise<void> {
 export async function syncGitHubPullRequests(): Promise<{ success: boolean; message: string; syncedCount: number; prs: PullRequest[] }> {
   const res = await fetch(`${BASE_URL}/pull-requests/sync`, {
     method: 'POST',
-    headers: authHeaders()
+    headers: authHeaders(),
+    credentials: 'include'
   });
   if (!res.ok) throw new Error('Failed to sync PRs from GitHub');
   return res.json();

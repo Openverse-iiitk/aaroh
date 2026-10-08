@@ -114,10 +114,11 @@ class Database {
     const now = Date.now();
     if (!force && this.lastLoadedAt && (now - this.lastLoadedAt < 3000)) return;
     try {
-      const res = await fetch(`${BLOB_URL}?t=${now}`, {
+      const res = await fetch(`${BLOB_URL}?t=${now}&r=${Math.random().toString(36).substring(2, 8)}`, {
         cache: 'no-store',
         headers: {
-          'Cache-Control': 'no-cache, no-store, must-revalidate'
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache'
         }
       });
       if (res.ok) {
@@ -132,6 +133,17 @@ class Database {
               return new Date(pr.createdAt).getTime() >= minAllowedMs;
             });
           }
+
+          // Strictly filter out any PRs marked as deleted
+          const deletedSet = new Set((remoteData.deletedPrIds || []).map(x => String(x).toLowerCase()));
+          (this.data?.deletedPrIds || []).forEach(x => deletedSet.add(String(x).toLowerCase()));
+          remoteData.deletedPrIds = Array.from(deletedSet);
+          remoteData.pullRequests = remoteData.pullRequests.filter(pr => {
+            const pId = String(pr.id || '').trim().toLowerCase();
+            const pNum = String(pr.githubPrNumber || '').trim().toLowerCase();
+            if (deletedSet.has(pId) || deletedSet.has(pNum)) return false;
+            return true;
+          });
 
           this.data = remoteData;
           this.lastLoadedAt = now;
@@ -196,24 +208,36 @@ class Database {
         // before writing to Vercel Blob to prevent race condition data loss.
         if (process.env.VERCEL && !isFullReset) {
           try {
-            const checkRes = await fetch(`${BLOB_URL}?t=${Date.now()}`, {
+            const checkRes = await fetch(`${BLOB_URL}?t=${Date.now()}&r=${Math.random().toString(36).substring(2, 8)}`, {
               cache: 'no-store',
-              headers: { 'Cache-Control': 'no-cache, no-store' }
+              headers: { 'Cache-Control': 'no-cache, no-store', 'Pragma': 'no-cache' }
             });
             if (checkRes.ok) {
               const remote = await checkRes.json();
               if (remote && Array.isArray(remote.pullRequests)) {
-                // Merge pull requests without losing any submitted PR
+                const deletedSet = new Set((this.data.deletedPrIds || []).map(x => String(x).toLowerCase()));
+                (remote.deletedPrIds || []).forEach(x => deletedSet.add(String(x).toLowerCase()));
+                this.data.deletedPrIds = Array.from(deletedSet);
+
+                // Merge pull requests without losing any submitted PR (filtering out deleted PRs)
                 const prMap = new Map();
                 // 1. Add remote PRs
                 remote.pullRequests.forEach(p => {
                   const key = p.id || `${p.repo}#${p.githubPrNumber}`;
-                  prMap.set(key, p);
+                  const pId = String(p.id || '').trim().toLowerCase();
+                  const pNum = String(p.githubPrNumber || '').trim().toLowerCase();
+                  if (!deletedSet.has(pId) && !deletedSet.has(pNum)) {
+                    prMap.set(key, p);
+                  }
                 });
                 // 2. Overlay local PRs (newer local state overrides)
                 (this.data.pullRequests || []).forEach(p => {
                   const key = p.id || `${p.repo}#${p.githubPrNumber}`;
-                  prMap.set(key, p);
+                  const pId = String(p.id || '').trim().toLowerCase();
+                  const pNum = String(p.githubPrNumber || '').trim().toLowerCase();
+                  if (!deletedSet.has(pId) && !deletedSet.has(pNum)) {
+                    prMap.set(key, p);
+                  }
                 });
                 this.data.pullRequests = Array.from(prMap.values());
 
@@ -243,6 +267,7 @@ class Database {
           access: 'public',
           addRandomSuffix: false,
           allowOverwrite: true,
+          cacheControlMaxAge: 0,
           abortSignal: AbortSignal.timeout(8000),
           token
         });
@@ -372,10 +397,25 @@ class Database {
   async deletePullRequest(id) {
     if (!id) return false;
     await this.ensureLoaded(true);
+    const target = String(id).trim().toLowerCase();
+    this.data.deletedPrIds = this.data.deletedPrIds || [];
+    if (!this.data.deletedPrIds.includes(target)) {
+      this.data.deletedPrIds.push(target);
+    }
     const initialLen = (this.data.pullRequests || []).length;
-    this.data.pullRequests = (this.data.pullRequests || []).filter(
-      pr => pr.id !== id && String(pr.githubPrNumber) !== String(id)
-    );
+    this.data.pullRequests = (this.data.pullRequests || []).filter(pr => {
+      const pId = String(pr.id || '').trim().toLowerCase();
+      const pNum = String(pr.githubPrNumber || '').trim().toLowerCase();
+      const pUrl = String(pr.url || '').trim().toLowerCase();
+      const pRepoPr = `${pr.repo || ''}#${pr.githubPrNumber || ''}`.toLowerCase();
+      if (pId === target || pNum === target || pUrl === target || pRepoPr === target) {
+        if (!this.data.deletedPrIds.includes(pId)) this.data.deletedPrIds.push(pId);
+        if (pNum && !this.data.deletedPrIds.includes(pNum)) this.data.deletedPrIds.push(pNum);
+        return false;
+      }
+      return true;
+    });
+    // Critical: pass isFullReset = true so the deleted PR is never merged back from stale remote state
     await this.save(true);
     return this.data.pullRequests.length < initialLen;
   }

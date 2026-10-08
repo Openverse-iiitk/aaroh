@@ -152,7 +152,27 @@ function RootLayout() {
 
   const deletePrMutation = useMutation({
     mutationFn: deletePullRequest,
-    onSuccess: () => {
+    onMutate: async (deletedId: string) => {
+      await queryClient.cancelQueries({ queryKey: ['pullRequests'] });
+      const previousPrs = queryClient.getQueryData<PullRequest[]>(['pullRequests']);
+      const targetStr = String(deletedId).trim().toLowerCase();
+      queryClient.setQueryData<PullRequest[]>(['pullRequests'], (old) => {
+        if (!old) return [];
+        return old.filter(
+          (p) =>
+            String(p.id).trim().toLowerCase() !== targetStr &&
+            String(p.githubPrNumber).trim().toLowerCase() !== targetStr &&
+            !p.url?.toLowerCase().includes(targetStr)
+        );
+      });
+      return { previousPrs };
+    },
+    onError: (_err, _deletedId, context) => {
+      if (context?.previousPrs) {
+        queryClient.setQueryData(['pullRequests'], context.previousPrs);
+      }
+    },
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['pullRequests'] });
       queryClient.invalidateQueries({ queryKey: ['leaderboard'] });
       queryClient.invalidateQueries({ queryKey: ['auditLogs'] });

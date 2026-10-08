@@ -8,10 +8,18 @@
     "startDate": "2026-10-08T18:30:00.000Z",
     "endDate": null,
     "currentDay": 1,
-    "lastSyncAt": "2026-10-09T00:00:00.000Z",
-    "nextSyncAt": "2026-10-10T00:00:00.000Z",
+    "lastSyncAt": "2026-10-08T19:55:55.303Z",
+    "nextSyncAt": "2026-10-09T00:00:00.000Z",
     "trackingScope": "ALL_REPOSITORIES",
-    "trackedRepos": [],
+    "trackedRepos": [
+      "openverse/hackaaroh",
+      "facebook/react",
+      "nodejs/node",
+      "tailwindlabs/tailwindcss",
+      "tanstack/table",
+      "shadcn-ui/ui",
+      "microsoft/vscode"
+    ],
     "isFinalized": false,
     "loginsPaused": false,
     "finalizedAt": null,
@@ -27,30 +35,92 @@
       "htmlUrl": "https://github.com/Vijay-1710",
       "role": "admin",
       "createdAt": "2026-10-08T00:00:00.000Z"
+    },
+    {
+      "id": "gh_67535496",
+      "githubId": 67535496,
+      "username": "manvith12",
+      "name": "Manvith",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/67535496?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/manvith12",
+      "role": "contributor",
+      "createdAt": "2026-10-08T20:17:07.097Z"
     }
   ],
   "pullRequests": [],
   "auditLogs": [
     {
-      "id": "log-1791489895103-lc4r",
+      "id": "log-1791492320514-jmks",
+      "action": "PR_DELETED",
+      "actor": "Vijay-1710",
+      "details": "Admin deleted PR #46 (Openverse-iiitk/DSA-Website)",
+      "timestamp": "2026-10-08T20:45:20.514Z"
+    },
+    {
+      "id": "log-1791492258229-e8zc",
+      "action": "PR_DELETED",
+      "actor": "Vijay-1710",
+      "details": "Admin deleted PR #46 (Openverse-iiitk/DSA-Website)",
+      "timestamp": "2026-10-08T20:44:18.229Z"
+    },
+    {
+      "id": "log-1791492211695-29nk",
+      "action": "PR_DELETED",
+      "actor": "Vijay-1710",
+      "details": "Admin deleted PR #46 (Openverse-iiitk/DSA-Website)",
+      "timestamp": "2026-10-08T20:43:31.695Z"
+    },
+    {
+      "id": "log-1791491756754-8mgu",
+      "action": "PR_DELETED",
+      "actor": "Vijay-1710",
+      "details": "Admin deleted PR #46 (Openverse-iiitk/DSA-Website)",
+      "timestamp": "2026-10-08T20:35:56.754Z"
+    },
+    {
+      "id": "log-1791491746082-mg2i",
+      "action": "PR_DELETED",
+      "actor": "Vijay-1710",
+      "details": "Admin deleted PR #46 (Openverse-iiitk/DSA-Website)",
+      "timestamp": "2026-10-08T20:35:46.082Z"
+    },
+    {
+      "id": "log-1791490782081-087k",
+      "action": "PR_SUBMITTED",
+      "actor": "manvith12",
+      "details": "@manvith12 submitted verified PR #46 in Openverse-iiitk/DSA-Website",
+      "timestamp": "2026-10-08T20:19:42.081Z"
+    },
+    {
+      "id": "log-1791490472208-ajwy",
       "action": "ADMIN_SECRET_LOGIN",
       "actor": "Vijay-1710",
       "details": "Admin authenticated via verified secret passkey",
-      "timestamp": "2026-10-08T20:04:55.103Z"
+      "timestamp": "2026-10-08T20:14:32.208Z"
     },
     {
-      "id": "log-1791489160877-h2zv",
-      "action": "ADMIN_SECRET_LOGIN",
+      "id": "log-1791489355384-4ku7",
+      "action": "EVENT_RESET",
       "actor": "Vijay-1710",
-      "details": "Admin authenticated via verified secret passkey",
-      "timestamp": "2026-10-08T19:52:40.877Z"
+      "details": "Sprint reset to Day 1 clean event state",
+      "timestamp": "2026-10-08T19:55:55.384Z"
     },
     {
-      "id": "log-event-kickoff",
+      "id": "log-1791489355303-init",
       "action": "SPRINT_INITIALIZED",
       "actor": "Vijay-1710",
-      "details": "HackAaroh 2026 Open Source Sprint initialized. Review queue clean. Real-time PR evaluation active.",
-      "timestamp": "2026-10-09T00:00:00.000Z"
+      "details": "HackAaroh Sprint initialized for October 9 kickoff. Participant logins paused. Secret admin portal active.",
+      "timestamp": "2026-10-08T19:55:55.303Z"
     }
+  ],
+  "deletedPrIds": [
+    "pr-1791490781754-3yhe",
+    "46",
+    "pr-test-post-1",
+    "pr-test-delete-2",
+    "11111",
+    "22222",
+    "pr-test-del-99"
   ]
 }
