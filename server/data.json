@@ -24,6 +24,7 @@
       "openverse/hackaaroh"
     ],
     "isFinalized": false,
+    "loginsPaused": true,
     "finalizedAt": null,
     "finalPodium": []
   },
@@ -87,9 +88,374 @@
       "htmlUrl": "https://github.com/admin-starlit",
       "role": "admin",
       "createdAt": "2026-10-05T09:37:01.481Z"
+    },
+    {
+      "id": "gh_232497432",
+      "githubId": 232497432,
+      "username": "Rohan-Satheesh",
+      "name": "Rohan",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/232497432?v=4",
+      "bio": "A cuppa tea is all I need to pull and push.",
+      "htmlUrl": "https://github.com/Rohan-Satheesh",
+      "role": "contributor",
+      "createdAt": "2026-10-08T09:44:06.466Z"
+    },
+    {
+      "id": "gh_299600311",
+      "githubId": 299600311,
+      "username": "Deva4509",
+      "name": "Deva4509",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/299600311?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/Deva4509",
+      "role": "contributor",
+      "createdAt": "2026-10-08T10:04:37.594Z"
     }
   ],
   "pullRequests": [
+    {
+      "id": "pr-1791454207011-wzn4",
+      "githubPrNumber": 332,
+      "repo": "Vijay-1710/crypto-tracer",
+      "title": "crypto tracer",
+      "description": "Enhanced async reconciliation batching, reducing redundant tree traversals by 40%.",
+      "url": "https://github.com/Vijay-1710/crypto-tracer/pull/592",
+      "state": "open",
+      "author": "sarah-dev",
+      "authorAvatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T10:10:07.011Z",
+      "dayOfSprint": 4,
+      "additions": 140,
+      "deletions": 18,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "feature",
+        "tanstack",
+        "ui"
+      ]
+    },
+    {
+      "id": "pr-gh-3581860048-jyev",
+      "githubPrNumber": 93,
+      "repo": "gdg-iiitk/git-task",
+      "title": "Rohan-Satheesh/main <-- Rohan-Satheesh/git-task_Rohan-Satheesh",
+      "description": "Automatically tracked from gdg-iiitk/git-task for @Rohan-Satheesh",
+      "url": "https://github.com/gdg-iiitk/git-task/pull/93",
+      "state": "merged",
+      "author": "Rohan-Satheesh",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/232497432?v=4",
+      "createdAt": "2025-11-03T12:30:23Z",
+      "dayOfSprint": 4,
+      "additions": 44,
+      "deletions": 26,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "git-task"
+      ]
+    },
+    {
+      "id": "pr-gh-3581887987-0884",
+      "githubPrNumber": 110,
+      "repo": "gdg-iiitk/git-task",
+      "title": "New pull request #2",
+      "description": "Automatically tracked from gdg-iiitk/git-task for @Rohan-Satheesh",
+      "url": "https://github.com/gdg-iiitk/git-task/pull/110",
+      "state": "merged",
+      "author": "Rohan-Satheesh",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/232497432?v=4",
+      "createdAt": "2025-11-03T12:37:22Z",
+      "dayOfSprint": 4,
+      "additions": 114,
+      "deletions": 13,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "git-task"
+      ]
+    },
+    {
+      "id": "pr-1791453877839-1-al8",
+      "githubPrNumber": 778,
+      "repo": "facebook/react",
+      "title": "fix: optimize reactive subscriber reconciliation loop",
+      "description": "Automatically detected on GitHub across all repositories for @Deva4509.",
+      "url": "https://github.com/facebook/react/pull/778",
+      "state": "open",
+      "author": "Deva4509",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/299600311?v=4",
+      "createdAt": "2026-10-08T10:04:37.839Z",
+      "dayOfSprint": 4,
+      "additions": 145,
+      "deletions": 32,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "react",
+        "bugfix"
+      ]
+    },
+    {
+      "id": "pr-1791453877755-0-exu",
+      "githubPrNumber": 545,
+      "repo": "tailwindlabs/tailwindcss",
+      "title": "feat: add container queries runtime polyfill for tailwind engine",
+      "description": "Automatically detected on GitHub across all repositories for @Deva4509.",
+      "url": "https://github.com/tailwindlabs/tailwindcss/pull/545",
+      "state": "open",
+      "author": "Deva4509",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/299600311?v=4",
+      "createdAt": "2026-10-08T10:04:37.755Z",
+      "dayOfSprint": 4,
+      "additions": 175,
+      "deletions": 15,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "tailwind",
+        "css"
+      ]
+    },
+    {
+      "id": "pr-1791452741487-phaf",
+      "githubPrNumber": 284,
+      "repo": "Rohan-Satheesh/Titanic-Data-Analysis",
+      "title": "Wow",
+      "description": "Submitted by @Rohan-Satheesh",
+      "url": "https://github.com/Rohan-Satheesh/Titanic-Data-Analysis/pull/407",
+      "state": "open",
+      "author": "Rohan-Satheesh",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/232497432?v=4",
+      "createdAt": "2026-10-08T09:45:41.487Z",
+      "dayOfSprint": 4,
+      "additions": 140,
+      "deletions": 18,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "feature",
+        "tanstack",
+        "ui"
+      ]
+    },
+    {
+      "id": "pr-1791452679594-75l3",
+      "githubPrNumber": 908,
+      "repo": "Rohan-Satheesh/Titanic-Data-Analysis",
+      "title": "wow",
+      "description": "Submitted by @Rohan-Satheesh",
+      "url": "https://github.com/Rohan-Satheesh/Titanic-Data-Analysis/pull/348",
+      "state": "open",
+      "author": "Rohan-Satheesh",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/232497432?v=4",
+      "createdAt": "2026-10-08T09:44:39.594Z",
+      "dayOfSprint": 4,
+      "additions": 140,
+      "deletions": 18,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "feature",
+        "tanstack",
+        "ui"
+      ]
+    },
+    {
+      "id": "pr-1791452666541-qkb4",
+      "githubPrNumber": 160,
+      "repo": "Rohan-Satheesh/Titanic-Data-Analysis",
+      "title": "Wow",
+      "description": "Enhanced async reconciliation batching, reducing redundant tree traversals by 40%.",
+      "url": "https://github.com/Rohan-Satheesh/Titanic-Data-Analysis/pull/786",
+      "state": "open",
+      "author": "Rohan-Satheesh",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/232497432?v=4",
+      "createdAt": "2026-10-08T09:44:26.541Z",
+      "dayOfSprint": 4,
+      "additions": 140,
+      "deletions": 18,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "feature",
+        "tanstack",
+        "ui"
+      ]
+    },
+    {
+      "id": "pr-1791452640676-1-r35",
+      "githubPrNumber": 325,
+      "repo": "facebook/react",
+      "title": "fix: optimize reactive subscriber reconciliation loop",
+      "description": "Automatically detected on GitHub across all repositories for @Rohan-Satheesh.",
+      "url": "https://github.com/facebook/react/pull/325",
+      "state": "open",
+      "author": "Rohan-Satheesh",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/232497432?v=4",
+      "createdAt": "2026-10-08T09:44:00.676Z",
+      "dayOfSprint": 4,
+      "additions": 145,
+      "deletions": 32,
+      "commitsCount": 2,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "react",
+        "bugfix"
+      ]
+    },
+    {
+      "id": "pr-1791452640620-0-w9m",
+      "githubPrNumber": 889,
+      "repo": "vercel/next.js",
+      "title": "feat: implement concurrent task scheduler with priority queue",
+      "description": "Automatically detected on GitHub across all repositories for @Rohan-Satheesh.",
+      "url": "https://github.com/vercel/next.js/pull/889",
+      "state": "open",
+      "author": "Rohan-Satheesh",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/232497432?v=4",
+      "createdAt": "2026-10-08T09:44:00.620Z",
+      "dayOfSprint": 4,
+      "additions": 310,
+      "deletions": 25,
+      "commitsCount": 2,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "scheduler",
+        "nextjs"
+      ]
+    },
+    {
+      "id": "pr-1791452470405-cr0o",
+      "githubPrNumber": 522,
+      "repo": "openverse/hackaaroh",
+      "title": "feat: verified persistent test PR 1791452469909",
+      "description": "End-to-end test verifying PR is never deleted",
+      "url": "https://github.com/openverse/hackaaroh/pull/888",
+      "state": "open",
+      "author": "manav-codes",
+      "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-08T09:41:10.405Z",
+      "dayOfSprint": 4,
+      "additions": 120,
+      "deletions": 15,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 95,
+      "adminFeedback": "Excellent persistent implementation and robust caching boundaries.",
+      "adminCriteria": {
+        "quality": 20,
+        "complexity": 20,
+        "impact": 20,
+        "testCoverage": 20
+      },
+      "reviewedBy": "hackaaroh",
+      "reviewedAt": "2026-10-08T09:41:43.521Z",
+      "tags": [
+        "persistence",
+        "verified"
+      ]
+    },
     {
       "id": "pr-101",
       "githubPrNumber": 142,
@@ -380,6 +746,48 @@
     }
   ],
   "auditLogs": [
+    {
+      "id": "log-1791454207166-jdyc",
+      "action": "PR_SUBMITTED",
+      "actor": "sarah-dev",
+      "details": "@sarah-dev submitted PR #332 in https://github.com/Vijay-1710/crypto-tracer",
+      "timestamp": "2026-10-08T10:10:07.166Z"
+    },
+    {
+      "id": "log-1791454131446-cp1v",
+      "action": "GITHUB_SYNC",
+      "actor": "Rohan-Satheesh",
+      "details": "Automatically synced 2 real GitHub PRs across repositories for @Rohan-Satheesh",
+      "timestamp": "2026-10-08T10:08:51.446Z"
+    },
+    {
+      "id": "log-1791452741570-5puf",
+      "action": "PR_SUBMITTED",
+      "actor": "Rohan-Satheesh",
+      "details": "@Rohan-Satheesh submitted PR #284 in Rohan-Satheesh/Titanic-Data-Analysis",
+      "timestamp": "2026-10-08T09:45:41.570Z"
+    },
+    {
+      "id": "log-1791452679684-ramq",
+      "action": "PR_SUBMITTED",
+      "actor": "Rohan-Satheesh",
+      "details": "@Rohan-Satheesh submitted PR #908 in https://github.com/Rohan-Satheesh/Titanic-Data-Analysis",
+      "timestamp": "2026-10-08T09:44:39.684Z"
+    },
+    {
+      "id": "log-1791452666594-xuv3",
+      "action": "PR_SUBMITTED",
+      "actor": "Rohan-Satheesh",
+      "details": "@Rohan-Satheesh submitted PR #160 in https://github.com/Rohan-Satheesh/Titanic-Data-Analysis",
+      "timestamp": "2026-10-08T09:44:26.594Z"
+    },
+    {
+      "id": "log-1791452503575-15eu",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "hackaaroh",
+      "details": "Admin reviewed PR #522 (manav-codes) -> Awarded 95 credits with status REVIEWED",
+      "timestamp": "2026-10-08T09:41:43.575Z"
+    },
     {
       "id": "log-1",
       "action": "SPRINT_STARTED",

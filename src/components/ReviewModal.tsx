@@ -109,7 +109,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
         </div>
 
         <h3 className="text-xl font-medium text-lilac-white pr-8">
-          Review PR #{pr.githubPrNumber}: {pr.title}
+          Review {pr.isRepoOnly || !pr.githubPrNumber ? 'Project' : `PR #${pr.githubPrNumber}`}: {pr.title}
         </h3>
 
         {/* PR Metadata card */}

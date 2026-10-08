@@ -48,11 +48,17 @@ export const SubmitPrModal: React.FC<SubmitPrModalProps> = ({
       .map((t) => t.trim().toLowerCase())
       .filter(Boolean);
 
+    const cleanRepo = repo
+      .trim()
+      .replace(/^https?:\/\/github\.com\//i, '')
+      .replace(/\/pull\/\d+.*$/i, '')
+      .replace(/\/$/, '');
+
     await onSubmitPr({
-      repo,
-      title,
-      description,
-      url: url || `https://github.com/${repo}/pull/${Math.floor(Math.random() * 800) + 150}`,
+      repo: cleanRepo,
+      title: title.trim(),
+      description: description.trim(),
+      url: url.trim(),
       additions: Number(additions),
       deletions: Number(deletions),
       commitsCount: Number(commitsCount),
@@ -76,40 +82,40 @@ export const SubmitPrModal: React.FC<SubmitPrModalProps> = ({
 
         <div className="flex items-center gap-2 mb-2 text-xs font-medium uppercase tracking-wider text-lavender-accent">
           <GitPullRequest className="w-4 h-4" />
-          <span>Submit a Contribution</span>
+          <span>Submit a Contribution or Project</span>
         </div>
 
         <h3 className="text-xl font-medium text-lilac-white">
-          Submit Pull Request for Admin Review
+          Submit Work for Admin Review
         </h3>
         <p className="text-xs text-ash mt-1">
-          Submitted PRs enter the queue for administrators to inspect and assign credit scores based on quality, impact, and complexity.
+          Submit an open-source pull request OR a complete project repository. Evaluators will inspect your GitHub code and assign rubric credit scores.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-5 space-y-4">
           <div>
             <label className="text-xs font-semibold uppercase tracking-wider text-fog block mb-1">
-              GitHub Repository
+              GitHub Repository or Project Link *
             </label>
             <input
               type="text"
               required
-              placeholder="e.g. facebook/react or your-org/your-repo"
+              placeholder="e.g. facebook/react or https://github.com/your-org/your-repo"
               value={repo}
               onChange={(e) => setRepo(e.target.value)}
               className="w-full p-2.5 rounded-btn bg-midnight-surface border border-white/10 text-xs text-lilac-white focus:outline-none focus:border-lavender-accent"
             />
-            <p className="text-[11px] text-ash mt-1.5">Submit a pull request from any public GitHub repository.</p>
+            <p className="text-[11px] text-ash mt-1.5">You can enter either &ldquo;owner/repo&rdquo; or paste the full GitHub repository URL.</p>
           </div>
 
           <div>
             <label className="text-xs font-semibold uppercase tracking-wider text-fog block mb-1">
-              Pull Request Title *
+              Contribution or Project Title *
             </label>
             <input
               type="text"
               required
-              placeholder="e.g. feat: add reactive leaderboard sorting using TanStack Table"
+              placeholder="e.g. feat: Realtime collaborative canvas or project name"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               className="w-full p-2.5 rounded-btn bg-midnight-surface border border-white/10 text-xs text-lilac-white focus:outline-none focus:border-lavender-accent placeholder:text-steel"
@@ -118,11 +124,11 @@ export const SubmitPrModal: React.FC<SubmitPrModalProps> = ({
 
           <div>
             <label className="text-xs font-semibold uppercase tracking-wider text-fog block mb-1">
-              PR Description & Context
+              Description & Highlights
             </label>
             <textarea
               rows={2}
-              placeholder="Summarize the key changes, bug fixes, or performance gains achieved."
+              placeholder="Summarize key features, architecture, bug fixes, or performance gains."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               className="w-full p-2.5 rounded-btn bg-midnight-surface border border-white/10 text-xs text-lilac-white focus:outline-none focus:border-lavender-accent placeholder:text-steel resize-none"
@@ -131,15 +137,16 @@ export const SubmitPrModal: React.FC<SubmitPrModalProps> = ({
 
           <div>
             <label className="text-xs font-semibold uppercase tracking-wider text-fog block mb-1">
-              GitHub PR URL (optional)
+              Specific PR URL (optional)
             </label>
             <input
               type="url"
-              placeholder="https://github.com/openverse/hackaaroh/pull/155"
+              placeholder="https://github.com/owner/repo/pull/123 (leave empty if submitting entire repo)"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               className="w-full p-2.5 rounded-btn bg-midnight-surface border border-white/10 text-xs text-lilac-white focus:outline-none focus:border-lavender-accent placeholder:text-steel"
             />
+            <p className="text-[11px] text-ash mt-1">If no PR exists, leave this empty. Evaluators will review your repository directly.</p>
           </div>
 
           <div className="grid grid-cols-3 gap-3">

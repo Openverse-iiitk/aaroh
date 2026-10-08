@@ -51,6 +51,7 @@ const getInitialSeed = () => {
         'openverse/hackaaroh'
       ],
       isFinalized: false,
+      loginsPaused: true,
       finalizedAt: null,
       finalPodium: []
     },

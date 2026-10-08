@@ -42,7 +42,7 @@ export const LivePullRequestMarquee: React.FC<LivePullRequestMarqueeProps> = ({ 
             ) : (
               <span className="inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 font-medium border border-blue-500/30">
                 <GitPullRequest className="w-2.5 h-2.5" />
-                PR #{pr.githubPrNumber}
+                {pr.isRepoOnly || !pr.githubPrNumber ? 'Repo Project' : `PR #${pr.githubPrNumber}`}
               </span>
             )}
 

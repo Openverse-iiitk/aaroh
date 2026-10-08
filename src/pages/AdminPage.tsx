@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PullRequest, Sprint, User, AuditLog } from '../types';
-import { Shield, CheckCircle2, Clock, StopCircle, PlayCircle, PauseCircle, RefreshCw, Flag, RotateCcw, AlertTriangle, ExternalLink, Award, FileCode, Check, Play, Settings, Plus, Trash2, Calendar } from 'lucide-react';
+import { Shield, CheckCircle2, Clock, StopCircle, PlayCircle, PauseCircle, RefreshCw, Flag, RotateCcw, AlertTriangle, ExternalLink, Award, FileCode, Check, Play, Settings, Plus, Trash2, Calendar, Lock } from 'lucide-react';
 
 interface AdminPageProps {
   currentUser: User | null;
@@ -267,6 +267,32 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 )}
               </button>
 
+              {/* Pause / Resume Logins Toggle */}
+              <button
+                id="admin-toggle-logins-btn"
+                type="button"
+                onClick={async () => {
+                  try {
+                    await fetch('/api/admin/toggle-logins', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ paused: !sprint.loginsPaused })
+                    });
+                    window.location.reload();
+                  } catch (e) {
+                    alert('Failed to update logins status');
+                  }
+                }}
+                className={`px-3 py-2 rounded-btn text-xs font-medium transition-colors flex items-center gap-1.5 border ${
+                  sprint.loginsPaused
+                    ? 'bg-amber-950/60 border-amber-500/50 text-amber-300 hover:bg-amber-900/60'
+                    : 'btn-secondary !py-2 !px-3'
+                }`}
+              >
+                <Lock className={`w-3.5 h-3.5 ${sprint.loginsPaused ? 'text-amber-400' : 'text-zinc-400'}`} />
+                <span>{sprint.loginsPaused ? 'Logins: PAUSED (Click to Resume)' : 'Pause Logins'}</span>
+              </button>
+
               {/* End Tracking */}
               <button
                 id="admin-end-sprint-btn"
@@ -447,7 +473,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                     </div>
 
                     <h4 className="text-sm font-medium text-lilac-white">
-                      #{pr.githubPrNumber}: {pr.title}
+                      {pr.isRepoOnly || !pr.githubPrNumber ? '📁 [Repo Project] ' : `#${pr.githubPrNumber}: `}{pr.title}
                     </h4>
 
                     {pr.description && (
@@ -466,7 +492,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                         rel="noopener noreferrer"
                         className="text-lavender-accent hover:underline flex items-center gap-1"
                       >
-                        GitHub PR <ExternalLink className="w-3 h-3" />
+                        {pr.isRepoOnly || !pr.githubPrNumber ? 'View Repository' : 'GitHub PR'} <ExternalLink className="w-3 h-3" />
                       </a>
                     </div>
                   </div>
@@ -503,7 +529,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
               <div className="space-y-1 min-w-0">
                 <div className="flex items-center gap-2">
                   <span className="font-medium text-lilac-white truncate">
-                    #{pr.githubPrNumber}: {pr.title}
+                    {pr.isRepoOnly || !pr.githubPrNumber ? '📁 [Repo Project] ' : `#${pr.githubPrNumber}: `}{pr.title}
                   </span>
                   <span className="text-fog">(@{pr.author})</span>
                 </div>

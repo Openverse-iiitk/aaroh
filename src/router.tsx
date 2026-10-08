@@ -329,6 +329,7 @@ function RootLayout() {
           onClose={() => setAuthModalOpen(false)}
           onSelectMockUser={handleSelectMockUser}
           isLoading={loginMutation.isPending}
+          loginsPaused={sprint?.loginsPaused}
         />
 
         <SubmitPrModal

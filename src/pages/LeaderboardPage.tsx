@@ -399,7 +399,7 @@ export const LeaderboardPage: React.FC<LeaderboardPageProps> = ({
                                           rel="noopener noreferrer"
                                           className="font-medium text-white hover:text-blue-400 transition-colors flex items-center gap-1"
                                         >
-                                          <span>#{pr.githubPrNumber}: {pr.title}</span>
+                                          <span>{pr.isRepoOnly || !pr.githubPrNumber ? '📁 ' : `#${pr.githubPrNumber}: `}{pr.title}</span>
                                           <ExternalLink className="w-3 h-3 text-zinc-500" />
                                         </a>
                                         {pr.adminFeedback && (
@@ -562,7 +562,7 @@ export const LeaderboardPage: React.FC<LeaderboardPageProps> = ({
                       rel="noopener noreferrer"
                       className="font-medium text-white hover:text-blue-400 transition-colors flex items-center gap-1.5 text-sm truncate"
                     >
-                      <span>#{pr.githubPrNumber}: {pr.title}</span>
+                      <span>{pr.isRepoOnly || !pr.githubPrNumber ? '📁 ' : `#${pr.githubPrNumber}: `}{pr.title}</span>
                       <ExternalLink className="w-3.5 h-3.5 text-zinc-500 flex-shrink-0" />
                     </a>
 

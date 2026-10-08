@@ -276,6 +276,19 @@ app.post('/api/auth/mock-login', async (req, res) => {
     return res.status(400).json({ error: 'Username is required' });
   }
 
+  const sprint = db.getSprint();
+  const adminUsers = (process.env.ADMIN_GITHUB_USER || 'Vijay-1710,admin-starlit,Openverse-iiitk')
+    .toLowerCase()
+    .split(',')
+    .map(u => u.trim());
+  const isAdmin = (role === 'admin') || adminUsers.includes(username.toLowerCase());
+
+  if (sprint.loginsPaused && !isAdmin) {
+    return res.status(403).json({
+      error: 'Logins are temporarily paused by event organizers. Please check back shortly!'
+    });
+  }
+
   let user = db.getUserByUsername(username);
   if (!user) {
     user = await db.upsertUser({
@@ -295,7 +308,6 @@ app.post('/api/auth/mock-login', async (req, res) => {
   // Automatically ensure cross-repository PRs are tracked for newly connected contributors
   const existingPrs = db.getPullRequests().filter(pr => pr.author.toLowerCase() === user.username.toLowerCase());
   if (existingPrs.length === 0 && user.role !== 'admin') {
-    const sprint = db.getSprint();
     await syncUserGitHubPullRequests(user, sprint.currentDay || 1);
   }
 
@@ -311,6 +323,15 @@ app.post('/api/auth/mock-login', async (req, res) => {
 
 // GitHub OAuth authorization URL
 app.get('/api/auth/github/url', (req, res) => {
+  const sprint = db.getSprint();
+  if (sprint.loginsPaused) {
+    return res.json({
+      configured: false,
+      paused: true,
+      message: 'Participant logins are temporarily paused by event organizers. Please check back shortly!'
+    });
+  }
+
   const clientId = process.env.GITHUB_CLIENT_ID;
   if (!clientId) {
     return res.json({
@@ -383,6 +404,11 @@ app.get('/api/auth/github/callback', async (req, res) => {
       .map(u => u.trim());
     const isAdmin = adminUsers.includes(ghUser.login.toLowerCase());
 
+    const sprint = db.getSprint();
+    if (sprint.loginsPaused && !isAdmin) {
+      return res.redirect(`${frontendUrl}/?error=logins_paused&message=${encodeURIComponent('Logins are temporarily paused by event organizers. Please check back shortly!')}`);
+    }
+
     const user = await db.upsertUser({
       id: `gh_${ghUser.id}`,
       githubId: ghUser.id,
@@ -433,6 +459,26 @@ app.all('/api/auth/forget-user', async (req, res) => {
   res.clearCookie('reflect_session');
   await db.addAuditLog('USER_REMOVED', 'SYSTEM', `Removed user @${username} and all associated PRs`);
   res.json({ success: true, removed: username, deleted });
+});
+
+// Toggle logins paused / active
+app.all('/api/auth/pause-logins', async (req, res) => {
+  await db.updateSprint({ loginsPaused: true });
+  await db.addAuditLog('LOGINS_PAUSED', 'ORGANIZER', 'Participant logins temporarily paused');
+  res.json({ success: true, loginsPaused: true, message: 'Logins are now PAUSED' });
+});
+
+app.all('/api/auth/resume-logins', async (req, res) => {
+  await db.updateSprint({ loginsPaused: false });
+  await db.addAuditLog('LOGINS_RESUMED', 'ORGANIZER', 'Participant logins resumed');
+  res.json({ success: true, loginsPaused: false, message: 'Logins are now ACTIVE' });
+});
+
+app.post('/api/admin/toggle-logins', async (req, res) => {
+  const sprint = db.getSprint();
+  const newPaused = req.body.paused !== undefined ? req.body.paused : !sprint.loginsPaused;
+  await db.updateSprint({ loginsPaused: newPaused });
+  res.json({ success: true, loginsPaused: newPaused });
 });
 
 // -------------------------------------------------------------
@@ -652,15 +698,59 @@ app.post('/api/pull-requests', async (req, res) => {
     return res.status(400).json({ error: 'Repo and title are required' });
   }
 
+  // Clean repo: extract owner/repo even if full URL was pasted
+  let cleanRepo = repo.trim()
+    .replace(/^https?:\/\/github\.com\//i, '')
+    .replace(/\/pull\/\d+.*$/i, '')
+    .replace(/\/$/, '');
+
+  let cleanUrl = (url || '').trim().replace(/^https?:\/\/github\.com\/https?:\/\/github\.com\//i, 'https://github.com/');
+  let prNumber = githubPrNumber ? parseInt(githubPrNumber, 10) : null;
+  let isRepoOnly = false;
+
+  // If a full PR URL was passed in url or repo
+  if (cleanUrl) {
+    const prMatch = cleanUrl.match(/\/pull\/(\d+)/i);
+    if (prMatch) {
+      prNumber = parseInt(prMatch[1], 10);
+    }
+  }
+
+  // If no PR number known yet, query GitHub API to check if user has an existing PR in this repo
+  if (!prNumber) {
+    try {
+      const token = sessionUser.accessToken || process.env.GITHUB_TOKEN;
+      const headers = { 'User-Agent': 'HackAaroh-PR-Tracker' };
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+
+      const ghRes = await fetch(`https://api.github.com/repos/${cleanRepo}/pulls?creator=${encodeURIComponent(sessionUser.username)}&state=all`, { headers });
+      if (ghRes.ok) {
+        const ghPrs = await ghRes.json();
+        if (Array.isArray(ghPrs) && ghPrs.length > 0) {
+          prNumber = ghPrs[0].number;
+          cleanUrl = ghPrs[0].html_url;
+        }
+      }
+    } catch (_) {}
+  }
+
+  // If no PR exists on GitHub (user submitted a standalone repository project link):
+  if (!prNumber) {
+    isRepoOnly = true;
+    cleanUrl = `https://github.com/${cleanRepo}`;
+  } else if (!cleanUrl) {
+    cleanUrl = `https://github.com/${cleanRepo}/pull/${prNumber}`;
+  }
+
   const sprint = db.getSprint();
-  const prNumber = githubPrNumber || Math.floor(Math.random() * 900) + 100;
   const newPr = {
     id: `pr-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
-    githubPrNumber: prNumber,
-    repo,
+    githubPrNumber: prNumber || 0,
+    isRepoOnly,
+    repo: cleanRepo,
     title,
-    description: description || `Submitted by @${sessionUser.username}`,
-    url: url || `https://github.com/${repo}/pull/${prNumber}`,
+    description: description || (isRepoOnly ? `Repository project submitted by @${sessionUser.username}` : `Submitted by @${sessionUser.username}`),
+    url: cleanUrl,
     state: 'open',
     author: sessionUser.username,
     authorAvatar: sessionUser.avatarUrl,
@@ -679,7 +769,7 @@ app.post('/api/pull-requests', async (req, res) => {
   };
 
   await db.addPullRequest(newPr);
-  await db.addAuditLog('PR_SUBMITTED', sessionUser.username, `@${sessionUser.username} submitted PR #${prNumber} in ${repo}`);
+  await db.addAuditLog('PR_SUBMITTED', sessionUser.username, `@${sessionUser.username} submitted ${isRepoOnly ? 'repo project' : `PR #${prNumber}`} in ${cleanRepo}`);
   res.status(201).json({ pr: newPr });
 });
 

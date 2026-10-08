@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Github, ArrowRight } from 'lucide-react';
+import { X, Github, ArrowRight, AlertTriangle, Lock } from 'lucide-react';
 import { fetchGitHubOAuthUrl } from '../api/client';
 
 interface AuthModalProps {
@@ -7,13 +7,15 @@ interface AuthModalProps {
   onClose: () => void;
   onSelectMockUser: (username: string, role: 'admin' | 'contributor', name?: string, avatarUrl?: string) => Promise<void>;
   isLoading: boolean;
+  loginsPaused?: boolean;
 }
 
 export const AuthModal: React.FC<AuthModalProps> = ({
   isOpen,
   onClose,
   onSelectMockUser,
-  isLoading
+  isLoading,
+  loginsPaused = false
 }) => {
   const [customUsername, setCustomUsername] = useState('');
   const [customRole, setCustomRole] = useState<'admin' | 'contributor'>('contributor');
@@ -84,13 +86,29 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           </p>
         </div>
 
+        {/* Logins Paused Alert */}
+        {loginsPaused && (
+          <div className="p-3.5 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-200 text-xs mb-4 flex items-start gap-2.5 leading-relaxed">
+            <AlertTriangle className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
+            <div>
+              <span className="font-semibold block text-amber-300 mb-0.5">Participant Logins Temporarily Paused</span>
+              Event organizers have temporarily paused logins and new contributor registrations while configuring the sprint. Please check back shortly!
+            </div>
+          </div>
+        )}
+
         {/* Primary GitHub OAuth button */}
         <button
           onClick={handleOAuthLogin}
-          className="w-full py-2.5 px-4 rounded bg-[#24292e] hover:bg-[#2f363d] text-white border border-white/15 text-xs font-medium flex items-center justify-center gap-2 transition-colors mb-2"
+          disabled={loginsPaused}
+          className={`w-full py-2.5 px-4 rounded text-white border text-xs font-medium flex items-center justify-center gap-2 transition-colors mb-2 ${
+            loginsPaused
+              ? 'bg-zinc-800/80 border-white/5 text-zinc-400 cursor-not-allowed opacity-60'
+              : 'bg-[#24292e] hover:bg-[#2f363d] border-white/15'
+          }`}
         >
-          <Github className="w-4 h-4" />
-          <span>Authenticate with GitHub OAuth</span>
+          {loginsPaused ? <Lock className="w-4 h-4 text-amber-400" /> : <Github className="w-4 h-4" />}
+          <span>{loginsPaused ? 'Participant Logins Paused' : 'Authenticate with GitHub OAuth'}</span>
         </button>
 
         <p className="text-[10px] text-zinc-500 text-center mb-3">
@@ -106,46 +124,58 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         <div className="relative flex py-2 items-center mb-4">
           <div className="flex-grow border-t border-white/10"></div>
           <span className="flex-shrink mx-3 text-[11px] uppercase tracking-wider text-zinc-500">
-            Or test with instant accounts
+            {loginsPaused ? 'Admin test access only' : 'Or test with instant accounts'}
           </span>
           <div className="flex-grow border-t border-white/10"></div>
         </div>
 
         {/* Instant Profile Switcher */}
         <div className="space-y-2 mb-5">
-          {demoAccounts.map((account) => (
-            <button
-              key={account.username}
-              onClick={() => onSelectMockUser(account.username, account.role, account.name, account.avatarUrl)}
-              disabled={isLoading}
-              className="w-full p-2.5 rounded bg-[#18181b] hover:bg-[#202025] border border-white/5 hover:border-white/15 text-left flex items-center justify-between gap-3 transition-colors group"
-            >
-              <div className="flex items-center gap-2.5 min-w-0">
-                <img
-                  src={account.avatarUrl}
-                  alt={account.username}
-                  className="w-7 h-7 rounded-full object-cover flex-shrink-0"
-                />
-                <div className="min-w-0">
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-xs font-medium text-white truncate">
-                      {account.name}
-                    </span>
-                    <span className={`text-[10px] px-1.5 py-0.2 rounded ${
-                      account.role === 'admin'
-                        ? 'bg-blue-900/40 text-blue-300 border border-blue-800/50'
-                        : 'bg-zinc-800 text-zinc-400'
-                    }`}>
-                      {account.badge}
-                    </span>
+          {demoAccounts.map((account) => {
+            const isPausedForAccount = loginsPaused && account.role !== 'admin';
+            return (
+              <button
+                key={account.username}
+                onClick={() => onSelectMockUser(account.username, account.role, account.name, account.avatarUrl)}
+                disabled={isLoading || isPausedForAccount}
+                className={`w-full p-2.5 rounded bg-[#18181b] border text-left flex items-center justify-between gap-3 transition-colors group ${
+                  isPausedForAccount
+                    ? 'opacity-40 cursor-not-allowed border-white/5'
+                    : 'hover:bg-[#202025] border-white/5 hover:border-white/15'
+                }`}
+              >
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <img
+                    src={account.avatarUrl}
+                    alt={account.username}
+                    className="w-7 h-7 rounded-full object-cover flex-shrink-0"
+                  />
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-xs font-medium text-white truncate">
+                        {account.name}
+                      </span>
+                      <span className={`text-[10px] px-1.5 py-0.2 rounded ${
+                        account.role === 'admin'
+                          ? 'bg-blue-900/40 text-blue-300 border border-blue-800/50'
+                          : 'bg-zinc-800 text-zinc-400'
+                      }`}>
+                        {account.badge}
+                      </span>
+                      {isPausedForAccount && (
+                        <span className="text-[10px] text-amber-400 font-medium">
+                          (Paused)
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-[11px] text-zinc-500 truncate">@{account.username}</p>
                   </div>
-                  <p className="text-[11px] text-zinc-500 truncate">@{account.username}</p>
                 </div>
-              </div>
 
-              <ArrowRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white transition-colors flex-shrink-0" />
-            </button>
-          ))}
+                <ArrowRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white transition-colors flex-shrink-0" />
+              </button>
+            );
+          })}
         </div>
 
         {/* Custom Username Input */}
@@ -175,7 +205,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   onSelectMockUser(customUsername.trim(), customRole);
                 }
               }}
-              disabled={!customUsername.trim() || isLoading}
+              disabled={!customUsername.trim() || isLoading || (loginsPaused && customRole !== 'admin')}
               className="btn-primary !text-xs !py-1.5 !px-3 disabled:opacity-40"
             >
               Login

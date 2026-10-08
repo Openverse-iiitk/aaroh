@@ -40,6 +40,7 @@ export interface Sprint {
   totalTrackedContributors?: number;
   totalDiscoveredRepos?: number;
   isFinalized: boolean;
+  loginsPaused?: boolean;
   finalizedAt: string | null;
   finalPodium: FinalPodiumItem[];
 }
@@ -70,6 +71,7 @@ export interface AdminCriteria {
 export interface PullRequest {
   id: string;
   githubPrNumber: number;
+  isRepoOnly?: boolean;
   repo: string;
   title: string;
   description: string;
