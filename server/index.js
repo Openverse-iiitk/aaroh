@@ -315,8 +315,11 @@ app.get('/api/auth/github/callback', async (req, res) => {
     });
     const ghUser = await userRes.json();
 
-    const adminUser = (process.env.ADMIN_GITHUB_USER || 'admin-starlit').trim().toLowerCase();
-    const isAdmin = ghUser.login.toLowerCase() === adminUser;
+    const adminUsers = (process.env.ADMIN_GITHUB_USER || 'Vijay-1710,admin-starlit,Openverse-iiitk')
+      .toLowerCase()
+      .split(',')
+      .map(u => u.trim());
+    const isAdmin = adminUsers.includes(ghUser.login.toLowerCase());
 
     const user = db.upsertUser({
       id: `gh_${ghUser.id}`,
