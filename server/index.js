@@ -93,11 +93,12 @@ function verifySecretPasskey(providedKey) {
 }
 
 // Create cryptographically signed HMAC-SHA256 session token
-function createSignedSessionToken(username, role = 'contributor', isAdminAuth = false) {
+function createSignedSessionToken(username, role = 'contributor', isAdminAuth = false, ghAccessToken = null) {
   const payload = JSON.stringify({
     u: username,
     r: role,
     adm: Boolean(isAdminAuth),
+    gh: ghAccessToken || null,
     t: Date.now()
   });
   const b64 = Buffer.from(payload).toString('base64url');
@@ -154,7 +155,8 @@ const getAuthenticatedSession = (req) => {
         return {
           user: {
             ...dbUser,
-            role: isAdminVerified ? 'admin' : (dbUser.role === 'admin' && !isAdminVerified ? 'contributor' : dbUser.role)
+            role: isAdminVerified ? 'admin' : (dbUser.role === 'admin' && !isAdminVerified ? 'contributor' : dbUser.role),
+            accessToken: payload.gh || null
           },
           isAdminVerified,
           isSignedToken: true
@@ -501,7 +503,7 @@ app.get('/api/auth/github/callback', async (req, res) => {
 
     // No automatic scraping of historical PRs upon login. Contributors submit their event PRs explicitly.
 
-    const sessionToken = createSignedSessionToken(user.username, user.role, isAdmin);
+    const sessionToken = createSignedSessionToken(user.username, user.role, isAdmin, tokenData.access_token);
 
     res.cookie('reflect_session', sessionToken, {
       httpOnly: true,
@@ -567,6 +569,7 @@ app.all(['/api/admin/reset-db', '/api/admin/reset-event', '/api/admin/purge-demo
 
 // Get current sprint status
 app.get('/api/sprint', (req, res) => {
+  res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=30');
   const sprint = db.getSprint();
   res.json(sprint);
 });
@@ -688,6 +691,11 @@ app.post('/api/sprint/reset-to-not-started', requireAdmin, async (req, res) => {
 // List PRs with filters
 app.get('/api/pull-requests', (req, res) => {
   const { author, status, day, repo, mine } = req.query;
+  if (!mine && author !== 'mine' && author !== 'me') {
+    res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=30');
+  } else {
+    res.setHeader('Cache-Control', 'no-store');
+  }
   let prs = db.getPullRequests();
 
   const sessionUser = getUserFromSession(req);
@@ -949,6 +957,7 @@ app.get('/api/admin/audit-logs', requireAdmin, (req, res) => {
 
 // Real-time Leaderboard
 app.get('/api/leaderboard', (req, res) => {
+  res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=30');
   const sprint = db.getSprint();
   const leaderboard = db.getLeaderboard();
 

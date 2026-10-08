@@ -299,13 +299,20 @@ class Database {
   }
 
   async addPullRequest(pr) {
-    this.data.pullRequests.unshift(pr);
-    await this.save();
+    await this.ensureLoaded(true);
+    const exists = (this.data.pullRequests || []).some(
+      p => p.id === pr.id || (p.repo?.toLowerCase() === pr.repo?.toLowerCase() && p.githubPrNumber === pr.githubPrNumber)
+    );
+    if (!exists) {
+      this.data.pullRequests.unshift(pr);
+      await this.save();
+    }
     return pr;
   }
 
   async updatePullRequest(id, updates) {
-    const idx = this.data.pullRequests.findIndex(pr => pr.id === id);
+    await this.ensureLoaded(true);
+    const idx = (this.data.pullRequests || []).findIndex(pr => pr.id === id);
     if (idx >= 0) {
       this.data.pullRequests[idx] = { ...this.data.pullRequests[idx], ...updates };
       await this.save();
@@ -316,6 +323,7 @@ class Database {
 
   async deletePullRequest(id) {
     if (!id) return false;
+    await this.ensureLoaded(true);
     const initialLen = (this.data.pullRequests || []).length;
     this.data.pullRequests = (this.data.pullRequests || []).filter(
       pr => pr.id !== id && String(pr.githubPrNumber) !== String(id)
