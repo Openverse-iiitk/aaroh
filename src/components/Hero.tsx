@@ -33,59 +33,85 @@ export const Hero: React.FC<HeroProps> = ({
   isAuthenticated,
   isAdmin = false
 }) => {
-  const [timeLeft, setTimeLeft] = useState<{
+  // Official event start date: October 9, 2026 at 00:00 IST = 2026-10-08T18:30:00.000Z
+  const eventStartTime = sprint?.startDate
+    ? new Date(sprint.startDate).getTime()
+    : new Date('2026-10-08T18:30:00.000Z').getTime();
+
+  const [timerState, setTimerState] = useState<{
+    days: number;
     hours: number;
     minutes: number;
     seconds: number;
-    isDue: boolean;
+    isUpcoming: boolean;
+    computedDay: number;
     totalSeconds: number;
   }>({
+    days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0,
-    isDue: false,
+    isUpcoming: true,
+    computedDay: 1,
     totalSeconds: 0
   });
 
   useEffect(() => {
-    if (!sprint?.nextSyncAt || sprint?.status !== 'ACTIVE' || sprint?.isFinalized) {
-      return;
-    }
-
     const updateTimer = () => {
-      const target = new Date(sprint.nextSyncAt!).getTime();
-      const diff = target - Date.now();
+      const now = Date.now();
+      const isUpcoming = now < eventStartTime;
 
-      if (diff <= 0) {
-        setTimeLeft({ hours: 0, minutes: 0, seconds: 0, isDue: true, totalSeconds: 0 });
-        return;
+      if (isUpcoming) {
+        // Countdown to the event starting tomorrow (Oct 9, 00:00 IST)
+        const diff = Math.max(0, eventStartTime - now);
+        const totalSecs = Math.floor(diff / 1000);
+        const days = Math.floor(totalSecs / (24 * 3600));
+        const hours = Math.floor((totalSecs % (24 * 3600)) / 3600);
+        const minutes = Math.floor((totalSecs % 3600) / 60);
+        const seconds = totalSecs % 60;
+
+        setTimerState({
+          days,
+          hours,
+          minutes,
+          seconds,
+          isUpcoming: true,
+          computedDay: 1,
+          totalSeconds: totalSecs
+        });
+      } else {
+        // Event is Live! Day 1, Day 2, Day 3 computed automatically from startDate
+        const elapsedMs = now - eventStartTime;
+        const currentDay = Math.floor(elapsedMs / (24 * 3600 * 1000)) + 1;
+
+        // Daily evaluation target cutoff
+        const nextMilestone = sprint?.nextSyncAt
+          ? new Date(sprint.nextSyncAt).getTime()
+          : eventStartTime + currentDay * 24 * 3600 * 1000;
+        const diff = Math.max(0, nextMilestone - now);
+        const totalSecs = Math.floor(diff / 1000);
+        const hours = Math.floor((totalSecs % (24 * 3600)) / 3600);
+        const minutes = Math.floor((totalSecs % 3600) / 60);
+        const seconds = totalSecs % 60;
+
+        setTimerState({
+          days: 0,
+          hours,
+          minutes,
+          seconds,
+          isUpcoming: false,
+          computedDay: currentDay,
+          totalSeconds: totalSecs
+        });
       }
-
-      const totalSecs = Math.floor(diff / 1000);
-      const hours = Math.floor((totalSecs % (24 * 3600)) / 3600);
-      const minutes = Math.floor((totalSecs % 3600) / 60);
-      const seconds = totalSecs % 60;
-
-      setTimeLeft({
-        hours,
-        minutes,
-        seconds,
-        isDue: false,
-        totalSeconds: totalSecs
-      });
     };
 
     updateTimer();
     const timer = setInterval(updateTimer, 1000);
     return () => clearInterval(timer);
-  }, [sprint?.nextSyncAt, sprint?.status, sprint?.isFinalized]);
+  }, [eventStartTime, sprint?.nextSyncAt]);
 
   const pad = (n: number) => n.toString().padStart(2, '0');
-
-  // Daily cycle progress percentage
-  const fullCycleSeconds = 24 * 3600;
-  const remainingSeconds = Math.min(fullCycleSeconds, Math.max(0, timeLeft.totalSeconds));
-  const progressPercent = Math.min(100, Math.max(0, Math.round(((fullCycleSeconds - remainingSeconds) / fullCycleSeconds) * 100)));
 
   return (
     <section className="w-full relative flex flex-col items-center pt-8 pb-16">
@@ -105,81 +131,73 @@ export const Hero: React.FC<HeroProps> = ({
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                 </span>
                 <span className="font-bold text-white tracking-wider uppercase text-[11px] sm:text-xs">
-                  {sprint?.status === 'ACTIVE'
-                    ? `Day ${sprint.currentDay || 1} • Tracking Active`
-                    : sprint?.isFinalized
-                    ? 'Results Final • Standings Locked'
-                    : 'Now accepting contributions'}
+                  {timerState.isUpcoming
+                    ? 'EVENT STARTS TOMORROW • OCTOBER 9TH'
+                    : `DAY ${timerState.computedDay} • TRACKING LIVE & ACTIVE`}
                 </span>
-                <span className="px-1.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-mono text-[10px] font-semibold border border-indigo-500/30">
-                  {progressPercent}%
+                <span className="px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-mono text-[10px] font-semibold border border-indigo-500/30">
+                  {timerState.isUpcoming ? 'COUNTDOWN TO LAUNCH' : `DAY ${timerState.computedDay}`}
                 </span>
               </div>
 
               <div className="flex items-center gap-2 text-zinc-400 text-xs">
                 <span className="flex items-center gap-1 text-zinc-400 text-[11px]">
                   <Clock className="w-3 h-3 text-indigo-400" />
-                  <span>Cutoff:</span>
+                  <span>{timerState.isUpcoming ? 'Event Kickoff:' : 'Daily Cutoff:'}</span>
                 </span>
                 <span className="font-mono text-white text-[11px] font-semibold bg-black/50 px-2 py-0.5 rounded border border-white/10 shadow-inner">
-                  {sprint?.dailyUpdateTime || '00:00'} UTC Nightly
+                  {timerState.isUpcoming ? 'Oct 9, 00:00 IST' : `${sprint?.dailyUpdateTime || '00:00'} UTC Nightly`}
                 </span>
               </div>
             </div>
 
-            {/* Large Digital Counter Blocks (Hours, Minutes, Seconds) */}
-            {sprint?.status === 'ACTIVE' && !sprint?.isFinalized ? (
-              <div className="space-y-4">
-                <div className="flex items-center justify-center gap-1.5 sm:gap-3.5 lg:gap-4.5 my-1.5 w-full">
-                  {/* Hours 3D Flip Card */}
-                  <FlipUnit val={pad(timeLeft.hours)} label="Hours" />
+            {/* Countdown Sub-heading */}
+            <div className="text-center mb-3">
+              <span className="text-xs sm:text-sm font-semibold tracking-wider text-indigo-300 uppercase">
+                {timerState.isUpcoming ? 'The Event Starts In' : `Day ${timerState.computedDay} Scoring Cutoff In`}
+              </span>
+            </div>
 
-                  {/* Pulsing Colon Separator */}
-                  <span className="font-mono text-2xl sm:text-4xl lg:text-5xl font-black text-indigo-400/80 -mt-5 sm:-mt-7 animate-pulse select-none">
-                    :
-                  </span>
-
-                  {/* Minutes 3D Flip Card */}
-                  <FlipUnit val={pad(timeLeft.minutes)} label="Minutes" />
-
-                  {/* Pulsing Colon Separator */}
-                  <span className="font-mono text-2xl sm:text-4xl lg:text-5xl font-black text-indigo-400/80 -mt-5 sm:-mt-7 animate-pulse select-none">
-                    :
-                  </span>
-
-                  {/* Seconds 3D Flip Card (Highlighted with active tick glow) */}
-                  <FlipUnit val={pad(timeLeft.seconds)} label="Seconds" isHighlight />
-                </div>
-
-                {/* Rich Cycle Progress Track & Metadata Bar */}
-                <div className="pt-1.5">
-                  <div className="flex items-center justify-between text-[11px] text-zinc-400 mb-1 px-0.5 font-medium">
-                    <span className="flex items-center gap-1.5 text-zinc-400">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
-                      <span>24-Hour Cycle Window</span>
+            {/* Large Digital Counter Blocks (Days/Hours, Minutes, Seconds) */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-center gap-1.5 sm:gap-3.5 lg:gap-4.5 my-1.5 w-full">
+                {timerState.days > 0 && (
+                  <>
+                    <FlipUnit val={pad(timerState.days)} label="Days" />
+                    <span className="font-mono text-2xl sm:text-4xl lg:text-5xl font-black text-indigo-400/80 -mt-5 sm:-mt-7 animate-pulse select-none">
+                      :
                     </span>
-                    <span className="font-mono text-indigo-300">
-                      {pad(timeLeft.hours)}h {pad(timeLeft.minutes)}m {pad(timeLeft.seconds)}s to scoring
-                    </span>
-                  </div>
+                  </>
+                )}
 
-                  <div className="w-full h-2 rounded-full bg-zinc-900/90 border border-white/5 overflow-hidden p-0.5">
-                    <div
-                      className="h-full rounded-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 transition-all duration-1000 shadow-[0_0_12px_rgba(168,85,247,0.7)]"
-                      style={{ width: `${progressPercent}%` }}
-                    />
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="py-6 text-center text-xs text-zinc-400">
-                <span>
-                  {sprint?.isFinalized
-                    ? 'Standings are locked in permanently. Explore the final podium.'
-                    : 'The countdown begins when contributions open.'}
+                <FlipUnit val={pad(timerState.hours)} label="Hours" />
+
+                <span className="font-mono text-2xl sm:text-4xl lg:text-5xl font-black text-indigo-400/80 -mt-5 sm:-mt-7 animate-pulse select-none">
+                  :
                 </span>
+
+                <FlipUnit val={pad(timerState.minutes)} label="Minutes" />
+
+                <span className="font-mono text-2xl sm:text-4xl lg:text-5xl font-black text-indigo-400/80 -mt-5 sm:-mt-7 animate-pulse select-none">
+                  :
+                </span>
+
+                <FlipUnit val={pad(timerState.seconds)} label="Seconds" isHighlight />
               </div>
-            )}
+
+              {/* Progress and status message */}
+              <div className="pt-1.5 text-center text-xs text-zinc-400">
+                {timerState.isUpcoming ? (
+                  <span>
+                    Get your GitHub account ready — automated PR tracking and project submissions open at midnight!
+                  </span>
+                ) : (
+                  <span>
+                    Daily evaluation running for Day {timerState.computedDay}. Pull requests are being graded by organizers.
+                  </span>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -20,9 +20,18 @@ export function calculateNextSync(timeStr = '00:00') {
   return next.toISOString();
 }
 
+export function calculateSprintDay(startDateStr) {
+  if (!startDateStr) return 1;
+  const start = new Date(startDateStr).getTime();
+  const now = Date.now();
+  if (now < start) return 1;
+  const diffDays = Math.floor((now - start) / (24 * 60 * 60 * 1000));
+  return diffDays + 1;
+}
+
 // Initial seed data with admin-controlled tracking lifecycle for live event
 const getInitialSeed = () => {
-  const now = new Date();
+  const eventStart = '2026-10-08T18:30:00.000Z'; // October 9, 2026 00:00 IST
 
   return {
     sprint: {
@@ -31,10 +40,10 @@ const getInitialSeed = () => {
       description: 'Automated GitHub pull request tracking and repository project submissions. Evaluators review contributions daily and award credits.',
       status: 'ACTIVE',
       dailyUpdateTime: '00:00',
-      startDate: now.toISOString(),
+      startDate: eventStart,
       endDate: null,
-      currentDay: 1,
-      lastSyncAt: now.toISOString(),
+      currentDay: calculateSprintDay(eventStart),
+      lastSyncAt: new Date().toISOString(),
       nextSyncAt: calculateNextSync('00:00'),
       trackingScope: 'ALL_REPOSITORIES',
       trackedRepos: [
@@ -213,8 +222,17 @@ class Database {
   getSprint() {
     const repos = Array.from(new Set((this.data.pullRequests || []).map(pr => pr.repo))).filter(Boolean);
     const contributors = (this.data.users || []).filter(u => u.role !== 'admin');
+    const startDateStr = this.data.sprint.startDate || '2026-10-08T18:30:00.000Z';
+    const startMs = new Date(startDateStr).getTime();
+    const now = Date.now();
+    const isUpcoming = now < startMs;
+    const computedDay = isUpcoming ? 1 : Math.floor((now - startMs) / (24 * 60 * 60 * 1000)) + 1;
+
     return {
       ...this.data.sprint,
+      startDate: startDateStr,
+      currentDay: computedDay,
+      isUpcoming,
       trackingScope: 'ALL_REPOSITORIES',
       trackedRepos: repos.length > 0 ? repos : (this.data.sprint.trackedRepos || []),
       totalTrackedContributors: contributors.length,

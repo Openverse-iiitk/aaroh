@@ -28,7 +28,6 @@ import {
   syncGitHubPullRequests
 } from './api/client';
 import { Navbar } from './components/Navbar';
-import { TopCountdownBanner } from './components/TopCountdownBanner';
 import { AuthModal } from './components/AuthModal';
 import { ReviewModal } from './components/ReviewModal';
 import { SubmitPrModal } from './components/SubmitPrModal';
@@ -257,8 +256,6 @@ function RootLayout() {
   return (
     <RouteContextShim.Provider value={outletContext}>
       <div className="min-h-screen flex flex-col bg-[#06040d] text-[#f5f3ff]">
-        {/* Top Live Sticky Countdown Ribbon */}
-        <TopCountdownBanner sprint={sprint} />
 
         {/* Navigation */}
         <Navbar
