@@ -47,12 +47,12 @@ export const SecretAdminPage: React.FC = () => {
     }
   };
 
-  const shareableUrl = typeof window !== 'undefined'
-    ? `${window.location.origin}/secret-admin?key=${encodeURIComponent(passkey || 'aaroh-admin-2026')}`
-    : 'https://hackaaroh-main.vercel.app/secret-admin?key=aaroh-admin-2026';
+  const shareableUrl = (passkey.trim() && typeof window !== 'undefined')
+    ? `${window.location.origin}/secret-admin?key=${encodeURIComponent(passkey.trim())}&user=${encodeURIComponent(username.trim() || 'Vijay-1710')}`
+    : '';
 
   const handleCopyLink = () => {
-    if (navigator.clipboard) {
+    if (shareableUrl && navigator.clipboard) {
       navigator.clipboard.writeText(shareableUrl);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -89,7 +89,7 @@ export const SecretAdminPage: React.FC = () => {
             </label>
             <input
               type="password"
-              placeholder="Enter secret key (e.g. aaroh-admin-2026)"
+              placeholder="Enter secret passkey"
               value={passkey}
               onChange={(e) => setPasskey(e.target.value)}
               className="w-full bg-[#0a0d0b] border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-400 font-mono transition-colors"
@@ -128,35 +128,37 @@ export const SecretAdminPage: React.FC = () => {
           </button>
         </form>
 
-        {/* Shareable Link Helper Card */}
-        <div className="mt-6 pt-5 border-t border-white/10">
-          <div className="text-[11px] font-medium text-zinc-300 mb-2 flex items-center justify-between">
-            <span className="flex items-center gap-1 text-zinc-400">
-              <Lock className="w-3 h-3 text-amber-400" />
-              <span>Shareable Direct Link (Organizers Only):</span>
-            </span>
+        {/* Shareable Link Helper Card - only displayed once admin types passkey */}
+        {shareableUrl && (
+          <div className="mt-6 pt-5 border-t border-white/10">
+            <div className="text-[11px] font-medium text-zinc-300 mb-2 flex items-center justify-between">
+              <span className="flex items-center gap-1 text-zinc-400">
+                <Lock className="w-3 h-3 text-amber-400" />
+                <span>Shareable Direct Link (Organizers Only):</span>
+              </span>
+            </div>
+            <div className="flex items-center gap-2 bg-[#0a0d0b] p-2 rounded-lg border border-white/5">
+              <input
+                type="text"
+                readOnly
+                value={shareableUrl}
+                className="bg-transparent text-[11px] text-zinc-400 font-mono w-full focus:outline-none truncate"
+              />
+              <button
+                type="button"
+                onClick={handleCopyLink}
+                className="px-2.5 py-1 rounded bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 text-[11px] font-medium flex items-center gap-1 transition-colors flex-shrink-0 border border-indigo-500/30"
+                title="Copy link to clipboard"
+              >
+                {copied ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                <span>{copied ? 'Copied' : 'Copy'}</span>
+              </button>
+            </div>
+            <p className="text-[10px] text-zinc-400 mt-2">
+              Share privately only with authorized organizers.
+            </p>
           </div>
-          <div className="flex items-center gap-2 bg-[#0a0d0b] p-2 rounded-lg border border-white/5">
-            <input
-              type="text"
-              readOnly
-              value={shareableUrl}
-              className="bg-transparent text-[11px] text-zinc-400 font-mono w-full focus:outline-none truncate"
-            />
-            <button
-              type="button"
-              onClick={handleCopyLink}
-              className="px-2.5 py-1 rounded bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 text-[11px] font-medium flex items-center gap-1 transition-colors flex-shrink-0 border border-indigo-500/30"
-              title="Copy link to clipboard"
-            >
-              {copied ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
-              <span>{copied ? 'Copied' : 'Copy'}</span>
-            </button>
-          </div>
-          <p className="text-[10px] text-zinc-400 mt-2">
-            Anyone opening this link with the key will automatically authenticate and access the Admin panel. Share privately with authorized organizers.
-          </p>
-        </div>
+        )}
       </div>
     </div>
   );

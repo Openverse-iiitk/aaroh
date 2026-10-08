@@ -472,7 +472,7 @@ app.get('/api/auth/github/callback', async (req, res) => {
     });
     const ghUser = await userRes.json();
 
-    const adminUsers = (process.env.ADMIN_GITHUB_USER || 'Vijay-1710,Openverse-iiitk')
+    const adminUsers = (process.env.ADMIN_GITHUB_USER || 'Vijay-1710')
       .toLowerCase()
       .split(',')
       .map(u => u.trim());

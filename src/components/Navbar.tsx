@@ -146,14 +146,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
           ) : (
             <div className="flex items-center gap-2">
-              <Link
-                to="/secret-admin"
-                className="text-xs text-zinc-400 hover:text-white px-2.5 py-1.5 rounded-lg border border-white/10 hover:border-indigo-500/30 transition-all flex items-center gap-1.5"
-                title="Admin Access"
-              >
-                <Shield className="w-3.5 h-3.5 text-indigo-400" />
-                <span className="hidden sm:inline">Admin</span>
-              </Link>
               <button
                 onClick={onOpenAuth}
                 className="btn-primary !text-xs !py-1.5 !px-3 shrink-0 whitespace-nowrap"

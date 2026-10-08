@@ -32,6 +32,13 @@
   "pullRequests": [],
   "auditLogs": [
     {
+      "id": "log-1791489895103-lc4r",
+      "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-08T20:04:55.103Z"
+    },
+    {
       "id": "log-1791489160877-h2zv",
       "action": "ADMIN_SECRET_LOGIN",
       "actor": "Vijay-1710",

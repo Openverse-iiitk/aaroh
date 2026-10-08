@@ -298,9 +298,6 @@ function RootLayout() {
                 <Link to="/faq" className="hover:text-white transition-colors">
                   FAQ
                 </Link>
-                <Link to="/secret-admin" className="text-zinc-500 hover:text-zinc-300 text-[11px] transition-colors">
-                  Admin Access
-                </Link>
               </div>
             </div>
           </footer>

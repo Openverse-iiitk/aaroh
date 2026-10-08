@@ -77,8 +77,40 @@ export const AdminPage: React.FC<AdminPageProps> = ({
     }
   };
 
-  // If user is not admin, show secret organizer access terminal
+  // If user is a logged-in participant, block admin access
   if (!isAdmin) {
+    if (currentUser) {
+      return (
+        <div className="w-full max-w-md mx-auto px-4 py-20 text-center">
+          <div className="p-8 rounded-2xl bg-[#131614] border border-white/10 space-y-4 shadow-[0_20px_50px_rgba(0,0,0,0.7)] text-center">
+            <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 mx-auto flex items-center justify-center mb-2">
+              <Lock className="w-6 h-6 text-amber-400" />
+            </div>
+            <h2 className="text-xl font-bold text-white tracking-tight">
+              Access Restricted
+            </h2>
+            <p className="text-xs text-zinc-400 max-w-sm mx-auto leading-relaxed">
+              You are signed in as participant <strong className="text-white">@{currentUser.username}</strong>. The admin review hub is restricted to event administrators.
+            </p>
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <a
+                href="/leaderboard"
+                className="btn-primary !text-xs !py-2 !px-4 w-full sm:w-auto text-center"
+              >
+                Go to Leaderboard
+              </a>
+              <a
+                href="/pull-requests"
+                className="btn-secondary !text-xs !py-2 !px-4 w-full sm:w-auto text-center"
+              >
+                View Submitted PRs
+              </a>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="w-full max-w-lg mx-auto px-4 py-16 text-center">
         <div className="p-7 rounded-2xl bg-[#131614] border border-white/10 space-y-4 shadow-[0_20px_50px_rgba(0,0,0,0.7)] text-left">
@@ -90,7 +122,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
               Organizer Admin Access
             </h2>
             <p className="text-xs text-zinc-400 max-w-sm mx-auto mt-1 leading-relaxed">
-              Participant logins are paused. Enter your secret organizer passkey to access the management portal.
+              Enter your organizer passkey to access the management portal.
             </p>
           </div>
 
