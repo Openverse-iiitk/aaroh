@@ -34,9 +34,11 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
   const [testCoverage, setTestCoverage] = useState(15);
   const [feedback, setFeedback] = useState('');
   const [reviewStatus, setReviewStatus] = useState<'REVIEWED' | 'REJECTED'>('REVIEWED');
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (pr) {
+      setError(null);
       if (pr.adminCriteria) {
         setQuality(pr.adminCriteria.quality || 20);
         setComplexity(pr.adminCriteria.complexity || 20);
@@ -59,18 +61,23 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await onSubmitReview({
-      prId: pr.id,
-      creditScore: reviewStatus === 'REJECTED' ? 0 : totalScore,
-      feedback,
-      criteria: {
-        quality,
-        complexity,
-        impact,
-        testCoverage
-      },
-      reviewStatus
-    });
+    setError(null);
+    try {
+      await onSubmitReview({
+        prId: pr.id,
+        creditScore: reviewStatus === 'REJECTED' ? 0 : totalScore,
+        feedback,
+        criteria: {
+          quality,
+          complexity,
+          impact,
+          testCoverage
+        },
+        reviewStatus
+      });
+    } catch (err: any) {
+      setError(err?.message || 'Failed to submit review');
+    }
   };
 
   const applyPreset = (q: number, c: number, i: number, t: number, note: string) => {
@@ -88,6 +95,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
       <div className="panel-glass-elevated w-full max-w-2xl max-h-[92vh] overflow-y-auto p-6 relative border border-white/10 shadow-2xl">
         <button
+          id="review-close-x-btn"
           onClick={onClose}
           className="absolute top-5 right-5 text-fog hover:text-lilac-white p-1 rounded-btn hover:bg-white/5 transition-colors"
         >
@@ -152,6 +160,13 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
 
         {/* Scoring Form */}
         <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+          {error && (
+            <div className="p-3 rounded bg-rose-950/60 border border-rose-500/40 text-xs text-rose-200 flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 text-rose-400 flex-shrink-0" />
+              <span>{error}</span>
+            </div>
+          )}
+
           {/* Quick Preset Buttons */}
           <div>
             <label className="text-xs font-semibold uppercase tracking-wider text-fog block mb-2">
@@ -159,6 +174,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
             </label>
             <div className="flex flex-wrap gap-2 text-xs">
               <button
+                id="preset-minor-btn"
                 type="button"
                 onClick={() => applyPreset(10, 5, 5, 5, 'Quick bugfix or typo correction.')}
                 className="px-2.5 py-1 rounded-btn bg-midnight-surface border border-white/5 hover:border-lavender-accent/40 text-ash hover:text-lilac-white transition-colors"
@@ -166,6 +182,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
                 Minor Patch (25 pts)
               </button>
               <button
+                id="preset-feature-btn"
                 type="button"
                 onClick={() => applyPreset(20, 15, 15, 10, 'Well-crafted feature PR with solid code structure.')}
                 className="px-2.5 py-1 rounded-btn bg-midnight-surface border border-white/5 hover:border-lavender-accent/40 text-ash hover:text-lilac-white transition-colors"
@@ -173,6 +190,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
                 Feature Work (60 pts)
               </button>
               <button
+                id="preset-high-impact-btn"
                 type="button"
                 onClick={() => applyPreset(25, 25, 25, 20, 'Exceptional architecture, performance gains & tests.')}
                 className="px-2.5 py-1 rounded-btn bg-midnight-surface border border-white/5 hover:border-lavender-accent/40 text-ash hover:text-lilac-white transition-colors"
@@ -203,6 +221,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
                 <span className="font-semibold text-lilac-white">{quality} pts</span>
               </div>
               <input
+                id="review-quality-slider"
                 type="range"
                 min="0"
                 max="25"
@@ -219,6 +238,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
                 <span className="font-semibold text-lilac-white">{complexity} pts</span>
               </div>
               <input
+                id="review-complexity-slider"
                 type="range"
                 min="0"
                 max="25"
@@ -235,6 +255,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
                 <span className="font-semibold text-lilac-white">{impact} pts</span>
               </div>
               <input
+                id="review-impact-slider"
                 type="range"
                 min="0"
                 max="25"
@@ -251,6 +272,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
                 <span className="font-semibold text-lilac-white">{testCoverage} pts</span>
               </div>
               <input
+                id="review-tests-slider"
                 type="range"
                 min="0"
                 max="25"
@@ -267,6 +289,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
               Reviewer Notes / Feedback to Contributor
             </label>
             <textarea
+              id="review-feedback-textarea"
               value={feedback}
               onChange={(e) => setFeedback(e.target.value)}
               placeholder="e.g. Great architectural choices and comprehensive integration tests. Awarded high credits for impact!"
@@ -280,6 +303,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
             <span className="text-fog">Review Decision:</span>
             <label className="flex items-center gap-1.5 cursor-pointer text-lilac-white">
               <input
+                id="review-radio-approve"
                 type="radio"
                 name="status"
                 value="REVIEWED"
@@ -291,6 +315,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
             </label>
             <label className="flex items-center gap-1.5 cursor-pointer text-ash">
               <input
+                id="review-radio-reject"
                 type="radio"
                 name="status"
                 value="REJECTED"
@@ -305,6 +330,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
           {/* Action buttons */}
           <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/5">
             <button
+              id="review-cancel-btn"
               type="button"
               onClick={onClose}
               className="btn-ghost !text-xs"
@@ -312,6 +338,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
               Cancel
             </button>
             <button
+              id="review-submit-btn"
               type="submit"
               disabled={isSubmitting}
               className="btn-primary !text-xs !py-2 !px-4"

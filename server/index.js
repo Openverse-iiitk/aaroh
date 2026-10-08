@@ -226,6 +226,8 @@ app.post('/api/auth/mock-login', (req, res) => {
       role: role === 'admin' ? 'admin' : 'contributor',
       createdAt: new Date().toISOString()
     });
+  } else if (role && user.role !== role) {
+    user = db.upsertUser({ ...user, role });
   }
 
   // Automatically ensure cross-repository PRs are tracked for newly connected contributors
@@ -255,12 +257,18 @@ app.get('/api/auth/github/url', (req, res) => {
     });
   }
 
+  const isLocal = !req.headers.host || req.headers.host.includes('localhost') || req.headers.host.includes('127.0.0.1');
+  const proto = isLocal ? (req.protocol || 'http') : 'https';
   const defaultRedirect = req.headers.host
-    ? `${(req.headers['x-forwarded-proto'] || req.protocol || 'http')}://${req.headers.host}/api/auth/github/callback`
+    ? `${proto}://${req.headers.host}/api/auth/github/callback`
     : `http://localhost:${PORT}/api/auth/github/callback`;
-  const redirectUri = process.env.GITHUB_REDIRECT_URI || defaultRedirect;
+
+  let redirectUri = process.env.GITHUB_REDIRECT_URI;
+  if (!redirectUri || (!isLocal && redirectUri.includes('localhost'))) {
+    redirectUri = defaultRedirect;
+  }
   const url = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=read:user,repo`;
-  res.json({ configured: true, url });
+  res.json({ configured: true, url, redirectUri });
 });
 
 // GitHub OAuth callback
@@ -268,8 +276,13 @@ app.get('/api/auth/github/callback', async (req, res) => {
   const { code } = req.query;
   const clientId = process.env.GITHUB_CLIENT_ID;
   const clientSecret = process.env.GITHUB_CLIENT_SECRET;
-  const hostUrl = req.headers.host ? `${(req.headers['x-forwarded-proto'] || req.protocol || 'https')}://${req.headers.host}` : null;
-  const frontendUrl = process.env.FRONTEND_URL || hostUrl || 'http://localhost:5173';
+  const isLocal = !req.headers.host || req.headers.host.includes('localhost') || req.headers.host.includes('127.0.0.1');
+  const proto = isLocal ? (req.protocol || 'http') : 'https';
+  const hostUrl = req.headers.host ? `${proto}://${req.headers.host}` : null;
+  let frontendUrl = process.env.FRONTEND_URL;
+  if (!frontendUrl || (!isLocal && frontendUrl.includes('localhost'))) {
+    frontendUrl = hostUrl || 'https://hackaaroh-main.vercel.app';
+  }
 
   if (!code || !clientId || !clientSecret) {
     return res.redirect(`${frontendUrl}/?error=oauth_config_missing`);
@@ -330,14 +343,12 @@ app.get('/api/auth/github/callback', async (req, res) => {
     res.cookie('reflect_session', user.username, {
       httpOnly: false,
       maxAge: 7 * 24 * 60 * 60 * 1000,
-      sameSite: 'lax'
+      sameSite: 'lax',
+      secure: !isLocal
     });
 
-    if (user.role === 'admin') {
-      res.redirect(`${frontendUrl}/admin`);
-    } else {
-      res.redirect(`${frontendUrl}/leaderboard`);
-    }
+    const targetPath = user.role === 'admin' ? '/admin' : '/leaderboard';
+    res.redirect(`${frontendUrl}${targetPath}?session=${encodeURIComponent(user.username)}`);
   } catch (err) {
     console.error('OAuth Callback Error:', err);
     res.redirect(`${frontendUrl}/?error=oauth_exception`);

@@ -206,6 +206,12 @@ function RootLayout() {
   React.useEffect(() => {
     try {
       const urlParams = new URLSearchParams(window.location.search);
+      const sessionParam = urlParams.get('session') || urlParams.get('user');
+      if (sessionParam) {
+        localStorage.setItem('reflect_active_user', sessionParam);
+        queryClient.invalidateQueries({ queryKey: ['currentUser'] });
+      }
+
       const loginParam = urlParams.get('login') || urlParams.get('role') || urlParams.get('demo');
       if (loginParam === 'admin') {
         handleSwitchToAdmin();

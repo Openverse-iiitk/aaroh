@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PullRequest, Sprint, User, AuditLog } from '../types';
-import { Shield, CheckCircle2, Clock, StopCircle, PlayCircle, RefreshCw, Flag, RotateCcw, AlertTriangle, ExternalLink, Award, FileCode, Check, Play, Settings, Plus, Trash2, Calendar } from 'lucide-react';
+import { Shield, CheckCircle2, Clock, StopCircle, PlayCircle, PauseCircle, RefreshCw, Flag, RotateCcw, AlertTriangle, ExternalLink, Award, FileCode, Check, Play, Settings, Plus, Trash2, Calendar } from 'lucide-react';
 
 interface AdminPageProps {
   currentUser: User | null;
@@ -42,6 +42,12 @@ export const AdminPage: React.FC<AdminPageProps> = ({
   const [newRepoInput, setNewRepoInput] = useState('');
   const [settingsSaved, setSettingsSaved] = useState(false);
 
+  useEffect(() => {
+    if (sprint.dailyUpdateTime) {
+      setDailyTimeInput(sprint.dailyUpdateTime);
+    }
+  }, [sprint.dailyUpdateTime]);
+
   const isAdmin = currentUser?.role === 'admin';
   const safePrs = Array.isArray(pullRequests) ? pullRequests : [];
   const pendingPrs = safePrs.filter((pr) => pr && pr.reviewStatus === 'PENDING_REVIEW');
@@ -66,6 +72,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
 
           <div className="pt-4 flex justify-center">
             <button
+              id="admin-switch-account-btn"
               onClick={onSwitchToAdmin}
               className="btn-primary !px-5 !py-2.5"
             >
@@ -117,6 +124,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
         <div className="flex items-center gap-2">
           {onResetToNotStarted && (
             <button
+              id="admin-reset-not-started-btn"
               onClick={onResetToNotStarted}
               className="btn-ghost !text-xs !py-1.5 !px-2.5 text-fog hover:text-lilac-white"
               title="Reset state to not started so you can test starting"
@@ -126,6 +134,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
           )}
 
           <button
+            id="admin-reset-db-btn"
             onClick={onResetDatabase}
             className="btn-ghost !text-xs !py-1.5 !px-3 flex items-center gap-1 text-fog hover:text-rose-300"
             title="Reset back to initial seed data"
@@ -219,6 +228,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
         <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-white/5">
           {sprint.status === 'NOT_STARTED' ? (
             <button
+              id="admin-start-sprint-btn"
               onClick={onStartSprint}
               className="btn-primary !text-xs !py-2 !px-4 flex items-center gap-1.5"
             >
@@ -229,6 +239,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
             <>
               {/* Daily PR Calculation Trigger */}
               <button
+                id="admin-sync-daily-btn"
                 onClick={onSyncDaily}
                 disabled={isSyncing || sprint.status !== 'ACTIVE'}
                 className="btn-primary !text-xs !py-2 !px-4 disabled:opacity-40"
@@ -239,12 +250,13 @@ export const AdminPage: React.FC<AdminPageProps> = ({
 
               {/* Pause / Resume */}
               <button
+                id="admin-toggle-status-btn"
                 onClick={onToggleStatus}
                 className="btn-secondary !text-xs !py-2 !px-4"
               >
                 {sprint.status === 'ACTIVE' ? (
                   <>
-                    <PlayCircle className="w-3.5 h-3.5 text-amber-300" />
+                    <PauseCircle className="w-3.5 h-3.5 text-amber-300" />
                     <span>Pause Event</span>
                   </>
                 ) : (
@@ -257,6 +269,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
 
               {/* End Tracking */}
               <button
+                id="admin-end-sprint-btn"
                 onClick={() => setConfirmEndModal(true)}
                 className="px-4 py-2 rounded-btn bg-rose-950/40 border border-rose-500/40 text-rose-300 hover:bg-rose-900/40 hover:text-rose-100 text-xs font-medium transition-colors flex items-center gap-2"
               >
@@ -270,6 +283,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 Tracking concluded on {new Date(sprint.finalizedAt || '').toLocaleDateString()}. Standings are locked.
               </span>
               <button
+                id="admin-start-new-sprint-btn"
                 onClick={onStartNewSprint}
                 className="btn-primary !text-xs !py-2 !px-4 flex items-center gap-1.5"
               >
@@ -295,12 +309,20 @@ export const AdminPage: React.FC<AdminPageProps> = ({
 
           <div className="flex items-center gap-3 pt-2">
             <input
+              id="admin-schedule-time-input"
               type="time"
               value={dailyTimeInput}
               onChange={(e) => setDailyTimeInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  handleSaveSchedule();
+                }
+              }}
               className="px-3 py-1.5 rounded-btn bg-midnight-surface border border-white/10 text-xs text-lilac-white focus:outline-none focus:border-lavender-accent font-mono"
             />
             <button
+              id="admin-save-schedule-btn"
               onClick={handleSaveSchedule}
               className="btn-secondary !text-xs !py-1.5 !px-3"
             >
@@ -340,10 +362,19 @@ export const AdminPage: React.FC<AdminPageProps> = ({
               {sprint.trackedRepos?.map((repo) => (
                 <span
                   key={repo}
-                  className="px-2.5 py-1 rounded-btn bg-midnight-surface border border-white/10 text-[11px] text-lilac-white font-mono flex items-center gap-1.5"
+                  className="px-2.5 py-1 rounded-btn bg-midnight-surface border border-white/10 text-[11px] text-lilac-white font-mono flex items-center gap-1.5 group"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-lavender-accent" />
                   <span>{repo}</span>
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveRepo(repo)}
+                    className="ml-0.5 text-zinc-500 hover:text-rose-400 p-0.5 rounded hover:bg-white/5 transition-colors"
+                    title={`Unpin ${repo}`}
+                    aria-label={`Unpin ${repo}`}
+                  >
+                    <Trash2 className="w-3 h-3" />
+                  </button>
                 </span>
               ))}
             </div>
@@ -351,13 +382,21 @@ export const AdminPage: React.FC<AdminPageProps> = ({
 
           <div className="flex gap-2 pt-2 border-t border-white/5">
             <input
+              id="admin-new-repo-input"
               type="text"
               placeholder="Track custom repo: e.g. org/repo"
               value={newRepoInput}
               onChange={(e) => setNewRepoInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  handleAddRepo();
+                }
+              }}
               className="flex-1 px-3 py-1.5 rounded-btn bg-midnight-surface border border-white/10 text-xs text-lilac-white focus:outline-none focus:border-lavender-accent placeholder:text-steel"
             />
             <button
+              id="admin-pin-repo-btn"
               onClick={handleAddRepo}
               disabled={!newRepoInput.trim()}
               className="btn-secondary !text-xs !py-1.5 !px-3 disabled:opacity-40"
@@ -433,6 +472,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                   </div>
 
                   <button
+                    id={`admin-review-pr-btn-${pr.id}`}
                     onClick={() => onSelectPrForReview(pr)}
                     className="btn-primary !text-xs !py-2 !px-4 flex-shrink-0"
                   >
@@ -479,6 +519,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                   +{pr.creditScore} pts
                 </span>
                 <button
+                  id={`admin-adjust-pr-btn-${pr.id}`}
                   onClick={() => onSelectPrForReview(pr)}
                   className="btn-secondary !text-[11px] !py-1 !px-2.5"
                 >
@@ -531,12 +572,14 @@ export const AdminPage: React.FC<AdminPageProps> = ({
 
             <div className="flex items-center justify-end gap-3 pt-3 border-t border-white/5">
               <button
+                id="admin-cancel-end-btn"
                 onClick={() => setConfirmEndModal(false)}
                 className="btn-ghost !text-xs"
               >
                 Cancel
               </button>
               <button
+                id="admin-confirm-end-btn"
                 onClick={() => {
                   setConfirmEndModal(false);
                   onEndTracking();
