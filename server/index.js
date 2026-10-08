@@ -22,6 +22,24 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
+// Normalize /api prefix if rewritten by Vercel serverless functions
+app.use((req, res, next) => {
+  if (!req.url.startsWith('/api') && !req.url.startsWith('/static') && !req.url.startsWith('/assets') && !req.url.includes('.')) {
+    req.url = '/api' + (req.url.startsWith('/') ? req.url : '/' + req.url);
+  }
+  next();
+});
+
+// Health check / API status endpoint
+app.get('/api', (req, res) => {
+  res.json({
+    status: 'online',
+    service: 'HackAaroh PR Leaderboard API',
+    version: '1.0.0',
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Helper auth middleware
 const getUserFromSession = (req) => {
   const sessionToken = req.cookies.reflect_session || req.headers['x-session-user'];
@@ -158,23 +176,26 @@ async function performDailyCalculation(isManualTrigger = false) {
 }
 
 // Background scheduler running every 30 seconds to check if it's the configured dailyUpdateTime
-setInterval(async () => {
-  try {
-    const sprint = db.getSprint();
-    if (sprint.status !== 'ACTIVE' || sprint.isFinalized || !sprint.startDate) {
-      return;
-    }
+if (!process.env.VERCEL) {
+  const syncTimer = setInterval(async () => {
+    try {
+      const sprint = db.getSprint();
+      if (sprint.status !== 'ACTIVE' || sprint.isFinalized || !sprint.startDate) {
+        return;
+      }
 
-    const now = new Date();
-    // Check if nextSyncAt has been reached
-    if (sprint.nextSyncAt && new Date(sprint.nextSyncAt) <= now) {
-      console.log(`[Scheduler] Daily update triggered for sprint at ${now.toISOString()}`);
-      await performDailyCalculation(false);
+      const now = new Date();
+      // Check if nextSyncAt has been reached
+      if (sprint.nextSyncAt && new Date(sprint.nextSyncAt) <= now) {
+        console.log(`[Scheduler] Daily update triggered for sprint at ${now.toISOString()}`);
+        await performDailyCalculation(false);
+      }
+    } catch (err) {
+      console.error('Error in daily background scheduler:', err);
     }
-  } catch (err) {
-    console.error('Error in daily background scheduler:', err);
-  }
-}, 30000);
+  }, 30000);
+  if (syncTimer.unref) syncTimer.unref();
+}
 
 // -------------------------------------------------------------
 // Authentication Routes
@@ -234,7 +255,10 @@ app.get('/api/auth/github/url', (req, res) => {
     });
   }
 
-  const redirectUri = process.env.GITHUB_REDIRECT_URI || `http://localhost:${PORT}/api/auth/github/callback`;
+  const defaultRedirect = req.headers.host
+    ? `${(req.headers['x-forwarded-proto'] || req.protocol || 'http')}://${req.headers.host}/api/auth/github/callback`
+    : `http://localhost:${PORT}/api/auth/github/callback`;
+  const redirectUri = process.env.GITHUB_REDIRECT_URI || defaultRedirect;
   const url = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=read:user,repo`;
   res.json({ configured: true, url });
 });
@@ -244,7 +268,8 @@ app.get('/api/auth/github/callback', async (req, res) => {
   const { code } = req.query;
   const clientId = process.env.GITHUB_CLIENT_ID;
   const clientSecret = process.env.GITHUB_CLIENT_SECRET;
-  const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+  const hostUrl = req.headers.host ? `${(req.headers['x-forwarded-proto'] || req.protocol || 'https')}://${req.headers.host}` : null;
+  const frontendUrl = process.env.FRONTEND_URL || hostUrl || 'http://localhost:5173';
 
   if (!code || !clientId || !clientSecret) {
     return res.redirect(`${frontendUrl}/?error=oauth_config_missing`);
@@ -672,7 +697,17 @@ if (fs.existsSync(distPath)) {
   });
 }
 
-// Start Express Server
-app.listen(PORT, () => {
-  console.log(`✨ ReflectPR backend listening on http://localhost:${PORT}`);
-});
+// Start Express Server locally (skip when executing inside Vercel serverless environment or when imported)
+const isDirectRun = Boolean(process.argv[1] && (
+  fileURLToPath(import.meta.url) === path.resolve(process.argv[1]) ||
+  process.argv[1].endsWith('server' + path.sep + 'index.js') ||
+  process.argv[1].endsWith('server/index.js')
+));
+
+if (!process.env.VERCEL && isDirectRun) {
+  app.listen(PORT, () => {
+    console.log(`✨ ReflectPR backend listening on http://localhost:${PORT}`);
+  });
+}
+
+export default app;

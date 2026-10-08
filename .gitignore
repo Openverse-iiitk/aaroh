@@ -5,3 +5,4 @@ dist
 .DS_Store
 verify_*.png
 verify_*.cjs
+.vercel

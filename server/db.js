@@ -4,7 +4,8 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const DB_FILE = path.join(__dirname, 'data.json');
+const SEED_FILE = path.join(__dirname, 'data.json');
+const DB_FILE = process.env.VERCEL ? path.join('/tmp', 'hackaaroh_data.json') : SEED_FILE;
 
 export function calculateNextSync(timeStr = '00:00') {
   const [hours, minutes] = (timeStr || '00:00').split(':').map(Number);
@@ -362,22 +363,34 @@ class Database {
 
   init() {
     try {
-      if (!fs.existsSync(DB_FILE)) {
-        const initial = getInitialSeed();
-        fs.writeFileSync(DB_FILE, JSON.stringify(initial, null, 2), 'utf-8');
-        this.data = initial;
-      } else {
+      if (fs.existsSync(DB_FILE)) {
         const raw = fs.readFileSync(DB_FILE, 'utf-8');
         this.data = JSON.parse(raw);
-        // Ensure new sprint properties exist
-        if (!this.data.sprint.dailyUpdateTime) {
-          this.data.sprint.dailyUpdateTime = '00:00';
-        }
+      } else if (fs.existsSync(SEED_FILE)) {
+        const raw = fs.readFileSync(SEED_FILE, 'utf-8');
+        this.data = JSON.parse(raw);
+        try {
+          fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
+        } catch (_) {}
+      } else {
+        const initial = getInitialSeed();
+        this.data = initial;
+        try {
+          fs.writeFileSync(DB_FILE, JSON.stringify(initial, null, 2), 'utf-8');
+        } catch (_) {}
+      }
+      if (!this.data.sprint) {
+        this.data = getInitialSeed();
+      }
+      if (!this.data.sprint.dailyUpdateTime) {
+        this.data.sprint.dailyUpdateTime = '00:00';
       }
     } catch (err) {
       console.error('Error initializing db, resetting to seed:', err);
       this.data = getInitialSeed();
-      fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
+      try {
+        fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
+      } catch (_) {}
     }
   }
 
