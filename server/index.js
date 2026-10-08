@@ -364,6 +364,15 @@ app.post('/api/auth/logout', (req, res) => {
   res.json({ success: true });
 });
 
+// Remove / forget user and their PRs (for testing OAuth re-authorization)
+app.all('/api/auth/forget-user', (req, res) => {
+  const username = req.query.username || req.body?.username || 'Rohan-Satheesh';
+  const deleted = db.deleteUser(username);
+  res.clearCookie('reflect_session');
+  db.addAuditLog('USER_REMOVED', 'SYSTEM', `Removed user @${username} and all associated PRs`);
+  res.json({ success: true, removed: username, deleted });
+});
+
 // -------------------------------------------------------------
 // Sprint & Admin Lifecycle Routes
 // -------------------------------------------------------------

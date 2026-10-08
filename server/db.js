@@ -466,6 +466,15 @@ class Database {
     return this.getUserByUsername(user.username);
   }
 
+  deleteUser(username) {
+    if (!username) return false;
+    const initialLen = this.data.users.length;
+    this.data.users = this.data.users.filter(u => u.username.toLowerCase() !== username.toLowerCase());
+    this.data.pullRequests = this.data.pullRequests.filter(pr => pr.author.toLowerCase() !== username.toLowerCase());
+    this.save();
+    return this.data.users.length < initialLen;
+  }
+
   getPullRequests() {
     return this.data.pullRequests;
   }
