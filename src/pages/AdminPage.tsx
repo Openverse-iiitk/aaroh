@@ -18,6 +18,7 @@ interface AdminPageProps {
   onUpdateSettings?: (payload: { dailyUpdateTime?: string; name?: string; trackedRepos?: string[] }) => void;
   onResetToNotStarted?: () => void;
   onResetDatabase: () => void;
+  onDeletePr?: (id: string) => Promise<any> | void;
   onSwitchToAdmin: () => void;
   isSyncing: boolean;
 }
@@ -36,6 +37,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
   onUpdateSettings,
   onResetToNotStarted,
   onResetDatabase,
+  onDeletePr,
   onSwitchToAdmin,
   isSyncing
 }) => {
@@ -549,14 +551,31 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                     </div>
                   </div>
 
-                  <button
-                    id={`admin-review-pr-btn-${pr.id}`}
-                    onClick={() => onSelectPrForReview(pr)}
-                    className="btn-primary !text-xs !py-2 !px-4 flex-shrink-0"
-                  >
-                    <Shield className="w-3.5 h-3.5" />
-                    <span>Grade &amp; Score PR</span>
-                  </button>
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    {onDeletePr && (
+                      <button
+                        id={`admin-delete-pr-btn-${pr.id}`}
+                        onClick={async () => {
+                          if (window.confirm(`Are you sure you want to delete PR #${pr.githubPrNumber || pr.id} (${pr.repo})? This will permanently remove it from the review queue.`)) {
+                            await onDeletePr(pr.id);
+                          }
+                        }}
+                        className="px-3 py-2 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 hover:text-rose-300 border border-rose-500/30 text-xs font-medium transition-colors flex items-center gap-1.5"
+                        title="Delete pull request"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                        <span>Delete</span>
+                      </button>
+                    )}
+                    <button
+                      id={`admin-review-pr-btn-${pr.id}`}
+                      onClick={() => onSelectPrForReview(pr)}
+                      className="btn-primary !text-xs !py-2 !px-4 flex-shrink-0"
+                    >
+                      <Shield className="w-3.5 h-3.5" />
+                      <span>Grade &amp; Score PR</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
@@ -603,6 +622,20 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 >
                   Adjust
                 </button>
+                {onDeletePr && (
+                  <button
+                    id={`admin-delete-graded-pr-btn-${pr.id}`}
+                    onClick={async () => {
+                      if (window.confirm(`Are you sure you want to delete PR #${pr.githubPrNumber || pr.id} (${pr.repo})?`)) {
+                        await onDeletePr(pr.id);
+                      }
+                    }}
+                    className="p-1 rounded hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 text-[11px] transition-colors"
+                    title="Delete PR"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                )}
               </div>
             </div>
           ))}

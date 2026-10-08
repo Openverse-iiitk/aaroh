@@ -264,6 +264,17 @@ export async function reviewPullRequest(payload: {
   return res.json();
 }
 
+export async function deletePullRequest(id: string): Promise<void> {
+  const res = await fetch(`${BASE_URL}/pull-requests/${id}`, {
+    method: 'DELETE',
+    headers: authHeaders()
+  });
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.error || 'Failed to delete pull request');
+  }
+}
+
 export async function fetchLeaderboard(): Promise<LeaderboardResponse> {
   const res = await fetch(`${BASE_URL}/leaderboard`);
   if (!res.ok) throw new Error('Failed to fetch leaderboard');

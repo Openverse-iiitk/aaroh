@@ -878,6 +878,28 @@ app.post('/api/pull-requests/sync', (req, res) => {
   });
 });
 
+// Admin Delete PR endpoint
+app.delete('/api/pull-requests/:id', requireAdmin, async (req, res) => {
+  const prId = req.params.id;
+  const existing = (db.getPullRequests() || []).find(p => p.id === prId || String(p.githubPrNumber) === String(prId));
+  const deleted = await db.deletePullRequest(prId);
+  if (existing) {
+    await db.addAuditLog('PR_DELETED', req.adminUser.username, `Admin deleted PR #${existing.githubPrNumber || existing.id} (${existing.repo || 'unknown repo'})`);
+  }
+  res.json({ success: true, deleted, id: prId });
+});
+
+app.post('/api/admin/delete-pr', requireAdmin, async (req, res) => {
+  const prId = req.body.id || req.body.prId;
+  if (!prId) return res.status(400).json({ error: 'prId is required' });
+  const existing = (db.getPullRequests() || []).find(p => p.id === prId || String(p.githubPrNumber) === String(prId));
+  const deleted = await db.deletePullRequest(prId);
+  if (existing) {
+    await db.addAuditLog('PR_DELETED', req.adminUser.username, `Admin deleted PR #${existing.githubPrNumber || existing.id} (${existing.repo || 'unknown repo'})`);
+  }
+  res.json({ success: true, deleted, id: prId });
+});
+
 // -------------------------------------------------------------
 // Admin Manual Review & Credit Scoring Routes
 // -------------------------------------------------------------

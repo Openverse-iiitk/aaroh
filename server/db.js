@@ -96,6 +96,9 @@ class Database {
   async resetToCleanEvent() {
     this.data = getInitialSeed();
     this.lastLoadedAt = Date.now();
+    if (process.env.VERCEL && fs.existsSync(DB_FILE)) {
+      try { fs.unlinkSync(DB_FILE); } catch (_) {}
+    }
     await this.save();
     return this.data;
   }
@@ -309,6 +312,16 @@ class Database {
       return this.data.pullRequests[idx];
     }
     return null;
+  }
+
+  async deletePullRequest(id) {
+    if (!id) return false;
+    const initialLen = (this.data.pullRequests || []).length;
+    this.data.pullRequests = (this.data.pullRequests || []).filter(
+      pr => pr.id !== id && String(pr.githubPrNumber) !== String(id)
+    );
+    await this.save();
+    return this.data.pullRequests.length < initialLen;
   }
 
   async addAuditLog(action, actor, details) {

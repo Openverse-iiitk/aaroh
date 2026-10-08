@@ -21,6 +21,7 @@ import {
   updateSprintSettings,
   resetToNotStarted,
   reviewPullRequest,
+  deletePullRequest,
   submitPullRequest,
   mockLogin,
   logout,
@@ -146,6 +147,15 @@ function RootLayout() {
     },
   });
 
+  const deletePrMutation = useMutation({
+    mutationFn: deletePullRequest,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['pullRequests'] });
+      queryClient.invalidateQueries({ queryKey: ['leaderboard'] });
+      queryClient.invalidateQueries({ queryKey: ['auditLogs'] });
+    },
+  });
+
   const loginMutation = useMutation({
     mutationFn: ({ username, role, name, avatarUrl }: any) =>
       mockLogin(username, role, name, avatarUrl),
@@ -248,6 +258,7 @@ function RootLayout() {
     onResetToNotStarted: () => resetToNotStartedMutation.mutate(),
     onSelectPrForReview: (pr: PullRequest) => setReviewPrModalPr(pr),
     onResetDatabase: () => resetDbMutation.mutate(),
+    onDeletePr: (id: string) => deletePrMutation.mutateAsync(id),
     onSwitchToAdmin: () => navigate({ to: '/admin' }),
     onOpenSubmitPr: () => setSubmitPrModalOpen(true),
     onSyncGitHub: () => syncGitHubMutation.mutateAsync(),
@@ -456,6 +467,7 @@ function AdminView() {
       onUpdateSettings={context.onUpdateSettings}
       onResetToNotStarted={context.onResetToNotStarted}
       onResetDatabase={context.onResetDatabase}
+      onDeletePr={context.onDeletePr}
       onSwitchToAdmin={context.onSwitchToAdmin}
       isSyncing={context.isSyncing}
     />
