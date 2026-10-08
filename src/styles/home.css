@@ -59,8 +59,15 @@
 
 .home-v3 .panel { background: var(--panel); border: 1px solid var(--line); backdrop-filter: blur(6px); }
 
-/* Contribution-graph panel (the squares are drawn on a canvas in PixelHeatmap). No backdrop blur, so the
-   graph does not force the video behind it to be re-blurred on every frame. */
+/* Contribution-graph squares */
+.hm-grid { display: grid; grid-auto-flow: column; gap: clamp(2px, 0.45vw, 5px); }
+.hm-cell { aspect-ratio: 1 / 1; border-radius: 2px; display: block; }
+.hm-l0 { background: rgba(255, 255, 255, 0.035); }
+.hm-l1 { background: #0e3a24; }
+.hm-l2 { background: #14582f; }
+.hm-l3 { background: #1d8a49; }
+.hm-l4 { background: #27d968; }
+.hm-l5 { background: #2eff7b; }
 .hm-panel { background: rgba(6, 5, 7, 0.78); border: 1px solid var(--line); }
 
 /* Segmented clock */

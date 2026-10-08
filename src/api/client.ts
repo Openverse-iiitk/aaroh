@@ -7,37 +7,75 @@ function authHeaders(): Record<string, string> {
     'Content-Type': 'application/json',
   };
   try {
-    const user = typeof window !== 'undefined' ? localStorage.getItem('reflect_active_user') : null;
-    if (user) {
-      headers['x-session-user'] = user;
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('reflect_session_token') || localStorage.getItem('reflect_admin_token');
+      if (token) {
+        headers['x-session-token'] = token;
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+      const user = localStorage.getItem('reflect_active_user');
+      if (user) {
+        headers['x-session-user'] = user;
+      }
     }
   } catch {}
   return headers;
 }
 
 export async function fetchCurrentUser(): Promise<User | null> {
+  // If ?token=... is present in URL (e.g. from GitHub OAuth redirect), store it!
+  if (typeof window !== 'undefined') {
+    const params = new URLSearchParams(window.location.search);
+    const tokenParam = params.get('token');
+    if (tokenParam) {
+      try {
+        localStorage.setItem('reflect_session_token', tokenParam);
+      } catch {}
+      const url = new URL(window.location.href);
+      url.searchParams.delete('token');
+      window.history.replaceState({}, '', url.toString());
+    }
+  }
+
   const res = await fetch(`${BASE_URL}/auth/me`, {
-    headers: authHeaders()
+    headers: authHeaders(),
+    credentials: 'include'
   });
   if (!res.ok) {
-    try { localStorage.removeItem('reflect_active_user'); } catch {}
+    try {
+      localStorage.removeItem('reflect_active_user');
+      localStorage.removeItem('reflect_session_token');
+      localStorage.removeItem('reflect_admin_token');
+    } catch {}
     return null;
   }
   const data = await res.json();
   if (data.user) {
     const purged = ['rohan-satheesh', 'deva4509', 'manav-codes', 'sarah-dev', 'admin-starlit', 'ptr25', 'vipulreddyvemula'];
     if (purged.includes((data.user.username || '').toLowerCase())) {
-      try { localStorage.removeItem('reflect_active_user'); } catch {}
+      try {
+        localStorage.removeItem('reflect_active_user');
+        localStorage.removeItem('reflect_session_token');
+        localStorage.removeItem('reflect_admin_token');
+      } catch {}
       return null;
     }
     // Auto-evict non-admin participants while logins are paused
     if (data.paused) {
-      try { localStorage.removeItem('reflect_active_user'); } catch {}
+      try {
+        localStorage.removeItem('reflect_active_user');
+        localStorage.removeItem('reflect_session_token');
+        localStorage.removeItem('reflect_admin_token');
+      } catch {}
       return null;
     }
     try { localStorage.setItem('reflect_active_user', data.user.username); } catch {}
   } else {
-    try { localStorage.removeItem('reflect_active_user'); } catch {}
+    try {
+      localStorage.removeItem('reflect_active_user');
+      localStorage.removeItem('reflect_session_token');
+      localStorage.removeItem('reflect_admin_token');
+    } catch {}
   }
   return data.user;
 }
@@ -46,13 +84,20 @@ export async function adminSecretLogin(secretKey: string, username?: string): Pr
   const res = await fetch(`${BASE_URL}/auth/admin-secret-login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ secretKey, username })
+    body: JSON.stringify({ secretKey, username }),
+    credentials: 'include'
   });
   if (!res.ok) {
     const data = await res.json().catch(() => ({}));
     throw new Error(data.error || 'Invalid admin secret passkey');
   }
   const data = await res.json();
+  if (data.token) {
+    try {
+      localStorage.setItem('reflect_admin_token', data.token);
+      localStorage.setItem('reflect_session_token', data.token);
+    } catch {}
+  }
   if (data.user) {
     try { localStorage.setItem('reflect_active_user', data.user.username); } catch {}
   }
@@ -63,10 +108,20 @@ export async function mockLogin(username: string, role: 'admin' | 'contributor' 
   const res = await fetch(`${BASE_URL}/auth/mock-login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, role, name, avatarUrl })
+    body: JSON.stringify({ username, role, name, avatarUrl }),
+    credentials: 'include'
   });
-  if (!res.ok) throw new Error('Failed to login');
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}));
+    throw new Error(data.error || 'Failed to login');
+  }
   const data = await res.json();
+  if (data.token) {
+    try {
+      localStorage.setItem('reflect_session_token', data.token);
+      localStorage.removeItem('reflect_admin_token');
+    } catch {}
+  }
   if (data.user) {
     try { localStorage.setItem('reflect_active_user', data.user.username); } catch {}
   }
@@ -74,12 +129,16 @@ export async function mockLogin(username: string, role: 'admin' | 'contributor' 
 }
 
 export async function logout(): Promise<void> {
-  try { localStorage.removeItem('reflect_active_user'); } catch {}
-  await fetch(`${BASE_URL}/auth/logout`, { method: 'POST', headers: authHeaders() });
+  try {
+    localStorage.removeItem('reflect_active_user');
+    localStorage.removeItem('reflect_session_token');
+    localStorage.removeItem('reflect_admin_token');
+  } catch {}
+  await fetch(`${BASE_URL}/auth/logout`, { method: 'POST', headers: authHeaders(), credentials: 'include' });
 }
 
 export async function fetchGitHubOAuthUrl(): Promise<{ configured: boolean; url?: string; message?: string }> {
-  const res = await fetch(`${BASE_URL}/auth/github/url`);
+  const res = await fetch(`${BASE_URL}/auth/github/url`, { credentials: 'include' });
   return res.json();
 }
 

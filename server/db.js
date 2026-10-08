@@ -56,7 +56,7 @@ const getInitialSeed = () => {
         'microsoft/vscode'
       ],
       isFinalized: false,
-      loginsPaused: true,
+      loginsPaused: false,
       finalizedAt: null,
       finalPodium: []
     },
@@ -101,6 +101,13 @@ class Database {
   }
 
   async ensureLoaded(force = false) {
+    // Only attempt to load from remote Vercel Blob if running in VERCEL serverless environment
+    // or if BLOB_READ_WRITE_TOKEN is explicitly configured.
+    // In local development, use local data.json to prevent stale remote blob data from overwriting local state.
+    if (!process.env.VERCEL && !process.env.BLOB_READ_WRITE_TOKEN) {
+      return false;
+    }
+
     const now = Date.now();
     if (!force && this.lastLoadedAt && (now - this.lastLoadedAt < 3000)) return;
     try {
@@ -113,6 +120,16 @@ class Database {
       if (res.ok) {
         const remoteData = await res.json();
         if (remoteData && remoteData.sprint && Array.isArray(remoteData.pullRequests) && Array.isArray(remoteData.users)) {
+          // Strictly filter out any historical PRs created before sprint start
+          const sprintStartMs = remoteData.sprint?.startDate ? new Date(remoteData.sprint.startDate).getTime() : 0;
+          const minAllowedMs = sprintStartMs > 0 ? sprintStartMs - (3 * 60 * 60 * 1000) : 0;
+          if (minAllowedMs > 0) {
+            remoteData.pullRequests = remoteData.pullRequests.filter(pr => {
+              if (!pr.createdAt) return false;
+              return new Date(pr.createdAt).getTime() >= minAllowedMs;
+            });
+          }
+
           this.data = remoteData;
           this.lastLoadedAt = now;
           try {
@@ -207,7 +224,7 @@ class Database {
       startDate: startDateStr,
       currentDay: computedDay,
       isUpcoming,
-      loginsPaused: this.data.sprint?.loginsPaused !== false,
+      loginsPaused: Boolean(this.data.sprint?.loginsPaused),
       trackingScope: 'ALL_REPOSITORIES',
       trackedRepos: repos.length > 0 ? repos : (this.data.sprint.trackedRepos || []),
       totalTrackedContributors: contributors.length,
