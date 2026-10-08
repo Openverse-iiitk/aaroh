@@ -28,7 +28,7 @@ export const SubmitPrModal: React.FC<SubmitPrModalProps> = ({
   onSubmitPr,
   isSubmitting
 }) => {
-  const [repo, setRepo] = useState(sprint?.trackedRepos?.[0] || 'openverse/hackaaroh');
+  const [repo, setRepo] = useState('');
   const [title, setTitle] = useState('feat: optimize reactive fiber work reconciliation loop');
   const [description, setDescription] = useState('Enhanced async reconciliation batching, reducing redundant tree traversals by 40%.');
   const [url, setUrl] = useState('');
@@ -76,7 +76,7 @@ export const SubmitPrModal: React.FC<SubmitPrModalProps> = ({
 
         <div className="flex items-center gap-2 mb-2 text-xs font-medium uppercase tracking-wider text-lavender-accent">
           <GitPullRequest className="w-4 h-4" />
-          <span>Sprint Submission</span>
+          <span>Submit a Contribution</span>
         </div>
 
         <h3 className="text-xl font-medium text-lilac-white">
@@ -89,19 +89,17 @@ export const SubmitPrModal: React.FC<SubmitPrModalProps> = ({
         <form onSubmit={handleSubmit} className="mt-5 space-y-4">
           <div>
             <label className="text-xs font-semibold uppercase tracking-wider text-fog block mb-1">
-              Tracked Repository
+              GitHub Repository
             </label>
-            <select
+            <input
+              type="text"
+              required
+              placeholder="e.g. facebook/react or your-org/your-repo"
               value={repo}
               onChange={(e) => setRepo(e.target.value)}
               className="w-full p-2.5 rounded-btn bg-midnight-surface border border-white/10 text-xs text-lilac-white focus:outline-none focus:border-lavender-accent"
-            >
-              {sprint?.trackedRepos?.map((r) => (
-                <option key={r} value={r}>
-                  {r}
-                </option>
-              )) || <option value="openverse/hackaaroh">openverse/hackaaroh</option>}
-            </select>
+            />
+            <p className="text-[11px] text-ash mt-1.5">Submit a pull request from any public GitHub repository.</p>
           </div>
 
           <div>

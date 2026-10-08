@@ -124,7 +124,7 @@ export const PullRequestsPage: React.FC<PullRequestsPageProps> = ({
           <div className="flex items-center gap-2 mb-1">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span className="text-[11px] font-semibold text-indigo-400 uppercase tracking-wider">
-              Live Ingestion Pipeline
+              Live PR Tracking
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">

@@ -186,7 +186,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               </span>
             </div>
             <span className="text-[11px] text-zinc-500 mt-1">
-              Ingested across ecosystem
+              Tracked across GitHub
             </span>
           </SpotlightCard>
 
@@ -208,14 +208,14 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </div>
 
-      {/* How The Sprint Works (3 Pillars) */}
+      {/* How It Works */}
       <div className="max-w-5xl mx-auto px-4 mb-20">
         <div className="text-center max-w-xl mx-auto mb-10">
           <span className="text-xs font-semibold text-blue-400 uppercase tracking-wider">
             Simple &amp; Transparent
           </span>
           <h2 className="text-2xl sm:text-3xl font-semibold text-white mt-1.5 tracking-tight">
-            How The PR Sprint Operates
+            How It Works
           </h2>
           <p className="text-xs sm:text-sm text-zinc-400 mt-2">
             Automated discovery means you write code, open PRs on GitHub, and our platform handles the rest.
@@ -261,10 +261,10 @@ export const HomePage: React.FC<HomePageProps> = ({
                 Step 02
               </span>
               <h3 className="text-base font-semibold text-white mt-1 mb-2">
-                Automated Cross-Repo Tracking
+                Automatic PR Tracking
               </h3>
               <p className="text-xs text-zinc-400 leading-relaxed">
-                Work on open-source repositories. The ingestion engine discovers pull requests authored by participants and feeds them into the evaluation pipeline.
+                Open pull requests in any public GitHub repository. We find them automatically and send them to reviewers for scoring.
               </p>
             </div>
             <div className="pt-4 mt-4 border-t border-white/5 text-[11px] text-zinc-400 flex items-center gap-1.5">
@@ -388,6 +388,30 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </div>
 
+      {/* Contributor Rewards */}
+      <div className="max-w-5xl mx-auto px-4 mb-20">
+        <div className="relative overflow-hidden rounded-3xl border border-orange-400/30 bg-gradient-to-br from-[#29120b] via-[#17102b] to-[#0b071d] p-6 sm:p-10 shadow-[0_0_45px_rgba(251,146,60,0.12)]">
+          <div className="absolute -right-12 -top-16 h-48 w-48 rounded-full bg-orange-500/20 blur-3xl" />
+          <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+            <div className="max-w-xl">
+              <span className="inline-flex items-center gap-2 text-xs font-bold text-orange-300 uppercase tracking-[0.2em]">
+                <Trophy className="w-4 h-4" /> Contributor Rewards
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mt-2">20 meals on us.</h2>
+              <p className="text-base text-zinc-300 mt-3">Reach the top 20 on the leaderboard and get a Zomato food voucher for your next meal.</p>
+              <p className="text-xs text-zinc-500 mt-2">One voucher for each of the final top 20 contributors.</p>
+            </div>
+            <div className="grid grid-cols-5 gap-2 max-w-[220px]" aria-label="20 Zomato vouchers available">
+              {Array.from({ length: 20 }, (_, index) => (
+                <div key={index} className="flex h-9 w-9 items-center justify-center rounded-lg border border-orange-300/30 bg-orange-400/10 text-xs font-bold text-orange-200 shadow-inner">
+                  {index + 1}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Tracked Ecosystem Repositories */}
       <div className="max-w-5xl mx-auto px-4 mb-20">
         <div className="border-t border-white/10 pt-10">
@@ -400,7 +424,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 Monitored Open Source Repositories
               </h2>
               <p className="text-xs text-zinc-400 mt-1">
-                Pull requests authored across any of these recognized repositories are eligible for scoring.
+                Pull requests from any public GitHub repository are eligible for scoring.
               </p>
             </div>
             <Link
@@ -440,7 +464,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   Live Standings Preview
                 </span>
                 <h2 className="text-xl font-semibold text-white mt-1">
-                  Current Sprint Leaders
+                  Current Leaders
                 </h2>
               </div>
               <Link
@@ -529,7 +553,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             Ready to participate in HackAaroh?
           </h2>
           <p className="text-xs sm:text-sm text-zinc-400 max-w-md mx-auto mb-6">
-            Sign in with your GitHub account, start contributing pull requests to open-source repositories, and climb the event leaderboard.
+            Sign in with GitHub, open a pull request from any public repository, and climb the leaderboard.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3">

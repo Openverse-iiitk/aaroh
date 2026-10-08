@@ -106,10 +106,10 @@ export const Hero: React.FC<HeroProps> = ({
                 </span>
                 <span className="font-bold text-white tracking-wider uppercase text-[11px] sm:text-xs">
                   {sprint?.status === 'ACTIVE'
-                    ? `Sprint Day ${sprint.currentDay || 1} • Ingestion Cycle Active`
+                    ? `Day ${sprint.currentDay || 1} • Tracking Active`
                     : sprint?.isFinalized
-                    ? 'Sprint Concluded • Standings Locked'
-                    : 'Sprint Registration Open'}
+                    ? 'Results Final • Standings Locked'
+                    : 'Now accepting contributions'}
                 </span>
                 <span className="px-1.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-mono text-[10px] font-semibold border border-indigo-500/30">
                   {progressPercent}%
@@ -176,7 +176,7 @@ export const Hero: React.FC<HeroProps> = ({
                 <span>
                   {sprint?.isFinalized
                     ? 'Standings are locked in permanently. Explore the final podium.'
-                    : 'Countdown initiates automatically when sprint status is set to active.'}
+                    : 'The countdown begins when contributions open.'}
                 </span>
               </div>
             )}
@@ -192,7 +192,7 @@ export const Hero: React.FC<HeroProps> = ({
           className="absolute -inset-x-8 -inset-y-6 bg-[radial-gradient(ellipse_at_center,rgba(3,0,20,0.7)_0%,rgba(3,0,20,0.35)_55%,transparent_75%)] pointer-events-none -z-10 rounded-full blur-lg" 
         />
         <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-white mb-5 leading-[1.12] drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
-          The Starlit GitHub Sprint &{' '}
+          The Starlit GitHub Challenge &{' '}
           <ShinyText
             text="Live PR Leaderboard"
             className="text-4xl sm:text-6xl font-bold tracking-tight text-cosmic-gradient drop-shadow-[0_4px_24px_rgba(168,85,247,0.5)]"
@@ -200,8 +200,7 @@ export const Hero: React.FC<HeroProps> = ({
         </h1>
 
         <p className="text-sm sm:text-base text-zinc-200 max-w-2xl mx-auto font-normal leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.98)]">
-          Author pull requests across top open-source repositories. The ingestion engine discovers your commits, 
-          evaluates them under a 4-pillar rubric (Quality, Complexity, Impact, Tests), and updates standings every night.
+          Open pull requests from any public GitHub repository. We track your contributions, reviewers award points for meaningful work, and the leaderboard updates every night.
         </p>
       </div>
 
@@ -261,7 +260,7 @@ export const Hero: React.FC<HeroProps> = ({
       <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-zinc-400 pt-3 border-t border-white/5 w-full max-w-2xl">
         <div className="flex items-center gap-1.5">
           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-          <span>Multi-Repository Ingestion</span>
+          <span>Any Public Repository</span>
         </div>
         <span className="text-zinc-700 hidden sm:inline">•</span>
         <div className="flex items-center gap-1.5">
@@ -271,7 +270,7 @@ export const Hero: React.FC<HeroProps> = ({
         <span className="text-zinc-700 hidden sm:inline">•</span>
         <div className="flex items-center gap-1.5">
           <Clock className="w-3.5 h-3.5 text-purple-400" />
-          <span>Nightly 00:00 UTC Ticker</span>
+          <span>Daily 00:00 UTC Update</span>
         </div>
       </div>
     </div>

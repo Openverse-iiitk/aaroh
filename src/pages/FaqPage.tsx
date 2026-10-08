@@ -30,10 +30,10 @@ const FAQ_DATA: FaqItem[] = [
   {
     id: 'what-is-hackaaroh',
     category: 'general',
-    question: 'What is HackAaroh and how does the PR Sprint work?',
+    question: 'What is HackAaroh and how does it work?',
     answer:
-      'HackAaroh is an intensive open-source contribution sprint. Instead of counting superficial commit numbers, HackAaroh tracks pull requests authored across eligible repositories and evaluates them on real architectural depth, test resilience, and project impact.',
-    highlights: ['Automated PR ingestion', 'Nightly 00:00 UTC evaluations', 'Merit-based leaderboard']
+      'HackAaroh is a simple way to get recognized for meaningful open-source work. Open a pull request on GitHub, we track it, reviewers award points, and the leaderboard shows how you rank.',
+    highlights: ['Automatic PR tracking', 'Daily reviews at 00:00 UTC', 'Merit-based leaderboard']
   },
   {
     id: 'who-can-join',
@@ -48,16 +48,16 @@ const FAQ_DATA: FaqItem[] = [
     category: 'tracking',
     question: 'How does HackAaroh discover and track my pull requests?',
     answer:
-      'Once you sign in with GitHub, the platform maps your GitHub handle. The background ingestion engine monitors all public repositories in the tracked ecosystem list, automatically pulling your PR metadata (additions, deletions, commits, review status, and merge state).',
+      'Once you sign in with GitHub, we connect your GitHub username and automatically find your public pull requests. You can also submit a PR directly from any public repository using the submission form.',
     highlights: ['No manual forms to copy-paste', 'Tracks additions, diffs & commits', 'Auto-updates on merge']
   },
   {
     id: 'eligible-repos',
     category: 'tracking',
-    question: 'Which repositories are eligible for scoring?',
+    question: 'Which repositories can I submit a pull request from?',
     answer:
-      'Eligible repositories include recognized open-source projects such as React, Next.js, Bun, Rust, Linux, Tailwind CSS, TanStack, shadcn/ui, VS Code, and Astral uv, plus designated HackAaroh repositories. Maintainers can also expand the ecosystem list through the admin portal.',
-    highlights: ['Tier-1 open-source repositories', 'Publicly accessible repos only', 'Updated dynamically by admins']
+      'You can submit a pull request from any public GitHub repository. It does not need to be on a preset list. The repository must be open source and the contribution must follow the fair-play rules below.',
+    highlights: ['Any public GitHub repository', 'No preset repository list', 'Meaningful contributions only']
   },
   {
     id: 'draft-closed-prs',
@@ -80,15 +80,23 @@ const FAQ_DATA: FaqItem[] = [
     category: 'scoring',
     question: 'When do scores and leaderboard standings update?',
     answer:
-      'Scoring runs on a continuous daily cycle culminating every night at 00:00 UTC. The live countdown HUD on the home page displays the exact remaining hours, minutes, and seconds until the next nightly evaluation cycle.',
-    highlights: ['Nightly 00:00 UTC cutoff', 'Live Countdown HUD', 'Real-time leaderboard updates']
+      'Reviews and leaderboard updates happen once a day at 00:00 UTC. The countdown on the home page shows when the next update is due.',
+    highlights: ['Daily 00:00 UTC update', 'Live countdown', 'Real-time leaderboard']
+  },
+  {
+    id: 'rewards',
+    category: 'general',
+    question: 'What do the top contributors win?',
+    answer:
+      'The top 20 contributors on the final leaderboard receive Zomato food vouchers as a thank-you for their open-source contributions. Rankings are based on the points awarded by reviewers.',
+    highlights: ['Top 20 contributors', 'Zomato food vouchers', 'Final leaderboard standings']
   },
   {
     id: 'can-score-be-adjusted',
     category: 'scoring',
     question: 'Can my score be updated if I push new commits after review?',
     answer:
-      'Yes. If reviewers provide feedback or request revisions, and you push additional commits or test cases, administrators can re-review and adjust your score during subsequent evaluation rounds before the sprint is frozen.',
+      'Yes. If reviewers provide feedback or request revisions, administrators can review the updated PR and adjust your score.',
     highlights: ['Iterative feedback supported', 'Re-grading on pushed revisions', 'Transparent reviewer notes']
   },
   {
@@ -96,15 +104,15 @@ const FAQ_DATA: FaqItem[] = [
     category: 'rules',
     question: 'What is the policy on AI-generated spam or low-effort PRs?',
     answer:
-      'HackAaroh strictly enforces a zero-tolerance anti-spam policy. Trivial typo fixes, automated bulk PRs, unverified AI code dumps, or PRs submitted purely for leaderboard farming will receive 0 points and may lead to disqualification from the sprint podium.',
+      'HackAaroh does not award points for trivial typo fixes, automated bulk PRs, unverified AI code dumps, or contributions submitted only to manipulate the leaderboard.',
     highlights: ['Zero-tolerance for spam', 'No low-effort typo farming', 'Disqualification for abusive activity']
   },
   {
-    id: 'sprint-finalization',
+    id: 'results-finalization',
     category: 'rules',
-    question: 'What happens when a sprint concludes and podium is finalized?',
+    question: 'What happens when the results are finalized?',
     answer:
-      'When an admin finalizes the sprint, rankings are permanently locked. The top 3 contributors are awarded official Gold, Silver, and Bronze podium standings with commemorative event badges and achievement summaries.',
+      'When the event ends, rankings are locked and the final leaderboard is published. The top 20 contributors receive the Zomato food vouchers.',
     highlights: ['Permanent locked podium', 'Top 3 trophy recognition', 'Contributor certificate eligibility']
   }
 ];
@@ -149,7 +157,7 @@ export const FaqPage: React.FC = () => {
           Frequently Asked Questions
         </h1>
         <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-          Everything you need to know about participation, pull request tracking, 4-pillar rubric grading, and leaderboard standings.
+          Everything you need to know about joining, submitting pull requests, earning points, and winning rewards.
         </p>
       </div>
 
@@ -180,7 +188,7 @@ export const FaqPage: React.FC = () => {
           {[
             { id: 'all', label: 'All Questions' },
             { id: 'general', label: 'General & Overview' },
-            { id: 'tracking', label: 'PR Tracking & Ingestion' },
+            { id: 'tracking', label: 'PR Tracking' },
             { id: 'scoring', label: 'Rubric & Scoring' },
             { id: 'rules', label: 'Rules & Fair Play' }
           ].map((cat) => (
@@ -270,9 +278,9 @@ export const FaqPage: React.FC = () => {
       {/* Still Have Questions Box */}
       <div className="p-6 sm:p-8 rounded-2xl bg-[#0a0718] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
         <div className="space-y-1 text-center sm:text-left">
-          <h3 className="text-base font-semibold text-white">Still have questions about the sprint?</h3>
+          <h3 className="text-base font-semibold text-white">Still have questions?</h3>
           <p className="text-xs text-zinc-400">
-            Learn more about the rules, sprint schedule, or connect with organizers.
+            Learn more about the rules, scoring, or rewards.
           </p>
         </div>
 

@@ -104,7 +104,7 @@ export const FancyCountdown: React.FC<FancyCountdownProps> = ({ sprint }) => {
                 </span>
               </div>
               <h3 className="text-base font-medium text-white mt-0.5">
-                Next PR Ingestion &amp; Calculation Round
+                Next daily review
               </h3>
             </div>
           </div>
@@ -153,7 +153,7 @@ export const FancyCountdown: React.FC<FancyCountdownProps> = ({ sprint }) => {
             <div className="w-12 h-12 rounded-full bg-emerald-950 border border-emerald-500/40 mx-auto flex items-center justify-center text-emerald-400 mb-3 animate-bounce">
               <CheckCircle2 className="w-6 h-6" />
             </div>
-            <h4 className="text-lg font-semibold text-white">Ingestion In Progress!</h4>
+            <h4 className="text-lg font-semibold text-white">Updating the leaderboard</h4>
             <p className="text-xs text-zinc-400 max-w-sm mx-auto mt-1">
               The daily timer reached zero. The automated scheduler is processing pull requests for Day {(sprint.currentDay || 1) + 1}.
             </p>

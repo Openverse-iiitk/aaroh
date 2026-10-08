@@ -59,7 +59,7 @@ export const TopCountdownBanner: React.FC<TopCountdownBannerProps> = ({ sprint }
             <span>DAY {sprint.currentDay} SPRINT</span>
             <span className="text-indigo-400/50">•</span>
             <span className="text-indigo-300 font-normal hidden sm:inline">
-              Nightly PR Ingestion Cycle
+              Daily leaderboard update
             </span>
           </span>
         </div>

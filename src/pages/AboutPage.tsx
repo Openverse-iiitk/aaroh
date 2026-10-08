@@ -37,7 +37,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ currentUser, onOpenAuth })
           About <span className="bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">HackAaroh</span> PR Tracker
         </h1>
         <p className="text-sm sm:text-base text-zinc-400 leading-relaxed max-w-2xl mx-auto">
-          HackAaroh is an intensive open-source sprint platform engineered to discover, evaluate, and reward genuine developer contributions across premier open-source repositories.
+          HackAaroh is an open-source sprint where meaningful pull requests earn points, recognition, and rewards.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
@@ -87,12 +87,12 @@ export const AboutPage: React.FC<AboutPageProps> = ({ currentUser, onOpenAuth })
             <div className="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center">
               <Globe className="w-5 h-5" />
             </div>
-            <h2 className="text-lg font-semibold text-white">Automated Ecosystem Scope</h2>
+            <h2 className="text-lg font-semibold text-white">Contribute Anywhere</h2>
             <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-              Participants author pull requests across official open-source repositories including React, Next.js, Bun, Rust, Linux, Tailwind, VS Code, and HackAaroh community projects.
+              Submit pull requests from any public GitHub repository. You are not limited to a preset list of projects.
             </p>
             <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-              Our continuous ingestion engine discovers pull requests authored by participants and prepares them for reviewer evaluation without requiring tedious manual reporting.
+              We find your public pull requests automatically, and you can also submit one directly for review.
             </p>
           </div>
           <div className="pt-4 mt-4 border-t border-white/5 flex items-center gap-2 text-xs text-indigo-300">
@@ -129,7 +129,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ currentUser, onOpenAuth })
             <span className="text-xs font-mono font-bold text-purple-400">02</span>
             <h3 className="text-sm font-semibold text-white mt-2 mb-1">Automated Discovery</h3>
             <p className="text-xs text-zinc-400 leading-relaxed">
-              The ingestion engine monitors pull requests across tracked repositories, pulling additions, deletions, commits, and merge status.
+              We find your public pull requests and collect the details reviewers need, such as the repository, changes, commits, and merge status.
             </p>
           </div>
 
