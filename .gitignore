@@ -6,3 +6,4 @@ dist
 verify_*.png
 verify_*.cjs
 .vercel
+scratch/
