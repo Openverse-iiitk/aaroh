@@ -25,14 +25,36 @@ export async function fetchCurrentUser(): Promise<User | null> {
   }
   const data = await res.json();
   if (data.user) {
-    const purged = ['rohan-satheesh', 'deva4509', 'manav-codes', 'sarah-dev', 'admin-starlit'];
+    const purged = ['rohan-satheesh', 'deva4509', 'manav-codes', 'sarah-dev', 'admin-starlit', 'ptr25', 'vipulreddyvemula'];
     if (purged.includes((data.user.username || '').toLowerCase())) {
+      try { localStorage.removeItem('reflect_active_user'); } catch {}
+      return null;
+    }
+    // Auto-evict non-admin participants while logins are paused
+    if (data.paused || data.user.role !== 'admin') {
       try { localStorage.removeItem('reflect_active_user'); } catch {}
       return null;
     }
     try { localStorage.setItem('reflect_active_user', data.user.username); } catch {}
   } else {
     try { localStorage.removeItem('reflect_active_user'); } catch {}
+  }
+  return data.user;
+}
+
+export async function adminSecretLogin(secretKey: string, username?: string): Promise<User> {
+  const res = await fetch(`${BASE_URL}/auth/admin-secret-login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ secretKey, username })
+  });
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}));
+    throw new Error(data.error || 'Invalid admin secret passkey');
+  }
+  const data = await res.json();
+  if (data.user) {
+    try { localStorage.setItem('reflect_active_user', data.user.username); } catch {}
   }
   return data.user;
 }

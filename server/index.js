@@ -217,7 +217,52 @@ if (!process.env.VERCEL) {
 // Get current session user
 app.get('/api/auth/me', (req, res) => {
   const user = getUserFromSession(req);
+  if (user && user.role !== 'admin') {
+    const sprint = db.getSprint();
+    if (sprint.loginsPaused) {
+      res.clearCookie('reflect_session');
+      return res.json({ user: null, paused: true, message: 'Participant logins are temporarily paused.' });
+    }
+  }
   res.json({ user: user || null });
+});
+
+// Secret Admin Passkey Login (For organizers to access admin dashboard privately)
+app.post('/api/auth/admin-secret-login', async (req, res) => {
+  const { secretKey, username } = req.body || {};
+  const expectedKey = (process.env.ADMIN_SECRET_KEY || 'aaroh-admin-2026').trim();
+
+  if (!secretKey || secretKey.trim() !== expectedKey) {
+    return res.status(401).json({ error: 'Invalid organizer secret passkey' });
+  }
+
+  const adminUsername = (username && username.trim()) || 'Vijay-1710';
+  let user = db.getUserByUsername(adminUsername);
+  if (!user) {
+    user = await db.upsertUser({
+      id: `usr_${adminUsername.toLowerCase()}`,
+      username: adminUsername,
+      name: adminUsername === 'Vijay-1710' ? 'Vijay-1710 (Organizer)' : adminUsername,
+      avatarUrl: adminUsername === 'Vijay-1710'
+        ? 'https://avatars.githubusercontent.com/u/Vijay-1710?v=4'
+        : 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
+      bio: 'Official HackAaroh Event Administrator',
+      htmlUrl: `https://github.com/${adminUsername}`,
+      role: 'admin',
+      createdAt: new Date().toISOString()
+    });
+  } else if (user.role !== 'admin') {
+    user = await db.upsertUser({ ...user, role: 'admin' });
+  }
+
+  res.cookie('reflect_session', user.username, {
+    httpOnly: false,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    sameSite: 'lax'
+  });
+
+  await db.addAuditLog('ADMIN_SECRET_LOGIN', user.username, 'Admin authenticated via secret passkey');
+  res.json({ success: true, user });
 });
 
 // Mock login (1-click test login for judges & testers)
@@ -256,12 +301,6 @@ app.post('/api/auth/mock-login', async (req, res) => {
     user = await db.upsertUser({ ...user, role });
   }
 
-  // Automatically ensure cross-repository PRs are tracked for newly connected contributors
-  const existingPrs = db.getPullRequests().filter(pr => pr.author.toLowerCase() === user.username.toLowerCase());
-  if (existingPrs.length === 0 && user.role !== 'admin') {
-    await syncUserGitHubPullRequests(user, sprint.currentDay || 1);
-  }
-
   res.cookie('reflect_session', user.username, {
     httpOnly: false,
     maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -274,8 +313,12 @@ app.post('/api/auth/mock-login', async (req, res) => {
 
 // GitHub OAuth authorization URL
 app.get('/api/auth/github/url', (req, res) => {
+  const { adminKey } = req.query;
+  const expectedKey = (process.env.ADMIN_SECRET_KEY || 'aaroh-admin-2026').trim();
+  const isAdminBypass = adminKey && adminKey.trim() === expectedKey;
+
   const sprint = db.getSprint();
-  if (sprint.loginsPaused) {
+  if (sprint.loginsPaused && !isAdminBypass) {
     return res.json({
       configured: false,
       paused: true,
@@ -794,16 +837,6 @@ app.post('/api/admin/review-pr', async (req, res) => {
 // Audit logs
 app.get('/api/admin/audit-logs', (req, res) => {
   res.json(db.getAuditLogs());
-});
-
-// Reset database to initial seed (for testing)
-app.post('/api/admin/reset-db', async (req, res) => {
-  const user = getUserFromSession(req);
-  if (user?.role !== 'admin') {
-    return res.status(403).json({ error: 'Admin privileges required' });
-  }
-  const data = await db.reset();
-  res.json({ message: 'Database reset to initial state', data });
 });
 
 // -------------------------------------------------------------

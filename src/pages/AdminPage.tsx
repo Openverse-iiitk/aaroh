@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PullRequest, Sprint, User, AuditLog } from '../types';
 import { Shield, CheckCircle2, Clock, StopCircle, PlayCircle, PauseCircle, RefreshCw, Flag, RotateCcw, AlertTriangle, ExternalLink, Award, FileCode, Check, Play, Settings, Plus, Trash2, Calendar, Lock } from 'lucide-react';
+import { adminSecretLogin } from '../api/client';
 
 interface AdminPageProps {
   currentUser: User | null;
@@ -54,32 +55,82 @@ export const AdminPage: React.FC<AdminPageProps> = ({
   const reviewedPrs = safePrs.filter((pr) => pr && pr.reviewStatus === 'REVIEWED');
   const totalCreditsAwarded = reviewedPrs.reduce((acc, curr) => acc + (curr.creditScore || 0), 0);
 
-  // If user is not admin, show testing switch banner
+  const [passkeyInput, setPasskeyInput] = useState('');
+  const [passkeyUsername, setPasskeyUsername] = useState('Vijay-1710');
+  const [passkeyLoading, setPasskeyLoading] = useState(false);
+  const [passkeyError, setPasskeyError] = useState<string | null>(null);
+
+  const handlePasskeySubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!passkeyInput.trim()) return;
+    setPasskeyLoading(true);
+    setPasskeyError(null);
+    try {
+      await adminSecretLogin(passkeyInput.trim(), passkeyUsername.trim() || 'Vijay-1710');
+      window.location.reload();
+    } catch (err: any) {
+      setPasskeyError(err.message || 'Invalid secret passkey');
+      setPasskeyLoading(false);
+    }
+  };
+
+  // If user is not admin, show secret organizer access terminal
   if (!isAdmin) {
     return (
-      <div className="w-full max-w-3xl mx-auto px-4 py-16 text-center">
-        <div className="p-8 rounded bg-[#121215] border border-white/10 space-y-4">
-          <div className="w-12 h-12 rounded bg-[#18181b] border border-white/10 mx-auto flex items-center justify-center">
-            <Shield className="w-6 h-6 text-blue-400" />
+      <div className="w-full max-w-lg mx-auto px-4 py-16 text-center">
+        <div className="p-7 rounded-2xl bg-[#0e0a24] border border-white/10 space-y-4 shadow-[0_20px_50px_rgba(0,0,0,0.7)] text-left">
+          <div className="w-12 h-12 rounded-xl bg-indigo-950/80 border border-indigo-500/30 mx-auto flex items-center justify-center mb-2 shadow-[0_0_20px_rgba(99,102,241,0.25)]">
+            <Shield className="w-6 h-6 text-indigo-400" />
           </div>
-          <h2 className="text-xl font-semibold text-white">
-            Admin Portal Access
-          </h2>
-          <p className="text-xs text-zinc-400 max-w-md mx-auto">
-            You are currently browsing as a participant. Admin privileges are required
-            to start/end tracking, adjust scheduled daily update times, and manually grade pull requests.
-          </p>
+          <div className="text-center">
+            <h2 className="text-xl font-bold text-white tracking-tight">
+              Organizer Admin Access
+            </h2>
+            <p className="text-xs text-zinc-400 max-w-sm mx-auto mt-1 leading-relaxed">
+              Participant logins are paused. Enter your secret organizer passkey to access the management portal.
+            </p>
+          </div>
 
-          <div className="pt-4 flex justify-center">
+          {passkeyError && (
+            <div className="p-3 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-200 text-xs flex items-start gap-2">
+              <AlertTriangle className="w-4 h-4 text-rose-400 flex-shrink-0 mt-0.5" />
+              <span>{passkeyError}</span>
+            </div>
+          )}
+
+          <form onSubmit={handlePasskeySubmit} className="space-y-3 pt-2">
+            <div>
+              <label className="text-xs text-zinc-300 block mb-1">Secret Passkey</label>
+              <input
+                type="password"
+                placeholder="Enter secret passkey"
+                value={passkeyInput}
+                onChange={(e) => setPasskeyInput(e.target.value)}
+                className="w-full bg-[#070417] border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-400 font-mono"
+                required
+                autoFocus
+              />
+            </div>
+
+            <div>
+              <label className="text-xs text-zinc-300 block mb-1">Admin Username</label>
+              <input
+                type="text"
+                placeholder="Vijay-1710"
+                value={passkeyUsername}
+                onChange={(e) => setPasskeyUsername(e.target.value)}
+                className="w-full bg-[#070417] border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-400 font-mono"
+              />
+            </div>
+
             <button
-              id="admin-switch-account-btn"
-              onClick={onSwitchToAdmin}
-              className="btn-primary !px-5 !py-2.5"
+              type="submit"
+              disabled={passkeyLoading || !passkeyInput.trim()}
+              className="w-full py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white text-xs font-semibold transition-all shadow-[0_0_15px_rgba(99,102,241,0.25)] flex items-center justify-center gap-2"
             >
-              <Shield className="w-4 h-4" />
-              <span>Switch to Admin Account</span>
+              <span>{passkeyLoading ? 'Verifying...' : 'Unlock Admin Hub'}</span>
             </button>
-          </div>
+          </form>
         </div>
       </div>
     );

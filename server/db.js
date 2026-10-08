@@ -66,7 +66,7 @@ const getInitialSeed = () => {
         'microsoft/vscode'
       ],
       isFinalized: false,
-      loginsPaused: false,
+      loginsPaused: true,
       finalizedAt: null,
       finalPodium: []
     },
@@ -79,7 +79,7 @@ const getInitialSeed = () => {
         bio: 'Official HackAaroh Event Administrator',
         htmlUrl: 'https://github.com/Vijay-1710',
         role: 'admin',
-        createdAt: now.toISOString()
+        createdAt: '2026-10-08T00:00:00.000Z'
       }
     ],
     pullRequests: [],
@@ -88,14 +88,14 @@ const getInitialSeed = () => {
         id: `log-${Date.now()}-init`,
         action: 'SPRINT_INITIALIZED',
         actor: 'Vijay-1710',
-        details: 'HackAaroh Sprint initialized for live participants. Logins and tracking active.',
-        timestamp: now.toISOString()
+        details: 'HackAaroh Sprint initialized for October 9 kickoff. Participant logins paused. Secret admin portal active.',
+        timestamp: new Date().toISOString()
       }
     ]
   };
 };
 
-const DEMO_USERNAMES = new Set(['manav-codes', 'sarah-dev', 'alex-rustacean', 'elena-cloud', 'devon-craft', 'admin-starlit', 'rohan-satheesh', 'deva4509']);
+const DEMO_USERNAMES = new Set(['manav-codes', 'sarah-dev', 'alex-rustacean', 'elena-cloud', 'devon-craft', 'admin-starlit', 'rohan-satheesh', 'deva4509', 'ptr25', 'vipulreddyvemula']);
 
 class Database {
   constructor() {
@@ -122,34 +122,31 @@ class Database {
       });
       if (res.ok) {
         const remoteData = await res.json();
-        if (remoteData && remoteData.sprint && Array.isArray(remoteData.pullRequests)) {
-          // Purge legacy demo users and mock PRs if loaded from remote blob store
-          remoteData.users = (remoteData.users || []).filter(u => !DEMO_USERNAMES.has(u.username.toLowerCase()));
-          remoteData.pullRequests = (remoteData.pullRequests || []).filter(p => 
-            !DEMO_USERNAMES.has((p.author || '').toLowerCase()) && !p.id.startsWith('pr-10')
+        if (remoteData && remoteData.sprint) {
+          // Strictly keep only authorized admin accounts; clear all participant data and PRs
+          const adminUsers = new Set(
+            (process.env.ADMIN_GITHUB_USER || 'vijay-1710,Openverse-iiitk')
+              .toLowerCase()
+              .split(',')
+              .map(u => u.trim())
           );
-          if (remoteData.auditLogs) {
-            remoteData.auditLogs = remoteData.auditLogs.filter(l => !DEMO_USERNAMES.has((l.actor || '').toLowerCase()));
+          adminUsers.add('vijay-1710');
+
+          remoteData.users = (remoteData.users || []).filter(u =>
+            u.role === 'admin' || adminUsers.has((u.username || '').toLowerCase())
+          );
+          if (remoteData.users.length === 0) {
+            remoteData.users = getInitialSeed().users;
           }
+
+          // Wipe all PRs completely clean
+          remoteData.pullRequests = [];
+
           if (remoteData.sprint) {
-            remoteData.sprint.loginsPaused = false;
-          }
-
-          // Safety merge: keep valid non-demo PRs
-          if (this.data && Array.isArray(this.data.pullRequests)) {
-            const remotePrIds = new Set(remoteData.pullRequests.map(p => p.id));
-            const localOnlyPrs = this.data.pullRequests.filter(p => !remotePrIds.has(p.id) && !DEMO_USERNAMES.has((p.author || '').toLowerCase()));
-            if (localOnlyPrs.length > 0) {
-              remoteData.pullRequests = [...localOnlyPrs, ...remoteData.pullRequests];
-            }
-
-            if (Array.isArray(this.data.users)) {
-              const remoteUsernames = new Set((remoteData.users || []).map(u => u.username.toLowerCase()));
-              const localOnlyUsers = this.data.users.filter(u => !remoteUsernames.has(u.username.toLowerCase()) && !DEMO_USERNAMES.has(u.username.toLowerCase()));
-              if (localOnlyUsers.length > 0) {
-                remoteData.users = [...(remoteData.users || []), ...localOnlyUsers];
-              }
-            }
+            // Logins paused strictly until explicitly unlocked
+            remoteData.sprint.loginsPaused = true;
+            remoteData.sprint.startDate = '2026-10-08T18:30:00.000Z';
+            remoteData.sprint.status = 'ACTIVE';
           }
 
           correctTrackedRepository(remoteData);
@@ -216,7 +213,7 @@ class Database {
           access: 'public',
           addRandomSuffix: false,
           allowOverwrite: true,
-          cacheControlMaxAge: 0,
+          abortSignal: AbortSignal.timeout(4000),
           token
         });
       } catch (err) {
@@ -234,7 +231,9 @@ class Database {
   getSprint() {
     const repos = Array.from(new Set((this.data.pullRequests || []).map(pr => pr.repo))).filter(Boolean);
     const contributors = (this.data.users || []).filter(u => u.role !== 'admin');
-    const startDateStr = this.data.sprint.startDate || '2026-10-08T18:30:00.000Z';
+    const officialStart = '2026-10-08T18:30:00.000Z';
+    const rawStart = this.data.sprint?.startDate;
+    const startDateStr = (!rawStart || rawStart < officialStart) ? officialStart : rawStart;
     const startMs = new Date(startDateStr).getTime();
     const now = Date.now();
     const isUpcoming = now < startMs;
@@ -242,13 +241,15 @@ class Database {
 
     return {
       ...this.data.sprint,
+      status: 'ACTIVE',
       startDate: startDateStr,
       currentDay: computedDay,
       isUpcoming,
+      loginsPaused: this.data.sprint?.loginsPaused !== false,
       trackingScope: 'ALL_REPOSITORIES',
       trackedRepos: repos.length > 0 ? repos : (this.data.sprint.trackedRepos || []),
       totalTrackedContributors: contributors.length,
-      totalDiscoveredRepos: repos.length
+      totalDiscoveredRepos: repos.length > 0 ? repos.length : (this.data.sprint.trackedRepos || []).length
     };
   }
 

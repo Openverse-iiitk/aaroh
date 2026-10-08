@@ -34,9 +34,10 @@ export const Hero: React.FC<HeroProps> = ({
   isAdmin = false
 }) => {
   // Official event start date: October 9, 2026 at 00:00 IST = 2026-10-08T18:30:00.000Z
-  const eventStartTime = sprint?.startDate
+  const OFFICIAL_START_MS = new Date('2026-10-08T18:30:00.000Z').getTime();
+  const eventStartTime = (sprint?.startDate && new Date(sprint.startDate).getTime() >= OFFICIAL_START_MS)
     ? new Date(sprint.startDate).getTime()
-    : new Date('2026-10-08T18:30:00.000Z').getTime();
+    : OFFICIAL_START_MS;
 
   const [timerState, setTimerState] = useState<{
     days: number;
