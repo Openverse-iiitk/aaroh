@@ -51,15 +51,7 @@ export async function fetchCurrentUser(): Promise<User | null> {
   }
   const data = await res.json();
   if (data.user) {
-    const purged = ['rohan-satheesh', 'deva4509', 'manav-codes', 'sarah-dev', 'admin-starlit', 'ptr25', 'vipulreddyvemula'];
-    if (purged.includes((data.user.username || '').toLowerCase())) {
-      try {
-        localStorage.removeItem('reflect_active_user');
-        localStorage.removeItem('reflect_session_token');
-        localStorage.removeItem('reflect_admin_token');
-      } catch {}
-      return null;
-    }
+    // The server validates sessions; historical demo usernames must not block real users.
     // Auto-evict non-admin participants while logins are paused
     if (data.paused) {
       try {
