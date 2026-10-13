@@ -26,7 +26,8 @@ import {
   mockLogin,
   logout,
   resetDatabase,
-  syncGitHubPullRequests
+  syncGitHubPullRequests,
+  isClientUserPurged
 } from './api/client';
 import { Navbar } from './components/Navbar';
 import { AuthModal } from './components/AuthModal';
@@ -266,9 +267,9 @@ function RootLayout() {
       finalizedAt: null,
       finalPodium: [],
     },
-    leaderboard: leaderboardData?.leaderboard || [],
-    pullRequests: pullRequests || [],
-    recentPrs: pullRequests || [],
+    leaderboard: (leaderboardData?.leaderboard || []).filter(item => !isClientUserPurged(item.user?.username, item.user?.name)),
+    pullRequests: (pullRequests || []).filter(pr => !isClientUserPurged(pr.author)),
+    recentPrs: (pullRequests || []).filter(pr => !isClientUserPurged(pr.author)),
     auditLogs: auditLogs || [],
     currentUser: currentUser || null,
     onOpenAuth: () => setAuthModalOpen(true),

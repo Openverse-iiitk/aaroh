@@ -22,6 +22,17 @@ function authHeaders(): Record<string, string> {
   return headers;
 }
 
+const PURGED_USERNAMES = ['rohan-satheesh', 'deva4509', 'manav-codes', 'sarah-dev', 'admin-starlit', 'ptr25', 'vipulreddyvemula'];
+
+export function isClientUserPurged(username?: string, name?: string): boolean {
+  if (!username && !name) return false;
+  const u = (username || '').toLowerCase().trim();
+  const n = (name || '').toLowerCase().trim();
+  if (PURGED_USERNAMES.includes(u)) return true;
+  if (n === 'pranathi t r' || n === 'pranathi tr') return true;
+  return false;
+}
+
 export async function fetchCurrentUser(): Promise<User | null> {
   // If ?token=... is present in URL (e.g. from GitHub OAuth redirect), store it!
   if (typeof window !== 'undefined') {
@@ -51,8 +62,7 @@ export async function fetchCurrentUser(): Promise<User | null> {
   }
   const data = await res.json();
   if (data.user) {
-    const purged = ['rohan-satheesh', 'deva4509', 'manav-codes', 'sarah-dev', 'admin-starlit', 'ptr25', 'vipulreddyvemula'];
-    if (purged.includes((data.user.username || '').toLowerCase())) {
+    if (isClientUserPurged(data.user.username, data.user.name)) {
       try {
         localStorage.removeItem('reflect_active_user');
         localStorage.removeItem('reflect_session_token');
@@ -213,7 +223,8 @@ export async function fetchPullRequests(filters?: { author?: string; status?: st
     credentials: 'include'
   });
   if (!res.ok) throw new Error('Failed to fetch pull requests');
-  return res.json();
+  const prs: PullRequest[] = await res.json();
+  return (prs || []).filter(pr => !isClientUserPurged(pr.author));
 }
 
 export async function fetchMyReviewsSummary(): Promise<any> {
@@ -310,7 +321,13 @@ export async function deletePullRequest(id: string): Promise<void> {
 export async function fetchLeaderboard(): Promise<LeaderboardResponse> {
   const res = await fetch(`${BASE_URL}/leaderboard`, { credentials: 'include' });
   if (!res.ok) throw new Error('Failed to fetch leaderboard');
-  return res.json();
+  const data: LeaderboardResponse = await res.json();
+  if (data?.leaderboard) {
+    data.leaderboard = data.leaderboard.filter(
+      item => !isClientUserPurged(item.user?.username, item.user?.name)
+    );
+  }
+  return data;
 }
 
 export async function fetchAuditLogs(): Promise<AuditLog[]> {

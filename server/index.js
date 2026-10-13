@@ -6,7 +6,7 @@ import path from 'path';
 import fs from 'fs';
 import crypto from 'crypto';
 import { fileURLToPath } from 'url';
-import { db, calculateNextSync } from './db.js';
+import { db, calculateNextSync, isUserPurged } from './db.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -309,6 +309,10 @@ if (!process.env.VERCEL) {
 app.get('/api/auth/me', (req, res) => {
   const session = getAuthenticatedSession(req);
   const user = session ? session.user : null;
+  if (user && isUserPurged(user.username, user.name)) {
+    res.clearCookie('reflect_session', { httpOnly: true, sameSite: 'lax' });
+    return res.json({ user: null, purged: true, message: 'This user account has been removed.' });
+  }
   if (user && user.role !== 'admin') {
     const sprint = db.getSprint();
     if (sprint.loginsPaused) {
@@ -374,6 +378,10 @@ app.post('/api/auth/mock-login', async (req, res) => {
   const { username, name, avatarUrl } = req.body;
   if (!username) {
     return res.status(400).json({ error: 'Username is required' });
+  }
+
+  if (isUserPurged(username, name)) {
+    return res.status(403).json({ error: 'This user account has been removed.' });
   }
 
   const sprint = db.getSprint();
@@ -445,7 +453,7 @@ app.get('/api/auth/github/url', (req, res) => {
   if (!redirectUri || (!isLocal && redirectUri.includes('localhost'))) {
     redirectUri = defaultRedirect;
   }
-  const url = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=read:user,repo`;
+  const url = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=read:user,public_repo`;
   res.json({ configured: true, url, redirectUri });
 });
 
@@ -498,6 +506,10 @@ app.get('/api/auth/github/callback', async (req, res) => {
       .split(',')
       .map(u => u.trim());
     const isAdmin = adminUsers.includes(ghUser.login.toLowerCase());
+
+    if (isUserPurged(ghUser.login, ghUser.name)) {
+      return res.redirect(`${frontendUrl}/?error=account_removed&message=${encodeURIComponent('This account has been removed from the platform.')}`);
+    }
 
     const sprint = db.getSprint();
     if (sprint.loginsPaused && !isAdmin) {
@@ -770,7 +782,7 @@ app.get('/api/pull-requests/:id', (req, res) => {
 // Manual PR submission by authenticated contributor - strictly validates GitHub PR link
 app.post('/api/pull-requests', async (req, res) => {
   const sessionUser = getUserFromSession(req);
-  if (!sessionUser) {
+  if (!sessionUser || isUserPurged(sessionUser.username, sessionUser.name)) {
     return res.status(401).json({ error: 'Please sign in to submit a pull request' });
   }
 

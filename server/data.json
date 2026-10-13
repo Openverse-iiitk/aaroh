@@ -1,16 +1,18 @@
 {
   "sprint": {
-    "id": "sprint-hackaaroh-current",
-    "name": "HackAaroh 2026 - Global Open Source Sprint",
-    "description": "Automated GitHub pull request tracking and repository project submissions. Evaluators review contributions daily and award credits.",
-    "status": "ACTIVE",
-    "dailyUpdateTime": "00:00",
-    "startDate": "2026-10-08T18:30:00.000Z",
+    "loginsPaused": false,
     "endDate": null,
-    "currentDay": 1,
     "lastSyncAt": "2026-10-08T19:55:55.303Z",
+    "description": "Automated GitHub pull request tracking and repository project submissions. Evaluators review contributions daily and award credits.",
     "nextSyncAt": "2026-10-09T00:00:00.000Z",
+    "isFinalized": false,
     "trackingScope": "ALL_REPOSITORIES",
+    "currentDay": 1,
+    "finalizedAt": null,
+    "name": "HackAaroh 2026 - Global Open Source Sprint",
+    "dailyUpdateTime": "00:00",
+    "finalPodium": [],
+    "id": "sprint-hackaaroh-current",
     "trackedRepos": [
       "openverse/hackaaroh",
       "facebook/react",
@@ -20,160 +22,172 @@
       "shadcn-ui/ui",
       "microsoft/vscode"
     ],
-    "isFinalized": false,
-    "loginsPaused": false,
-    "finalizedAt": null,
-    "finalPodium": []
+    "startDate": "2026-10-08T18:30:00.000Z",
+    "status": "ACTIVE"
   },
   "users": [
     {
-      "id": "usr_Vijay-1710",
-      "username": "Vijay-1710",
-      "name": "Vijay-1710",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/Vijay-1710?v=4",
-      "bio": "Official HackAaroh Event Administrator",
-      "htmlUrl": "https://github.com/Vijay-1710",
-      "role": "admin",
-      "createdAt": "2026-10-08T00:00:00.000Z"
+      "createdAt": "2026-10-08T20:17:07.097Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/67535496?v=4",
+      "githubId": 67535496,
+      "htmlUrl": "https://github.com/manvith12",
+      "name": "Manvith",
+      "bio": "GitHub Contributor",
+      "id": "gh_67535496",
+      "username": "manvith12"
     },
     {
-      "id": "gh_67535496",
-      "githubId": 67535496,
-      "username": "manvith12",
-      "name": "Manvith",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/67535496?v=4",
-      "bio": "GitHub Contributor",
-      "htmlUrl": "https://github.com/manvith12",
-      "role": "contributor",
-      "createdAt": "2026-10-08T20:17:07.097Z"
+      "createdAt": "2026-10-08T00:00:00.000Z",
+      "role": "admin",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/Vijay-1710?v=4",
+      "htmlUrl": "https://github.com/Vijay-1710",
+      "name": "Vijay-1710",
+      "bio": "Official HackAaroh Event Administrator",
+      "id": "usr_Vijay-1710",
+      "username": "Vijay-1710"
     }
   ],
   "pullRequests": [],
   "auditLogs": [
     {
-      "id": "log-1791493870972-ut97",
+      "id": "log-1791520748155-atl5",
       "action": "ADMIN_SECRET_LOGIN",
       "actor": "Vijay-1710",
       "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-09T04:39:08.155Z"
+    },
+    {
+      "id": "log-1791520746140-pynw",
+      "action": "USER_LOGIN",
+      "actor": "e2e-tester",
+      "details": "User connected with role contributor",
+      "timestamp": "2026-10-09T04:39:06.140Z"
+    },
+    {
+      "actor": "Vijay-1710",
+      "action": "ADMIN_SECRET_LOGIN",
+      "details": "Admin authenticated via verified secret passkey",
+      "id": "log-1791493870972-ut97",
       "timestamp": "2026-10-08T21:11:10.972Z"
     },
     {
-      "id": "log-1791493695695-23mm",
-      "action": "LOGINS_TOGGLED",
       "actor": "Vijay-1710",
+      "action": "LOGINS_TOGGLED",
       "details": "Logins toggled to ACTIVE",
+      "id": "log-1791493695695-23mm",
       "timestamp": "2026-10-08T21:08:15.695Z"
     },
     {
-      "id": "log-1791493694677-meol",
-      "action": "LOGINS_TOGGLED",
       "actor": "Vijay-1710",
+      "action": "LOGINS_TOGGLED",
       "details": "Logins toggled to PAUSED",
+      "id": "log-1791493694677-meol",
       "timestamp": "2026-10-08T21:08:14.677Z"
     },
     {
-      "id": "log-1791493694001-5m7d",
-      "action": "SETTINGS_UPDATED",
       "actor": "Vijay-1710",
+      "action": "SETTINGS_UPDATED",
       "details": "Updated sprint settings: Daily calculation time set to 00:00 UTC",
+      "id": "log-1791493694001-5m7d",
       "timestamp": "2026-10-08T21:08:14.001Z"
     },
     {
-      "id": "log-1791493693094-es1c",
-      "action": "ADMIN_SECRET_LOGIN",
       "actor": "Vijay-1710",
+      "action": "ADMIN_SECRET_LOGIN",
       "details": "Admin authenticated via verified secret passkey",
+      "id": "log-1791493693094-es1c",
       "timestamp": "2026-10-08T21:08:13.094Z"
     },
     {
-      "id": "log-1791493543021-awxd",
-      "action": "LOGINS_TOGGLED",
       "actor": "Vijay-1710",
+      "action": "LOGINS_TOGGLED",
       "details": "Logins toggled to ACTIVE",
+      "id": "log-1791493543021-awxd",
       "timestamp": "2026-10-08T21:05:43.021Z"
     },
     {
-      "id": "log-1791493542376-dm1m",
-      "action": "LOGINS_TOGGLED",
       "actor": "Vijay-1710",
+      "action": "LOGINS_TOGGLED",
       "details": "Logins toggled to PAUSED",
+      "id": "log-1791493542376-dm1m",
       "timestamp": "2026-10-08T21:05:42.376Z"
     },
     {
-      "id": "log-1791493541555-w3av",
-      "action": "SETTINGS_UPDATED",
       "actor": "Vijay-1710",
+      "action": "SETTINGS_UPDATED",
       "details": "Updated sprint settings: Daily calculation time set to 00:00 UTC",
+      "id": "log-1791493541555-w3av",
       "timestamp": "2026-10-08T21:05:41.555Z"
     },
     {
-      "id": "log-1791493540708-00kf",
-      "action": "ADMIN_SECRET_LOGIN",
       "actor": "Vijay-1710",
+      "action": "ADMIN_SECRET_LOGIN",
       "details": "Admin authenticated via verified secret passkey",
+      "id": "log-1791493540708-00kf",
       "timestamp": "2026-10-08T21:05:40.708Z"
     },
     {
-      "id": "log-1791492320514-jmks",
-      "action": "PR_DELETED",
       "actor": "Vijay-1710",
+      "action": "PR_DELETED",
       "details": "Admin deleted PR #46 (Openverse-iiitk/DSA-Website)",
+      "id": "log-1791492320514-jmks",
       "timestamp": "2026-10-08T20:45:20.514Z"
     },
     {
-      "id": "log-1791492258229-e8zc",
-      "action": "PR_DELETED",
       "actor": "Vijay-1710",
+      "action": "PR_DELETED",
       "details": "Admin deleted PR #46 (Openverse-iiitk/DSA-Website)",
+      "id": "log-1791492258229-e8zc",
       "timestamp": "2026-10-08T20:44:18.229Z"
     },
     {
-      "id": "log-1791492211695-29nk",
-      "action": "PR_DELETED",
       "actor": "Vijay-1710",
+      "action": "PR_DELETED",
       "details": "Admin deleted PR #46 (Openverse-iiitk/DSA-Website)",
+      "id": "log-1791492211695-29nk",
       "timestamp": "2026-10-08T20:43:31.695Z"
     },
     {
-      "id": "log-1791491756754-8mgu",
-      "action": "PR_DELETED",
       "actor": "Vijay-1710",
+      "action": "PR_DELETED",
       "details": "Admin deleted PR #46 (Openverse-iiitk/DSA-Website)",
+      "id": "log-1791491756754-8mgu",
       "timestamp": "2026-10-08T20:35:56.754Z"
     },
     {
-      "id": "log-1791491746082-mg2i",
-      "action": "PR_DELETED",
       "actor": "Vijay-1710",
+      "action": "PR_DELETED",
       "details": "Admin deleted PR #46 (Openverse-iiitk/DSA-Website)",
+      "id": "log-1791491746082-mg2i",
       "timestamp": "2026-10-08T20:35:46.082Z"
     },
     {
-      "id": "log-1791490782081-087k",
-      "action": "PR_SUBMITTED",
       "actor": "manvith12",
+      "action": "PR_SUBMITTED",
       "details": "@manvith12 submitted verified PR #46 in Openverse-iiitk/DSA-Website",
+      "id": "log-1791490782081-087k",
       "timestamp": "2026-10-08T20:19:42.081Z"
     },
     {
-      "id": "log-1791490472208-ajwy",
-      "action": "ADMIN_SECRET_LOGIN",
       "actor": "Vijay-1710",
+      "action": "ADMIN_SECRET_LOGIN",
       "details": "Admin authenticated via verified secret passkey",
+      "id": "log-1791490472208-ajwy",
       "timestamp": "2026-10-08T20:14:32.208Z"
     },
     {
-      "id": "log-1791489355384-4ku7",
-      "action": "EVENT_RESET",
       "actor": "Vijay-1710",
+      "action": "EVENT_RESET",
       "details": "Sprint reset to Day 1 clean event state",
+      "id": "log-1791489355384-4ku7",
       "timestamp": "2026-10-08T19:55:55.384Z"
     },
     {
-      "id": "log-1791489355303-init",
-      "action": "SPRINT_INITIALIZED",
       "actor": "Vijay-1710",
+      "action": "SPRINT_INITIALIZED",
       "details": "HackAaroh Sprint initialized for October 9 kickoff. Participant logins paused. Secret admin portal active.",
+      "id": "log-1791489355303-init",
       "timestamp": "2026-10-08T19:55:55.303Z"
     }
   ],
@@ -188,6 +202,8 @@
     "pr-test-suite-1791493543513",
     "pr-test-suite-1791493696203",
     "pr-test-review-step",
-    "55555"
+    "55555",
+    "test-pr-e2e-1791520738509",
+    "9999"
   ]
 }

@@ -2,12 +2,42 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { put } from '@vercel/blob';
+import {
+  isFirestoreActive,
+  loadAllFromFirestore,
+  saveSprintToFirestore,
+  saveUserToFirestore,
+  deleteUserFromFirestore,
+  savePullRequestToFirestore,
+  deletePullRequestFromFirestore,
+  saveAuditLogToFirestore,
+  seedFirestoreFromData
+} from './firestore.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const SEED_FILE = path.join(__dirname, 'data.json');
 const DB_FILE = process.env.VERCEL ? path.join('/tmp', 'hackaaroh_data.json') : SEED_FILE;
 const BLOB_URL = 'https://ae1nkbba9sxv7ktd.public.blob.vercel-storage.com/hackaaroh_data.json';
+
+export const PURGED_USERNAMES = new Set([
+  'rohan-satheesh',
+  'deva4509',
+  'manav-codes',
+  'sarah-dev',
+  'admin-starlit',
+  'ptr25',
+  'vipulreddyvemula'
+]);
+
+export function isUserPurged(username, name = '') {
+  if (!username && !name) return false;
+  const u = String(username || '').toLowerCase().trim();
+  const n = String(name || '').toLowerCase().trim();
+  if (PURGED_USERNAMES.has(u)) return true;
+  if (n === 'pranathi t r' || n === 'pranathi tr') return true;
+  return false;
+}
 
 export function calculateNextSync(timeStr = '00:00') {
   const [hours, minutes] = (timeStr || '00:00').split(':').map(Number);
@@ -85,8 +115,6 @@ const getInitialSeed = () => {
   };
 };
 
-const DEMO_USERNAMES = new Set(['manav-codes', 'sarah-dev', 'alex-rustacean', 'elena-cloud', 'devon-craft', 'admin-starlit', 'rohan-satheesh', 'deva4509', 'ptr25', 'vipulreddyvemula']);
-
 class Database {
   constructor() {
     this.init();
@@ -96,6 +124,13 @@ class Database {
   async resetToCleanEvent() {
     this.data = getInitialSeed();
     this.lastLoadedAt = Date.now();
+    if (isFirestoreActive()) {
+      try {
+        await seedFirestoreFromData(this.data);
+      } catch (e) {
+        console.error('[Firebase] Failed to reset clean event in Firestore:', e.message);
+      }
+    }
     if (process.env.VERCEL && fs.existsSync(DB_FILE)) {
       try { fs.unlinkSync(DB_FILE); } catch (_) {}
     }
@@ -104,7 +139,39 @@ class Database {
   }
 
   async ensureLoaded(force = false) {
-    // In local development without BLOB token, reload from local data.json if modified
+    const now = Date.now();
+    if (!force && this.lastLoadedAt && (now - this.lastLoadedAt < 3000)) return;
+
+    // 1. Cloud Firestore Priority (if credentials provided)
+    if (isFirestoreActive()) {
+      try {
+        const remote = await loadAllFromFirestore();
+        if (remote && remote.sprint) {
+          this.data = {
+            sprint: remote.sprint,
+            users: (remote.users || []).filter(u => !isUserPurged(u.username, u.name)),
+            pullRequests: (remote.pullRequests || []).filter(p => !isUserPurged(p.author)),
+            auditLogs: remote.auditLogs || [],
+            deletedPrIds: remote.deletedPrIds || []
+          };
+          this.lastLoadedAt = now;
+          try {
+            fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
+          } catch (_) {}
+          return true;
+        } else if (remote && !remote.sprint) {
+          // Firestore active but unseeded: automatically seed with current local data
+          console.log('[Database] Firestore empty, auto-seeding with data bundle...');
+          await seedFirestoreFromData(this.data || getInitialSeed());
+          this.lastLoadedAt = now;
+          return true;
+        }
+      } catch (err) {
+        console.warn('[Database] Firestore sync check warning:', err.message);
+      }
+    }
+
+    // 2. Local development fallback without BLOB token
     if (!process.env.VERCEL && !process.env.BLOB_READ_WRITE_TOKEN) {
       if (fs.existsSync(DB_FILE)) {
         try {
@@ -113,6 +180,8 @@ class Database {
             const raw = fs.readFileSync(DB_FILE, 'utf-8');
             const local = JSON.parse(raw);
             if (local && local.sprint) {
+              local.users = (local.users || []).filter(u => !isUserPurged(u.username, u.name));
+              local.pullRequests = (local.pullRequests || []).filter(p => !isUserPurged(p.author));
               this.data = local;
               this.lastFileMtime = stats.mtimeMs;
               return true;
@@ -123,8 +192,7 @@ class Database {
       return false;
     }
 
-    const now = Date.now();
-    if (!force && this.lastLoadedAt && (now - this.lastLoadedAt < 3000)) return;
+    // 3. Vercel Blob fallback (if BLOB_READ_WRITE_TOKEN is configured without Firebase)
     try {
       const res = await fetch(`${BLOB_URL}?t=${now}&r=${Math.random().toString(36).substring(2, 8)}`, {
         cache: 'no-store',
@@ -146,11 +214,13 @@ class Database {
             });
           }
 
-          // Strictly filter out any PRs marked as deleted
+          // Filter out deleted PRs and purged users
           const deletedSet = new Set((remoteData.deletedPrIds || []).map(x => String(x).toLowerCase()));
           (this.data?.deletedPrIds || []).forEach(x => deletedSet.add(String(x).toLowerCase()));
           remoteData.deletedPrIds = Array.from(deletedSet);
-          remoteData.pullRequests = remoteData.pullRequests.filter(pr => {
+          remoteData.users = (remoteData.users || []).filter(u => !isUserPurged(u.username, u.name));
+          remoteData.pullRequests = (remoteData.pullRequests || []).filter(pr => {
+            if (isUserPurged(pr.author)) return false;
             const pId = String(pr.id || '').trim().toLowerCase();
             const pNum = String(pr.githubPrNumber || '').trim().toLowerCase();
             if (deletedSet.has(pId) || deletedSet.has(pNum)) return false;
@@ -212,12 +282,19 @@ class Database {
       console.error('Failed to persist database:', err);
     }
 
+    // If Firestore is active and it's a full reset, reseed all collections
+    if (isFirestoreActive() && isFullReset) {
+      try {
+        await seedFirestoreFromData(this.data);
+      } catch (err) {
+        console.error('[Firebase] Failed to reset Firestore state:', err.message);
+      }
+    }
+
+    // Keep Vercel Blob sync as secondary backup if configured
     const token = process.env.BLOB_READ_WRITE_TOKEN;
     if (token) {
       try {
-        // CONCURRENCY-SAFE MERGE: Unless this is an explicit admin reset or deletion,
-        // merge with any concurrent submissions from other lambda instances
-        // before writing to Vercel Blob to prevent race condition data loss.
         if (process.env.VERCEL && !isFullReset) {
           try {
             const checkRes = await fetch(`${BLOB_URL}?t=${Date.now()}&r=${Math.random().toString(36).substring(2, 8)}`, {
@@ -231,9 +308,7 @@ class Database {
                 (remote.deletedPrIds || []).forEach(x => deletedSet.add(String(x).toLowerCase()));
                 this.data.deletedPrIds = Array.from(deletedSet);
 
-                // Merge pull requests without losing any submitted PR (filtering out deleted PRs)
                 const prMap = new Map();
-                // 1. Add remote PRs
                 remote.pullRequests.forEach(p => {
                   const key = p.id || `${p.repo}#${p.githubPrNumber}`;
                   const pId = String(p.id || '').trim().toLowerCase();
@@ -242,7 +317,6 @@ class Database {
                     prMap.set(key, p);
                   }
                 });
-                // 2. Overlay local PRs (newer local state overrides)
                 (this.data.pullRequests || []).forEach(p => {
                   const key = p.id || `${p.repo}#${p.githubPrNumber}`;
                   const pId = String(p.id || '').trim().toLowerCase();
@@ -253,15 +327,21 @@ class Database {
                 });
                 this.data.pullRequests = Array.from(prMap.values());
 
-                // Merge users without losing any registered contributors
                 if (Array.isArray(remote.users)) {
                   const userMap = new Map();
-                  remote.users.forEach(u => userMap.set(u.username.toLowerCase(), u));
-                  (this.data.users || []).forEach(u => userMap.set(u.username.toLowerCase(), u));
+                  remote.users.forEach(u => {
+                    if (!isUserPurged(u.username, u.name)) {
+                      userMap.set(u.username.toLowerCase(), u);
+                    }
+                  });
+                  (this.data.users || []).forEach(u => {
+                    if (!isUserPurged(u.username, u.name)) {
+                      userMap.set(u.username.toLowerCase(), u);
+                    }
+                  });
                   this.data.users = Array.from(userMap.values());
                 }
 
-                // Merge audit logs
                 if (Array.isArray(remote.auditLogs)) {
                   const logMap = new Map();
                   remote.auditLogs.forEach(l => logMap.set(l.id, l));
@@ -343,24 +423,42 @@ class Database {
 
   async updateSprint(updates) {
     this.data.sprint = { ...this.data.sprint, ...updates };
+    if (isFirestoreActive()) {
+      try {
+        await saveSprintToFirestore(this.data.sprint);
+      } catch (err) {
+        console.error('[Firebase] Error updating sprint in Firestore:', err.message);
+      }
+    }
     await this.save();
     return this.data.sprint;
   }
 
   getUsers() {
-    return this.data.users;
+    return (this.data.users || []).filter(u => !isUserPurged(u.username, u.name));
   }
 
   getUserByUsername(username) {
-    return this.data.users.find(u => u.username.toLowerCase() === username.toLowerCase());
+    if (!username || isUserPurged(username)) return null;
+    return (this.data.users || []).find(u => u.username.toLowerCase() === username.toLowerCase() && !isUserPurged(u.username, u.name));
   }
 
   async upsertUser(user) {
+    if (!user || isUserPurged(user.username, user.name)) {
+      return null;
+    }
     const idx = this.data.users.findIndex(u => u.username.toLowerCase() === user.username.toLowerCase());
     if (idx >= 0) {
       this.data.users[idx] = { ...this.data.users[idx], ...user };
     } else {
       this.data.users.push(user);
+    }
+    if (isFirestoreActive()) {
+      try {
+        await saveUserToFirestore(user);
+      } catch (err) {
+        console.error('[Firebase] Error saving user in Firestore:', err.message);
+      }
     }
     await this.save();
     return this.getUserByUsername(user.username);
@@ -371,6 +469,13 @@ class Database {
     const initialLen = this.data.users.length;
     this.data.users = this.data.users.filter(u => u.username.toLowerCase() !== username.toLowerCase());
     this.data.pullRequests = this.data.pullRequests.filter(pr => pr.author.toLowerCase() !== username.toLowerCase());
+    if (isFirestoreActive()) {
+      try {
+        await deleteUserFromFirestore(username);
+      } catch (err) {
+        console.error('[Firebase] Error deleting user in Firestore:', err.message);
+      }
+    }
     await this.save(true);
     return this.data.users.length < initialLen;
   }
@@ -390,6 +495,13 @@ class Database {
     );
     if (!exists) {
       this.data.pullRequests.unshift(pr);
+      if (isFirestoreActive()) {
+        try {
+          await savePullRequestToFirestore(pr);
+        } catch (err) {
+          console.error('[Firebase] Error adding PR in Firestore:', err.message);
+        }
+      }
       await this.save();
     }
     return pr;
@@ -405,6 +517,13 @@ class Database {
     });
     if (idx >= 0) {
       this.data.pullRequests[idx] = { ...this.data.pullRequests[idx], ...updates };
+      if (isFirestoreActive()) {
+        try {
+          await savePullRequestToFirestore(this.data.pullRequests[idx]);
+        } catch (err) {
+          console.error('[Firebase] Error updating PR in Firestore:', err.message);
+        }
+      }
       await this.save();
       return this.data.pullRequests[idx];
     }
@@ -432,7 +551,14 @@ class Database {
       }
       return true;
     });
-    // Critical: pass isFullReset = true so the deleted PR is never merged back from stale remote state
+    if (isFirestoreActive()) {
+      try {
+        await deletePullRequestFromFirestore(target);
+      } catch (err) {
+        console.error('[Firebase] Error deleting PR in Firestore:', err.message);
+      }
+    }
+    // Pass isFullReset = true so the deleted PR is never merged back from stale remote state
     await this.save(true);
     return this.data.pullRequests.length < initialLen;
   }
@@ -449,6 +575,13 @@ class Database {
     if (this.data.auditLogs.length > 60) {
       this.data.auditLogs.pop();
     }
+    if (isFirestoreActive()) {
+      try {
+        await saveAuditLogToFirestore(entry);
+      } catch (err) {
+        console.error('[Firebase] Error saving audit log in Firestore:', err.message);
+      }
+    }
     await this.save();
     return entry;
   }
@@ -459,8 +592,8 @@ class Database {
 
   // Calculate dynamic leaderboard with flexible day counts
   getLeaderboard() {
-    const users = (this.data.users || []).filter(u => u.role !== 'admin');
-    const prs = this.data.pullRequests || [];
+    const users = (this.data.users || []).filter(u => u.role !== 'admin' && !isUserPurged(u.username, u.name));
+    const prs = (this.data.pullRequests || []).filter(pr => !isUserPurged(pr.author));
     const currentDay = Math.max(1, this.data.sprint.currentDay || 1);
 
     const statsByUser = {};

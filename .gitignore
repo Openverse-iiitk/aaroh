@@ -7,5 +7,7 @@ verify_*.png
 verify_*.cjs
 .vercel
 scratch/
+serviceAccountKey.json
+*firebase*.json
 
 .env*

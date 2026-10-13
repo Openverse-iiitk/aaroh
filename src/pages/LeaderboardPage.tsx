@@ -27,6 +27,7 @@ import {
   Filter
 } from 'lucide-react';
 import { formatGithubPrUrl } from '../utils/github';
+import { isClientUserPurged } from '../api/client';
 
 interface LeaderboardPageProps {
   leaderboard: LeaderboardItem[];
@@ -59,7 +60,17 @@ export const LeaderboardPage: React.FC<LeaderboardPageProps> = ({
   const [prStatusFilter, setPrStatusFilter] = useState<string>('ALL');
   const [prSearchQuery, setPrSearchQuery] = useState('');
 
-  const safePrs = Array.isArray(pullRequests) ? pullRequests : [];
+  const safeLeaderboard = useMemo(() => {
+    return (Array.isArray(leaderboard) ? leaderboard : []).filter(
+      item => !isClientUserPurged(item.user?.username, item.user?.name)
+    );
+  }, [leaderboard]);
+
+  const safePrs = useMemo(() => {
+    return (Array.isArray(pullRequests) ? pullRequests : []).filter(
+      pr => !isClientUserPurged(pr.author)
+    );
+  }, [pullRequests]);
 
   const columns = useMemo<ColumnDef<LeaderboardItem>[]>(
     () => [
@@ -228,7 +239,7 @@ export const LeaderboardPage: React.FC<LeaderboardPageProps> = ({
   );
 
   const table = useReactTable({
-    data: leaderboard,
+    data: safeLeaderboard,
     columns,
     state: {
       sorting,
