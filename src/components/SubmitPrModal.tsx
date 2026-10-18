@@ -39,28 +39,39 @@ export const SubmitPrModal: React.FC<SubmitPrModalProps> = ({
     const trimmed = prUrl.trim();
     if (!trimmed) return null;
 
-    const prRegex = /(?:https?:\/\/github\.com\/)?([a-zA-Z0-9_.-]+)\/([a-zA-Z0-9_.-]+)\/pull\/(\d+)/i;
-    const match = trimmed.match(prRegex);
-
-    if (match) {
+    // Full URL: https://github.com/owner/repo/pull/123
+    const fullMatch = trimmed.match(/^(?:https?:\/\/)?(?:www\.)?github\.com\/([a-zA-Z0-9_.-]+)\/([a-zA-Z0-9_.-]+)\/pull\/(\d+)(?:\/.*)?$/i);
+    if (fullMatch) {
       return {
         isValid: true,
-        owner: match[1],
-        repoName: match[2],
-        fullRepo: `${match[1]}/${match[2]}`,
-        prNumber: parseInt(match[3], 10),
-        canonicalUrl: `https://github.com/${match[1]}/${match[2]}/pull/${match[3]}`
+        owner: fullMatch[1],
+        repoName: fullMatch[2],
+        fullRepo: `${fullMatch[1]}/${fullMatch[2]}`,
+        prNumber: parseInt(fullMatch[3], 10),
+        canonicalUrl: `https://github.com/${fullMatch[1]}/${fullMatch[2]}/pull/${fullMatch[3]}`
+      };
+    }
+
+    // Shorthand: owner/repo/pull/123 (strictly NO external domains like gitlab.com)
+    const shorthandMatch = trimmed.match(/^([a-zA-Z0-9_.-]+)\/([a-zA-Z0-9_.-]+)\/pull\/(\d+)(?:\/.*)?$/i);
+    if (shorthandMatch && !shorthandMatch[1].includes('.')) {
+      return {
+        isValid: true,
+        owner: shorthandMatch[1],
+        repoName: shorthandMatch[2],
+        fullRepo: `${shorthandMatch[1]}/${shorthandMatch[2]}`,
+        prNumber: parseInt(shorthandMatch[3], 10),
+        canonicalUrl: `https://github.com/${shorthandMatch[1]}/${shorthandMatch[2]}/pull/${shorthandMatch[3]}`
       };
     }
 
     // Check if user entered a plain repository link without /pull/
-    const repoOnlyRegex = /(?:https?:\/\/github\.com\/)?([a-zA-Z0-9_.-]+)\/([a-zA-Z0-9_.-]+)(?:\/)?$/i;
-    const repoMatch = trimmed.match(repoOnlyRegex);
-    if (repoMatch) {
+    const repoOnlyMatch = trimmed.match(/^(?:https?:\/\/)?(?:www\.)?github\.com\/([a-zA-Z0-9_.-]+)\/([a-zA-Z0-9_.-]+)(?:\/.*)?$/i);
+    if (repoOnlyMatch) {
       return {
         isValid: false,
         isRepoOnly: true,
-        fullRepo: `${repoMatch[1]}/${repoMatch[2]}`
+        fullRepo: `${repoOnlyMatch[1]}/${repoOnlyMatch[2]}`
       };
     }
 

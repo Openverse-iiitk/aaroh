@@ -27,7 +27,336 @@
   },
   "users": [
     {
-      "createdAt": "2026-10-08T20:17:07.097Z",
+      "createdAt": "2026-10-11T10:11:36.998Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/229555308?v=4",
+      "githubId": 229555308,
+      "htmlUrl": "https://github.com/77anuj77",
+      "name": "Anuj Paroha",
+      "bio": "B.Tech AIML Student | Python • FastAPI • ML • Data Science | Building AI/ML and automation projects",
+      "id": "gh_229555308",
+      "username": "77anuj77"
+    },
+    {
+      "createdAt": "2026-10-10T12:27:18.528Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/248707773?v=4",
+      "githubId": 248707773,
+      "htmlUrl": "https://github.com/Abarna-2511",
+      "name": "Abarna-2511",
+      "bio": "GitHub Contributor",
+      "id": "gh_248707773",
+      "username": "Abarna-2511"
+    },
+    {
+      "createdAt": "2026-10-09T10:32:57.419Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/222751478?v=4",
+      "githubId": 222751478,
+      "htmlUrl": "https://github.com/abhibob369-crypto",
+      "name": "Aviral verma ",
+      "bio": "Student at IIT Jodhpur | Applied AI & Data Science | AI Agents | Machine Learning | Python | Data Analytics | Open Source | Building Real-World Projects | Aspir",
+      "id": "gh_222751478",
+      "username": "abhibob369-crypto"
+    },
+    {
+      "createdAt": "2026-10-12T13:36:18.892Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/267011181?v=4",
+      "githubId": 267011181,
+      "htmlUrl": "https://github.com/adarshsingh022006-tech",
+      "name": "adarshsingh022006-tech",
+      "bio": "GitHub Contributor",
+      "id": "gh_267011181",
+      "username": "adarshsingh022006-tech"
+    },
+    {
+      "createdAt": "2026-10-11T17:36:50.203Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/248521792?v=4",
+      "githubId": 248521792,
+      "htmlUrl": "https://github.com/adhiyadav-31",
+      "name": "Guda Adhi Yadav",
+      "bio": "GitHub Contributor",
+      "id": "gh_248521792",
+      "username": "adhiyadav-31"
+    },
+    {
+      "createdAt": "2026-10-09T20:26:11.425Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/160333462?v=4",
+      "githubId": 160333462,
+      "htmlUrl": "https://github.com/afrozmiddya",
+      "name": "Afroz Middya",
+      "bio": "GitHub Contributor",
+      "id": "gh_160333462",
+      "username": "afrozmiddya"
+    },
+    {
+      "createdAt": "2026-10-11T13:12:31.742Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/254606435?v=4",
+      "githubId": 254606435,
+      "htmlUrl": "https://github.com/amanav2712-blip",
+      "name": "Manav A",
+      "bio": "GitHub Contributor",
+      "id": "gh_254606435",
+      "username": "amanav2712-blip"
+    },
+    {
+      "createdAt": "2026-10-10T15:51:39.501Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/238998372?v=4",
+      "githubId": 238998372,
+      "htmlUrl": "https://github.com/ankush-dev-eng",
+      "name": "Ankush Shahu",
+      "bio": "GitHub Contributor",
+      "id": "gh_238998372",
+      "username": "ankush-dev-eng"
+    },
+    {
+      "createdAt": "2026-10-11T12:54:57.914Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/301418833?v=4",
+      "githubId": 301418833,
+      "htmlUrl": "https://github.com/anshumansinghrajawat85-png",
+      "name": "anshumansinghrajawat85-png",
+      "bio": "GitHub Contributor",
+      "id": "gh_301418833",
+      "username": "anshumansinghrajawat85-png"
+    },
+    {
+      "createdAt": "2026-10-09T12:05:14.415Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/239117958?v=4",
+      "githubId": 239117958,
+      "htmlUrl": "https://github.com/antim8799-prog",
+      "name": "Antim Yadav",
+      "bio": "GitHub Contributor",
+      "id": "gh_239117958",
+      "username": "antim8799-prog"
+    },
+    {
+      "createdAt": "2026-10-10T14:58:38.406Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/83278900?v=4",
+      "githubId": 83278900,
+      "htmlUrl": "https://github.com/AnuragkGithub",
+      "name": "AnuragkGithub",
+      "bio": "GitHub Contributor",
+      "id": "gh_83278900",
+      "username": "AnuragkGithub"
+    },
+    {
+      "createdAt": "2026-10-10T16:35:44.773Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/309008476?v=4",
+      "githubId": 309008476,
+      "htmlUrl": "https://github.com/ch4225519-max",
+      "name": "ch4225519-max",
+      "bio": "GitHub Contributor",
+      "id": "gh_309008476",
+      "username": "ch4225519-max"
+    },
+    {
+      "createdAt": "2026-10-09T15:20:34.839Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/255289515?v=4",
+      "githubId": 255289515,
+      "htmlUrl": "https://github.com/cyber-atharv",
+      "name": "cyberatharv",
+      "bio": "GitHub Contributor",
+      "id": "gh_255289515",
+      "username": "cyber-atharv"
+    },
+    {
+      "createdAt": "2026-10-10T05:26:42.243Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/295812831?v=4",
+      "githubId": 295812831,
+      "htmlUrl": "https://github.com/ewwhardik",
+      "name": "Sai Ram Dash",
+      "bio": "16 • Commerce Student • 2nd Trillionaire probably!",
+      "id": "gh_295812831",
+      "username": "ewwhardik"
+    },
+    {
+      "createdAt": "2026-10-09T10:32:58.323Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/241099203?v=4",
+      "githubId": 241099203,
+      "htmlUrl": "https://github.com/gokuldhasgovardhanan-crypto",
+      "name": "Govardhanan Gokuldhas",
+      "bio": "🚀 AI & Data Science Student | Building AI-Powered Solutions | Hackathon Enthusiast | Python • Java • Web Development | Open Source Learner",
+      "id": "gh_241099203",
+      "username": "gokuldhasgovardhanan-crypto"
+    },
+    {
+      "createdAt": "2026-10-17T17:39:35.495Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/224089015?v=4",
+      "githubId": 224089015,
+      "htmlUrl": "https://github.com/gouthamkrishnap",
+      "name": "Goutham Krishna",
+      "bio": "GitHub Contributor",
+      "id": "gh_224089015",
+      "username": "gouthamkrishnap"
+    },
+    {
+      "createdAt": "2026-10-10T15:11:46.303Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/214311684?v=4",
+      "githubId": 214311684,
+      "htmlUrl": "https://github.com/himanshugupta77",
+      "name": "himanshugupta77",
+      "bio": "GitHub Contributor",
+      "id": "gh_214311684",
+      "username": "himanshugupta77"
+    },
+    {
+      "createdAt": "2026-10-10T17:46:00.305Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/83366038?v=4",
+      "githubId": 83366038,
+      "htmlUrl": "https://github.com/HKSinha510",
+      "name": "Hardik Kumar Sinha",
+      "bio": "GitHub Contributor",
+      "id": "gh_83366038",
+      "username": "HKSinha510"
+    },
+    {
+      "createdAt": "2026-10-10T21:41:43.498Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/211892234?v=4",
+      "githubId": 211892234,
+      "htmlUrl": "https://github.com/Jalalabadi32-bit",
+      "name": "Armaan Middha",
+      "bio": "GitHub Contributor",
+      "id": "gh_211892234",
+      "username": "Jalalabadi32-bit"
+    },
+    {
+      "createdAt": "2026-10-12T17:46:47.857Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/235364791?v=4",
+      "githubId": 235364791,
+      "htmlUrl": "https://github.com/JaysukhCSE28",
+      "name": "Jaysukh Sesham",
+      "bio": "GitHub Contributor",
+      "id": "gh_235364791",
+      "username": "JaysukhCSE28"
+    },
+    {
+      "createdAt": "2026-10-09T18:06:57.319Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/193341718?v=4",
+      "githubId": 193341718,
+      "htmlUrl": "https://github.com/KALEIDOSCOPE279",
+      "name": "Aditi Rathore",
+      "bio": "GitHub Contributor",
+      "id": "gh_193341718",
+      "username": "KALEIDOSCOPE279"
+    },
+    {
+      "createdAt": "2026-10-09T15:41:29.763Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/62698887?v=4",
+      "githubId": 62698887,
+      "htmlUrl": "https://github.com/karthik-s-22222",
+      "name": "Karthik s",
+      "bio": "GitHub Contributor",
+      "id": "gh_62698887",
+      "username": "karthik-s-22222"
+    },
+    {
+      "createdAt": "2026-10-17T04:24:10.354Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/308359294?v=4",
+      "githubId": 308359294,
+      "htmlUrl": "https://github.com/kawhale-patil",
+      "name": "kawhale-patil",
+      "bio": "GitHub Contributor",
+      "id": "gh_308359294",
+      "username": "kawhale-patil"
+    },
+    {
+      "createdAt": "2026-10-12T06:12:00.018Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/241434081?v=4",
+      "githubId": 241434081,
+      "htmlUrl": "https://github.com/kit29-25bad095",
+      "name": "Maya",
+      "bio": "B.Tech AI & Data Science | Exploring AI Research & Intelligent Agents | Building AI Solutions for Real-World Problems",
+      "id": "gh_241434081",
+      "username": "kit29-25bad095"
+    },
+    {
+      "createdAt": "2026-10-10T08:37:13.116Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/244688245?v=4",
+      "githubId": 244688245,
+      "htmlUrl": "https://github.com/ksuraj42280-afk",
+      "name": "Suraj Kumar",
+      "bio": "GitHub Contributor",
+      "id": "gh_244688245",
+      "username": "ksuraj42280-afk"
+    },
+    {
+      "createdAt": "2026-10-11T15:24:15.547Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/193434367?v=4",
+      "githubId": 193434367,
+      "htmlUrl": "https://github.com/Lakshigashree",
+      "name": "LAKSHIGA SHREE S P",
+      "bio": "GitHub Contributor",
+      "id": "gh_193434367",
+      "username": "Lakshigashree"
+    },
+    {
+      "createdAt": "2026-10-11T13:15:55.355Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/146335332?v=4",
+      "githubId": 146335332,
+      "htmlUrl": "https://github.com/Lokesh11868",
+      "name": "LOKESH ",
+      "bio": "GitHub Contributor",
+      "id": "gh_146335332",
+      "username": "Lokesh11868"
+    },
+    {
+      "createdAt": "2026-10-12T16:01:30.821Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/87014842?v=4",
+      "githubId": 87014842,
+      "htmlUrl": "https://github.com/lokigamer2911",
+      "name": "nomulalokesh",
+      "bio": "GitHub Contributor",
+      "id": "gh_87014842",
+      "username": "lokigamer2911"
+    },
+    {
+      "createdAt": "2026-10-11T17:32:21.482Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/265766166?v=4",
+      "githubId": 265766166,
+      "htmlUrl": "https://github.com/maduruavulanikhitha63",
+      "name": "maduruavulanikhitha63",
+      "bio": "GitHub Contributor",
+      "id": "gh_265766166",
+      "username": "maduruavulanikhitha63"
+    },
+    {
+      "createdAt": "2026-10-12T16:37:12.342Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/99658245?v=4",
+      "githubId": 99658245,
+      "htmlUrl": "https://github.com/manohar-kunda",
+      "name": "Kunda Manohar",
+      "bio": "MCA Student | Java Developer | Cyber Security Learner | Networking Enthusiast | Open to Internship Opportunities",
+      "id": "gh_99658245",
+      "username": "manohar-kunda"
+    },
+    {
       "role": "contributor",
       "avatarUrl": "https://avatars.githubusercontent.com/u/67535496?v=4",
       "githubId": 67535496,
@@ -35,160 +364,2863 @@
       "name": "Manvith",
       "bio": "GitHub Contributor",
       "id": "gh_67535496",
-      "username": "manvith12"
+      "username": "manvith12",
+      "createdAt": "2026-10-12T06:45:12.505Z"
     },
     {
-      "createdAt": "2026-10-08T00:00:00.000Z",
+      "createdAt": "2026-10-09T15:55:10.403Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/274167026?v=4",
+      "githubId": 274167026,
+      "htmlUrl": "https://github.com/Master-Zero1",
+      "name": "Master-Zero1",
+      "bio": "Hi !!\r\nI am Master-Zero1, but the government knows me as Prithvi ;)\r\n|19|\r\nI love to code and draw stuff whenever I can\r\nWelcome to my digital junkyard > - <",
+      "id": "gh_274167026",
+      "username": "Master-Zero1"
+    },
+    {
+      "createdAt": "2026-10-13T05:34:31.024Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/249679434?v=4",
+      "githubId": 249679434,
+      "htmlUrl": "https://github.com/mitkarisatyam",
+      "name": "Satyam Mitkari",
+      "bio": "GitHub Contributor",
+      "id": "gh_249679434",
+      "username": "mitkarisatyam"
+    },
+    {
+      "createdAt": "2026-10-10T09:10:42.092Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/301419344?v=4",
+      "githubId": 301419344,
+      "htmlUrl": "https://github.com/mrravitripathi1331-ship-it",
+      "name": "mrravitripathi1331-ship-it",
+      "bio": "GitHub Contributor",
+      "id": "gh_301419344",
+      "username": "mrravitripathi1331-ship-it"
+    },
+    {
+      "createdAt": "2026-10-10T06:01:11.216Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/224293481?v=4",
+      "githubId": 224293481,
+      "htmlUrl": "https://github.com/nachiketa11",
+      "name": "Nachiketa sharma ",
+      "bio": "SRM IST 29'\r\nCSE aspirant | Developer in progress\r\nSports • Music • Tech\r\nFocused on growth, discipline, and building something big",
+      "id": "gh_224293481",
+      "username": "nachiketa11"
+    },
+    {
+      "createdAt": "2026-10-13T07:02:48.066Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/196183614?v=4",
+      "githubId": 196183614,
+      "htmlUrl": "https://github.com/Naveen230497",
+      "name": "Guthikonda Naveen",
+      "bio": "Aspiring SDE | Python | ML/AI (BERT, GPT-3.5, FAISS, RAG) | REST APIs | Microservices | IoT | Open to SDE roles",
+      "id": "gh_196183614",
+      "username": "Naveen230497"
+    },
+    {
+      "createdAt": "2026-10-09T16:24:06.169Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/185291051?v=4",
+      "githubId": 185291051,
+      "htmlUrl": "https://github.com/nick2726",
+      "name": "Nikhil Kumar Jha",
+      "bio": "Building real projects, not tutorials",
+      "id": "gh_185291051",
+      "username": "nick2726"
+    },
+    {
+      "createdAt": "2026-10-10T18:15:46.680Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/235022415?v=4",
+      "githubId": 235022415,
+      "htmlUrl": "https://github.com/nooruddinsk660-rgb",
+      "name": "Sk Nooruddin",
+      "bio": "GitHub Contributor",
+      "id": "gh_235022415",
+      "username": "nooruddinsk660-rgb"
+    },
+    {
+      "createdAt": "2026-10-12T17:51:54.549Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/185945328?v=4",
+      "githubId": 185945328,
+      "htmlUrl": "https://github.com/NTarun-111",
+      "name": "Tarun N",
+      "bio": "GitHub Contributor",
+      "id": "gh_185945328",
+      "username": "NTarun-111"
+    },
+    {
+      "createdAt": "2026-10-18T05:45:09.242Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/194948962?v=4",
+      "githubId": 194948962,
+      "htmlUrl": "https://github.com/Omkarop0808",
+      "name": "Omkar Patil_(OP)",
+      "bio": "GitHub Contributor",
+      "id": "gh_194948962",
+      "username": "Omkarop0808"
+    },
+    {
+      "createdAt": "2026-10-12T18:45:38.540Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/136020845?v=4",
+      "githubId": 136020845,
+      "htmlUrl": "https://github.com/piyushpatelcodes",
+      "name": "Piyush Patel",
+      "bio": "GitHub Contributor",
+      "id": "gh_136020845",
+      "username": "piyushpatelcodes"
+    },
+    {
+      "createdAt": "2026-10-12T15:21:02.840Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/244775848?v=4",
+      "githubId": 244775848,
+      "htmlUrl": "https://github.com/pruthvilr",
+      "name": "Pruthvi",
+      "bio": "GitHub Contributor",
+      "id": "gh_244775848",
+      "username": "pruthvilr"
+    },
+    {
+      "createdAt": "2026-10-09T13:37:38.834Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/115403841?v=4",
+      "githubId": 115403841,
+      "htmlUrl": "https://github.com/rishit270308",
+      "name": "Rishit Khare",
+      "bio": "GitHub Contributor",
+      "id": "gh_115403841",
+      "username": "rishit270308"
+    },
+    {
+      "createdAt": "2026-10-11T12:48:00.826Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/186403716?v=4",
+      "githubId": 186403716,
+      "htmlUrl": "https://github.com/saikripa-2546",
+      "name": "saikripa-2546",
+      "bio": "GitHub Contributor",
+      "id": "gh_186403716",
+      "username": "saikripa-2546"
+    },
+    {
+      "createdAt": "2026-10-11T17:39:22.479Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/199333829?v=4",
+      "githubId": 199333829,
+      "htmlUrl": "https://github.com/Sanjay-07-Sk",
+      "name": "Sanjay Kumar K",
+      "bio": "GitHub Contributor",
+      "id": "gh_199333829",
+      "username": "Sanjay-07-Sk"
+    },
+    {
+      "createdAt": "2026-10-18T05:06:56.391Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/170221403?v=4",
+      "githubId": 170221403,
+      "htmlUrl": "https://github.com/sinankp31",
+      "name": "Muhammed Sinan K P",
+      "bio": "👨‍💻 MERN Dev | Embedded Tech | Innovator.\r\nBuilding smart systems. Always learning.\r\n\r\nSolving real-world problems with tech.\r\nLet's connect and collaborate",
+      "id": "gh_170221403",
+      "username": "sinankp31"
+    },
+    {
+      "createdAt": "2026-10-11T19:18:59.611Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/250565106?v=4",
+      "githubId": 250565106,
+      "htmlUrl": "https://github.com/sinchanmondal",
+      "name": "sinchanmondal",
+      "bio": "GitHub Contributor",
+      "id": "gh_250565106",
+      "username": "sinchanmondal"
+    },
+    {
+      "createdAt": "2026-10-14T07:14:16.544Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/207640448?v=4",
+      "githubId": 207640448,
+      "htmlUrl": "https://github.com/somebeing2",
+      "name": "Kevin Joseph",
+      "bio": "Finance & Data Science student. Leveraging Python, NLP, and Quantitative Modeling to solve business inefficiencies.",
+      "id": "gh_207640448",
+      "username": "somebeing2"
+    },
+    {
+      "createdAt": "2026-10-10T13:37:04.159Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/291987715?v=4",
+      "githubId": 291987715,
+      "htmlUrl": "https://github.com/Sourodip1804",
+      "name": "Sourodip Mahato",
+      "bio": "Hello ! \r\nSourodip here",
+      "id": "gh_291987715",
+      "username": "Sourodip1804"
+    },
+    {
+      "createdAt": "2026-10-17T08:43:19.211Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/180283757?v=4",
+      "githubId": 180283757,
+      "htmlUrl": "https://github.com/Sunil56224972",
+      "name": "Sunil",
+      "bio": "𝗪𝗿𝗲𝘁𝗰𝗵𝗲𝗱 𝗖𝗼𝗱𝗲𝗿 🏃 • 𝘛𝘩𝘦 𝘲𝘶𝘪𝘦𝘵𝘦𝘳 𝘺𝘰𝘶 𝘣𝘦𝘤𝘰𝘮𝘦, 𝘵𝘩𝘦 𝘮𝘰𝘳𝘦 𝘺𝘰𝘶 𝘤𝘢𝘯 𝘩𝘦𝘢𝘳.",
+      "id": "gh_180283757",
+      "username": "Sunil56224972"
+    },
+    {
+      "createdAt": "2026-10-09T15:07:15.372Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/162972888?v=4",
+      "githubId": 162972888,
+      "htmlUrl": "https://github.com/Tanya-garg10",
+      "name": "Tanya Garg",
+      "bio": "GitHub Contributor",
+      "id": "gh_162972888",
+      "username": "Tanya-garg10"
+    },
+    {
+      "createdAt": "2026-10-10T11:42:52.492Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/235052269?v=4",
+      "githubId": 235052269,
+      "htmlUrl": "https://github.com/vaishsajal82",
+      "name": "Sajal Vaish",
+      "bio": "GitHub Contributor",
+      "id": "gh_235052269",
+      "username": "vaishsajal82"
+    },
+    {
       "role": "admin",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/Vijay-1710?v=4",
       "htmlUrl": "https://github.com/Vijay-1710",
-      "name": "Vijay-1710",
       "bio": "Official HackAaroh Event Administrator",
-      "id": "usr_Vijay-1710",
-      "username": "Vijay-1710"
+      "username": "Vijay-1710",
+      "createdAt": "2026-10-11T15:15:48.487Z",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/232495759?v=4",
+      "githubId": 232495759,
+      "name": "HackAaroh Admin",
+      "id": "gh_232495759"
+    },
+    {
+      "id": "usr_zpao",
+      "username": "zpao",
+      "name": "zpao",
+      "role": "contributor"
+    },
+    {
+      "id": "gh_201370274",
+      "githubId": 201370274,
+      "username": "PrasannaX-Spec",
+      "name": "Prasanna Kulkarni",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/201370274?v=4",
+      "bio": "Hi! I'm Prasanna Kulkarni, a passionate tech enthusiast and problem solver who loves turning ideas into reality through code, creativity, and logic.",
+      "htmlUrl": "https://github.com/PrasannaX-Spec",
+      "role": "contributor",
+      "createdAt": "2026-10-13T16:10:36.868Z"
+    },
+    {
+      "id": "gh_196914744",
+      "githubId": 196914744,
+      "username": "Sayandevxyz",
+      "name": "Sayan Mondal",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/196914744?v=4",
+      "bio": "Python Developer in Progress 🐍 | Exploring AI, Machine Learning & Automation | Open Source Learner",
+      "htmlUrl": "https://github.com/Sayandevxyz",
+      "role": "contributor",
+      "createdAt": "2026-10-17T18:13:46.280Z"
+    },
+    {
+      "id": "gh_195340186",
+      "githubId": 195340186,
+      "username": "Ad895731",
+      "name": "Aditya Pandey",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/195340186?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/Ad895731",
+      "role": "contributor",
+      "createdAt": "2026-10-13T20:17:48.114Z"
+    },
+    {
+      "id": "gh_222018012",
+      "githubId": 222018012,
+      "username": "249xa33106",
+      "name": "249xa33106",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/222018012?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/249xa33106",
+      "role": "contributor",
+      "createdAt": "2026-10-14T02:04:54.463Z"
+    },
+    {
+      "id": "gh_214610003",
+      "githubId": 214610003,
+      "username": "charitha1702",
+      "name": "P S Charitha",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/214610003?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/charitha1702",
+      "role": "contributor",
+      "createdAt": "2026-10-14T05:55:54.526Z"
+    },
+    {
+      "id": "gh_178459042",
+      "githubId": 178459042,
+      "username": "harsh1546",
+      "name": "Harsh Kumar",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/178459042?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/harsh1546",
+      "role": "contributor",
+      "createdAt": "2026-10-14T09:39:56.154Z"
+    },
+    {
+      "id": "gh_206090275",
+      "githubId": 206090275,
+      "username": "shagunmehta10",
+      "name": "shagunmehta10",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/206090275?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/shagunmehta10",
+      "role": "contributor",
+      "createdAt": "2026-10-14T10:29:46.377Z"
+    },
+    {
+      "id": "gh_232081292",
+      "githubId": 232081292,
+      "username": "tovi-govi",
+      "name": "Govindh Reddy",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/232081292?v=4",
+      "bio": "absolute garbage ",
+      "htmlUrl": "https://github.com/tovi-govi",
+      "role": "contributor",
+      "createdAt": "2026-10-14T13:37:24.792Z"
+    },
+    {
+      "id": "gh_233162342",
+      "githubId": 233162342,
+      "username": "alenAlex707",
+      "name": "Alen Alex",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/233162342?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/alenAlex707",
+      "role": "contributor",
+      "createdAt": "2026-10-14T14:27:52.954Z"
+    },
+    {
+      "id": "gh_79405663",
+      "githubId": 79405663,
+      "username": "TarsierIsCool",
+      "name": "TarsierIsCool",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/79405663?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/TarsierIsCool",
+      "role": "contributor",
+      "createdAt": "2026-10-14T15:13:49.881Z"
+    },
+    {
+      "id": "gh_277151654",
+      "githubId": 277151654,
+      "username": "theaadix",
+      "name": "theaadix",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/277151654?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/theaadix",
+      "role": "contributor",
+      "createdAt": "2026-10-15T06:16:55.086Z"
+    },
+    {
+      "id": "gh_233886301",
+      "githubId": 233886301,
+      "username": "aslinefebina-lab",
+      "name": "ASLINE HEPZIBAH FEBINA J",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/233886301?v=4",
+      "bio": "I AM AN ASPIRRING CSE STUDENT ",
+      "htmlUrl": "https://github.com/aslinefebina-lab",
+      "role": "contributor",
+      "createdAt": "2026-10-15T09:43:45.246Z"
+    },
+    {
+      "id": "gh_96969584",
+      "githubId": 96969584,
+      "username": "NavaneethNem",
+      "name": "Navaneeth Mohan",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/96969584?v=4",
+      "bio": "\r\ngotta codee!!\r\n",
+      "htmlUrl": "https://github.com/NavaneethNem",
+      "role": "contributor",
+      "createdAt": "2026-10-16T05:59:05.961Z"
+    },
+    {
+      "id": "gh_185824768",
+      "githubId": 185824768,
+      "username": "abdulaziz965-dev",
+      "name": "abdulaziz965-dev",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/185824768?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/abdulaziz965-dev",
+      "role": "contributor",
+      "createdAt": "2026-10-16T09:26:50.863Z"
+    },
+    {
+      "id": "gh_264797695",
+      "githubId": 264797695,
+      "username": "vaishrutha",
+      "name": "vaishrutha",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/264797695?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/vaishrutha",
+      "role": "contributor",
+      "createdAt": "2026-10-16T11:26:13.968Z"
+    },
+    {
+      "id": "gh_207858994",
+      "githubId": 207858994,
+      "username": "Eklavvyaaaaa",
+      "name": "Puri Eklavya",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/207858994?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/Eklavvyaaaaa",
+      "role": "contributor",
+      "createdAt": "2026-10-16T14:33:46.234Z"
+    },
+    {
+      "id": "gh_239327158",
+      "githubId": 239327158,
+      "username": "piyushmathur153",
+      "name": "Piyush",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/239327158?v=4",
+      "bio": "Hye I Am Piyush Mathur  .\r\nI   am a 2nd Year Computer Science Student.\r\nI am a tech enthusiast learning web development along with Data Structures And Algorithm",
+      "htmlUrl": "https://github.com/piyushmathur153",
+      "role": "contributor",
+      "createdAt": "2026-10-16T15:27:26.779Z"
+    },
+    {
+      "id": "gh_211229353",
+      "githubId": 211229353,
+      "username": "ThunderKhan",
+      "name": "Ayan Khan",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/211229353?v=4",
+      "bio": "Computer science student exploring the foundations of programming languages, compilers, and developer tools through hands-on systems work.",
+      "htmlUrl": "https://github.com/ThunderKhan",
+      "role": "contributor",
+      "createdAt": "2026-10-16T16:32:26.212Z"
+    },
+    {
+      "id": "gh_233261143",
+      "githubId": 233261143,
+      "username": "Kumar44developer",
+      "name": "Kumar Swamy R Y ",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/233261143?v=4",
+      "bio": "Cloud enthusiast and full stack developer working with AWS, GCP, and modern web technologies — always learning and building 🌍",
+      "htmlUrl": "https://github.com/Kumar44developer",
+      "role": "contributor",
+      "createdAt": "2026-10-18T05:04:32.133Z"
+    },
+    {
+      "id": "gh_290822448",
+      "githubId": 290822448,
+      "username": "sujithkumarjilakara-sudo",
+      "name": "Sujith",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/290822448?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/sujithkumarjilakara-sudo",
+      "role": "contributor",
+      "createdAt": "2026-10-16T17:53:13.188Z"
+    },
+    {
+      "id": "gh_222844990",
+      "githubId": 222844990,
+      "username": "mansi040805-dotcom",
+      "name": "Mansi",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/222844990?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/mansi040805-dotcom",
+      "role": "contributor",
+      "createdAt": "2026-10-17T04:40:25.207Z"
+    },
+    {
+      "id": "gh_290732884",
+      "githubId": 290732884,
+      "username": "aashiyadav893-web",
+      "name": "aashiyadav893-web",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/290732884?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/aashiyadav893-web",
+      "role": "contributor",
+      "createdAt": "2026-10-17T06:17:42.390Z"
+    },
+    {
+      "id": "gh_220146835",
+      "githubId": 220146835,
+      "username": "nayan45633",
+      "name": "nayanjyoti kalita",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/220146835?v=4",
+      "bio": "learning",
+      "htmlUrl": "https://github.com/nayan45633",
+      "role": "contributor",
+      "createdAt": "2026-10-17T06:54:05.049Z"
+    },
+    {
+      "id": "gh_161429455",
+      "githubId": 161429455,
+      "username": "khanjan2024",
+      "name": "Khanjan nath",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/161429455?v=4",
+      "bio": "Turning ideas into code and coffee into creations ☕💻",
+      "htmlUrl": "https://github.com/khanjan2024",
+      "role": "contributor",
+      "createdAt": "2026-10-17T11:31:16.981Z"
+    },
+    {
+      "id": "gh_235041349",
+      "githubId": 235041349,
+      "username": "manoj-1407",
+      "name": "Manoj",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/235041349?v=4",
+      "bio": "just another curious guy",
+      "htmlUrl": "https://github.com/manoj-1407",
+      "role": "contributor",
+      "createdAt": "2026-10-18T07:31:22.074Z"
+    },
+    {
+      "id": "gh_178887069",
+      "githubId": 178887069,
+      "username": "Aditya8369",
+      "name": "Aditya Mahajan",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/178887069?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/Aditya8369",
+      "role": "contributor",
+      "createdAt": "2026-10-17T13:51:57.491Z"
+    },
+    {
+      "id": "gh_218446500",
+      "githubId": 218446500,
+      "username": "syamjithv",
+      "name": "Syamjith  V",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/218446500?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/syamjithv",
+      "role": "contributor",
+      "createdAt": "2026-10-17T15:24:00.224Z"
+    },
+    {
+      "id": "gh_298653075",
+      "githubId": 298653075,
+      "username": "ayushagrawalfzd4321-dot",
+      "name": "Ayush Agrawal",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/298653075?v=4",
+      "bio": "i am fresher learning web development ...with little knowledge of java",
+      "htmlUrl": "https://github.com/ayushagrawalfzd4321-dot",
+      "role": "contributor",
+      "createdAt": "2026-10-17T15:47:32.067Z"
+    },
+    {
+      "id": "gh_183356746",
+      "githubId": 183356746,
+      "username": "Suraj5560",
+      "name": "Suraj vishwakarma",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/183356746?v=4",
+      "bio": "I am an enthusiastic tech student . ",
+      "htmlUrl": "https://github.com/Suraj5560",
+      "role": "contributor",
+      "createdAt": "2026-10-18T02:17:49.780Z"
+    },
+    {
+      "id": "gh_267396942",
+      "githubId": 267396942,
+      "username": "aaryansingh200617-cyber",
+      "name": "Aaryan Singh",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/267396942?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/aaryansingh200617-cyber",
+      "role": "contributor",
+      "createdAt": "2026-10-18T05:33:04.158Z"
     }
   ],
-  "pullRequests": [],
+  "pullRequests": [
+    {
+      "creditScore": 67,
+      "additions": 3,
+      "deletions": 6,
+      "author": "abhibob369-crypto",
+      "commitsCount": 1,
+      "repo": "KRLabsOrg/verbatim-rag",
+      "githubPrNumber": 78,
+      "reviewedAt": "2026-10-10T03:33:19.010Z",
+      "description": "## Summary\n- Removed `milvus-lite<3` version pin in `docker/overrides.txt` and `docker/constraints.txt`.\n- Updated `CHANGELOG.md` under `[Unreleased]`.\n\n## Related issue\nCloses #77\n\n## Type of change\n- [x] Bug fix\n- [ ] Feature\n- [ ] Documentation\n- [ ] Tests\n- [x] Refactor or maintenance\n\n## Proven",
+      "adminCriteria": {
+        "complexity": 17,
+        "testCoverage": 16,
+        "impact": 19,
+        "quality": 15
+      },
+      "reviewedBy": "Vijay-1710",
+      "title": "fix: lift milvus-lite pin in docker constraints (#77)",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/222751478?v=4",
+      "url": "https://github.com/KRLabsOrg/verbatim-rag/pull/78",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-09T13:58:59Z",
+      "dayOfSprint": 1,
+      "adminFeedback": "",
+      "reviewStatus": "REVIEWED",
+      "id": "pr-1791555157168-o3kn",
+      "isRepoOnly": false,
+      "state": "open"
+    },
+    {
+      "creditScore": 75,
+      "additions": 3,
+      "deletions": 3,
+      "author": "sinankp31",
+      "commitsCount": 1,
+      "repo": "OpenBeta/open-tacos",
+      "githubPrNumber": 1478,
+      "reviewedAt": "2026-10-11T10:18:19.236Z",
+      "description": "# Fix: Update Footer Contribution and Developer Onboarding Links\n\n## Summary\n\nThis PR updates the footer navigation in `open-tacos` to direct users to the official OpenBeta documentation for general contributions and developer onboarding, instead of relying on the Get Involved page hosted on the Collective website.\n\nThe change aims to make contribution resources easier to access and provide users with a more reliable starting point for participating in the OpenBeta project.\n\n## Related Issue\n\nRelated to #1475\n\n## Background and Investigation\n\nIssue #1475 reports that the existing **How to get involved** destination does not appear to be working.\n\nDuring the investigation, I explored the relevant OpenBeta repositories and identified the following:\n\n- **`OpenBeta/open-tacos`** is the main frontend application repository, where the footer navigation is defined.\n- **`OpenBeta/docs.openbeta.io`** contains the official documentation website, including contribution and developer onboarding guides.\n- **`OpenBeta/collective.openbeta.io`** is a separate repository associated with the Collective website, which hosts the original Get Involved destination.\n\nDuring testing, the Collective website's homepage and the `/about` and `/get-involved` routes returned HTTP 502 errors. I also built the Collective website locally and confirmed that the homepage and Get Involved page worked in my local environment.\n\nHowever, I could not access the production deployment logs, so the exact cause of the HTTP 502 errors could not be established.\n\nBased on these findings, I identified the existing contribution documentation as a practical alternative to sending users to the affected Collective website.\n\n## Changes Made\n\n### 1. Updated the general contribution link\n\nReplaced the existing link:\n\n`https://collective.openbeta.io/get-involved`\n\nwith:\n\n`https://docs.openbeta.io/how-to-contribute/general-onboarding`\n\nThe footer's **How to get involved** link now directs users to the official general contribution onboarding guide.\n\n### 2. Updated the developer onboarding link\n\nUpdated the developer onboarding destination to:\n\n`https://docs.openbeta.io/how-to-contribute/dev-onboarding`\n\nThis provides developers with a dedicated onboarding resource rather than directing them to the previous general contribution overview URL.\n\n### 3. Improved contribution navigation\n\nThe footer now provides two distinct entry points:\n\n- **How to get involved** — for users looking for general guidance on contributing to OpenBeta.\n- **Developer onboarding** — for developers looking for guidance on getting started with development.\n\nThese changes reuse the existing documentation instead of duplicating contribution instructions in the main application.\n\n## Why This Approach?\n\n- **Minimal and focused:** Changes only the relevant footer links.\n- **Reuses existing documentation:** Avoids creating redundant contribution pages.\n- **Clearer navigation:** Separates general contribution guidance from developer-specific onboarding.\n- **Easier maintenance:** Contribution instructions remain centralized in the documentation repository.\n- **No unnecessary architectural changes:** The existing footer structure and styling are preserved.\n\n## Testing and Verification\n\n- [ ] Verify that the general contribution onboarding URL loads successfully.\n- [ ] Verify that the developer onboarding URL loads successfully.\n- [ ] Confirm that both footer links navigate to the intended destinations.\n- [ ] Run the available lint and build checks.\n- [ ] Check the footer on desktop and mobile layouts.\n- [ ] Confirm that existing footer navigation remains unaffected.\n\n## Scope and Limitations\n\nThis PR changes the footer destinations; it does not repair or diagnose the underlying Collective website deployment issue.\n\nThe observed HTTP 502 responses and the successful local build are documented as investigation findings only. The production root cause remains unverified.\n\n## Future Improvements\n\n- Investigate and restore the Collective website if the maintainers intend to keep it as an active destination.\n- Review other references to the old Get Involved URL across OpenBeta repositories.\n- Consider automated link checking to identify broken documentation and community links.\n- Keep contribution navigation aligned with the official onboarding documentation.\n\n## Conclusion\n\nThis change provides a small, targeted improvement to the OpenBeta contribution experience by directing users to existing onboarding resources while avoiding the currently affected Collective destination.\n\nThank you to the OpenBeta maintainers and community for maintaining an open-source climbing platform.",
+      "adminCriteria": {
+        "complexity": 20,
+        "testCoverage": 15,
+        "impact": 20,
+        "quality": 20
+      },
+      "reviewedBy": "Vijay-1710",
+      "title": "fix: update footer contribution and developer onboarding links",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/170221403?v=4",
+      "url": "https://github.com/OpenBeta/open-tacos/pull/1478",
+      "tags": [
+        "frontend",
+        "bugfix",
+        "corrected"
+      ],
+      "createdAt": "2026-10-10T19:52:11Z",
+      "dayOfSprint": 3,
+      "adminFeedback": "",
+      "reviewStatus": "REVIEWED",
+      "id": "pr-1791662152450-j7oe",
+      "isRepoOnly": false,
+      "state": "open"
+    },
+    {
+      "creditScore": 75,
+      "additions": 15,
+      "deletions": 6,
+      "author": "sinankp31",
+      "commitsCount": 3,
+      "repo": "OpenBeta/open-tacos",
+      "githubPrNumber": 1479,
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "description": "# Fix: Allow saving profile when only some optional fields are filled\n\n## Summary\n\nThis PR fixes the Edit Profile form in `open-tacos` so the **Save changes** button enables as soon as any valid change is made, instead of requiring the display name, bio, and website to all be filled in.\n\n## Related Issue\n\nFixes #1466\n\n## Background and Investigation\n\nIssue #1466 reports that on a new account the **Save changes** button stays disabled after editing one field, and only enables once all three fields contain data.\n\nIn `src/components/users/account/UpdateProfileForm.tsx`:\n\n- The form uses `react-hook-form` with `zodResolver` and `mode: 'onChange'`.\n- The button is disabled when `!isValid || isSubmitting || !isDirty || userUuid == null`.\n- Each schema field was `.optional().or(z.literal(''))`, which accepts `undefined` and `''` but **not `null`**.\n- The profile loaded through `useUserProfileCmd` is passed directly to `reset(...)`.\n\nThe behavior matches unset profile fields being `null`. The resolver validates the whole form on each change, so untouched `null` fields keep `isValid` false even when the edited field is valid. Once all three fields hold strings, the button enables.\n\n[CONFIRM: say how you verified this, e.g. \"console.log of the loaded profile for a new account showed bio: null and website: null\". If you did not verify it, change this to \"likely cause\".]\n\n## Changes Made\n\n### 1. Schema accepts null values\n\n`displayName`, `bio`, and `website` now use `.nullish()` so `null` and `undefined` are valid for unset fields. Length, line-count, and URL validation are unchanged.\n\n### 2. Normalize and map values\n\n- After a successful save, `reset()` receives `''` instead of `null`/`undefined`.\n- Values passed to `updatePublicProfileCmd` use `?? undefined`, because the schema type now includes `null`, which the command's parameters don't accept.\n\n### 3. Small fixes\n\n- Bio validation message now says 80 characters to match `.max(80)`. [Remove if you didn't change it.]\n- Fixed indentation flagged by `@typescript-eslint/indent`.\n\n## Why This Approach?\n\n- **Minimal and focused:** Only the form's schema and value handling change.\n- **Validation intact:** Length and URL rules are unchanged; only `null` is now tolerated.\n- **No API changes:** The GraphQL query and mutation are untouched.\n\n## Testing and Verification\n\n- [ ] New account: editing only the display name enables **Save changes**.\n- [ ] Editing only the bio enables it.\n- [ ] Editing only the website with a valid URL enables it.\n- [ ] An invalid website URL shows the error and keeps the button disabled.\n- [ ] Clearing an existing field and saving works.\n- [ ] After saving, the button disables until the next change.\n- [ ] `yarn lint` passes. (The `@typescript-eslint` TypeScript version warning is pre-existing and unrelated.)\n- [ ] No TypeScript errors on build.\n\n[Tick only what you ran. Add a screenshot or short recording if possible.]\n\n## Scope and Limitations\n\nThis PR only changes the Edit Profile form's validation and value handling. Backend behavior is unchanged. [CONFIRM: note whether you checked how the API treats `undefined` vs `''` for a field, so reviewers know what to look at.]\n\n## Future Improvements\n\n- Add a unit test for the form with a profile containing null fields.\n- Review other forms that pass API data directly into `reset()`.\n\n## Conclusion\n\nOptional profile fields now stay optional, and a single valid edit is enough to save.",
+      "adminCriteria": {
+        "quality": 20,
+        "complexity": 18,
+        "impact": 20,
+        "testCoverage": 17
+      },
+      "reviewedBy": "Vijay-1710",
+      "title": "fix: allow saving profile when only some optional fields are filled",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/170221403?v=4",
+      "url": "https://github.com/OpenBeta/open-tacos/pull/1479",
+      "tags": [
+        "bugfix",
+        "optimization",
+        "validation",
+        "enhanced"
+      ],
+      "createdAt": "2026-10-11T14:52:46Z",
+      "dayOfSprint": 3,
+      "adminFeedback": "Clean form schema update using nullish validation. Fixes the multi-field block on new user profile saves.",
+      "reviewStatus": "REVIEWED",
+      "id": "pr-1791730489379-zx4x",
+      "isRepoOnly": false,
+      "state": "open"
+    },
+    {
+      "creditScore": 74,
+      "additions": 39,
+      "deletions": 1,
+      "author": "Naveen230497",
+      "commitsCount": 1,
+      "repo": "OpenBeta/open-tacos",
+      "githubPrNumber": 1480,
+      "reviewedAt": "2026-10-13T11:11:43.895Z",
+      "description": "Fixes Issue #1452 by resolving Cumulative Layout Shift (CLS) on the landing page. AppAlert previously initialized with useState(false), which caused an abrupt ~80px layout reflow when useEffect executed after initial paint to check cookies.\n\nChanges Made:\n- Initialized alert state to visible (true) by default so first-time visitors have the banner rendered immediately during initial paint.\n- Preserved graceful suppression logic for returning visitors who previously dismissed the alert via cookies.\n- Added comprehensive unit tests in AppAlert.tsx verifying initial render visibility for new users and proper cookie-based suppression.",
+      "adminCriteria": {
+        "complexity": 18,
+        "testCoverage": 18,
+        "impact": 19,
+        "quality": 19
+      },
+      "reviewedBy": "Vijay-1710",
+      "title": "fix(ui): eliminate cumulative layout shift in AppAlert for first-time visitors (#1452)",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/196183614?v=4",
+      "url": "https://github.com/OpenBeta/open-tacos/pull/1480",
+      "tags": [
+        "frontend",
+        "bugfix",
+        "performance",
+        "tests",
+        "react",
+        "nextjs"
+      ],
+      "createdAt": "2026-10-13T10:15:25Z",
+      "dayOfSprint": 5,
+      "adminFeedback": "",
+      "reviewStatus": "REVIEWED",
+      "id": "pr-1791887126145-50x8",
+      "isRepoOnly": false,
+      "state": "open"
+    },
+    {
+      "id": "pr-1791962139828-kiu8",
+      "githubPrNumber": 98,
+      "isRepoOnly": false,
+      "repo": "pesu-dev/discord_bot",
+      "title": "refactor: rename functional role BOT_DEV to DEV_STAFF",
+      "description": "Renamed functional role identifier, enum member, and config accessor from BOT_DEV to DEV_STAFF across 8 files to align with updated team terminology. Verified with 354 passing unit tests and clean Ruff linting.",
+      "url": "https://github.com/pesu-dev/discord_bot/pull/98",
+      "state": "closed",
+      "author": "somebeing2",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/207640448?v=4",
+      "createdAt": "2026-10-13T01:18:31Z",
+      "dayOfSprint": 6,
+      "additions": 3435,
+      "deletions": 595,
+      "commitsCount": 18,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 66,
+      "adminFeedback": "Consistent role renaming refactor across permissions and bot command decorators.",
+      "adminCriteria": {
+        "quality": 18,
+        "complexity": 16,
+        "impact": 17,
+        "testCoverage": 15
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "refactor",
+        "python",
+        "clean-code",
+        "discord-bot"
+      ]
+    },
+    {
+      "id": "pr-1791962248391-zzlg",
+      "githubPrNumber": 17,
+      "isRepoOnly": false,
+      "repo": "VoidPhoenixApps/project-tesseract",
+      "title": "docs: audit newcomer reading path and explain five terms",
+      "description": "## Problem and contribution\n\nCloses #13.\n\nThis addresses the newcomer need identified in issue #13: a clear path from the project overview through contribution guidance, approved requirements, and the Phase 1 proposal. It also explains five domain terms already used by the project without changing a",
+      "url": "https://github.com/VoidPhoenixApps/project-tesseract/pull/17",
+      "state": "open",
+      "author": "somebeing2",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/207640448?v=4",
+      "createdAt": "2026-10-13T01:39:41Z",
+      "dayOfSprint": 6,
+      "additions": 22,
+      "deletions": 1,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 55,
+      "adminFeedback": "Helpful newcomer documentation clarifications explaining domain terminology.",
+      "adminCriteria": {
+        "quality": 16,
+        "complexity": 12,
+        "impact": 15,
+        "testCoverage": 12
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1791962300712-zhtv",
+      "githubPrNumber": 24,
+      "isRepoOnly": false,
+      "repo": "mpetyx/theoxenia",
+      "title": "test: add one-row Celestrak fixture and offline reader test",
+      "description": "## What changed and why\n\nCloses #21.\n\nExtracted the recorded Celestrak result row from PR #13's `runs/sources-check/sources_check.json` into `tests/fixtures/celestrak-one-row.json`. Added a focused unit test that reads the fixture locally and guards against any `urllib.request.urlopen` network acces",
+      "url": "https://github.com/mpetyx/theoxenia/pull/24",
+      "state": "open",
+      "author": "somebeing2",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/207640448?v=4",
+      "createdAt": "2026-10-13T01:43:35Z",
+      "dayOfSprint": 6,
+      "additions": 47,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 72,
+      "adminFeedback": "Good test fixture addition enabling offline verification without flaky network dependencies.",
+      "adminCriteria": {
+        "quality": 18,
+        "complexity": 16,
+        "impact": 18,
+        "testCoverage": 20
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1791962317083-36yn",
+      "githubPrNumber": 11,
+      "isRepoOnly": false,
+      "repo": "devcom-goseong/community-web-django",
+      "title": "fix: remove unused PUBLIC_SITE_URL setting",
+      "description": "Closes #4\n\nRemoves the unused \\PUBLIC_SITE_URL\\ setting from \\config/settings.py\\, \\.env.example\\, and \\docker-compose.yml\\, and cleans up comments referencing it.",
+      "url": "https://github.com/devcom-goseong/community-web-django/pull/11",
+      "state": "merged",
+      "author": "somebeing2",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/207640448?v=4",
+      "createdAt": "2026-10-12T14:58:09Z",
+      "dayOfSprint": 6,
+      "additions": 4,
+      "deletions": 9,
+      "commitsCount": 2,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 61,
+      "adminFeedback": "Clean cleanup of legacy Django setting; successfully merged upstream.",
+      "adminCriteria": {
+        "quality": 18,
+        "complexity": 13,
+        "impact": 16,
+        "testCoverage": 14
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1791962347931-ar79",
+      "githubPrNumber": 112,
+      "isRepoOnly": false,
+      "repo": "yunaremaia/ci-test-gate",
+      "title": "test: add unit test coverage for diff analysis and test classification",
+      "description": "Closes #29\n\n## Summary\n\nAdds comprehensive unit test coverage for diff parsing, test file extraction, semantic classification, LLM prompt generation, and fallback behavior.\n\n### Acceptance Criteria Covered\n- [x] Unit tests for diff parsing (unified git diff format, headers, hunks, binary files, edge",
+      "url": "https://github.com/yunaremaia/ci-test-gate/pull/112",
+      "state": "open",
+      "author": "somebeing2",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/207640448?v=4",
+      "createdAt": "2026-10-12T15:14:11Z",
+      "dayOfSprint": 6,
+      "additions": 569,
+      "deletions": 1,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 86,
+      "adminFeedback": "High-value test suite addition with strong edge-case coverage for CI diff analysis.",
+      "adminCriteria": {
+        "quality": 22,
+        "complexity": 20,
+        "impact": 21,
+        "testCoverage": 23
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1791962412447-bifu",
+      "githubPrNumber": 10,
+      "isRepoOnly": false,
+      "repo": "devcom-goseong/community-web-django",
+      "title": "fix: unpin/update psycopg dependency constraint in requirements",
+      "description": "Updates psycopg pin in requirements.txt from psycopg[binary]==3.2.3 to psycopg[binary]>=3.2.3 to resolve build failure.",
+      "url": "https://github.com/devcom-goseong/community-web-django/pull/10",
+      "state": "open",
+      "author": "somebeing2",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/207640448?v=4",
+      "createdAt": "2026-10-12T14:45:22Z",
+      "dayOfSprint": 6,
+      "additions": 1,
+      "deletions": 1,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 54,
+      "adminFeedback": "Appropriate dependency constraint relaxation to support modern psycopg drivers.",
+      "adminCriteria": {
+        "quality": 15,
+        "complexity": 12,
+        "impact": 15,
+        "testCoverage": 12
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1791962423248-po2q",
+      "githubPrNumber": 2,
+      "isRepoOnly": false,
+      "repo": "abhishek5228/fleet_intelligence",
+      "title": "fix: add backend/.env.example template for setup",
+      "description": "Closes #1\n\nAdds \\\backend/.env.example\\ listing all required and optional backend environment variables with placeholder/empty values and explanatory comments based on the README table to make onboarding easier for contributors.",
+      "url": "https://github.com/abhishek5228/fleet_intelligence/pull/2",
+      "state": "merged",
+      "author": "somebeing2",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/207640448?v=4",
+      "createdAt": "2026-10-12T14:50:41Z",
+      "dayOfSprint": 6,
+      "additions": 33,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 58,
+      "adminFeedback": "Valuable setup template preventing environment config oversights during initial deployment.",
+      "adminCriteria": {
+        "quality": 16,
+        "complexity": 12,
+        "impact": 16,
+        "testCoverage": 14
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1791962521844-ud5t",
+      "githubPrNumber": 52,
+      "isRepoOnly": false,
+      "repo": "and3rn3t/apple-music-dj",
+      "title": "feat: add token-renewal reminder to daily-drop script",
+      "description": "Closes #47.\n\n## Summary\n\n- Check both Apple Music dev-token expiry and user-token age during the daily-drop command.\n- Append renewal guidance to the daily pick message only when either token check reports a warning.\n- Add unit coverage for warning and no-warning cases.\n\n## Validation\n\n- `py -m pyte",
+      "url": "https://github.com/and3rn3t/apple-music-dj/pull/52",
+      "state": "open",
+      "author": "somebeing2",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/207640448?v=4",
+      "createdAt": "2026-10-13T01:35:24Z",
+      "dayOfSprint": 6,
+      "additions": 63,
+      "deletions": 2,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 68,
+      "adminFeedback": "Proactive token renewal warning prevents silent script failures on daily drop execution.",
+      "adminCriteria": {
+        "quality": 18,
+        "complexity": 16,
+        "impact": 18,
+        "testCoverage": 16
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1791962537421-btq3",
+      "githubPrNumber": 38,
+      "isRepoOnly": false,
+      "repo": "anshu12011/Dynamo",
+      "title": "feat: compute hit ratio and eviction rate in stats() output safely",
+      "description": "Closes #30\n\n## Summary\n\n- Extended \\stats()\\ to calculate and expose derived health metrics: \\hit_ratio = hits / (hits + misses)\\, \\eviction_rate = evictions / (hits + misses)\\, and \\current_size\\.\n- Handled zero-division edge cases safely: returns \\",
+      "url": "https://github.com/anshu12011/Dynamo/pull/38",
+      "state": "open",
+      "author": "somebeing2",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/207640448?v=4",
+      "createdAt": "2026-10-12T15:28:22Z",
+      "dayOfSprint": 6,
+      "additions": 495,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 84,
+      "adminFeedback": "Robust cache telemetry computation with defensive zero-division checks and clean stats formatting.",
+      "adminCriteria": {
+        "quality": 22,
+        "complexity": 21,
+        "impact": 21,
+        "testCoverage": 20
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1791963529349-y0o0",
+      "githubPrNumber": 1012,
+      "isRepoOnly": false,
+      "repo": "cybermax4200/stellar-did-credit",
+      "title": "test: add authorization tests for contract upgrade functions",
+      "description": "## Summary\n\nCloses #1004.\n\nAdds a revocation-registry unit test that removes the blanket auth mock and verifies a non-admin authorization attempt to `upgrade` is rejected. Identity-oracle and credit-oracle already had upgrade authorization tests on the base branch; governance does not expose an `upg",
+      "url": "https://github.com/cybermax4200/stellar-did-credit/pull/1012",
+      "state": "open",
+      "author": "somebeing2",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/207640448?v=4",
+      "createdAt": "2026-10-14T07:37:22Z",
+      "dayOfSprint": 6,
+      "additions": 15,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 81,
+      "adminFeedback": "Crucial contract authorization unit test preventing unauthorized upgrade exploits.",
+      "adminCriteria": {
+        "quality": 20,
+        "complexity": 19,
+        "impact": 21,
+        "testCoverage": 21
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1791963808077-e8qw",
+      "githubPrNumber": 1628,
+      "isRepoOnly": false,
+      "repo": "morluto/rea",
+      "title": "docs(hopper): clarify lease directory recovery guidance",
+      "description": "Contributed defense-in-depth improvements to REA, addressing bootstrap-file cleanup on launch failure, symlink-handling hardening, and lease-directory validation to reduce TOCTOU risk. Added regression tests and verified the changes with the relevant checks. The work improves filesystem integrity and recovery reliability. These changes are defense-in-depth improvements, not claims of exploitable vulnerabilities within REA's stated threat model.",
+      "url": "https://github.com/morluto/rea/pull/1628",
+      "state": "merged",
+      "author": "Sunil56224972",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/180283757?v=4",
+      "createdAt": "2026-10-10T19:50:09Z",
+      "dayOfSprint": 6,
+      "additions": 4,
+      "deletions": 4,
+      "commitsCount": 12,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 63,
+      "adminFeedback": "Clear operational guidance on lease directory recovery procedures; merged into main.",
+      "adminCriteria": {
+        "quality": 18,
+        "complexity": 14,
+        "impact": 18,
+        "testCoverage": 13
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "security",
+        "defense-in-depth",
+        "testing",
+        "reliability",
+        "filesystem"
+      ]
+    },
+    {
+      "id": "pr-1791964120872-gvsq",
+      "githubPrNumber": 1016,
+      "isRepoOnly": false,
+      "repo": "cybermax4200/stellar-did-credit",
+      "title": "feat: add dry-run support for compute-score CLI command",
+      "description": "## Summary\n\nAdds explicit cooldown handling to `compute-score --dry-run`. Dry-run simulation continues to avoid broadcasting, while cooldown contract errors are identified and reported as `Cooldown Active`.\n\n## Related issue\n\nCloses #1003\n\n## Changes\n\n- Detect compute-score cooldown errors from Soro",
+      "url": "https://github.com/cybermax4200/stellar-did-credit/pull/1016",
+      "state": "open",
+      "author": "somebeing2",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/207640448?v=4",
+      "createdAt": "2026-10-14T07:45:20Z",
+      "dayOfSprint": 6,
+      "additions": 31,
+      "deletions": 2,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 72,
+      "adminFeedback": "Dry-run flag adds safe preview capability before committing on-chain score transactions.",
+      "adminCriteria": {
+        "quality": 19,
+        "complexity": 17,
+        "impact": 19,
+        "testCoverage": 17
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1791964524243-d76p",
+      "githubPrNumber": 1024,
+      "isRepoOnly": false,
+      "repo": "cybermax4200/stellar-did-credit",
+      "title": "test: add duplicate VC handling test for issueVC in SDK",
+      "description": "## Summary\n\nAdds SDK unit coverage proving that issuing the same VC hash for the same issuer twice is handled safely. This matches the identity-oracle contract behavior, which treats duplicate `(issuer, vc_hash)` pairs as a no-op.\n\n## Related issue\n\nCloses #999\n\n## Changes\n\n- Added an `issueVC` test",
+      "url": "https://github.com/cybermax4200/stellar-did-credit/pull/1024",
+      "state": "open",
+      "author": "somebeing2",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/207640448?v=4",
+      "createdAt": "2026-10-14T07:54:33Z",
+      "dayOfSprint": 6,
+      "additions": 46,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 76,
+      "adminFeedback": "Thorough edge-case test for duplicate VC issuance handling in client SDK.",
+      "adminCriteria": {
+        "quality": 19,
+        "complexity": 18,
+        "impact": 19,
+        "testCoverage": 20
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1791988321001-ye5e",
+      "githubPrNumber": 136,
+      "isRepoOnly": false,
+      "repo": "LennardGeissler/blindbucket",
+      "title": "feat(audit): export entries over syslog or OTLP as they are written (…",
+      "description": "…#135)\n\nExport audit entries as they are written, over RFC 5424 syslog (with RFC 5425 TLS octet-counting framing) or OpenTelemetry logs (OTLP/HTTP), in addition to the local file.\n\n- Add Exporter interface with SyslogExporter, OTLPExporter, AsyncExporter, and MultiExporter\n- Decouple file write and ",
+      "url": "https://github.com/LennardGeissler/blindbucket/pull/136",
+      "state": "open",
+      "author": "tovi-govi",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/232081292?v=4",
+      "createdAt": "2026-10-14T14:31:08Z",
+      "dayOfSprint": 6,
+      "additions": 1345,
+      "deletions": 17,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 91,
+      "adminFeedback": "Impressive architectural contribution implementing resilient OTLP and syslog audit streaming.",
+      "adminCriteria": {
+        "quality": 24,
+        "complexity": 23,
+        "impact": 23,
+        "testCoverage": 21
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1791988858729-ta35",
+      "githubPrNumber": 176,
+      "isRepoOnly": false,
+      "repo": "IIITK-Football/super-league",
+      "title": "Fix team builder partial save",
+      "description": "Pull request #176 submitted by @tovi-govi",
+      "url": "https://github.com/IIITK-Football/super-league/pull/176",
+      "state": "merged",
+      "author": "tovi-govi",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/232081292?v=4",
+      "createdAt": "2026-10-10T14:19:39Z",
+      "dayOfSprint": 6,
+      "additions": 12655,
+      "deletions": 501,
+      "commitsCount": 31,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 94,
+      "adminFeedback": "Exceptional overhaul of tournament team builder state lifecycle with complete persistence recovery.",
+      "adminCriteria": {
+        "quality": 24,
+        "complexity": 24,
+        "impact": 24,
+        "testCoverage": 22
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1791988912406-gy6m",
+      "githubPrNumber": 175,
+      "isRepoOnly": false,
+      "repo": "IIITK-Football/super-league",
+      "title": "update freshers bracket dynamic scheduling and layout",
+      "description": "Pull request #175 submitted by @tovi-govi",
+      "url": "https://github.com/IIITK-Football/super-league/pull/175",
+      "state": "closed",
+      "author": "tovi-govi",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/232081292?v=4",
+      "createdAt": "2026-10-09T19:28:13Z",
+      "dayOfSprint": 6,
+      "additions": 12186,
+      "deletions": 415,
+      "commitsCount": 27,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 85,
+      "adminFeedback": "Comprehensive bracket scheduling engine overhaul with dynamic timetable adjustment.",
+      "adminCriteria": {
+        "quality": 22,
+        "complexity": 22,
+        "impact": 22,
+        "testCoverage": 19
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1791990515621-9ynj",
+      "githubPrNumber": 70877,
+      "isRepoOnly": false,
+      "repo": "freeCodeCamp/freeCodeCamp",
+      "title": "fix(curriculum): correct wording and options in python basics quiz",
+      "description": "- Simplify string-length question phrasing\n- Format symbols and character ranges with backticks in variable-naming options\n- Fix grammar and terminology in variable-naming answer option\n- Change 'None' distractor to 'NoneType' in data-type question\n\nChecklist:\n\n<!-- Please follow this checklist and ",
+      "url": "https://github.com/freeCodeCamp/freeCodeCamp/pull/70877",
+      "state": "open",
+      "author": "tovi-govi",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/232081292?v=4",
+      "createdAt": "2026-10-14T15:07:46Z",
+      "dayOfSprint": 6,
+      "additions": 5,
+      "deletions": 5,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 60,
+      "adminFeedback": "High-impact educational correction directly improving learner clarity on Python fundamentals quiz.",
+      "adminCriteria": {
+        "quality": 16,
+        "complexity": 13,
+        "impact": 17,
+        "testCoverage": 14
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1791991612220-hb5e",
+      "githubPrNumber": 4,
+      "isRepoOnly": false,
+      "repo": "Silvren/issue-scout",
+      "title": "Fix duplicate search results across pagination",
+      "description": "When `--limit` is greater than 100 and is not a multiple of 100, the search client changes `per_page` on the final request. GitHub uses the page size to determine the page offset, so `--limit 150` returns issues 1–100 followed by 51–100 instead of 101–150.\n\nKeep `per_page` fixed throughout the searc",
+      "url": "https://github.com/Silvren/issue-scout/pull/4",
+      "state": "open",
+      "author": "alenAlex707",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/233162342?v=4",
+      "createdAt": "2026-10-14T14:51:03Z",
+      "dayOfSprint": 6,
+      "additions": 21,
+      "deletions": 1,
+      "commitsCount": 2,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 72,
+      "adminFeedback": "Precise pagination cursor boundary handling eliminating duplicate search entries across page loads.",
+      "adminCriteria": {
+        "quality": 19,
+        "complexity": 17,
+        "impact": 19,
+        "testCoverage": 17
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1791991896326-kc8y",
+      "githubPrNumber": 19001,
+      "isRepoOnly": false,
+      "repo": "sveltejs/svelte",
+      "title": "docs: add example of updating complex store data (#3053)",
+      "description": "- Add 'Updating complex data' section to Stores documentation under writable\n- Demonstrate immutable updates and mutations for nested objects and arrays with store.update()\n- Demonstrate direct property mutation inside components with \\ syntax\n- Clarify that updating any property triggers whole-stor",
+      "url": "https://github.com/sveltejs/svelte/pull/19001",
+      "state": "open",
+      "author": "TarsierIsCool",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/79405663?v=4",
+      "createdAt": "2026-10-14T15:31:00Z",
+      "dayOfSprint": 6,
+      "additions": 74,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 78,
+      "adminFeedback": "Well-crafted idiomatic documentation example showcasing immutable nested store mutations in Svelte.",
+      "adminCriteria": {
+        "quality": 21,
+        "complexity": 18,
+        "impact": 21,
+        "testCoverage": 18
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792012090883-vt3k",
+      "githubPrNumber": 3659,
+      "isRepoOnly": false,
+      "repo": "morluto/rea",
+      "title": "fix(security): harden archive and Hopper probes",
+      "description": "Implemented three security hardening improvements in REA: bounded ZIP metadata allocation and archive entry retention, validation of ZIP entry counts to prevent analysis evasion, and removal of potentially executable Linux diagnostic probes during Hopper checks. Added regression and boundary tests to validate the changes. The PR's displayed CI checks and test suites passed; Linux-only PoC execution and actual Hopper installation verification remain environment-dependent.",
+      "url": "https://github.com/morluto/rea/pull/3659",
+      "state": "open",
+      "author": "Sunil56224972",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/180283757?v=4",
+      "createdAt": "2026-10-14T20:26:23Z",
+      "dayOfSprint": 7,
+      "additions": 324,
+      "deletions": 83,
+      "commitsCount": 2,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 82,
+      "adminFeedback": "Strong security hardening addressing potential probe vector vulnerabilities and boundary sanitization.",
+      "adminCriteria": {
+        "quality": 21,
+        "complexity": 20,
+        "impact": 22,
+        "testCoverage": 19
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "security",
+        "bugfix",
+        "zip-validation",
+        "resource-limits",
+        "regression-tests"
+      ]
+    },
+    {
+      "id": "pr-1792130385429-4yo2",
+      "githubPrNumber": 37,
+      "isRepoOnly": false,
+      "repo": "Noelithub77/bunkialo2",
+      "title": "Update mess menu (October)",
+      "description": "Replaced all 28 meals across seven days, including drinks, fruits, and sweets.\nUpdated breakfast to 7:00–9:30 am and dinner to 7:00–8:30 pm. Lunch and snacks remain unchanged.\nUpdated the shared menu used by phone/web, widgets, and Wear OS, and regenerated the desktop plugin’s menu.\nAdded regression",
+      "url": "https://github.com/Noelithub77/bunkialo2/pull/37",
+      "state": "merged",
+      "author": "NavaneethNem",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/96969584?v=4",
+      "createdAt": "2026-10-14T15:31:15Z",
+      "dayOfSprint": 8,
+      "additions": 549,
+      "deletions": 879,
+      "commitsCount": 4,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 58,
+      "adminFeedback": "Community data schedule update with clean JSON schema conformity; merged.",
+      "adminCriteria": {
+        "quality": 16,
+        "complexity": 13,
+        "impact": 16,
+        "testCoverage": 13
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792226657141-05zg",
+      "githubPrNumber": 973,
+      "isRepoOnly": false,
+      "repo": "bilawalsidhu/gods-eye-view",
+      "title": "fix(traffic): refuse cross-site requests before they spend the TomTom budget",
+      "description": "This PR fixes a cross-site request vulnerability in God's Eye View's TomTom traffic proxy. Previously, a malicious website could trigger requests to the local application and consume the user's daily TomTom API quota, potentially disabling new traffic-tile requests until the daily budget reset.\n\nThe fix applies the existing same-site request gate before proxy processing and budget accounting on the TomTom routes. This protects the traffic-tile and status endpoints while preserving legitimate same-origin and supported local-tool access.\n\nProof of impact: A reproducible test using the real middleware showed that, before the fix, 50 cross-site requests exhausted a test budget of 50. With the fix, 60 cross-site requests returned HTTP 403, caused zero upstream calls, and left the budget unchanged.\n\nValidation: Regression tests, development and preview HTTP probes, build, formatting, boundary checks, and GitHub CI passed. The maintainer merged the PR.",
+      "url": "https://github.com/bilawalsidhu/gods-eye-view/pull/973",
+      "state": "merged",
+      "author": "Sunil56224972",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/180283757?v=4",
+      "createdAt": "2026-10-08T15:30:59Z",
+      "dayOfSprint": 9,
+      "additions": 92,
+      "deletions": 7,
+      "commitsCount": 6,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 88,
+      "adminFeedback": "High-value cost and security guard preventing external budget exhaustion on third-party map APIs.",
+      "adminCriteria": {
+        "quality": 23,
+        "complexity": 21,
+        "impact": 24,
+        "testCoverage": 20
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "security",
+        "cross-site requests",
+        "api quota",
+        "regression testing",
+        "reliability"
+      ]
+    },
+    {
+      "id": "pr-1792230313147-98c4",
+      "githubPrNumber": 1167,
+      "isRepoOnly": false,
+      "repo": "charmbracelet/gum",
+      "title": "feat(spin): add --fps flag to configure spinner animation speed",
+      "description": "Fixes #1164\n\n### Changes\n- Add `--fps` flag (with `--spinner.fps` alias) to `gum spin` to configure animation speed in frames per second.\n- Support `GUM_SPIN_FPS` environment variable.\n- Extract `newSpinner()` helper in `spin/command.go` to set the frame duration when `--fps` > 0.\n- Add unit tests i",
+      "url": "https://github.com/charmbracelet/gum/pull/1167",
+      "state": "open",
+      "author": "TarsierIsCool",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/79405663?v=4",
+      "createdAt": "2026-10-17T09:39:08Z",
+      "dayOfSprint": 9,
+      "additions": 77,
+      "deletions": 3,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 78,
+      "adminFeedback": "Idiomatic Go implementation adding clean CLI flag parsing and ticker rate adjustment to Gum spinner.",
+      "adminCriteria": {
+        "quality": 21,
+        "complexity": 19,
+        "impact": 20,
+        "testCoverage": 18
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792259033641-unf8",
+      "githubPrNumber": 439,
+      "isRepoOnly": false,
+      "repo": "ilyamiro/serpantinum",
+      "title": "fix(lock): compare FullyCharged against battery state",
+      "description": "## Summary\n\nFixed an issue where the lock screen showed the charging indicator even when the battery was discharging.\n\nThe `isCharging` check was missing a comparison against the current battery state for `UPowerDeviceState.FullyCharged`. This caused it to always evaluate as true when the battery in",
+      "url": "https://github.com/ilyamiro/serpantinum/pull/439",
+      "state": "merged",
+      "author": "gouthamkrishnap",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/224089015?v=4",
+      "createdAt": "2026-10-15T10:30:13Z",
+      "dayOfSprint": 9,
+      "additions": 1,
+      "deletions": 1,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 71,
+      "adminFeedback": "Targeted battery state comparator bugfix preventing premature lock power cycles.",
+      "adminCriteria": {
+        "quality": 19,
+        "complexity": 17,
+        "impact": 19,
+        "testCoverage": 16
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792260843420-7isp",
+      "githubPrNumber": 5670,
+      "isRepoOnly": false,
+      "repo": "tscircuit/tscircuit",
+      "title": "`feat: add TypeScript module declarations for .stp and .svg assets`",
+      "description": "```markdown\n## Summary\nAdds ambient TypeScript module declarations for `*.stp` (ISO 10303-21 STEP models) and `*.svg` (vector graphics / silkscreen artwork) to `globals.d.ts` and `types/static-assets.d.ts`, and adds parity testing.\n## Problem & Motivation\n1. In CAD and electronic design, 3D STEP mod",
+      "url": "https://github.com/tscircuit/tscircuit/pull/5670",
+      "state": "open",
+      "author": "Sayandevxyz",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/196914744?v=4",
+      "createdAt": "2026-10-14T02:53:32Z",
+      "dayOfSprint": 9,
+      "additions": 58,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 72,
+      "adminFeedback": "Comprehensive ambient TypeScript module declarations ensuring strict type checking on 3D STP and SVG assets.",
+      "adminCriteria": {
+        "quality": 19,
+        "complexity": 17,
+        "impact": 19,
+        "testCoverage": 17
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792260953047-3md9",
+      "githubPrNumber": 5666,
+      "isRepoOnly": false,
+      "repo": "tscircuit/tscircuit",
+      "title": "fix: cross-platform build scripts and dependency audit test",
+      "description": "## Summary\nFixes cross-platform build failures and subprocess execution issues in `tests/manifold-dependency.test.ts` on non-Unix/Windows developer environments and CI workers.\n\n## Problem & Motivation\n1. In `package.json`, the `build` and `add-global-types-reference` scripts relied on Unix-specific",
+      "url": "https://github.com/tscircuit/tscircuit/pull/5666",
+      "state": "open",
+      "author": "Sayandevxyz",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/196914744?v=4",
+      "createdAt": "2026-10-14T02:42:29Z",
+      "dayOfSprint": 9,
+      "additions": 40,
+      "deletions": 10,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 78,
+      "adminFeedback": "Reliable cross-platform shell harmonization resolving path separator and execution mismatches on Windows/Linux CI.",
+      "adminCriteria": {
+        "quality": 20,
+        "complexity": 19,
+        "impact": 20,
+        "testCoverage": 19
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792260967685-tian",
+      "githubPrNumber": 5667,
+      "isRepoOnly": false,
+      "repo": "tscircuit/tscircuit",
+      "title": "fix: harden cli.mjs entrypoint error propagation and execution diagno…",
+      "description": "## Summary\nFixes cross-platform build failures and subprocess execution issues in `tests/manifold-dependency.test.ts` on non-Unix/Windows developer environments and CI workers.\n\n## Problem & Motivation\n1. In `package.json`, the `build` and `add-global-types-reference` scripts relied on Unix-specific",
+      "url": "https://github.com/tscircuit/tscircuit/pull/5667",
+      "state": "open",
+      "author": "Sayandevxyz",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/196914744?v=4",
+      "createdAt": "2026-10-14T02:45:07Z",
+      "dayOfSprint": 9,
+      "additions": 60,
+      "deletions": 33,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 77,
+      "adminFeedback": "Improved CLI process error propagation with clean stack trace formatting and defensive error boundaries.",
+      "adminCriteria": {
+        "quality": 20,
+        "complexity": 19,
+        "impact": 20,
+        "testCoverage": 18
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792260988992-bt40",
+      "githubPrNumber": 5669,
+      "isRepoOnly": false,
+      "repo": "tscircuit/tscircuit",
+      "title": "feat: export comprehensive circuit element prop types from public entrypoint",
+      "description": "## Summary\nRe-exports all circuit element and layout prop types from `@tscircuit/props` through `tscircuit`'s public entrypoint, resolving TypeScript export ambiguity conflicts.\n\n## Problem & Motivation\nCurrently, `index.ts` only exported 5 prop types:\n```ts\nexport type {\n  BoardProps,\n  ChipProps,\n",
+      "url": "https://github.com/tscircuit/tscircuit/pull/5669",
+      "state": "open",
+      "author": "Sayandevxyz",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/196914744?v=4",
+      "createdAt": "2026-10-14T02:50:56Z",
+      "dayOfSprint": 9,
+      "additions": 84,
+      "deletions": 8,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 79,
+      "adminFeedback": "Great type-level utility exposing core schematic element types directly from root package barrel.",
+      "adminCriteria": {
+        "quality": 21,
+        "complexity": 18,
+        "impact": 21,
+        "testCoverage": 19
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792261108309-mgjs",
+      "githubPrNumber": 5668,
+      "isRepoOnly": false,
+      "repo": "tscircuit/tscircuit",
+      "title": "fix: wildcard pattern matching in core dependency synchronizer and biome-config",
+      "description": "\n```markdown\n## Summary\nFixes pattern matching in `scripts/copy-core-versions.ts` to support infix wildcards (preventing recurring failures in the scheduled dependency updater) and corrects the Biome linter configuration syntax error.\n## Problem & Motivation\n1. In `scripts/copy-core-versions.ts`, pa",
+      "url": "https://github.com/tscircuit/tscircuit/pull/5668",
+      "state": "open",
+      "author": "Sayandevxyz",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/196914744?v=4",
+      "createdAt": "2026-10-14T02:46:18Z",
+      "dayOfSprint": 9,
+      "additions": 52,
+      "deletions": 10,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 75,
+      "adminFeedback": "Solid glob pattern normalization ensuring nested monorepo packages adhere to Biome styling.",
+      "adminCriteria": {
+        "quality": 20,
+        "complexity": 18,
+        "impact": 19,
+        "testCoverage": 18
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792300476755-ubj9",
+      "githubPrNumber": 4377,
+      "isRepoOnly": false,
+      "repo": "date-fns/date-fns",
+      "title": "Fix infinite loop from fractional step in each*OfInterval",
+      "description": "Fixes an infinite loop in eachHourOfInterval, eachDayOfInterval, eachMonthOfInterval and eachYearOfInterval. All four advance their cursor with a Date setter applied to the current value (setHours, setDate, setMonth, setFullYear), and those setters truncate to an integer. A fractional step such as 0.5 was therefore discarded, the date never advanced, and the while loop ran forever, hanging the calling application. The Temporal implementations failed differently on the same input, throwing a RangeError for non-integer duration fields like 1.5.\n\nThe fix truncates the step toward zero before the zero-check and sign handling, in both the Date and Temporal implementations, so fractional values resolve to whole units consistently and a step that truncates to zero returns an empty array instead of hanging. Existing integer, zero and NaN behaviour is unchanged.\n\n12 files changed, +112/-9. Because the Temporal test suites re-run the main test file against the Temporal implementation, every added regression test validates both code paths. 190 tests pass across the four functions. Resolves issue #4336.",
+      "url": "https://github.com/date-fns/date-fns/pull/4377",
+      "state": "open",
+      "author": "Kumar44developer",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/233261143?v=4",
+      "createdAt": "2026-10-16T18:14:31Z",
+      "dayOfSprint": 10,
+      "additions": 112,
+      "deletions": 9,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 92,
+      "adminFeedback": "High-severity algorithmic fix in date-fns preventing process hang on fractional step intervals with regression tests.",
+      "adminCriteria": {
+        "quality": 23,
+        "complexity": 22,
+        "impact": 24,
+        "testCoverage": 23
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "bugfix",
+        "reliability",
+        "infinite-loop",
+        "date-fns",
+        "typescript",
+        "testing"
+      ]
+    },
+    {
+      "id": "pr-1792300568261-680k",
+      "githubPrNumber": 4378,
+      "isRepoOnly": false,
+      "repo": "date-fns/date-fns",
+      "title": "Truncate fractional step in eachMinuteOfInterval and eachWeekOfInterval",
+      "description": "A bug I found myself rather than from the issue tracker, completing a family of related defects. eachMinuteOfInterval and eachWeekOfInterval both document that they return starts of minutes and starts of weeks, but a fractional step silently breaks that contract. Unlike their siblings they advance via helper functions instead of a truncating Date setter, so rather than hanging they return quietly wrong data: a step of 0.5 on minutes produces values at :30 seconds, and on weeks addWeeks multiplies by 7 before setDate truncates, turning it into a 3-day step so every value after the first lands mid-week (Wednesday, Saturday, Tuesday).\n\nThe fix truncates the step toward zero in both the Date and Temporal implementations, matching the rest of the each*OfInterval family. The Temporal versions previously threw a RangeError for the same input, so this also makes the two implementations consistent.\n\n6 files changed, +61/-4, with 6 new regression tests. I verified they fail on current main (6 failures) and pass with the fix (32 passing), across both implementations. oxlint is clean. No overlap with other open PRs in this area.",
+      "url": "https://github.com/date-fns/date-fns/pull/4378",
+      "state": "open",
+      "author": "Kumar44developer",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/233261143?v=4",
+      "createdAt": "2026-10-16T19:21:41Z",
+      "dayOfSprint": 10,
+      "additions": 61,
+      "deletions": 4,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 82,
+      "adminFeedback": "Consistent step interval truncation maintaining mathematical invariant stability across weekly/minute intervals.",
+      "adminCriteria": {
+        "quality": 21,
+        "complexity": 19,
+        "impact": 21,
+        "testCoverage": 21
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "bugfix",
+        "correctness",
+        "date-fns",
+        "typescript",
+        "testing",
+        "temporal"
+      ]
+    },
+    {
+      "id": "pr-1792300623004-5lhb",
+      "githubPrNumber": 4379,
+      "isRepoOnly": false,
+      "repo": "date-fns/date-fns",
+      "title": "Truncate fractional step in eachQuarterOfInterval",
+      "description": "Another self-found bug, and the last member of this family without a fix in flight. eachQuarterOfInterval documents that it returns starts of quarters, but addQuarters multiplies the step by 3 before Date.setMonth truncates it, so a step of 2.9 becomes an 8-month step (2.9 * 3 = 8.7, truncated to 8). The function then returns 1 September and 1 May, which are not quarter months, violating its documented contract.\n\nThe Temporal implementation fails differently on the same input, throwing \"RangeError: Non-integer months: 8.7\". That pair of behaviours, silent misalignment on one path and a thrown error on the other, is the clearest evidence of the inconsistency.\n\nThe fix truncates the step toward zero before the zero-check and sign handling in both implementations. Ranges with integer steps, zero and NaN are untouched.\n\n3 files changed, +37/-2, with 3 new tests covering a fractional step, the start-of-quarter property of every returned value, and a step that truncates to zero. Verified failing on main (6 failures across both implementations) and passing after (50 tests). oxlint clean.",
+      "url": "https://github.com/date-fns/date-fns/pull/4379",
+      "state": "open",
+      "author": "Kumar44developer",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/233261143?v=4",
+      "createdAt": "2026-10-16T19:28:58Z",
+      "dayOfSprint": 10,
+      "additions": 37,
+      "deletions": 2,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 78,
+      "adminFeedback": "Precise quarterly interval iterator handling aligning behavior across date-fns interval APIs.",
+      "adminCriteria": {
+        "quality": 20,
+        "complexity": 18,
+        "impact": 20,
+        "testCoverage": 20
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "bugfix",
+        "correctness",
+        "date-fns",
+        "typescript",
+        "testing"
+      ]
+    },
+    {
+      "id": "pr-1792300647288-mvk4",
+      "githubPrNumber": 231,
+      "isRepoOnly": false,
+      "repo": "micromatch/picomatch",
+      "title": "fix: escape dots when a brace range falls back to literal matching",
+      "description": "A correctness bug in picomatch's glob-to-regex compilation. picomatch is the glob matcher underneath chokidar, vitest, rollup and tinyglobby, so most JavaScript build tooling depends on it transitively.\n\nWhen a brace range cannot be expressed as a character class, picomatch falls back to matching it as literal text. That fallback escaped each bound but joined them with a raw '..', and those two dots reached the generated regex as wildcards. {01..03} takes this path because its character class [01-03] contains the invalid range 1-0, so it compiled to /^(?:01..03)$/ and matched far more than intended: 01ab03, 01__03, and even 01/x03, meaning a brace range could match across a path separator, which glob semantics should never allow.\n\nThe fix escapes the dots so the fallback matches only the literal text it represents. Ranges that can be expressed as a character class never reach this path and are unaffected, so {a..c} still compiles to [a-c].\n\n2 files changed, +21/-1. I verified the new test fails on current master and passes with the fix; the full suite goes from 1998 to 1999 passing with eslint clean. I deliberately scoped out adding zero-padded range expansion and explained why in the PR, since the README directs that to the expandRange option.",
+      "url": "https://github.com/micromatch/picomatch/pull/231",
+      "state": "open",
+      "author": "Kumar44developer",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/233261143?v=4",
+      "createdAt": "2026-10-16T19:43:34Z",
+      "dayOfSprint": 10,
+      "additions": 21,
+      "deletions": 1,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 90,
+      "adminFeedback": "Critical regex escaping fix in picomatch preventing regex dot injection during brace range fallback.",
+      "adminCriteria": {
+        "quality": 23,
+        "complexity": 22,
+        "impact": 23,
+        "testCoverage": 22
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "bugfix",
+        "security-adjacent",
+        "regex",
+        "glob",
+        "picomatch",
+        "testing"
+      ]
+    },
+    {
+      "id": "pr-1792300671806-mmhq",
+      "githubPrNumber": 232,
+      "isRepoOnly": false,
+      "repo": "micromatch/picomatch",
+      "title": "fix: treat a brace range with no bounds as literal text",
+      "description": "A second, independent bug in the same library, found by inspecting the compiled regex rather than the matcher output. A brace range with no bounds, such as {..}, was expanded to the empty character class []. That is valid regex so nothing threw, but an empty class can never match, which makes the entire surrounding pattern unmatchable. There is no string that *{..} can match.\n\nIt was well hidden: isMatch(p, p) short-circuits on exact string equality, so isMatch('{..}', '{..}') returns true while the compiled regex matches nothing. I had to construct patterns like *{..} where the shortcut cannot fire to expose it. Both bash and picomatch's own nobrace option already treat {..} as literal text.\n\nThe fix collects the range bounds before consuming the tokens, so a boundless range falls through to the existing literal-brace handling instead of being expanded. Ranges with bounds are untouched. Fixing this surfaced a second defect it had been masking: the dots token emitted \\.. with the second dot unescaped, which only mattered once the token could be rendered literally, so that is escaped too.\n\n2 files changed, +39/-5. The new test fails on master and passes with the fix, suite at 1999 passing, eslint clean. GitHub reports it mergeable alongside my other open PR. I limited the scope to the boundless case and left the arguable single-bound case alone rather than fold a semantics change into a bug fix.",
+      "url": "https://github.com/micromatch/picomatch/pull/232",
+      "state": "open",
+      "author": "Kumar44developer",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/233261143?v=4",
+      "createdAt": "2026-10-16T20:00:41Z",
+      "dayOfSprint": 10,
+      "additions": 39,
+      "deletions": 5,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 85,
+      "adminFeedback": "Robust parser grammar update handling empty/unbounded brace expansions gracefully.",
+      "adminCriteria": {
+        "quality": 22,
+        "complexity": 20,
+        "impact": 22,
+        "testCoverage": 21
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "bugfix",
+        "correctness",
+        "regex",
+        "glob",
+        "picomatch",
+        "testing"
+      ]
+    },
+    {
+      "id": "pr-1792300700942-lgzd",
+      "githubPrNumber": 1483,
+      "isRepoOnly": false,
+      "repo": "OpenBeta/open-tacos",
+      "title": "Fix Mountain Project tick import showing dates a day early",
+      "description": "Fixes a timezone off-by-one that made every climb imported from Mountain Project display the wrong date. A climb ticked on April 3 was imported as April 2.\n\nMountain Project's tick export supplies a calendar date (YYYY-MM-DD) with no time or timezone. The import route parsed it as midnight, and an inline comment claimed this converted to the user's timezone. That assumption does not hold, because the code runs server-side: the string is interpreted in the server's timezone, which is UTC in production, producing 2024-04-03T00:00:00Z. Rendering that with toLocaleDateString in any timezone behind UTC, which covers most of the Americas and therefore most of this site's users, rolls it back to the previous day.\n\nThe fix anchors the imported date to 12:00 UTC through a small, documented parseMpTickDate helper. Noon UTC keeps the date on the same calendar day in every timezone from UTC-11 through UTC+11, so the imported date matches Mountain Project regardless of the server's or the viewer's timezone, and it removes the hidden dependency on the server's local timezone. Midnight UTC would not work, since that still displays as the previous day for any viewer west of UTC.\n\n3 files changed, +61/-1, with 10 jest tests asserting the calendar date survives formatting across seven timezones including US Pacific, Eastern, São Paulo, Berlin, Kolkata, Tokyo and UTC-11. ts-standard lint passes. Resolves issue #1456.",
+      "url": "https://github.com/OpenBeta/open-tacos/pull/1483",
+      "state": "open",
+      "author": "Kumar44developer",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/233261143?v=4",
+      "createdAt": "2026-10-16T19:01:42Z",
+      "dayOfSprint": 10,
+      "additions": 61,
+      "deletions": 1,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 81,
+      "adminFeedback": "Clean UTC timezone date parsing fix eliminating day-early shift during Mountain Project CSV ingestion.",
+      "adminCriteria": {
+        "quality": 21,
+        "complexity": 19,
+        "impact": 21,
+        "testCoverage": 20
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "bugfix",
+        "timezone",
+        "data-integrity",
+        "nextjs",
+        "typescript",
+        "testing"
+      ]
+    },
+    {
+      "id": "pr-1792301947630-eklk",
+      "githubPrNumber": 1168,
+      "isRepoOnly": false,
+      "repo": "charmbracelet/gum",
+      "title": "fix(choose): allow space key to toggle items in multi-select",
+      "description": "Fixes #1143\n\n### Changes\n- Add `\"space\"` to `Toggle` keymap bindings in `choose/choose.go` so pressing the spacebar toggles options in multi-select mode.\n- In Bubble Tea v2, pressing the Space key generates a key press whose string representation is `\"space\"` rather than `\" \"`. Adding `\"space\"` ensu",
+      "url": "https://github.com/charmbracelet/gum/pull/1168",
+      "state": "open",
+      "author": "TarsierIsCool",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/79405663?v=4",
+      "createdAt": "2026-10-18T05:36:27Z",
+      "dayOfSprint": 10,
+      "additions": 80,
+      "deletions": 1,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 76,
+      "adminFeedback": "Standardized keyboard navigation enabling spacebar toggling in Gum multi-select menu.",
+      "adminCriteria": {
+        "quality": 20,
+        "complexity": 18,
+        "impact": 20,
+        "testCoverage": 18
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792302457321-ksun",
+      "githubPrNumber": 1169,
+      "isRepoOnly": false,
+      "repo": "charmbracelet/gum",
+      "title": "fix(filter): prevent panic when toggling selection with no matches",
+      "description": "Fixes #1105\n\n### Changes\n- Add bounds check in `ToggleSelection()` (`filter/filter.go`) to safely return early if `len(m.matches) == 0` or if `m.cursor` is out of bounds, matching the safety guards in `CursorUp()` and `CursorDown()`.\n- Add unit tests in `filter/filter_test.go` covering empty match s",
+      "url": "https://github.com/charmbracelet/gum/pull/1169",
+      "state": "open",
+      "author": "TarsierIsCool",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/79405663?v=4",
+      "createdAt": "2026-10-18T05:46:45Z",
+      "dayOfSprint": 10,
+      "additions": 96,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 84,
+      "adminFeedback": "Important defensive bounds check preventing index out-of-range panic in terminal filter prompt.",
+      "adminCriteria": {
+        "quality": 22,
+        "complexity": 20,
+        "impact": 22,
+        "testCoverage": 20
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792303102956-bfm6",
+      "githubPrNumber": 762,
+      "isRepoOnly": false,
+      "repo": "charmbracelet/lipgloss",
+      "title": "fix(tree): keep following siblings when expanding slice children",
+      "description": "Fixes #754\n\n### Changes\n- In `Tree.Child`, remove the early `return` when expanding `[]any`, `[]string`, or default formatted types. Previously, calling `Child(\"a\", []string{\"b\", \"c\"}, \"d\")` returned immediately at the slice, silently dropping any subsequent arguments like `\"d\"`.\n- Now slice items a",
+      "url": "https://github.com/charmbracelet/lipgloss/pull/762",
+      "state": "open",
+      "author": "tovi-govi",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/232081292?v=4",
+      "createdAt": "2026-10-18T05:57:11Z",
+      "dayOfSprint": 10,
+      "additions": 45,
+      "deletions": 5,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 84,
+      "adminFeedback": "Elegantly resolves tree traversal rendering when slice children are dynamically expanded in Lipgloss.",
+      "adminCriteria": {
+        "quality": 22,
+        "complexity": 21,
+        "impact": 21,
+        "testCoverage": 20
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792303474096-o94y",
+      "githubPrNumber": 160,
+      "isRepoOnly": false,
+      "repo": "LennardGeissler/blindbucket",
+      "title": "test(probe): classify decides whether rotation may start",
+      "description": "Closes #94\n\n## What and why\n\nAdds table-driven unit tests for `classify` and `Outcome.String` in `internal/probe/probe_test.go`.\n\n`classify` decides whether a rotation or a name migration may safely start against a storage provider (ADR-020). This adds unit test coverage for each possible classifica",
+      "url": "https://github.com/LennardGeissler/blindbucket/pull/160",
+      "state": "open",
+      "author": "tovi-govi",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/232081292?v=4",
+      "createdAt": "2026-10-18T06:03:51Z",
+      "dayOfSprint": 10,
+      "additions": 94,
+      "deletions": 1,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 82,
+      "adminFeedback": "High-fidelity classification unit test covering state transition criteria for rotation lifecycle.",
+      "adminCriteria": {
+        "quality": 21,
+        "complexity": 19,
+        "impact": 20,
+        "testCoverage": 22
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792308709725-fy7c",
+      "githubPrNumber": 19286,
+      "isRepoOnly": false,
+      "repo": "nushell/nushell",
+      "title": "Fix `chunks` crash when the chunk size is larger than the input",
+      "description": "## Description\n`chunks` crashes when the chunk size is very large. On current main:\n\n> [1 2 3] | chunks 9223372036854775807\npanicked: capacity overflow\n\n> 0x[11 22 33] | chunks 9223372036854775807\nmemory allocation of 9223372036854775807 bytes failed\n\nBoth come from `Vec::with_capacity(self.size)`, ",
+      "url": "https://github.com/nushell/nushell/pull/19286",
+      "state": "open",
+      "author": "manoj-1407",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/235041349?v=4",
+      "createdAt": "2026-10-18T06:05:00Z",
+      "dayOfSprint": 10,
+      "additions": 20,
+      "deletions": 3,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 92,
+      "adminFeedback": "Excellent Rust bugfix in Nushell resolving bounds panic when chunk size exceeds vector length.",
+      "adminCriteria": {
+        "quality": 23,
+        "complexity": 22,
+        "impact": 24,
+        "testCoverage": 23
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792308723014-2aak",
+      "githubPrNumber": 19285,
+      "isRepoOnly": false,
+      "repo": "nushell/nushell",
+      "title": "Fix `roll` panic on empty lists and records",
+      "description": "## Description\n`roll` panics when the input is empty. On current main:\n\n> [] | roll down\npanicked: assertion failed: k <= self.len()\n\n> {} | roll left\npanicked: assertion failed: mid <= self.len()\n\n> [] | roll up --by 3\npanicked: attempt to calculate the remainder with a divisor of zero\n\nI found the",
+      "url": "https://github.com/nushell/nushell/pull/19285",
+      "state": "open",
+      "author": "manoj-1407",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/235041349?v=4",
+      "createdAt": "2026-10-18T05:48:02Z",
+      "dayOfSprint": 10,
+      "additions": 42,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 86,
+      "adminFeedback": "Clean guard clause preventing unwrapped panic on empty record sequences in Nushell pipeline.",
+      "adminCriteria": {
+        "quality": 22,
+        "complexity": 20,
+        "impact": 22,
+        "testCoverage": 22
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792330797144-ginj",
+      "githubPrNumber": 187,
+      "isRepoOnly": false,
+      "repo": "kubescape/synchronizer",
+      "title": "fix(auth): drain and close auth server response body",
+      "description": "## Overview\n`AuthenticationServerMiddleware` calls the auth server with `client.Do(...)` for every incoming connection but only looks at `StatusCode`. The response body is never read or closed. With the default `&http.Client{}` that means the connection to the auth server can't be reused or released",
+      "url": "https://github.com/kubescape/synchronizer/pull/187",
+      "state": "open",
+      "author": "manoj-1407",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/235041349?v=4",
+      "createdAt": "2026-10-18T13:27:50Z",
+      "dayOfSprint": 10,
+      "additions": 278,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 91,
+      "adminFeedback": "Crucial HTTP client lifecycle fix in Kubescape draining response bodies to prevent socket descriptor exhaustion.",
+      "adminCriteria": {
+        "quality": 23,
+        "complexity": 22,
+        "impact": 24,
+        "testCoverage": 22
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792330805093-ynre",
+      "githubPrNumber": 440,
+      "isRepoOnly": false,
+      "repo": "kubescape/operator",
+      "title": "fix(webhook): reload TLS certificate on rotation",
+      "description": "## Overview\nThe webhook is supposed to restart its HTTPS server when /etc/certs/tls.crt or tls.key changes, but that never happens. In `notifyChanges`, `getInfos` writes what it stats into the outer `infos` map and returns its own `res` map, which is always empty. So `lastInfos` and `newInfos` are b",
+      "url": "https://github.com/kubescape/operator/pull/440",
+      "state": "open",
+      "author": "manoj-1407",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/235041349?v=4",
+      "createdAt": "2026-10-18T13:27:53Z",
+      "dayOfSprint": 10,
+      "additions": 229,
+      "deletions": 19,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 93,
+      "adminFeedback": "Outstanding production-grade fix in Kubescape operator supporting dynamic TLS certificate rotation without pod downtime.",
+      "adminCriteria": {
+        "quality": 24,
+        "complexity": 23,
+        "impact": 24,
+        "testCoverage": 22
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792330811743-pxfl",
+      "githubPrNumber": 1039,
+      "isRepoOnly": false,
+      "repo": "kubescape/node-agent",
+      "title": "fix(hostsensor): close kernel variable files per entry, not per directory",
+      "description": "## Overview\n`walkVarsDir` in `sensor_kernelvars.go` opened each entry of a /proc/sys/kernel directory and did `defer varFile.Close()` inside the loop. A defer runs when the function returns, not at the end of the iteration, so every file in a directory stayed open until the whole directory (and ever",
+      "url": "https://github.com/kubescape/node-agent/pull/1039",
+      "state": "open",
+      "author": "manoj-1407",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/235041349?v=4",
+      "createdAt": "2026-10-18T13:27:47Z",
+      "dayOfSprint": 10,
+      "additions": 187,
+      "deletions": 37,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 90,
+      "adminFeedback": "Critical sysfs/procfs descriptor leak remediation closing files immediately per entry across kernel inspection loop.",
+      "adminCriteria": {
+        "quality": 23,
+        "complexity": 22,
+        "impact": 23,
+        "testCoverage": 22
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792331738356-vxfk",
+      "githubPrNumber": 19288,
+      "isRepoOnly": false,
+      "repo": "nushell/nushell",
+      "title": "Fix `window` crash when the window size is too large to allocate",
+      "description": "## Description\n`window` crashes when the window size is too large to allocate. On current main:\n\n> [1 2 3] | window 9223372036854775807\npanicked: capacity overflow\n\n> [1 2 3] | window 9223372036854775807 --stride 9223372036854775807\npanicked: capacity overflow\n\nBoth come from `Vec::with_capacity` ta",
+      "url": "https://github.com/nushell/nushell/pull/19288",
+      "state": "open",
+      "author": "manoj-1407",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/235041349?v=4",
+      "createdAt": "2026-10-18T13:53:43Z",
+      "dayOfSprint": 10,
+      "additions": 28,
+      "deletions": 6,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 90,
+      "adminFeedback": "Graceful error propagation replacing memory allocation panic on oversized window command parameters.",
+      "adminCriteria": {
+        "quality": 23,
+        "complexity": 22,
+        "impact": 23,
+        "testCoverage": 22
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "tags": [
+        "contribution"
+      ]
+    }
+  ],
   "auditLogs": [
     {
-      "id": "log-1791520748155-atl5",
-      "action": "ADMIN_SECRET_LOGIN",
+      "id": "log-1792333953747-drgq",
+      "action": "PR_MANUALLY_REVIEWED",
       "actor": "Vijay-1710",
-      "details": "Admin authenticated via verified secret passkey",
-      "timestamp": "2026-10-09T04:39:08.155Z"
+      "details": "Admin reviewed PR #19288 in nushell/nushell (@manoj-1407) -> Awarded 90 credits [Q:23 C:22 I:23 T:22]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
     },
     {
-      "id": "log-1791520746140-pynw",
-      "action": "USER_LOGIN",
-      "actor": "e2e-tester",
-      "details": "User connected with role contributor",
-      "timestamp": "2026-10-09T04:39:06.140Z"
-    },
-    {
+      "id": "log-1792333953747-vqqn",
+      "action": "PR_MANUALLY_REVIEWED",
       "actor": "Vijay-1710",
-      "action": "ADMIN_SECRET_LOGIN",
-      "details": "Admin authenticated via verified secret passkey",
-      "id": "log-1791493870972-ut97",
-      "timestamp": "2026-10-08T21:11:10.972Z"
+      "details": "Admin reviewed PR #1039 in kubescape/node-agent (@manoj-1407) -> Awarded 90 credits [Q:23 C:22 I:23 T:22]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
     },
     {
+      "id": "log-1792333953747-njnb",
+      "action": "PR_MANUALLY_REVIEWED",
       "actor": "Vijay-1710",
-      "action": "LOGINS_TOGGLED",
-      "details": "Logins toggled to ACTIVE",
-      "id": "log-1791493695695-23mm",
-      "timestamp": "2026-10-08T21:08:15.695Z"
+      "details": "Admin reviewed PR #440 in kubescape/operator (@manoj-1407) -> Awarded 93 credits [Q:24 C:23 I:24 T:22]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
     },
     {
+      "id": "log-1792333953747-7dr4",
+      "action": "PR_MANUALLY_REVIEWED",
       "actor": "Vijay-1710",
-      "action": "LOGINS_TOGGLED",
-      "details": "Logins toggled to PAUSED",
-      "id": "log-1791493694677-meol",
-      "timestamp": "2026-10-08T21:08:14.677Z"
+      "details": "Admin reviewed PR #187 in kubescape/synchronizer (@manoj-1407) -> Awarded 91 credits [Q:23 C:22 I:24 T:22]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
     },
     {
+      "id": "log-1792333953747-j8qw",
+      "action": "PR_MANUALLY_REVIEWED",
       "actor": "Vijay-1710",
-      "action": "SETTINGS_UPDATED",
-      "details": "Updated sprint settings: Daily calculation time set to 00:00 UTC",
-      "id": "log-1791493694001-5m7d",
-      "timestamp": "2026-10-08T21:08:14.001Z"
+      "details": "Admin reviewed PR #19285 in nushell/nushell (@manoj-1407) -> Awarded 86 credits [Q:22 C:20 I:22 T:22]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
     },
     {
+      "id": "log-1792333953747-cdj0",
+      "action": "PR_MANUALLY_REVIEWED",
       "actor": "Vijay-1710",
-      "action": "ADMIN_SECRET_LOGIN",
-      "details": "Admin authenticated via verified secret passkey",
-      "id": "log-1791493693094-es1c",
-      "timestamp": "2026-10-08T21:08:13.094Z"
+      "details": "Admin reviewed PR #19286 in nushell/nushell (@manoj-1407) -> Awarded 92 credits [Q:23 C:22 I:24 T:23]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
     },
     {
+      "id": "log-1792333953747-4k1w",
+      "action": "PR_MANUALLY_REVIEWED",
       "actor": "Vijay-1710",
-      "action": "LOGINS_TOGGLED",
-      "details": "Logins toggled to ACTIVE",
-      "id": "log-1791493543021-awxd",
-      "timestamp": "2026-10-08T21:05:43.021Z"
+      "details": "Admin reviewed PR #160 in LennardGeissler/blindbucket (@tovi-govi) -> Awarded 82 credits [Q:21 C:19 I:20 T:22]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
     },
     {
+      "id": "log-1792333953747-w2jl",
+      "action": "PR_MANUALLY_REVIEWED",
       "actor": "Vijay-1710",
-      "action": "LOGINS_TOGGLED",
-      "details": "Logins toggled to PAUSED",
-      "id": "log-1791493542376-dm1m",
-      "timestamp": "2026-10-08T21:05:42.376Z"
+      "details": "Admin reviewed PR #762 in charmbracelet/lipgloss (@tovi-govi) -> Awarded 84 credits [Q:22 C:21 I:21 T:20]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
     },
     {
+      "id": "log-1792333953747-o7ww",
+      "action": "PR_MANUALLY_REVIEWED",
       "actor": "Vijay-1710",
-      "action": "SETTINGS_UPDATED",
-      "details": "Updated sprint settings: Daily calculation time set to 00:00 UTC",
-      "id": "log-1791493541555-w3av",
-      "timestamp": "2026-10-08T21:05:41.555Z"
+      "details": "Admin reviewed PR #1169 in charmbracelet/gum (@TarsierIsCool) -> Awarded 84 credits [Q:22 C:20 I:22 T:20]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
     },
     {
+      "id": "log-1792333953747-jl9t",
+      "action": "PR_MANUALLY_REVIEWED",
       "actor": "Vijay-1710",
-      "action": "ADMIN_SECRET_LOGIN",
-      "details": "Admin authenticated via verified secret passkey",
-      "id": "log-1791493540708-00kf",
-      "timestamp": "2026-10-08T21:05:40.708Z"
+      "details": "Admin reviewed PR #1168 in charmbracelet/gum (@TarsierIsCool) -> Awarded 76 credits [Q:20 C:18 I:20 T:18]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
     },
     {
+      "id": "log-1792333953747-3by3",
+      "action": "PR_MANUALLY_REVIEWED",
       "actor": "Vijay-1710",
-      "action": "PR_DELETED",
-      "details": "Admin deleted PR #46 (Openverse-iiitk/DSA-Website)",
-      "id": "log-1791492320514-jmks",
-      "timestamp": "2026-10-08T20:45:20.514Z"
+      "details": "Admin reviewed PR #1483 in OpenBeta/open-tacos (@Kumar44developer) -> Awarded 81 credits [Q:21 C:19 I:21 T:20]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
     },
     {
+      "id": "log-1792333953747-pbtz",
+      "action": "PR_MANUALLY_REVIEWED",
       "actor": "Vijay-1710",
-      "action": "PR_DELETED",
-      "details": "Admin deleted PR #46 (Openverse-iiitk/DSA-Website)",
-      "id": "log-1791492258229-e8zc",
-      "timestamp": "2026-10-08T20:44:18.229Z"
+      "details": "Admin reviewed PR #232 in micromatch/picomatch (@Kumar44developer) -> Awarded 85 credits [Q:22 C:20 I:22 T:21]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
     },
     {
+      "id": "log-1792333953747-lioq",
+      "action": "PR_MANUALLY_REVIEWED",
       "actor": "Vijay-1710",
-      "action": "PR_DELETED",
-      "details": "Admin deleted PR #46 (Openverse-iiitk/DSA-Website)",
-      "id": "log-1791492211695-29nk",
-      "timestamp": "2026-10-08T20:43:31.695Z"
+      "details": "Admin reviewed PR #231 in micromatch/picomatch (@Kumar44developer) -> Awarded 90 credits [Q:23 C:22 I:23 T:22]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
     },
     {
+      "id": "log-1792333953747-1etm",
+      "action": "PR_MANUALLY_REVIEWED",
       "actor": "Vijay-1710",
-      "action": "PR_DELETED",
-      "details": "Admin deleted PR #46 (Openverse-iiitk/DSA-Website)",
-      "id": "log-1791491756754-8mgu",
-      "timestamp": "2026-10-08T20:35:56.754Z"
+      "details": "Admin reviewed PR #4379 in date-fns/date-fns (@Kumar44developer) -> Awarded 78 credits [Q:20 C:18 I:20 T:20]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
     },
     {
+      "id": "log-1792333953747-p537",
+      "action": "PR_MANUALLY_REVIEWED",
       "actor": "Vijay-1710",
-      "action": "PR_DELETED",
-      "details": "Admin deleted PR #46 (Openverse-iiitk/DSA-Website)",
-      "id": "log-1791491746082-mg2i",
-      "timestamp": "2026-10-08T20:35:46.082Z"
+      "details": "Admin reviewed PR #4378 in date-fns/date-fns (@Kumar44developer) -> Awarded 82 credits [Q:21 C:19 I:21 T:21]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
     },
     {
-      "actor": "manvith12",
+      "id": "log-1792333953747-fq0h",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #4377 in date-fns/date-fns (@Kumar44developer) -> Awarded 92 credits [Q:23 C:22 I:24 T:23]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-2w1a",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #5668 in tscircuit/tscircuit (@Sayandevxyz) -> Awarded 75 credits [Q:20 C:18 I:19 T:18]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-4yzv",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #5669 in tscircuit/tscircuit (@Sayandevxyz) -> Awarded 79 credits [Q:21 C:18 I:21 T:19]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-oe9i",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #5667 in tscircuit/tscircuit (@Sayandevxyz) -> Awarded 77 credits [Q:20 C:19 I:20 T:18]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-l9i0",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #5666 in tscircuit/tscircuit (@Sayandevxyz) -> Awarded 78 credits [Q:20 C:19 I:20 T:19]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-zcd8",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #5670 in tscircuit/tscircuit (@Sayandevxyz) -> Awarded 72 credits [Q:19 C:17 I:19 T:17]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-oy0e",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #439 in ilyamiro/serpantinum (@gouthamkrishnap) -> Awarded 71 credits [Q:19 C:17 I:19 T:16]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-j0pg",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #1167 in charmbracelet/gum (@TarsierIsCool) -> Awarded 78 credits [Q:21 C:19 I:20 T:18]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-lxqp",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #973 in bilawalsidhu/gods-eye-view (@Sunil56224972) -> Awarded 88 credits [Q:23 C:21 I:24 T:20]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-liye",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #37 in Noelithub77/bunkialo2 (@NavaneethNem) -> Awarded 58 credits [Q:16 C:13 I:16 T:13]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-xee0",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #3659 in morluto/rea (@Sunil56224972) -> Awarded 82 credits [Q:21 C:20 I:22 T:19]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-znnf",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #19001 in sveltejs/svelte (@TarsierIsCool) -> Awarded 78 credits [Q:21 C:18 I:21 T:18]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-klgu",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #4 in Silvren/issue-scout (@alenAlex707) -> Awarded 72 credits [Q:19 C:17 I:19 T:17]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-cf24",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #70877 in freeCodeCamp/freeCodeCamp (@tovi-govi) -> Awarded 60 credits [Q:16 C:13 I:17 T:14]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-pgu9",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #175 in IIITK-Football/super-league (@tovi-govi) -> Awarded 85 credits [Q:22 C:22 I:22 T:19]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-4xo3",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #176 in IIITK-Football/super-league (@tovi-govi) -> Awarded 94 credits [Q:24 C:24 I:24 T:22]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-qbbi",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #136 in LennardGeissler/blindbucket (@tovi-govi) -> Awarded 91 credits [Q:24 C:23 I:23 T:21]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-mcow",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #1024 in cybermax4200/stellar-did-credit (@somebeing2) -> Awarded 76 credits [Q:19 C:18 I:19 T:20]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-yfzo",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #1016 in cybermax4200/stellar-did-credit (@somebeing2) -> Awarded 72 credits [Q:19 C:17 I:19 T:17]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-01o6",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #1628 in morluto/rea (@Sunil56224972) -> Awarded 63 credits [Q:18 C:14 I:18 T:13]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-t1os",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #1012 in cybermax4200/stellar-did-credit (@somebeing2) -> Awarded 81 credits [Q:20 C:19 I:21 T:21]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-8m8a",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #38 in anshu12011/Dynamo (@somebeing2) -> Awarded 84 credits [Q:22 C:21 I:21 T:20]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-abwg",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #52 in and3rn3t/apple-music-dj (@somebeing2) -> Awarded 68 credits [Q:18 C:16 I:18 T:16]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-ukdf",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #2 in abhishek5228/fleet_intelligence (@somebeing2) -> Awarded 58 credits [Q:16 C:12 I:16 T:14]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-yvlp",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #10 in devcom-goseong/community-web-django (@somebeing2) -> Awarded 54 credits [Q:15 C:12 I:15 T:12]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953747-p7z4",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #112 in yunaremaia/ci-test-gate (@somebeing2) -> Awarded 86 credits [Q:22 C:20 I:21 T:23]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953746-b7sb",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #11 in devcom-goseong/community-web-django (@somebeing2) -> Awarded 61 credits [Q:18 C:13 I:16 T:14]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953746-xuz9",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #24 in mpetyx/theoxenia (@somebeing2) -> Awarded 72 credits [Q:18 C:16 I:18 T:20]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953746-bqo4",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #17 in VoidPhoenixApps/project-tesseract (@somebeing2) -> Awarded 55 credits [Q:16 C:12 I:15 T:12]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953746-o2th",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #98 in pesu-dev/discord_bot (@somebeing2) -> Awarded 66 credits [Q:18 C:16 I:17 T:15]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792333953746-04xe",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #1479 in OpenBeta/open-tacos (@sinankp31) -> Awarded 75 credits [Q:20 C:18 I:20 T:17]",
+      "timestamp": "2026-10-18T14:32:33.739Z"
+    },
+    {
+      "id": "log-1792331738634-0zdl",
       "action": "PR_SUBMITTED",
-      "details": "@manvith12 submitted verified PR #46 in Openverse-iiitk/DSA-Website",
-      "id": "log-1791490782081-087k",
-      "timestamp": "2026-10-08T20:19:42.081Z"
+      "actor": "manoj-1407",
+      "details": "@manoj-1407 submitted verified PR #19288 in nushell/nushell",
+      "timestamp": "2026-10-18T13:55:38.634Z"
     },
     {
-      "actor": "Vijay-1710",
+      "id": "log-1792330811837-pznh",
+      "action": "PR_SUBMITTED",
+      "actor": "manoj-1407",
+      "details": "@manoj-1407 submitted verified PR #1039 in kubescape/node-agent",
+      "timestamp": "2026-10-18T13:40:11.837Z"
+    },
+    {
+      "id": "log-1792330805261-xjca",
+      "action": "PR_SUBMITTED",
+      "actor": "manoj-1407",
+      "details": "@manoj-1407 submitted verified PR #440 in kubescape/operator",
+      "timestamp": "2026-10-18T13:40:05.261Z"
+    },
+    {
+      "id": "log-1792330797421-m6w5",
+      "action": "PR_SUBMITTED",
+      "actor": "manoj-1407",
+      "details": "@manoj-1407 submitted verified PR #187 in kubescape/synchronizer",
+      "timestamp": "2026-10-18T13:39:57.421Z"
+    },
+    {
+      "id": "log-1792308723174-db46",
+      "action": "PR_SUBMITTED",
+      "actor": "manoj-1407",
+      "details": "@manoj-1407 submitted verified PR #19285 in nushell/nushell",
+      "timestamp": "2026-10-18T07:32:03.174Z"
+    },
+    {
+      "id": "log-1792308709872-7hj3",
+      "action": "PR_SUBMITTED",
+      "actor": "manoj-1407",
+      "details": "@manoj-1407 submitted verified PR #19286 in nushell/nushell",
+      "timestamp": "2026-10-18T07:31:49.872Z"
+    },
+    {
+      "id": "log-1792303474410-px38",
+      "action": "PR_SUBMITTED",
+      "actor": "tovi-govi",
+      "details": "@tovi-govi submitted verified PR #160 in LennardGeissler/blindbucket",
+      "timestamp": "2026-10-18T06:04:34.410Z"
+    },
+    {
+      "id": "log-1792303103084-bud1",
+      "action": "PR_SUBMITTED",
+      "actor": "tovi-govi",
+      "details": "@tovi-govi submitted verified PR #762 in charmbracelet/lipgloss",
+      "timestamp": "2026-10-18T05:58:23.084Z"
+    },
+    {
+      "id": "log-1792302457480-eriz",
+      "action": "PR_SUBMITTED",
+      "actor": "TarsierIsCool",
+      "details": "@TarsierIsCool submitted verified PR #1169 in charmbracelet/gum",
+      "timestamp": "2026-10-18T05:47:37.480Z"
+    },
+    {
+      "id": "log-1792301947826-mj77",
+      "action": "PR_SUBMITTED",
+      "actor": "TarsierIsCool",
+      "details": "@TarsierIsCool submitted verified PR #1168 in charmbracelet/gum",
+      "timestamp": "2026-10-18T05:39:07.826Z"
+    },
+    {
+      "id": "log-1792300701044-8add",
+      "action": "PR_SUBMITTED",
+      "actor": "Kumar44developer",
+      "details": "@Kumar44developer submitted verified PR #1483 in OpenBeta/open-tacos",
+      "timestamp": "2026-10-18T05:18:21.044Z"
+    },
+    {
+      "id": "log-1792300671952-8llb",
+      "action": "PR_SUBMITTED",
+      "actor": "Kumar44developer",
+      "details": "@Kumar44developer submitted verified PR #232 in micromatch/picomatch",
+      "timestamp": "2026-10-18T05:17:51.952Z"
+    },
+    {
+      "id": "log-1792300647376-8hfo",
+      "action": "PR_SUBMITTED",
+      "actor": "Kumar44developer",
+      "details": "@Kumar44developer submitted verified PR #231 in micromatch/picomatch",
+      "timestamp": "2026-10-18T05:17:27.376Z"
+    },
+    {
+      "id": "log-1792300623136-22qo",
+      "action": "PR_SUBMITTED",
+      "actor": "Kumar44developer",
+      "details": "@Kumar44developer submitted verified PR #4379 in date-fns/date-fns",
+      "timestamp": "2026-10-18T05:17:03.136Z"
+    },
+    {
+      "id": "log-1792300568444-sp0k",
+      "action": "PR_SUBMITTED",
+      "actor": "Kumar44developer",
+      "details": "@Kumar44developer submitted verified PR #4378 in date-fns/date-fns",
+      "timestamp": "2026-10-18T05:16:08.444Z"
+    },
+    {
+      "id": "log-1792300476947-35ux",
+      "action": "PR_SUBMITTED",
+      "actor": "Kumar44developer",
+      "details": "@Kumar44developer submitted verified PR #4377 in date-fns/date-fns",
+      "timestamp": "2026-10-18T05:14:36.947Z"
+    },
+    {
+      "id": "log-1792261108462-is3q",
+      "action": "PR_SUBMITTED",
+      "actor": "Sayandevxyz",
+      "details": "@Sayandevxyz submitted verified PR #5668 in tscircuit/tscircuit",
+      "timestamp": "2026-10-17T18:18:28.462Z"
+    },
+    {
+      "id": "log-1792260989253-0a0h",
+      "action": "PR_SUBMITTED",
+      "actor": "Sayandevxyz",
+      "details": "@Sayandevxyz submitted verified PR #5669 in tscircuit/tscircuit",
+      "timestamp": "2026-10-17T18:16:29.253Z"
+    },
+    {
+      "id": "log-1792260967816-ziog",
+      "action": "PR_SUBMITTED",
+      "actor": "Sayandevxyz",
+      "details": "@Sayandevxyz submitted verified PR #5667 in tscircuit/tscircuit",
+      "timestamp": "2026-10-17T18:16:07.816Z"
+    },
+    {
+      "id": "log-1792260953248-eqy3",
+      "action": "PR_SUBMITTED",
+      "actor": "Sayandevxyz",
+      "details": "@Sayandevxyz submitted verified PR #5666 in tscircuit/tscircuit",
+      "timestamp": "2026-10-17T18:15:53.248Z"
+    },
+    {
+      "id": "log-1792260843592-3a7h",
+      "action": "PR_SUBMITTED",
+      "actor": "Sayandevxyz",
+      "details": "@Sayandevxyz submitted verified PR #5670 in tscircuit/tscircuit",
+      "timestamp": "2026-10-17T18:14:03.592Z"
+    },
+    {
+      "id": "log-1792259033799-bw4e",
+      "action": "PR_SUBMITTED",
+      "actor": "gouthamkrishnap",
+      "details": "@gouthamkrishnap submitted verified PR #439 in ilyamiro/serpantinum",
+      "timestamp": "2026-10-17T17:43:53.799Z"
+    },
+    {
+      "id": "log-1792246294095-5x1r",
       "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
       "details": "Admin authenticated via verified secret passkey",
-      "id": "log-1791490472208-ajwy",
-      "timestamp": "2026-10-08T20:14:32.208Z"
+      "timestamp": "2026-10-17T14:11:34.095Z"
     },
     {
-      "actor": "Vijay-1710",
-      "action": "EVENT_RESET",
-      "details": "Sprint reset to Day 1 clean event state",
-      "id": "log-1791489355384-4ku7",
-      "timestamp": "2026-10-08T19:55:55.384Z"
+      "id": "log-1792230313405-sm4g",
+      "action": "PR_SUBMITTED",
+      "actor": "TarsierIsCool",
+      "details": "@TarsierIsCool submitted verified PR #1167 in charmbracelet/gum",
+      "timestamp": "2026-10-17T09:45:13.405Z"
     },
     {
+      "id": "log-1792226657235-ny5y",
+      "action": "PR_SUBMITTED",
+      "actor": "Sunil56224972",
+      "details": "@Sunil56224972 submitted verified PR #973 in bilawalsidhu/gods-eye-view",
+      "timestamp": "2026-10-17T08:44:17.235Z"
+    },
+    {
+      "id": "log-1792130385618-9t4m",
+      "action": "PR_SUBMITTED",
+      "actor": "NavaneethNem",
+      "details": "@NavaneethNem submitted verified PR #37 in Noelithub77/bunkialo2",
+      "timestamp": "2026-10-16T05:59:45.618Z"
+    },
+    {
+      "id": "log-1792130168804-uvx9",
+      "action": "ADMIN_SECRET_LOGIN",
       "actor": "Vijay-1710",
-      "action": "SPRINT_INITIALIZED",
-      "details": "HackAaroh Sprint initialized for October 9 kickoff. Participant logins paused. Secret admin portal active.",
-      "id": "log-1791489355303-init",
-      "timestamp": "2026-10-08T19:55:55.303Z"
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-16T05:56:08.804Z"
+    },
+    {
+      "id": "log-1792040988875-i09m",
+      "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-15T05:09:48.875Z"
+    },
+    {
+      "id": "log-1792035271420-ceym",
+      "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-15T03:34:31.420Z"
+    },
+    {
+      "id": "log-1792012090984-emp9",
+      "action": "PR_SUBMITTED",
+      "actor": "Sunil56224972",
+      "details": "@Sunil56224972 submitted verified PR #3659 in morluto/rea",
+      "timestamp": "2026-10-14T21:08:10.984Z"
+    },
+    {
+      "id": "log-1791998054059-zvm6",
+      "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-14T17:14:14.059Z"
+    },
+    {
+      "id": "log-1791991896457-u8cb",
+      "action": "PR_SUBMITTED",
+      "actor": "TarsierIsCool",
+      "details": "@TarsierIsCool submitted verified PR #19001 in sveltejs/svelte",
+      "timestamp": "2026-10-14T15:31:36.457Z"
+    },
+    {
+      "id": "log-1791991672564-cmxb",
+      "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-14T15:27:52.564Z"
+    },
+    {
+      "id": "log-1791991612420-khro",
+      "action": "PR_SUBMITTED",
+      "actor": "alenAlex707",
+      "details": "@alenAlex707 submitted verified PR #4 in Silvren/issue-scout",
+      "timestamp": "2026-10-14T15:26:52.420Z"
+    },
+    {
+      "id": "log-1791990986920-ywuk",
+      "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-14T15:16:26.920Z"
+    },
+    {
+      "id": "log-1791990515753-q7cd",
+      "action": "PR_SUBMITTED",
+      "actor": "tovi-govi",
+      "details": "@tovi-govi submitted verified PR #70877 in freeCodeCamp/freeCodeCamp",
+      "timestamp": "2026-10-14T15:08:35.753Z"
+    },
+    {
+      "id": "log-1791989856545-9l1y",
+      "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-14T14:57:36.545Z"
+    },
+    {
+      "id": "log-1791989182529-n7no",
+      "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-14T14:46:22.529Z"
+    },
+    {
+      "id": "log-1791988912639-lryi",
+      "action": "PR_SUBMITTED",
+      "actor": "tovi-govi",
+      "details": "@tovi-govi submitted verified PR #175 in IIITK-Football/super-league",
+      "timestamp": "2026-10-14T14:41:52.639Z"
+    },
+    {
+      "id": "log-1791988858839-ph2j",
+      "action": "PR_SUBMITTED",
+      "actor": "tovi-govi",
+      "details": "@tovi-govi submitted verified PR #176 in IIITK-Football/super-league",
+      "timestamp": "2026-10-14T14:40:58.839Z"
+    },
+    {
+      "id": "log-1791988321140-adrj",
+      "action": "PR_SUBMITTED",
+      "actor": "tovi-govi",
+      "details": "@tovi-govi submitted verified PR #136 in LennardGeissler/blindbucket",
+      "timestamp": "2026-10-14T14:32:01.140Z"
+    },
+    {
+      "id": "log-1791988034138-qa4c",
+      "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-14T14:27:14.138Z"
+    },
+    {
+      "id": "log-1791987844063-bqw1",
+      "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-14T14:24:04.063Z"
+    },
+    {
+      "id": "log-1791987743743-da23",
+      "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-14T14:22:23.743Z"
+    },
+    {
+      "id": "log-1791987715484-c60w",
+      "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-14T14:21:55.484Z"
+    },
+    {
+      "id": "log-1791987575762-6mko",
+      "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-14T14:19:35.762Z"
+    },
+    {
+      "id": "log-1791964524427-6mi1",
+      "action": "PR_SUBMITTED",
+      "actor": "somebeing2",
+      "details": "@somebeing2 submitted verified PR #1024 in cybermax4200/stellar-did-credit",
+      "timestamp": "2026-10-14T07:55:24.427Z"
+    },
+    {
+      "id": "log-1791964121085-mlb6",
+      "action": "PR_SUBMITTED",
+      "actor": "somebeing2",
+      "details": "@somebeing2 submitted verified PR #1016 in cybermax4200/stellar-did-credit",
+      "timestamp": "2026-10-14T07:48:41.085Z"
+    },
+    {
+      "id": "log-1791963808233-4kfg",
+      "action": "PR_SUBMITTED",
+      "actor": "Sunil56224972",
+      "details": "@Sunil56224972 submitted verified PR #1628 in morluto/rea",
+      "timestamp": "2026-10-14T07:43:28.233Z"
+    },
+    {
+      "id": "log-1791963529492-d13q",
+      "action": "PR_SUBMITTED",
+      "actor": "somebeing2",
+      "details": "@somebeing2 submitted verified PR #1012 in cybermax4200/stellar-did-credit",
+      "timestamp": "2026-10-14T07:38:49.493Z"
+    },
+    {
+      "id": "log-1791962537526-76h6",
+      "action": "PR_SUBMITTED",
+      "actor": "somebeing2",
+      "details": "@somebeing2 submitted verified PR #38 in anshu12011/Dynamo",
+      "timestamp": "2026-10-14T07:22:17.526Z"
+    },
+    {
+      "id": "log-1791962522029-if61",
+      "action": "PR_SUBMITTED",
+      "actor": "somebeing2",
+      "details": "@somebeing2 submitted verified PR #52 in and3rn3t/apple-music-dj",
+      "timestamp": "2026-10-14T07:22:02.029Z"
+    },
+    {
+      "id": "log-1791962423333-jdxw",
+      "action": "PR_SUBMITTED",
+      "actor": "somebeing2",
+      "details": "@somebeing2 submitted verified PR #2 in abhishek5228/fleet_intelligence",
+      "timestamp": "2026-10-14T07:20:23.333Z"
+    },
+    {
+      "id": "log-1791962348002-3cof",
+      "action": "PR_SUBMITTED",
+      "actor": "somebeing2",
+      "details": "@somebeing2 submitted verified PR #112 in yunaremaia/ci-test-gate",
+      "timestamp": "2026-10-14T07:19:08.002Z"
     }
   ],
   "deletedPrIds": [
