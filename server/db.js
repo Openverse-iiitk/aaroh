@@ -26,8 +26,7 @@ export const PURGED_USERNAMES = new Set([
   'manav-codes',
   'sarah-dev',
   'admin-starlit',
-  'ptr25',
-  'vipulreddyvemula'
+  'ptr25'
 ]);
 
 export function isUserPurged(username, name = '') {
@@ -155,6 +154,42 @@ class Database {
             deletedPrIds: remote.deletedPrIds || []
           };
           this.lastLoadedAt = now;
+
+          // Cross-sync with Vercel Blob: Pull any submissions made directly on production
+          try {
+            const blobRes = await fetch(`${BLOB_URL}?t=${now}&r=${Math.random().toString(36).substring(2, 8)}`, {
+              cache: 'no-store',
+              headers: { 'Cache-Control': 'no-cache, no-store' }
+            });
+            if (blobRes.ok) {
+              const blobData = await blobRes.json();
+              if (blobData && Array.isArray(blobData.pullRequests)) {
+                const existingPrKeys = new Set((this.data.pullRequests || []).map(p => `${p.repo}#${p.githubPrNumber}`.toLowerCase()));
+                const deletedSet = new Set((this.data.deletedPrIds || []).map(x => String(x).toLowerCase()));
+
+                for (const bPr of blobData.pullRequests) {
+                  const key = `${bPr.repo}#${bPr.githubPrNumber}`.toLowerCase();
+                  if (!existingPrKeys.has(key) && !deletedSet.has(key) && !deletedSet.has(String(bPr.id).toLowerCase()) && !isUserPurged(bPr.author)) {
+                    this.data.pullRequests.unshift(bPr);
+                    existingPrKeys.add(key);
+                    savePullRequestToFirestore(bPr).catch(() => {});
+                  }
+                }
+
+                if (Array.isArray(blobData.users)) {
+                  const existingUsernames = new Set((this.data.users || []).map(u => u.username.toLowerCase()));
+                  for (const bUser of blobData.users) {
+                    if (bUser.username && !existingUsernames.has(bUser.username.toLowerCase()) && !isUserPurged(bUser.username, bUser.name)) {
+                      this.data.users.push(bUser);
+                      existingUsernames.add(bUser.username.toLowerCase());
+                      saveUserToFirestore(bUser).catch(() => {});
+                    }
+                  }
+                }
+              }
+            }
+          } catch (_) {}
+
           try {
             fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
           } catch (_) {}
@@ -227,8 +262,35 @@ class Database {
             return true;
           });
 
+          // Smart concurrency merge: Combine any PRs present in local/bundled seed data that are missing from remoteData
+          const remotePrKeys = new Set((remoteData.pullRequests || []).map(p => `${p.repo}#${p.githubPrNumber}`.toLowerCase()));
+          let newlyMerged = false;
+          for (const localPr of (this.data?.pullRequests || [])) {
+            const key = `${localPr.repo}#${localPr.githubPrNumber}`.toLowerCase();
+            if (!remotePrKeys.has(key) && !deletedSet.has(key) && !deletedSet.has(String(localPr.id).toLowerCase()) && !isUserPurged(localPr.author)) {
+              remoteData.pullRequests.unshift(localPr);
+              remotePrKeys.add(key);
+              newlyMerged = true;
+            }
+          }
+
+          const remoteUsernames = new Set((remoteData.users || []).map(u => u.username.toLowerCase()));
+          for (const localUser of (this.data?.users || [])) {
+            if (localUser.username && !remoteUsernames.has(localUser.username.toLowerCase()) && !isUserPurged(localUser.username, localUser.name)) {
+              remoteData.users.push(localUser);
+              remoteUsernames.add(localUser.username.toLowerCase());
+              newlyMerged = true;
+            }
+          }
+
           this.data = remoteData;
           this.lastLoadedAt = now;
+
+          // If new PRs or users were merged from the bundled release, persist them back to Blob storage
+          if (newlyMerged && process.env.BLOB_READ_WRITE_TOKEN) {
+            this.save().catch(() => {});
+          }
+
           try {
             fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
           } catch (_) {}
