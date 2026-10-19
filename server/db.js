@@ -258,7 +258,9 @@ class Database {
             if (isUserPurged(pr.author)) return false;
             const pId = String(pr.id || '').trim().toLowerCase();
             const pNum = String(pr.githubPrNumber || '').trim().toLowerCase();
-            if (deletedSet.has(pId) || deletedSet.has(pNum)) return false;
+            const pRepoPr = `${pr.repo || ''}#${pr.githubPrNumber || ''}`.toLowerCase();
+            const pUrl = String(pr.url || '').trim().toLowerCase();
+            if (deletedSet.has(pId) || deletedSet.has(pNum) || deletedSet.has(pRepoPr) || deletedSet.has(pUrl)) return false;
             return true;
           });
 

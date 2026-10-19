@@ -971,6 +971,409 @@
   ],
   "pullRequests": [
     {
+      "id": "pr-1792405274728-h4of",
+      "githubPrNumber": 5818,
+      "isRepoOnly": false,
+      "repo": "tscircuit/tscircuit",
+      "title": "docs: expand README with programmatic Circuit API, 3D assembly, and C…",
+      "description": "## Description\nExpands the project `README.md` with practical, runnable examples:\n- Demonstrates programmatic circuit instantiation using `new Circuit()`.\n- Demonstrates 3D enclosure and mechanical assembly modeling using `assembly` and `printedpart`.\n- Adds guidance for importing STEP and DXF asset",
+      "url": "https://github.com/tscircuit/tscircuit/pull/5818",
+      "state": "open",
+      "author": "Sayandevxyz",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/196914744?v=4",
+      "createdAt": "2026-10-19T03:19:43Z",
+      "dayOfSprint": 11,
+      "additions": 160,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792405255112-48a2",
+      "githubPrNumber": 5816,
+      "isRepoOnly": false,
+      "repo": "tscircuit/tscircuit",
+      "title": "fix(scripts): apply DO_NOT_SYNC_PACKAGE filter to update loop and improve glob matching",
+      "description": "## Description\nImproves `scripts/copy-core-versions.ts` by properly filtering excluded packages during update loops:\n- Exports `DO_NOT_SYNC_PACKAGE` and adds `shouldSkipPackage` helper with robust wildcard regex support (`@types/*`).\n- Applies `shouldSkipPackage` filter in the update loop to prevent",
+      "url": "https://github.com/tscircuit/tscircuit/pull/5816",
+      "state": "open",
+      "author": "Sayandevxyz",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/196914744?v=4",
+      "createdAt": "2026-10-19T03:18:59Z",
+      "dayOfSprint": 11,
+      "additions": 40,
+      "deletions": 10,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792405265077-20q9",
+      "githubPrNumber": 5817,
+      "isRepoOnly": false,
+      "repo": "tscircuit/tscircuit",
+      "title": "feat(types): export type guards for Circuit JSON element discrimination",
+      "description": "## Description\nExports standardized TypeScript type guards for discriminating Circuit JSON elements:\n- Implements and exports type guards for PCB elements (`isPcbBoard`, `isPcbComponent`, `isPcbHole`, `isPcbPlatedHole`, `isPcbPort`, `isPcbSmtPad`, `isPcbTrace`, `isPcbVia`).\n- Implements and exports ",
+      "url": "https://github.com/tscircuit/tscircuit/pull/5817",
+      "state": "open",
+      "author": "Sayandevxyz",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/196914744?v=4",
+      "createdAt": "2026-10-19T03:19:23Z",
+      "dayOfSprint": 11,
+      "additions": 141,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792405245182-ok35",
+      "githubPrNumber": 5815,
+      "isRepoOnly": false,
+      "repo": "tscircuit/tscircuit",
+      "title": "fix(tests): cross-platform execution in manifold dependency audit",
+      "description": "Uses fileURLToPath(new URL(\"..\", import.meta.url)) to ensure proper path resolution on Windows.\nDynamically selects npmCmd (npm.cmd on Windows, npm on Unix).\nPasses --package-lock-only during audit installation to skip unnecessary script execution and speed up testing.\nExtends test timeout to 180s f",
+      "url": "https://github.com/tscircuit/tscircuit/pull/5815",
+      "state": "open",
+      "author": "Sayandevxyz",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/196914744?v=4",
+      "createdAt": "2026-10-19T02:54:20Z",
+      "dayOfSprint": 11,
+      "additions": 62,
+      "deletions": 7,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792405210500-yzw9",
+      "githubPrNumber": 5806,
+      "isRepoOnly": false,
+      "repo": "tscircuit/tscircuit",
+      "title": "test: add integration test suite for rendering core circuit primitives",
+      "description": "## Summary\nAdds a comprehensive integration test suite `tests/primitives-rendering.test.tsx` verifying that standard passive/active components and PCB primitives render to valid Circuit JSON.\n## Problem & Motivation\nThe existing smoke tests (`smoke1.test.tsx`, `smoke2.test.tsx`) only tested a single",
+      "url": "https://github.com/tscircuit/tscircuit/pull/5806",
+      "state": "open",
+      "author": "Sayandevxyz",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/196914744?v=4",
+      "createdAt": "2026-10-18T18:44:13Z",
+      "dayOfSprint": 11,
+      "additions": 87,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792405220554-0luz",
+      "githubPrNumber": 5807,
+      "isRepoOnly": false,
+      "repo": "tscircuit/tscircuit",
+      "title": "test: add unit test for standalone runframe bundle and worker injection",
+      "description": "## Summary\nAdds an automated unit test `tests/copy-runframe-standalone.test.ts` to verify the execution of `scripts/copy-runframe-standalone.ts` and the creation of `dist/browser.min.js`.\n## Problem & Motivation\n`scripts/copy-runframe-standalone.ts` is responsible for base64-encoding the `@tscircuit",
+      "url": "https://github.com/tscircuit/tscircuit/pull/5807",
+      "state": "open",
+      "author": "Sayandevxyz",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/196914744?v=4",
+      "createdAt": "2026-10-18T18:45:00Z",
+      "dayOfSprint": 11,
+      "additions": 30,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792405231862-m67z",
+      "githubPrNumber": 5814,
+      "isRepoOnly": false,
+      "repo": "tscircuit/tscircuit",
+      "title": "fix(scripts): isolate smoke-init test in temporary directory without global npm install",
+      "description": "## Description\nThis PR refactors `scripts/smoke-init-test.ts` and adds `tests/smoke-init.test.ts` to enable clean, isolated CLI smoke testing:\n\n- **Isolated execution:** Uses `mkdtemp` in `tmpdir()` instead of polluting the global environment with `npm i -g .`.\n- **Automatic cleanup:** Cleans up tem",
+      "url": "https://github.com/tscircuit/tscircuit/pull/5814",
+      "state": "open",
+      "author": "Sayandevxyz",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/196914744?v=4",
+      "createdAt": "2026-10-19T02:42:23Z",
+      "dayOfSprint": 11,
+      "additions": 42,
+      "deletions": 19,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792405161027-09tm",
+      "githubPrNumber": 5804,
+      "isRepoOnly": false,
+      "repo": "tscircuit/tscircuit",
+      "title": "feat(dx): add standard typecheck, lint, and format scripts to package…",
+      "description": "….json## Summary\nAdds standardized `\"typecheck\"`, `\"lint\"`, `\"format\"`, and `\"format:check\"` scripts to `package.json`.\n## Problem & Motivation\nContributors and automated CI workflows currently have `bun run test` and `bun run build`, but lack standard `bun run typecheck` or `bun run lint` commands.",
+      "url": "https://github.com/tscircuit/tscircuit/pull/5804",
+      "state": "open",
+      "author": "Sayandevxyz",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/196914744?v=4",
+      "createdAt": "2026-10-18T18:42:18Z",
+      "dayOfSprint": 11,
+      "additions": 21,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792405146560-oixf",
+      "githubPrNumber": 5803,
+      "isRepoOnly": false,
+      "repo": "tscircuit/tscircuit",
+      "title": "feat(types): re-export core Circuit JSON element interfaces from circuit-json",
+      "description": "## Summary\nRe-exports primary Circuit JSON element interfaces (`PcbBoard`, `PcbComponent`, `PcbHole`, `PcbPlatedHole`, `PcbPort`, `PcbSmtPad`, `PcbTrace`, `PcbVia`, `SchematicComponent`, `SourceComponent`, etc.) from `tscircuit`'s public entrypoint `index.ts`.\n\n## Problem & Motivation\nCurrently, `in",
+      "url": "https://github.com/tscircuit/tscircuit/pull/5803",
+      "state": "open",
+      "author": "Sayandevxyz",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/196914744?v=4",
+      "createdAt": "2026-10-18T18:37:54Z",
+      "dayOfSprint": 11,
+      "additions": 52,
+      "deletions": 1,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792405171899-h8ex",
+      "githubPrNumber": 5805,
+      "isRepoOnly": false,
+      "repo": "tscircuit/tscircuit",
+      "title": "fix(cli): add fast version flag handling and top-level error propagation",
+      "description": "## Summary\nAdds instant `--version` / `-v` handling directly in `cli.mjs` and hardens top-level unhandled rejection handling and error diagnostics.\n\n## Problem & Motivation\n1. Running `tscircuit --version` or `-v` previously paid the full import and initialization overhead of `@tscircuit/cli`.\n2. `m",
+      "url": "https://github.com/tscircuit/tscircuit/pull/5805",
+      "state": "open",
+      "author": "Sayandevxyz",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/196914744?v=4",
+      "createdAt": "2026-10-18T18:43:16Z",
+      "dayOfSprint": 11,
+      "additions": 40,
+      "deletions": 2,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792405128362-cfp4",
+      "githubPrNumber": 5800,
+      "isRepoOnly": false,
+      "repo": "tscircuit/tscircuit",
+      "title": "feat(build): cross-platform asset copy and globals reference injection",
+      "description": "## Summary\nReplaces shell-dependent Unix commands (`cp`, `cat -`, `mv`) in `package.json` with a cross-platform TypeScript build script `scripts/post-build-assets.ts`.\n\n## Problem & Motivation\nThe existing `build` script in `package.json` relied on POSIX `cp`, `cat -`, and `mv`, which fail on Window",
+      "url": "https://github.com/tscircuit/tscircuit/pull/5800",
+      "state": "open",
+      "author": "Sayandevxyz",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/196914744?v=4",
+      "createdAt": "2026-10-18T18:24:49Z",
+      "dayOfSprint": 11,
+      "additions": 74,
+      "deletions": 2,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792405075998-7v1u",
+      "githubPrNumber": 5798,
+      "isRepoOnly": false,
+      "repo": "tscircuit/tscircuit",
+      "title": "feat(types): add ambient declarations for .stp, .dxf, .kicad_sch, and .circuit.json",
+      "description": "## Summary\nAdds ambient TypeScript module declarations for `.stp`, `.dxf`, `.kicad_sch`, and `.circuit.json` assets in `types/static-assets.d.ts` and `globals.d.ts`.\n\n## Problem & Motivation\nWhile `tscircuit` supports importing `.step`, `.obj`, `.stl`, `.kicad_mod`, and `.kicad_pcb`, importing stand",
+      "url": "https://github.com/tscircuit/tscircuit/pull/5798",
+      "state": "open",
+      "author": "Sayandevxyz",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/196914744?v=4",
+      "createdAt": "2026-10-18T18:23:14Z",
+      "dayOfSprint": 11,
+      "additions": 76,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792405066086-ec9q",
+      "githubPrNumber": 5797,
+      "isRepoOnly": false,
+      "repo": "tscircuit/tscircuit",
+      "title": "feat(types): re-export core component prop types from @tscircuit/props",
+      "description": "## Summary\nRe-exports standard circuit component prop types (`ResistorProps`, `CapacitorProps`, `InductorProps`, `TraceProps`, `ViaProps`, etc.) directly from `tscircuit`'s public entrypoint `index.ts`.\n\n## Problem & Motivation\nPreviously, `index.ts` only re-exported `BoardProps`, `ChipProps`, and `",
+      "url": "https://github.com/tscircuit/tscircuit/pull/5797",
+      "state": "open",
+      "author": "Sayandevxyz",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/196914744?v=4",
+      "createdAt": "2026-10-18T18:21:30Z",
+      "dayOfSprint": 11,
+      "additions": 68,
+      "deletions": 8,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
       "additions": 3,
       "deletions": 6,
       "author": "abhibob369-crypto",
@@ -999,7 +1402,8 @@
         "testCoverage": 16,
         "impact": 19,
         "quality": 15
-      }
+      },
+      "_docId": "pr-1791555157168-o3kn"
     },
     {
       "additions": 3,
@@ -1032,7 +1436,8 @@
         "testCoverage": 15,
         "impact": 20,
         "quality": 20
-      }
+      },
+      "_docId": "pr-1791662152450-j7oe"
     },
     {
       "additions": 15,
@@ -1066,7 +1471,8 @@
         "testCoverage": 17,
         "impact": 20,
         "quality": 20
-      }
+      },
+      "_docId": "pr-1791730489379-zx4x"
     },
     {
       "additions": 39,
@@ -1102,7 +1508,8 @@
         "testCoverage": 18,
         "impact": 19,
         "quality": 19
-      }
+      },
+      "_docId": "pr-1791887126145-50x8"
     },
     {
       "additions": 3435,
@@ -1136,7 +1543,8 @@
         "testCoverage": 15,
         "impact": 17,
         "quality": 18
-      }
+      },
+      "_docId": "pr-1791962139828-kiu8"
     },
     {
       "additions": 22,
@@ -1167,7 +1575,8 @@
         "testCoverage": 12,
         "impact": 15,
         "quality": 16
-      }
+      },
+      "_docId": "pr-1791962248391-zzlg"
     },
     {
       "creditScore": 72,
@@ -1198,7 +1607,8 @@
         "quality": 18,
         "complexity": 16,
         "testCoverage": 20
-      }
+      },
+      "_docId": "pr-1791962300712-zhtv"
     },
     {
       "additions": 4,
@@ -1229,7 +1639,8 @@
         "testCoverage": 14,
         "impact": 16,
         "quality": 18
-      }
+      },
+      "_docId": "pr-1791962317083-36yn"
     },
     {
       "additions": 569,
@@ -1260,7 +1671,8 @@
         "testCoverage": 23,
         "impact": 21,
         "quality": 22
-      }
+      },
+      "_docId": "pr-1791962347931-ar79"
     },
     {
       "additions": 1,
@@ -1291,7 +1703,8 @@
         "testCoverage": 12,
         "impact": 15,
         "quality": 15
-      }
+      },
+      "_docId": "pr-1791962412447-bifu"
     },
     {
       "additions": 33,
@@ -1322,7 +1735,8 @@
         "testCoverage": 14,
         "impact": 16,
         "quality": 16
-      }
+      },
+      "_docId": "pr-1791962423248-po2q"
     },
     {
       "additions": 63,
@@ -1353,7 +1767,8 @@
         "quality": 18,
         "complexity": 16,
         "testCoverage": 16
-      }
+      },
+      "_docId": "pr-1791962521844-ud5t"
     },
     {
       "additions": 495,
@@ -1384,7 +1799,8 @@
         "complexity": 21,
         "impact": 21,
         "quality": 22
-      }
+      },
+      "_docId": "pr-1791962537421-btq3"
     },
     {
       "additions": 15,
@@ -1415,7 +1831,8 @@
         "testCoverage": 21,
         "impact": 21,
         "quality": 20
-      }
+      },
+      "_docId": "pr-1791963529349-y0o0"
     },
     {
       "additions": 4,
@@ -1450,7 +1867,8 @@
         "testCoverage": 13,
         "impact": 18,
         "quality": 18
-      }
+      },
+      "_docId": "pr-1791963808077-e8qw"
     },
     {
       "creditScore": 72,
@@ -1481,7 +1899,8 @@
         "testCoverage": 17,
         "impact": 19,
         "quality": 19
-      }
+      },
+      "_docId": "pr-1791964120872-gvsq"
     },
     {
       "additions": 46,
@@ -1512,7 +1931,8 @@
         "testCoverage": 20,
         "impact": 19,
         "quality": 19
-      }
+      },
+      "_docId": "pr-1791964524243-d76p"
     },
     {
       "additions": 1345,
@@ -1543,7 +1963,8 @@
         "testCoverage": 21,
         "impact": 23,
         "quality": 24
-      }
+      },
+      "_docId": "pr-1791988321001-ye5e"
     },
     {
       "additions": 12655,
@@ -1574,7 +1995,8 @@
         "testCoverage": 22,
         "impact": 24,
         "quality": 24
-      }
+      },
+      "_docId": "pr-1791988858729-ta35"
     },
     {
       "additions": 12186,
@@ -1605,7 +2027,8 @@
         "complexity": 22,
         "impact": 22,
         "quality": 22
-      }
+      },
+      "_docId": "pr-1791988912406-gy6m"
     },
     {
       "additions": 5,
@@ -1636,7 +2059,8 @@
         "complexity": 13,
         "testCoverage": 14,
         "quality": 16
-      }
+      },
+      "_docId": "pr-1791990515621-9ynj"
     },
     {
       "additions": 21,
@@ -1667,7 +2091,8 @@
         "quality": 19,
         "complexity": 17,
         "testCoverage": 17
-      }
+      },
+      "_docId": "pr-1791991612220-hb5e"
     },
     {
       "additions": 74,
@@ -1698,7 +2123,8 @@
         "complexity": 18,
         "impact": 21,
         "quality": 21
-      }
+      },
+      "_docId": "pr-1791991896326-kc8y"
     },
     {
       "additions": 324,
@@ -1733,7 +2159,8 @@
         "testCoverage": 19,
         "impact": 22,
         "quality": 21
-      }
+      },
+      "_docId": "pr-1792012090883-vt3k"
     },
     {
       "additions": 549,
@@ -1764,7 +2191,8 @@
         "testCoverage": 13,
         "impact": 16,
         "quality": 16
-      }
+      },
+      "_docId": "pr-1792130385429-4yo2"
     },
     {
       "additions": 92,
@@ -1799,7 +2227,8 @@
         "testCoverage": 20,
         "impact": 24,
         "quality": 23
-      }
+      },
+      "_docId": "pr-1792226657141-05zg"
     },
     {
       "additions": 77,
@@ -1830,7 +2259,8 @@
         "complexity": 19,
         "impact": 20,
         "quality": 21
-      }
+      },
+      "_docId": "pr-1792230313147-98c4"
     },
     {
       "additions": 1,
@@ -1861,7 +2291,8 @@
         "quality": 19,
         "complexity": 17,
         "testCoverage": 16
-      }
+      },
+      "_docId": "pr-1792259033641-unf8"
     },
     {
       "additions": 58,
@@ -1892,7 +2323,8 @@
         "quality": 19,
         "complexity": 17,
         "testCoverage": 17
-      }
+      },
+      "_docId": "pr-1792260843420-7isp"
     },
     {
       "additions": 40,
@@ -1923,7 +2355,8 @@
         "testCoverage": 19,
         "impact": 20,
         "quality": 20
-      }
+      },
+      "_docId": "pr-1792260953047-3md9"
     },
     {
       "additions": 60,
@@ -1954,7 +2387,8 @@
         "complexity": 19,
         "impact": 20,
         "quality": 20
-      }
+      },
+      "_docId": "pr-1792260967685-tian"
     },
     {
       "additions": 84,
@@ -1985,7 +2419,8 @@
         "testCoverage": 19,
         "impact": 21,
         "quality": 21
-      }
+      },
+      "_docId": "pr-1792260988992-bt40"
     },
     {
       "additions": 52,
@@ -2016,7 +2451,8 @@
         "testCoverage": 18,
         "impact": 19,
         "quality": 20
-      }
+      },
+      "_docId": "pr-1792261108309-mgjs"
     },
     {
       "additions": 112,
@@ -2052,7 +2488,8 @@
         "testCoverage": 23,
         "impact": 24,
         "quality": 23
-      }
+      },
+      "_docId": "pr-1792300476755-ubj9"
     },
     {
       "additions": 61,
@@ -2088,7 +2525,8 @@
         "testCoverage": 21,
         "impact": 21,
         "quality": 21
-      }
+      },
+      "_docId": "pr-1792300568261-680k"
     },
     {
       "additions": 37,
@@ -2123,7 +2561,8 @@
         "testCoverage": 20,
         "impact": 20,
         "quality": 20
-      }
+      },
+      "_docId": "pr-1792300623004-5lhb"
     },
     {
       "additions": 21,
@@ -2159,7 +2598,8 @@
         "testCoverage": 22,
         "impact": 23,
         "quality": 23
-      }
+      },
+      "_docId": "pr-1792300647288-mvk4"
     },
     {
       "additions": 39,
@@ -2195,7 +2635,8 @@
         "testCoverage": 21,
         "impact": 22,
         "quality": 22
-      }
+      },
+      "_docId": "pr-1792300671806-mmhq"
     },
     {
       "additions": 61,
@@ -2231,7 +2672,8 @@
         "testCoverage": 20,
         "impact": 21,
         "quality": 21
-      }
+      },
+      "_docId": "pr-1792300700942-lgzd"
     },
     {
       "additions": 80,
@@ -2262,7 +2704,8 @@
         "testCoverage": 18,
         "impact": 20,
         "quality": 20
-      }
+      },
+      "_docId": "pr-1792301947630-eklk"
     },
     {
       "additions": 96,
@@ -2293,7 +2736,8 @@
         "testCoverage": 20,
         "impact": 22,
         "quality": 22
-      }
+      },
+      "_docId": "pr-1792302457321-ksun"
     },
     {
       "additions": 45,
@@ -2324,7 +2768,8 @@
         "testCoverage": 20,
         "impact": 21,
         "quality": 22
-      }
+      },
+      "_docId": "pr-1792303102956-bfm6"
     },
     {
       "additions": 94,
@@ -2355,7 +2800,8 @@
         "testCoverage": 22,
         "impact": 20,
         "quality": 21
-      }
+      },
+      "_docId": "pr-1792303474096-o94y"
     },
     {
       "additions": 20,
@@ -2386,7 +2832,8 @@
         "testCoverage": 23,
         "impact": 24,
         "quality": 23
-      }
+      },
+      "_docId": "pr-1792308709725-fy7c"
     },
     {
       "additions": 42,
@@ -2417,7 +2864,8 @@
         "testCoverage": 22,
         "impact": 22,
         "quality": 22
-      }
+      },
+      "_docId": "pr-1792308723014-2aak"
     },
     {
       "additions": 278,
@@ -2448,7 +2896,8 @@
         "testCoverage": 22,
         "impact": 24,
         "quality": 23
-      }
+      },
+      "_docId": "pr-1792330797144-ginj"
     },
     {
       "additions": 229,
@@ -2479,7 +2928,8 @@
         "testCoverage": 22,
         "impact": 24,
         "quality": 24
-      }
+      },
+      "_docId": "pr-1792330805093-ynre"
     },
     {
       "additions": 187,
@@ -2510,7 +2960,8 @@
         "testCoverage": 22,
         "impact": 23,
         "quality": 23
-      }
+      },
+      "_docId": "pr-1792330811743-pxfl"
     },
     {
       "additions": 28,
@@ -2541,38 +2992,8 @@
         "testCoverage": 22,
         "impact": 23,
         "quality": 23
-      }
-    },
-    {
-      "creditScore": 0,
-      "additions": 44,
-      "deletions": 13,
-      "author": "tovi-govi",
-      "commitsCount": 1,
-      "repo": "tovi-govi/Bunkialo",
-      "githubPrNumber": 2,
-      "reviewedAt": null,
-      "description": "Closes #1\n\n### Summary of Changes\n- **Excused Duty Leave Calculation**: Updated attendance percentage and session calculations so duty leaves (both portal-credited and user-marked) reduce the total sessions denominator rather than adding to the attended numerator.\n  - Previous: \\(Attended + DL) / To",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
       },
-      "reviewedBy": null,
-      "title": "fix(attendance): deduct duty leaves from total sessions instead of adding to attended",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/232081292?v=4",
-      "url": "https://github.com/tovi-govi/Bunkialo/pull/2",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-19T09:40:11Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792402886338-pvec",
-      "isRepoOnly": false,
-      "state": "open"
+      "_docId": "pr-1792331738356-vxfk"
     },
     {
       "creditScore": 0,
@@ -2697,657 +3118,6 @@
       "id": "pr-1792403320000-ed3f",
       "isRepoOnly": false,
       "state": "open"
-    },
-    {
-      "creditScore": 0,
-      "additions": 50,
-      "deletions": 8,
-      "author": "somebeing2",
-      "commitsCount": 1,
-      "repo": "modular/modular",
-      "githubPrNumber": 7341,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #7341 in modular/modular",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "[Mojo] Check associated field origins after rebinding",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/207640448?v=4",
-      "url": "https://github.com/modular/modular/pull/7341",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-19T06:30:26Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404732672-3fjt",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 5,
-      "deletions": 8,
-      "author": "somebeing2",
-      "commitsCount": 1,
-      "repo": "anshu12011/Dynamo",
-      "githubPrNumber": 39,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #39 in anshu12011/Dynamo",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "test: cover concurrent rate limiter stats snapshots",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/207640448?v=4",
-      "url": "https://github.com/anshu12011/Dynamo/pull/39",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-19T06:51:48Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404733821-99ks",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 5,
-      "deletions": 8,
-      "author": "somebeing2",
-      "commitsCount": 1,
-      "repo": "cybermax4200/stellar-did-credit",
-      "githubPrNumber": 1107,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #1107 in cybermax4200/stellar-did-credit",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "fix(sdk): handle duplicate verifiable credentials",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/207640448?v=4",
-      "url": "https://github.com/cybermax4200/stellar-did-credit/pull/1107",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-19T07:29:01Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404735064-8lwn",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 2,
-      "deletions": 8,
-      "author": "somebeing2",
-      "commitsCount": 1,
-      "repo": "mpetyx/theoxenia",
-      "githubPrNumber": 29,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #29 in mpetyx/theoxenia",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "test: validate Celestrak fixtures offline",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/207640448?v=4",
-      "url": "https://github.com/mpetyx/theoxenia/pull/29",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-19T07:42:21Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404736371-taoy",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 5,
-      "deletions": 8,
-      "author": "somebeing2",
-      "commitsCount": 1,
-      "repo": "date-fns/date-fns",
-      "githubPrNumber": 4385,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #4385 in date-fns/date-fns",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "core: prevent eachDayOfInterval DST loops",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/207640448?v=4",
-      "url": "https://github.com/date-fns/date-fns/pull/4385",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-19T07:54:10Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404737526-4usq",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 5,
-      "deletions": 8,
-      "author": "somebeing2",
-      "commitsCount": 1,
-      "repo": "micromatch/picomatch",
-      "githubPrNumber": 233,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #233 in micromatch/picomatch",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "fix: reset stateful matcher regexes",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/207640448?v=4",
-      "url": "https://github.com/micromatch/picomatch/pull/233",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-19T08:01:19Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404738688-g7fe",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 5,
-      "deletions": 8,
-      "author": "somebeing2",
-      "commitsCount": 1,
-      "repo": "fastify/fastify",
-      "githubPrNumber": 7131,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #7131 in fastify/fastify",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "fix: handle web responses in auto-head routes",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/207640448?v=4",
-      "url": "https://github.com/fastify/fastify/pull/7131",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-19T08:11:04Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404739793-px4z",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 5,
-      "deletions": 8,
-      "author": "somebeing2",
-      "commitsCount": 1,
-      "repo": "tj/commander.js",
-      "githubPrNumber": 2658,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #2658 in tj/commander.js",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "fix: respect effective option source with globals",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/207640448?v=4",
-      "url": "https://github.com/tj/commander.js/pull/2658",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-19T08:22:50Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404740281-9lh0",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 65,
-      "deletions": 8,
-      "author": "Kumar44developer",
-      "commitsCount": 1,
-      "repo": "date-fns/date-fns",
-      "githubPrNumber": 4381,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #4381 in date-fns/date-fns",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "fix(kk): parse Kazakh month and weekday names correctly",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/235887258?v=4",
-      "url": "https://github.com/date-fns/date-fns/pull/4381",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-18T16:23:38Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404741391-6brt",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 50,
-      "deletions": 8,
-      "author": "Kumar44developer",
-      "commitsCount": 1,
-      "repo": "date-fns/date-fns",
-      "githubPrNumber": 4382,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #4382 in date-fns/date-fns",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "fix(gd): parse Scottish Gaelic month and weekday names correctly",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/235887258?v=4",
-      "url": "https://github.com/date-fns/date-fns/pull/4382",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-18T16:33:12Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404742457-8znc",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 50,
-      "deletions": 8,
-      "author": "Kumar44developer",
-      "commitsCount": 1,
-      "repo": "iamkun/dayjs",
-      "githubPrNumber": 3278,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #3278 in iamkun/dayjs",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "fix(customParseFormat): parse the d, dd, ddd and dddd weekday tokens",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/235887258?v=4",
-      "url": "https://github.com/iamkun/dayjs/pull/3278",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-18T17:30:59Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404743605-34zb",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 50,
-      "deletions": 8,
-      "author": "Kumar44developer",
-      "commitsCount": 1,
-      "repo": "recharts/recharts",
-      "githubPrNumber": 8030,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #8030 in recharts/recharts",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "fix(Tooltip): promote transitioning tooltip wrapper to its own compositor layer",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/235887258?v=4",
-      "url": "https://github.com/recharts/recharts/pull/8030",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-19T09:11:03Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404744923-g1ad",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 2,
-      "deletions": 8,
-      "author": "manoj-1407",
-      "commitsCount": 1,
-      "repo": "kubescape/kubescape-network-scanner",
-      "githubPrNumber": 57,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #57 in kubescape/kubescape-network-scanner",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "fix(scan): expand IP ranges correctly",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/190805175?v=4",
-      "url": "https://github.com/kubescape/kubescape-network-scanner/pull/57",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-19T04:32:42Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404746235-bn6e",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 24,
-      "deletions": 8,
-      "author": "manoj-1407",
-      "commitsCount": 1,
-      "repo": "nushell/nushell",
-      "githubPrNumber": 19295,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #19295 in nushell/nushell",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "Fix `last` crash when the count is too large to allocate",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/190805175?v=4",
-      "url": "https://github.com/nushell/nushell/pull/19295",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-19T05:03:51Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404747369-lc27",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 1,
-      "deletions": 8,
-      "author": "manoj-1407",
-      "commitsCount": 1,
-      "repo": "nushell/nushell",
-      "githubPrNumber": 19296,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #19296 in nushell/nushell",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "Fix `table --abbreviated` crash when the row count is too large to allocate",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/190805175?v=4",
-      "url": "https://github.com/nushell/nushell/pull/19296",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-19T05:13:06Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404748469-yn1b",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 5,
-      "deletions": 8,
-      "author": "Sunil56224972",
-      "commitsCount": 1,
-      "repo": "akitaonrails/ai-memory",
-      "githubPrNumber": 1420,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #1420 in akitaonrails/ai-memory",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "fix(hooks): never read server-side files named in a hook payload",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/198754167?v=4",
-      "url": "https://github.com/akitaonrails/ai-memory/pull/1420",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-18T12:41:46Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404749698-a8rg",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 5,
-      "deletions": 8,
-      "author": "Sunil56224972",
-      "commitsCount": 1,
-      "repo": "akitaonrails/ai-memory",
-      "githubPrNumber": 1421,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #1421 in akitaonrails/ai-memory",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "fix(hooks): require write access to record a project&#39;s [profile] flags",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/198754167?v=4",
-      "url": "https://github.com/akitaonrails/ai-memory/pull/1421",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-18T12:41:49Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404750876-04id",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 50,
-      "deletions": 8,
-      "author": "Sunil56224972",
-      "commitsCount": 1,
-      "repo": "akitaonrails/ai-memory",
-      "githubPrNumber": 1436,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #1436 in akitaonrails/ai-memory",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "security: fix disabled-user auth bypass via API keys &amp; install script MITM",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/198754167?v=4",
-      "url": "https://github.com/akitaonrails/ai-memory/pull/1436",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-19T04:58:14Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404752017-ji2e",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 5,
-      "deletions": 8,
-      "author": "tovi-govi",
-      "commitsCount": 1,
-      "repo": "IIITK-Football/super-league",
-      "githubPrNumber": 174,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #174 in IIITK-Football/super-league",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "fix: display freshers teams and unassigned players",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/139268397?v=4",
-      "url": "https://github.com/IIITK-Football/super-league/pull/174",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-09T17:47:43Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404753448-guss",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 5,
-      "deletions": 8,
-      "author": "tovi-govi",
-      "commitsCount": 1,
-      "repo": "IIITK-Football/super-league",
-      "githubPrNumber": 177,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #177 in IIITK-Football/super-league",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "Develop",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/139268397?v=4",
-      "url": "https://github.com/IIITK-Football/super-league/pull/177",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-10T15:59:21Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404755031-nej9",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 5,
-      "deletions": 8,
-      "author": "tovi-govi",
-      "commitsCount": 1,
-      "repo": "IIITK-Football/super-league",
-      "githubPrNumber": 178,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #178 in IIITK-Football/super-league",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "Player values defaulted bw 40 and 80",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/139268397?v=4",
-      "url": "https://github.com/IIITK-Football/super-league/pull/178",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-11T06:45:03Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404756513-d4vw",
-      "isRepoOnly": false,
-      "state": "merged"
     }
   ],
   "auditLogs": [
@@ -3925,6 +3695,28 @@
     "pr-test-review-step",
     "55555",
     "test-pr-e2e-1791520738509",
-    "9999"
+    "9999",
+    "tovi-govi/bunkialo#2",
+    "iiitk-football/super-league#174",
+    "iiitk-football/super-league#177",
+    "iiitk-football/super-league#178",
+    "modular/modular#7341",
+    "anshu12011/dynamo#39",
+    "cybermax4200/stellar-did-credit#1107",
+    "mpetyx/theoxenia#29",
+    "date-fns/date-fns#4385",
+    "micromatch/picomatch#233",
+    "fastify/fastify#7131",
+    "tj/commander.js#2658",
+    "date-fns/date-fns#4381",
+    "date-fns/date-fns#4382",
+    "iamkun/dayjs#3278",
+    "recharts/recharts#8030",
+    "kubescape/kubescape-network-scanner#57",
+    "nushell/nushell#19295",
+    "nushell/nushell#19296",
+    "akitaonrails/ai-memory#1420",
+    "akitaonrails/ai-memory#1421",
+    "akitaonrails/ai-memory#1436"
   ]
 }
