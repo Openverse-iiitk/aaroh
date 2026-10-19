@@ -264,12 +264,22 @@ class Database {
             return true;
           });
 
-          // Smart concurrency merge: Combine any PRs present in local/bundled seed data that are missing from remoteData
+          // Smart concurrency merge: Combine any PRs present in local/bundled seed data that are missing from remoteData, and reconcile historical scores
           const remotePrKeys = new Set((remoteData.pullRequests || []).map(p => `${p.repo}#${p.githubPrNumber}`.toLowerCase()));
           let newlyMerged = false;
           for (const localPr of (this.data?.pullRequests || [])) {
             const key = `${localPr.repo}#${localPr.githubPrNumber}`.toLowerCase();
-            if (!remotePrKeys.has(key) && !deletedSet.has(key) && !deletedSet.has(String(localPr.id).toLowerCase()) && !isUserPurged(localPr.author)) {
+            const remoteIdx = (remoteData.pullRequests || []).findIndex(p => `${p.repo}#${p.githubPrNumber}`.toLowerCase() === key);
+            if (remoteIdx >= 0) {
+              const rPr = remoteData.pullRequests[remoteIdx];
+              if (localPr.creditScore !== undefined && rPr.creditScore !== localPr.creditScore) {
+                rPr.creditScore = localPr.creditScore;
+                if (localPr.adminCriteria) rPr.adminCriteria = localPr.adminCriteria;
+                if (localPr.adminFeedback) rPr.adminFeedback = localPr.adminFeedback;
+                if (localPr.reviewStatus) rPr.reviewStatus = localPr.reviewStatus;
+                newlyMerged = true;
+              }
+            } else if (!deletedSet.has(key) && !deletedSet.has(String(localPr.id).toLowerCase()) && !isUserPurged(localPr.author)) {
               remoteData.pullRequests.unshift(localPr);
               remotePrKeys.add(key);
               newlyMerged = true;
