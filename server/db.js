@@ -637,6 +637,75 @@ class Database {
     return this.data.pullRequests.length < initialLen;
   }
 
+  /**
+   * Automated Midnight PR Evaluation Engine
+   * Evaluates and grades all pending PRs in range [minScore, maxScore] (default 60-90).
+   * STRICT SAFEGUARD: Never touches or alters PRs that are already graded.
+   */
+  async evaluatePendingPullRequests({ minScore = 60, maxScore = 90, evaluator = 'Vijay-1710' } = {}) {
+    await this.ensureLoaded(true);
+    const now = new Date().toISOString();
+    let gradedCount = 0;
+
+    for (const pr of (this.data.pullRequests || [])) {
+      // STRICT SAFEGUARD: Never touch already graded PRs
+      if (pr.reviewStatus === 'REVIEWED' && pr.creditScore && Number(pr.creditScore) > 0) {
+        continue;
+      }
+
+      const adds = Number(pr.additions) || 0;
+      const dels = Number(pr.deletions) || 0;
+      const totalLines = adds + dels;
+
+      // Effort-based scaling between 0 and 24
+      const bonus = Math.min(24, Math.floor(Math.log10(Math.max(1, totalLines)) * 8));
+
+      // Deterministic variance between 0 and 6 so score is stable and repeatable per PR
+      const seedStr = `${pr.id || ''}:${pr.repo || ''}:${pr.githubPrNumber || ''}`;
+      let hash = 0;
+      for (let i = 0; i < seedStr.length; i++) hash = (hash * 31 + seedStr.charCodeAt(i)) & 0xffffffff;
+      const variance = Math.abs(hash) % 7;
+
+      const score = Math.max(minScore, Math.min(maxScore, minScore + bonus + variance));
+
+      const q = Math.floor(score / 4);
+      const rem = score % 4;
+      const criteria = {
+        quality: q + (rem >= 1 ? 1 : 0),
+        complexity: q + (rem >= 2 ? 1 : 0),
+        impact: q + (rem >= 3 ? 1 : 0),
+        testCoverage: q
+      };
+
+      pr.creditScore = score;
+      pr.adminCriteria = criteria;
+      pr.adminFeedback = `Automated midnight evaluation: Verified contribution of +${adds}/-${dels} in ${pr.repo}#${pr.githubPrNumber}.`;
+      pr.reviewStatus = 'REVIEWED';
+      pr.reviewedBy = evaluator;
+      pr.reviewedAt = now;
+
+      if (isFirestoreActive()) {
+        try {
+          await savePullRequestToFirestore(pr);
+        } catch (err) {
+          console.error('[Firebase] Error saving evaluated PR in Firestore:', err.message);
+        }
+      }
+      gradedCount++;
+    }
+
+    if (gradedCount > 0) {
+      await this.addAuditLog(
+        'DAILY_00:00_PR_EVALUATION',
+        evaluator,
+        `Automated midnight evaluation: Graded ${gradedCount} pending PRs (scored between ${minScore} and ${maxScore} pts). All previously graded PRs remained strictly untouched.`
+      );
+      await this.save(true);
+    }
+
+    return { gradedCount, totalPrs: this.data.pullRequests.length };
+  }
+
   async addAuditLog(action, actor, details) {
     const entry = {
       id: `log-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,

@@ -34,10 +34,24 @@ app.use((req, res, next) => {
   next();
 });
 
-// Ensure persistent database is loaded from Vercel Blob store
+// Ensure persistent database is loaded from Vercel Blob store & check midnight auto-evaluation
 app.use(async (req, res, next) => {
   if (req.url.startsWith('/api')) {
     await db.ensureLoaded();
+
+    // Check if scheduled midnight calculation is due (e.g. on serverless environments where intervals don't run continuously)
+    try {
+      const sprint = db.getSprint();
+      if (sprint && sprint.status === 'ACTIVE' && !sprint.isFinalized && sprint.nextSyncAt) {
+        const now = new Date();
+        if (new Date(sprint.nextSyncAt) <= now) {
+          console.log(`[Auto-Midnight] Scheduled daily evaluation due (${sprint.nextSyncAt} <= ${now.toISOString()}). Executing...`);
+          await performDailyCalculation(false);
+        }
+      }
+    } catch (err) {
+      console.warn('[Auto-Midnight] Check error:', err.message);
+    }
   }
   next();
 });
@@ -244,26 +258,13 @@ async function performDailyCalculation(isManualTrigger = false) {
 
   const now = new Date();
   const nextDay = (sprint.currentDay || 1) + 1;
-  const contributors = db.getUsers().filter(u => u.role !== 'admin');
 
-  // Diverse open source repositories across the ecosystem
-  const featurePool = [
-    { title: 'refactor: decouple router state cache from hydration tree', repo: 'tanstack/react-router', tags: ['tanstack', 'refactor'], additions: 240, deletions: 38 },
-    { title: 'perf: optimize AST traversal in query compiler', repo: 'oven-sh/bun', tags: ['compiler', 'perf'], additions: 180, deletions: 54 },
-    { title: 'fix: resolve race condition in concurrent daily sync scheduler', repo: 'openverse/hackaaroh', tags: ['bugfix', 'concurrency'], additions: 95, deletions: 12 },
-    { title: 'feat: add real-time WebSocket ingress for webhook events', repo: 'vercel/next.js', tags: ['websocket', 'feat'], additions: 310, deletions: 20 },
-    { title: 'docs: document automated daily tracking schedule and scoring rubric', repo: 'microsoft/vscode', tags: ['docs', 'rubric'], additions: 120, deletions: 8 },
-    { title: 'feat: add zero-allocation byte serializer in rust microservice', repo: 'astral-sh/uv', tags: ['rust', 'perf'], additions: 275, deletions: 45 },
-    { title: 'perf: vectorize token tokenizer in rust compiler backend', repo: 'rust-lang/rust', tags: ['rust', 'compiler'], additions: 320, deletions: 60 },
-    { title: 'feat: add adaptive layout container queries for responsive grid', repo: 'tailwindlabs/tailwindcss', tags: ['tailwind', 'css'], additions: 190, deletions: 25 },
-    { title: 'fix: prevent memory leak in asynchronous worker connection pool', repo: 'nodejs/node', tags: ['nodejs', 'resilience'], additions: 85, deletions: 40 },
-    { title: 'feat: add virtualized row windowing model adapter', repo: 'tanstack/table', tags: ['table', 'performance'], additions: 340, deletions: 50 },
-    { title: 'feat: add accessible modal primitive with focus trapping', repo: 'shadcn-ui/ui', tags: ['a11y', 'ui'], additions: 210, deletions: 15 },
-    { title: 'fix: handle memory compaction deadlock in eBPF filter allocator', repo: 'torvalds/linux', tags: ['linux', 'kernel'], additions: 160, deletions: 48 },
-    { title: 'feat: optimize concurrent fiber reconciler work loop', repo: 'facebook/react', tags: ['react', 'concurrency'], additions: 215, deletions: 30 }
-  ];
+  // AUTOMATED MIDNIGHT EVALUATION:
+  // Automatically evaluate and grade all pending PRs (scored strictly between 60-90 pts)
+  // Preserves all previously graded PRs 100% untouched
+  const evalResult = await db.evaluatePendingPullRequests({ minScore: 60, maxScore: 90, evaluator: 'Vijay-1710' });
 
-  // Day roll without unsolicited scraping: PRs are evaluated based on participant submissions
+  // Advance event day and calculate next daily midnight evaluation timestamp
   const updatedSprint = await db.updateSprint({
     currentDay: nextDay,
     lastSyncAt: now.toISOString(),
@@ -273,11 +274,21 @@ async function performDailyCalculation(isManualTrigger = false) {
   await db.addAuditLog(
     isManualTrigger ? 'MANUAL_DAILY_UPDATE' : 'AUTOMATIC_DAILY_UPDATE',
     isManualTrigger ? 'ADMIN' : 'SCHEDULED_TICKER',
-    `Day ${nextDay} daily calculation completed. Event timeline advanced to Day ${nextDay}.`
+    `Day ${nextDay} daily calculation completed. Evaluated ${evalResult.gradedCount} pending PRs (60-90 pts). Timeline advanced to Day ${nextDay}. Next midnight evaluation at ${updatedSprint.nextSyncAt}.`
   );
 
-  return { success: true, sprint: updatedSprint, ingestedPrs: [] };
+  return { success: true, sprint: updatedSprint, gradedCount: evalResult.gradedCount };
 }
+
+// Midnight cron endpoint for Vercel Cron or external schedulers
+app.all(['/api/cron/daily-evaluation', '/api/cron/midnight-eval'], async (req, res) => {
+  try {
+    const result = await performDailyCalculation(false);
+    res.json({ success: true, message: 'Automated midnight evaluation executed', result });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
 
 // Background scheduler running every 30 seconds to check if it's the configured dailyUpdateTime
 if (!process.env.VERCEL) {
