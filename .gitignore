@@ -9,5 +9,7 @@ verify_*.cjs
 scratch/
 serviceAccountKey.json
 *firebase*.json
+server/backups/
+*.backup-*.json
 
 .env*

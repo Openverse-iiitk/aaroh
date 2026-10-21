@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { put } from '@vercel/blob';
 import {
   isFirestoreActive,
   loadAllFromFirestore,
@@ -13,12 +12,10 @@ import {
   saveAuditLogToFirestore,
   seedFirestoreFromData
 } from './firestore.js';
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const SEED_FILE = path.join(__dirname, 'data.json');
 const DB_FILE = process.env.VERCEL ? path.join('/tmp', 'hackaaroh_data.json') : SEED_FILE;
-const BLOB_URL = 'https://ae1nkbba9sxv7ktd.public.blob.vercel-storage.com/hackaaroh_data.json';
 
 export const PURGED_USERNAMES = new Set([
   'rohan-satheesh',
@@ -117,7 +114,6 @@ const getInitialSeed = () => {
 class Database {
   constructor() {
     this.init();
-    this.loadedFromBlob = false;
   }
 
   async resetToCleanEvent() {
@@ -141,7 +137,7 @@ class Database {
     const now = Date.now();
     if (!force && this.lastLoadedAt && (now - this.lastLoadedAt < 3000)) return;
 
-    // 1. Cloud Firestore Priority (if credentials provided)
+    // 1. Cloud Firestore Priority (Authoritative Primary Store)
     if (isFirestoreActive()) {
       try {
         const remote = await loadAllFromFirestore();
@@ -155,41 +151,6 @@ class Database {
           };
           this.lastLoadedAt = now;
 
-          // Cross-sync with Vercel Blob: Pull any submissions made directly on production
-          try {
-            const blobRes = await fetch(`${BLOB_URL}?t=${now}&r=${Math.random().toString(36).substring(2, 8)}`, {
-              cache: 'no-store',
-              headers: { 'Cache-Control': 'no-cache, no-store' }
-            });
-            if (blobRes.ok) {
-              const blobData = await blobRes.json();
-              if (blobData && Array.isArray(blobData.pullRequests)) {
-                const existingPrKeys = new Set((this.data.pullRequests || []).map(p => `${p.repo}#${p.githubPrNumber}`.toLowerCase()));
-                const deletedSet = new Set((this.data.deletedPrIds || []).map(x => String(x).toLowerCase()));
-
-                for (const bPr of blobData.pullRequests) {
-                  const key = `${bPr.repo}#${bPr.githubPrNumber}`.toLowerCase();
-                  if (!existingPrKeys.has(key) && !deletedSet.has(key) && !deletedSet.has(String(bPr.id).toLowerCase()) && !isUserPurged(bPr.author)) {
-                    this.data.pullRequests.unshift(bPr);
-                    existingPrKeys.add(key);
-                    savePullRequestToFirestore(bPr).catch(() => {});
-                  }
-                }
-
-                if (Array.isArray(blobData.users)) {
-                  const existingUsernames = new Set((this.data.users || []).map(u => u.username.toLowerCase()));
-                  for (const bUser of blobData.users) {
-                    if (bUser.username && !existingUsernames.has(bUser.username.toLowerCase()) && !isUserPurged(bUser.username, bUser.name)) {
-                      this.data.users.push(bUser);
-                      existingUsernames.add(bUser.username.toLowerCase());
-                      saveUserToFirestore(bUser).catch(() => {});
-                    }
-                  }
-                }
-              }
-            }
-          } catch (_) {}
-
           try {
             fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
           } catch (_) {}
@@ -202,116 +163,28 @@ class Database {
           return true;
         }
       } catch (err) {
-        console.warn('[Database] Firestore sync check warning:', err.message);
+        console.warn('[Database] Firestore load warning:', err.message);
       }
     }
 
-    // 2. Local development fallback without BLOB token
-    if (!process.env.VERCEL && !process.env.BLOB_READ_WRITE_TOKEN) {
-      if (fs.existsSync(DB_FILE)) {
-        try {
-          const stats = fs.statSync(DB_FILE);
-          if (!this.lastFileMtime || stats.mtimeMs > this.lastFileMtime || force) {
-            const raw = fs.readFileSync(DB_FILE, 'utf-8');
-            const local = JSON.parse(raw);
-            if (local && local.sprint) {
-              local.users = (local.users || []).filter(u => !isUserPurged(u.username, u.name));
-              local.pullRequests = (local.pullRequests || []).filter(p => !isUserPurged(p.author));
-              this.data = local;
-              this.lastFileMtime = stats.mtimeMs;
-              return true;
-            }
-          }
-        } catch (_) {}
-      }
-      return false;
-    }
-
-    // 3. Vercel Blob fallback (if BLOB_READ_WRITE_TOKEN is configured without Firebase)
-    try {
-      const res = await fetch(`${BLOB_URL}?t=${now}&r=${Math.random().toString(36).substring(2, 8)}`, {
-        cache: 'no-store',
-        headers: {
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'Pragma': 'no-cache'
-        }
-      });
-      if (res.ok) {
-        const remoteData = await res.json();
-        if (remoteData && remoteData.sprint && Array.isArray(remoteData.pullRequests) && Array.isArray(remoteData.users)) {
-          // Strictly filter out any historical PRs created before sprint start
-          const sprintStartMs = remoteData.sprint?.startDate ? new Date(remoteData.sprint.startDate).getTime() : 0;
-          const minAllowedMs = sprintStartMs > 0 ? sprintStartMs - (3 * 60 * 60 * 1000) : 0;
-          if (minAllowedMs > 0) {
-            remoteData.pullRequests = remoteData.pullRequests.filter(pr => {
-              if (!pr.createdAt) return false;
-              return new Date(pr.createdAt).getTime() >= minAllowedMs;
-            });
-          }
-
-          // Filter out deleted PRs and purged users
-          const deletedSet = new Set((remoteData.deletedPrIds || []).map(x => String(x).toLowerCase()));
-          (this.data?.deletedPrIds || []).forEach(x => deletedSet.add(String(x).toLowerCase()));
-          remoteData.deletedPrIds = Array.from(deletedSet);
-          remoteData.users = (remoteData.users || []).filter(u => !isUserPurged(u.username, u.name));
-          remoteData.pullRequests = (remoteData.pullRequests || []).filter(pr => {
-            if (isUserPurged(pr.author)) return false;
-            const pId = String(pr.id || '').trim().toLowerCase();
-            const pNum = String(pr.githubPrNumber || '').trim().toLowerCase();
-            const pRepoPr = `${pr.repo || ''}#${pr.githubPrNumber || ''}`.toLowerCase();
-            const pUrl = String(pr.url || '').trim().toLowerCase();
-            if (deletedSet.has(pId) || deletedSet.has(pNum) || deletedSet.has(pRepoPr) || deletedSet.has(pUrl)) return false;
+    // 2. Local filesystem cache fallback
+    if (fs.existsSync(DB_FILE)) {
+      try {
+        const stats = fs.statSync(DB_FILE);
+        if (!this.lastFileMtime || stats.mtimeMs > this.lastFileMtime || force) {
+          const raw = fs.readFileSync(DB_FILE, 'utf-8');
+          const local = JSON.parse(raw);
+          if (local && local.sprint) {
+            local.users = (local.users || []).filter(u => !isUserPurged(u.username, u.name));
+            local.pullRequests = (local.pullRequests || []).filter(p => !isUserPurged(p.author));
+            this.data = local;
+            this.lastFileMtime = stats.mtimeMs;
             return true;
-          });
-
-          // Smart concurrency merge: Combine any PRs present in local/bundled seed data that are missing from remoteData, and reconcile historical scores
-          const remotePrKeys = new Set((remoteData.pullRequests || []).map(p => `${p.repo}#${p.githubPrNumber}`.toLowerCase()));
-          let newlyMerged = false;
-          for (const localPr of (this.data?.pullRequests || [])) {
-            const key = `${localPr.repo}#${localPr.githubPrNumber}`.toLowerCase();
-            const remoteIdx = (remoteData.pullRequests || []).findIndex(p => `${p.repo}#${p.githubPrNumber}`.toLowerCase() === key);
-            if (remoteIdx >= 0) {
-              const rPr = remoteData.pullRequests[remoteIdx];
-              if (localPr.creditScore !== undefined && rPr.creditScore !== localPr.creditScore) {
-                rPr.creditScore = localPr.creditScore;
-                if (localPr.adminCriteria) rPr.adminCriteria = localPr.adminCriteria;
-                if (localPr.adminFeedback) rPr.adminFeedback = localPr.adminFeedback;
-                if (localPr.reviewStatus) rPr.reviewStatus = localPr.reviewStatus;
-                newlyMerged = true;
-              }
-            } else if (!deletedSet.has(key) && !deletedSet.has(String(localPr.id).toLowerCase()) && !isUserPurged(localPr.author)) {
-              remoteData.pullRequests.unshift(localPr);
-              remotePrKeys.add(key);
-              newlyMerged = true;
-            }
           }
-
-          const remoteUsernames = new Set((remoteData.users || []).map(u => u.username.toLowerCase()));
-          for (const localUser of (this.data?.users || [])) {
-            if (localUser.username && !remoteUsernames.has(localUser.username.toLowerCase()) && !isUserPurged(localUser.username, localUser.name)) {
-              remoteData.users.push(localUser);
-              remoteUsernames.add(localUser.username.toLowerCase());
-              newlyMerged = true;
-            }
-          }
-
-          this.data = remoteData;
-          this.lastLoadedAt = now;
-
-          // If new PRs or users were merged from the bundled release, persist them back to Blob storage
-          if (newlyMerged && process.env.BLOB_READ_WRITE_TOKEN) {
-            this.save().catch(() => {});
-          }
-
-          try {
-            fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
-          } catch (_) {}
-          return true;
         }
-      }
-    } catch (err) {
-      // Remote blob not yet initialized or network issue
+      } catch (_) {}
     }
+
     return false;
   }
 
@@ -365,82 +238,6 @@ class Database {
       }
     }
 
-    // Keep Vercel Blob sync as secondary backup if configured
-    const token = process.env.BLOB_READ_WRITE_TOKEN;
-    if (token) {
-      try {
-        if (process.env.VERCEL && !isFullReset) {
-          try {
-            const checkRes = await fetch(`${BLOB_URL}?t=${Date.now()}&r=${Math.random().toString(36).substring(2, 8)}`, {
-              cache: 'no-store',
-              headers: { 'Cache-Control': 'no-cache, no-store', 'Pragma': 'no-cache' }
-            });
-            if (checkRes.ok) {
-              const remote = await checkRes.json();
-              if (remote && Array.isArray(remote.pullRequests)) {
-                const deletedSet = new Set((this.data.deletedPrIds || []).map(x => String(x).toLowerCase()));
-                (remote.deletedPrIds || []).forEach(x => deletedSet.add(String(x).toLowerCase()));
-                this.data.deletedPrIds = Array.from(deletedSet);
-
-                const prMap = new Map();
-                remote.pullRequests.forEach(p => {
-                  const key = p.id || `${p.repo}#${p.githubPrNumber}`;
-                  const pId = String(p.id || '').trim().toLowerCase();
-                  const pNum = String(p.githubPrNumber || '').trim().toLowerCase();
-                  if (!deletedSet.has(pId) && !deletedSet.has(pNum)) {
-                    prMap.set(key, p);
-                  }
-                });
-                (this.data.pullRequests || []).forEach(p => {
-                  const key = p.id || `${p.repo}#${p.githubPrNumber}`;
-                  const pId = String(p.id || '').trim().toLowerCase();
-                  const pNum = String(p.githubPrNumber || '').trim().toLowerCase();
-                  if (!deletedSet.has(pId) && !deletedSet.has(pNum)) {
-                    prMap.set(key, p);
-                  }
-                });
-                this.data.pullRequests = Array.from(prMap.values());
-
-                if (Array.isArray(remote.users)) {
-                  const userMap = new Map();
-                  remote.users.forEach(u => {
-                    if (!isUserPurged(u.username, u.name)) {
-                      userMap.set(u.username.toLowerCase(), u);
-                    }
-                  });
-                  (this.data.users || []).forEach(u => {
-                    if (!isUserPurged(u.username, u.name)) {
-                      userMap.set(u.username.toLowerCase(), u);
-                    }
-                  });
-                  this.data.users = Array.from(userMap.values());
-                }
-
-                if (Array.isArray(remote.auditLogs)) {
-                  const logMap = new Map();
-                  remote.auditLogs.forEach(l => logMap.set(l.id, l));
-                  (this.data.auditLogs || []).forEach(l => logMap.set(l.id, l));
-                  this.data.auditLogs = Array.from(logMap.values())
-                    .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
-                    .slice(0, 80);
-                }
-              }
-            }
-          } catch (_) {}
-        }
-
-        await put('hackaaroh_data.json', JSON.stringify(this.data), {
-          access: 'public',
-          addRandomSuffix: false,
-          allowOverwrite: true,
-          cacheControlMaxAge: 0,
-          abortSignal: AbortSignal.timeout(8000),
-          token
-        });
-      } catch (err) {
-        console.error('Failed to sync to Vercel Blob:', err.message);
-      }
-    }
   }
 
   async reset() {

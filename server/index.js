@@ -34,7 +34,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Ensure persistent database is loaded from Vercel Blob store & check midnight auto-evaluation
+// Ensure persistent database is loaded from Cloud Firestore & check midnight auto-evaluation
 app.use(async (req, res, next) => {
   if (req.url.startsWith('/api')) {
     await db.ensureLoaded();

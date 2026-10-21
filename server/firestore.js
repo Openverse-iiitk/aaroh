@@ -48,6 +48,7 @@ function parseCredentials() {
   // Option 3: GOOGLE_APPLICATION_CREDENTIALS or local serviceAccountKey.json
   const candidatePaths = [
     process.env.GOOGLE_APPLICATION_CREDENTIALS,
+    path.join(__dirname, 'serviceAccountKey.json'),
     path.join(__dirname, '../serviceAccountKey.json'),
     path.join(__dirname, '../firebase-key.json'),
     path.join(process.cwd(), 'serviceAccountKey.json')
