@@ -248,7 +248,7 @@ class Database {
 
   getSprint() {
     const repos = Array.from(new Set((this.data.pullRequests || []).map(pr => pr.repo))).filter(Boolean);
-    const contributors = (this.data.users || []).filter(u => u.role !== 'admin');
+    const contributors = (this.data.users || []).filter(u => !isUserPurged(u.username, u.name) && (u.role !== 'admin' || u.username.toLowerCase() === 'vijay-1710'));
     const officialStart = '2026-10-08T18:30:00.000Z';
     const rawStart = this.data.sprint?.startDate;
     const startDateStr = (!rawStart || rawStart < officialStart) ? officialStart : rawStart;
@@ -532,7 +532,7 @@ class Database {
 
   // Calculate dynamic leaderboard with flexible day counts
   getLeaderboard() {
-    const users = (this.data.users || []).filter(u => u.role !== 'admin' && !isUserPurged(u.username, u.name));
+    const users = (this.data.users || []).filter(u => !isUserPurged(u.username, u.name) && (u.role !== 'admin' || u.username.toLowerCase() === 'vijay-1710'));
     const prs = (this.data.pullRequests || []).filter(pr => !isUserPurged(pr.author));
     const currentDay = Math.max(1, this.data.sprint.currentDay || 1);
 

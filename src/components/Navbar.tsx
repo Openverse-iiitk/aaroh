@@ -123,16 +123,16 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="flex items-center gap-2 pl-2 border-l border-white/10">
               <div className="flex items-center gap-2 px-2.5 py-1 rounded-btn bg-[#191c1a] border border-indigo-500/30">
                 <img
-                  src={user.role === 'admin' ? 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&auto=format&fit=crop&q=80' : user.avatarUrl}
-                  alt={user.role === 'admin' ? 'HackAaroh Admin' : user.username}
+                  src={user.avatarUrl || (user.role === 'admin' ? 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&auto=format&fit=crop&q=80' : 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150')}
+                  alt={user.name || user.username}
                   className="w-5 h-5 rounded-full object-cover border border-indigo-400/30"
                 />
                 <span className="text-xs font-medium text-white">
-                  {user.role === 'admin' ? '@hackaaroh' : `@${user.username}`}
+                  @{user.username}
                 </span>
                 {user.role === 'admin' && (
                   <span className="text-[10px] px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-semibold">
-                    HackAaroh Admin
+                    Admin
                   </span>
                 )}
                 <button
