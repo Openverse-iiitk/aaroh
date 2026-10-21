@@ -1202,6 +1202,105 @@
   ],
   "pullRequests": [
     {
+      "id": "pr-devpulse-3",
+      "githubPrNumber": 3,
+      "isRepoOnly": false,
+      "repo": "Vijay-1710/devpulse-ai",
+      "title": "feat: integrate SOC-2, OWASP Top 10, and CWE compliance badges",
+      "description": "Integrated dynamic Compliance & Security Certification Matrix into DevPulse studio (SOC-2 Type II, OWASP Top 10, CWE / SANS Top 25).",
+      "url": "https://github.com/Vijay-1710/devpulse-ai/pull/3",
+      "state": "open",
+      "author": "Vijay-1710",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/232495759?v=4",
+      "createdAt": "2026-10-21T08:50:51Z",
+      "dayOfSprint": 14,
+      "additions": 68,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution",
+        "security",
+        "compliance"
+      ]
+    },
+    {
+      "id": "pr-devpulse-2",
+      "githubPrNumber": 2,
+      "isRepoOnly": false,
+      "repo": "Vijay-1710/devpulse-ai",
+      "title": "feat: add real-time GitHub PR URL inspector and dynamic patch parser",
+      "description": "Live GitHub PR Ingestion to fetch live diffs, changed files, and metadata via public GitHub REST API. Added dynamic diff parser and preset shortcuts.",
+      "url": "https://github.com/Vijay-1710/devpulse-ai/pull/2",
+      "state": "merged",
+      "author": "Vijay-1710",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/232495759?v=4",
+      "createdAt": "2026-10-21T08:48:49Z",
+      "dayOfSprint": 14,
+      "additions": 259,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution",
+        "feature",
+        "github-api"
+      ]
+    },
+    {
+      "id": "pr-devpulse-1",
+      "githubPrNumber": 1,
+      "isRepoOnly": false,
+      "repo": "Vijay-1710/devpulse-ai",
+      "title": "ci: integrate automated GitHub Actions pipeline & contributor workflows",
+      "description": "Integrated automated GitHub Actions CI Pipeline, standardized Pull Request template, and CONTRIBUTING.md guidelines for DevPulse AI.",
+      "url": "https://github.com/Vijay-1710/devpulse-ai/pull/1",
+      "state": "merged",
+      "author": "Vijay-1710",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/232495759?v=4",
+      "createdAt": "2026-10-21T08:46:07Z",
+      "dayOfSprint": 14,
+      "additions": 102,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution",
+        "ci-cd",
+        "automation"
+      ]
+    },
+    {
       "additions": 3,
       "deletions": 6,
       "author": "abhibob369-crypto",
@@ -7249,6 +7348,27 @@
   ],
   "auditLogs": [
     {
+      "id": "log-1792573146713-a8gi",
+      "action": "PR_SUBMITTED",
+      "actor": "Vijay-1710",
+      "details": "@Vijay-1710 submitted verified PR #3 in Vijay-1710/devpulse-ai",
+      "timestamp": "2026-10-21T08:59:06.713Z"
+    },
+    {
+      "id": "log-1792573146326-kkkn",
+      "action": "PR_SUBMITTED",
+      "actor": "Vijay-1710",
+      "details": "@Vijay-1710 submitted verified PR #2 in Vijay-1710/devpulse-ai",
+      "timestamp": "2026-10-21T08:59:06.326Z"
+    },
+    {
+      "id": "log-1792573145938-009d",
+      "action": "PR_SUBMITTED",
+      "actor": "Vijay-1710",
+      "details": "@Vijay-1710 submitted verified PR #1 in Vijay-1710/devpulse-ai",
+      "timestamp": "2026-10-21T08:59:05.938Z"
+    },
+    {
       "id": "log-1792560542825-pr4l-73",
       "timestamp": "2026-10-21T05:29:02.825Z",
       "actor": "Vijay-1710",
@@ -7786,27 +7906,6 @@
       "details": "Day 14 daily calculation completed. Evaluated 35 pending PRs (60-90 pts). Timeline advanced to Day 14. Next midnight evaluation at 2026-10-22T00:00:00.000Z.",
       "id": "log-1792540811602-vm5o",
       "timestamp": "2026-10-21T00:00:11.602Z"
-    },
-    {
-      "actor": "Vijay-1710",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "details": "Automated midnight evaluation: Graded 35 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "id": "log-1792540809198-0bqv",
-      "timestamp": "2026-10-21T00:00:09.198Z"
-    },
-    {
-      "actor": "Vijay-1710",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "details": "Automated midnight evaluation: Graded 35 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "id": "log-1792540809189-cf8t",
-      "timestamp": "2026-10-21T00:00:09.189Z"
-    },
-    {
-      "actor": "RANJITHROSAN17",
-      "action": "PR_SUBMITTED",
-      "details": "@RANJITHROSAN17 submitted verified PR #440 in kubeflow/mcp-server",
-      "id": "log-1792540614667-kx0p",
-      "timestamp": "2026-10-20T23:56:54.667Z"
     }
   ],
   "deletedPrIds": [
