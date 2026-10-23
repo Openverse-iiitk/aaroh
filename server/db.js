@@ -20,8 +20,6 @@ const SEED_FILE = path.join(__dirname, 'data.json');
 const DB_FILE = process.env.VERCEL ? path.join('/tmp', 'hackaaroh_data.json') : SEED_FILE;
 const BLOB_URL = 'https://ae1nkbba9sxv7ktd.public.blob.vercel-storage.com/hackaaroh_data.json';
 
-// When Firebase hits quota limits, USE_FIREBASE is turned off (default false) and Vercel Blob is primary
-const isFirebaseEnabled = () => process.env.USE_FIREBASE === 'true';
 const isBlobEnabled = () => process.env.USE_BLOB !== 'false' && Boolean(process.env.BLOB_READ_WRITE_TOKEN);
 
 export const PURGED_USERNAMES = new Set([
@@ -120,13 +118,15 @@ const getInitialSeed = () => {
 
 class Database {
   constructor() {
+    // Mode transitions from 'BLOB' (temporary bridge) to 'FIRESTORE' (permanent primary) when quota resets
+    this.storageMode = 'BLOB';
     this.init();
   }
 
   async resetToCleanEvent() {
     this.data = getInitialSeed();
     this.lastLoadedAt = Date.now();
-    if (isFirebaseEnabled() && isFirestoreActive()) {
+    if (this.storageMode === 'FIRESTORE' && isFirestoreActive()) {
       try {
         await seedFirestoreFromData(this.data);
       } catch (e) {
@@ -144,8 +144,64 @@ class Database {
     const now = Date.now();
     if (!force && this.lastLoadedAt && (now - this.lastLoadedAt < 3000)) return;
 
-    // 1. Primary Store: Vercel Blob (Authoritative remote store)
-    if (isBlobEnabled() || process.env.VERCEL) {
+    // 1. Primary Store: Cloud Firestore (Auto-shifts to Firestore as soon as daily quota resets)
+    if (isFirestoreActive()) {
+      try {
+        const remote = await loadAllFromFirestore();
+        if (remote && remote.sprint) {
+          const wasBlob = this.storageMode !== 'FIRESTORE';
+          this.storageMode = 'FIRESTORE';
+
+          if (wasBlob) {
+            console.log('🎉 [Storage] Cloud Firestore quota has reset! Shifting primary storage to Firestore and discontinuing Blob.');
+
+            // Reconcile any PRs or users from the bridge period that might be missing in Firestore
+            const fsPrKeys = new Set((remote.pullRequests || []).map(p => `${p.repo}#${p.githubPrNumber}`.toLowerCase()));
+            const fsPrIds = new Set((remote.pullRequests || []).map(p => String(p.id).toLowerCase()));
+            const missingInFs = (this.data?.pullRequests || []).filter(
+              p => !fsPrKeys.has(`${p.repo}#${p.githubPrNumber}`.toLowerCase()) && !fsPrIds.has(String(p.id).toLowerCase())
+            );
+
+            if (missingInFs.length > 0) {
+              console.log(`[Storage] Syncing ${missingInFs.length} delta PRs to Cloud Firestore...`);
+              for (const pr of missingInFs) {
+                savePullRequestToFirestore(pr).catch(() => {});
+              }
+              remote.pullRequests = [...missingInFs, ...(remote.pullRequests || [])];
+            }
+
+            const fsUsernames = new Set((remote.users || []).map(u => u.username.toLowerCase()));
+            const missingUsersInFs = (this.data?.users || []).filter(u => u.username && !fsUsernames.has(u.username.toLowerCase()));
+            if (missingUsersInFs.length > 0) {
+              console.log(`[Storage] Syncing ${missingUsersInFs.length} delta users to Cloud Firestore...`);
+              for (const u of missingUsersInFs) {
+                saveUserToFirestore(u).catch(() => {});
+              }
+              remote.users = [...missingUsersInFs, ...(remote.users || [])];
+            }
+          }
+
+          this.data = {
+            sprint: remote.sprint,
+            users: (remote.users || []).filter(u => !isUserPurged(u.username, u.name)),
+            pullRequests: (remote.pullRequests || []).filter(p => !isUserPurged(p.author)),
+            auditLogs: remote.auditLogs || [],
+            deletedPrIds: remote.deletedPrIds || []
+          };
+          this.lastLoadedAt = now;
+
+          try {
+            fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
+          } catch (_) {}
+          return true;
+        }
+      } catch (err) {
+        // Quota still exceeded or network issue: fall back to Blob bridge
+      }
+    }
+
+    // 2. Temporary Bridge: Vercel Blob (Only used while Firestore quota is down)
+    if (this.storageMode === 'BLOB' && (isBlobEnabled() || process.env.VERCEL)) {
       try {
         const blobRes = await fetch(`${BLOB_URL}?t=${now}&r=${Math.random().toString(36).substring(2, 8)}`, {
           cache: 'no-store',
@@ -182,30 +238,6 @@ class Database {
         }
       } catch (err) {
         console.warn('[Database] Blob fetch warning:', err.message);
-      }
-    }
-
-    // 2. Cloud Firestore (Only if explicitly enabled via USE_FIREBASE=true)
-    if (isFirebaseEnabled() && isFirestoreActive()) {
-      try {
-        const remote = await loadAllFromFirestore();
-        if (remote && remote.sprint) {
-          this.data = {
-            sprint: remote.sprint,
-            users: (remote.users || []).filter(u => !isUserPurged(u.username, u.name)),
-            pullRequests: (remote.pullRequests || []).filter(p => !isUserPurged(p.author)),
-            auditLogs: remote.auditLogs || [],
-            deletedPrIds: remote.deletedPrIds || []
-          };
-          this.lastLoadedAt = now;
-
-          try {
-            fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
-          } catch (_) {}
-          return true;
-        }
-      } catch (err) {
-        console.warn('[Database] Firestore load warning:', err.message);
       }
     }
 
@@ -271,9 +303,22 @@ class Database {
       console.error('Failed to persist database to file:', err);
     }
 
-    // 1. Sync to Vercel Blob
+    // When Firestore is UP and active:
+    if (this.storageMode === 'FIRESTORE' && isFirestoreActive()) {
+      // User directive: "when the quota resets dont do anything to blob just shift to firestore when its up and continue from there thereafter"
+      if (isFullReset) {
+        try {
+          await seedFirestoreFromData(this.data);
+        } catch (err) {
+          console.error('[Firebase] Failed to reset Firestore state:', err.message);
+        }
+      }
+      return; // Do NOT write to Blob anymore!
+    }
+
+    // Only while Firestore is down due to quota: sync to Vercel Blob as the temporary bridge
     const token = process.env.BLOB_READ_WRITE_TOKEN;
-    if (token) {
+    if (token && this.storageMode === 'BLOB') {
       try {
         await put('hackaaroh_data.json', JSON.stringify(this.data, null, 2), {
           access: 'public',
@@ -284,15 +329,6 @@ class Database {
         });
       } catch (err) {
         console.error('[Blob] Failed to save to Vercel Blob:', err.message);
-      }
-    }
-
-    // 2. Cloud Firestore sync (only if explicitly enabled)
-    if (isFirebaseEnabled() && isFirestoreActive() && isFullReset) {
-      try {
-        await seedFirestoreFromData(this.data);
-      } catch (err) {
-        console.error('[Firebase] Failed to reset Firestore state:', err.message);
       }
     }
   }
@@ -351,7 +387,7 @@ class Database {
 
   async updateSprint(updates) {
     this.data.sprint = { ...this.data.sprint, ...updates };
-    if (isFirebaseEnabled() && isFirestoreActive()) {
+    if (this.storageMode === 'FIRESTORE' && isFirestoreActive()) {
       try {
         await saveSprintToFirestore(this.data.sprint);
       } catch (err) {
@@ -381,7 +417,7 @@ class Database {
     } else {
       this.data.users.push(user);
     }
-    if (isFirebaseEnabled() && isFirestoreActive()) {
+    if (this.storageMode === 'FIRESTORE' && isFirestoreActive()) {
       try {
         await saveUserToFirestore(user);
       } catch (err) {
@@ -397,7 +433,7 @@ class Database {
     const initialLen = this.data.users.length;
     this.data.users = this.data.users.filter(u => u.username.toLowerCase() !== username.toLowerCase());
     this.data.pullRequests = this.data.pullRequests.filter(pr => pr.author.toLowerCase() !== username.toLowerCase());
-    if (isFirebaseEnabled() && isFirestoreActive()) {
+    if (this.storageMode === 'FIRESTORE' && isFirestoreActive()) {
       try {
         await deleteUserFromFirestore(username);
       } catch (err) {
@@ -423,7 +459,7 @@ class Database {
     );
     if (!exists) {
       this.data.pullRequests.unshift(pr);
-      if (isFirebaseEnabled() && isFirestoreActive()) {
+      if (this.storageMode === 'FIRESTORE' && isFirestoreActive()) {
         try {
           await savePullRequestToFirestore(pr);
         } catch (err) {
@@ -445,7 +481,7 @@ class Database {
     });
     if (idx >= 0) {
       this.data.pullRequests[idx] = { ...this.data.pullRequests[idx], ...updates };
-      if (isFirebaseEnabled() && isFirestoreActive()) {
+      if (this.storageMode === 'FIRESTORE' && isFirestoreActive()) {
         try {
           await savePullRequestToFirestore(this.data.pullRequests[idx]);
         } catch (err) {
@@ -479,7 +515,7 @@ class Database {
       }
       return true;
     });
-    if (isFirebaseEnabled() && isFirestoreActive()) {
+    if (this.storageMode === 'FIRESTORE' && isFirestoreActive()) {
       try {
         await deletePullRequestFromFirestore(target);
       } catch (err) {
@@ -537,7 +573,7 @@ class Database {
       pr.reviewedBy = evaluator;
       pr.reviewedAt = now;
 
-      if (isFirebaseEnabled() && isFirestoreActive()) {
+      if (this.storageMode === 'FIRESTORE' && isFirestoreActive()) {
         try {
           await savePullRequestToFirestore(pr);
         } catch (err) {
@@ -571,7 +607,7 @@ class Database {
     if (this.data.auditLogs.length > 60) {
       this.data.auditLogs.pop();
     }
-    if (isFirebaseEnabled() && isFirestoreActive()) {
+    if (this.storageMode === 'FIRESTORE' && isFirestoreActive()) {
       try {
         await saveAuditLogToFirestore(entry);
       } catch (err) {
