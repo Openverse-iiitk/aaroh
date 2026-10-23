@@ -154,7 +154,7 @@ const getAuthenticatedSession = (req) => {
     const adminUser = db.getUserByUsername('Vijay-1710') || {
       username: 'Vijay-1710',
       role: 'admin',
-      name: 'Vijay-1710 (Organizer)',
+      name: 'Vijay-1710',
       avatarUrl: 'https://avatars.githubusercontent.com/u/Vijay-1710?v=4'
     };
     return {
@@ -349,11 +349,11 @@ app.post('/api/auth/admin-secret-login', async (req, res) => {
     user = await db.upsertUser({
       id: `usr_${adminUsername.toLowerCase()}`,
       username: adminUsername,
-      name: adminUsername === 'Vijay-1710' ? 'Vijay-1710 (Organizer)' : adminUsername,
+      name: adminUsername,
       avatarUrl: adminUsername === 'Vijay-1710'
         ? 'https://avatars.githubusercontent.com/u/Vijay-1710?v=4'
         : 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
-      bio: 'Official HackAaroh Event Administrator',
+      bio: 'GitHub Contributor',
       htmlUrl: `https://github.com/${adminUsername}`,
       role: 'admin',
       createdAt: new Date().toISOString()
@@ -522,9 +522,9 @@ app.get('/api/auth/github/callback', async (req, res) => {
       id: `gh_${ghUser.id}`,
       githubId: ghUser.id,
       username: ghUser.login,
-      name: ghUser.name || (isAdmin ? 'HackAaroh Admin' : ghUser.login),
+      name: ghUser.name || ghUser.login,
       avatarUrl: ghUser.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
-      bio: ghUser.bio || (isAdmin ? 'Official HackAaroh Event Administrator' : 'GitHub Contributor'),
+      bio: ghUser.bio || 'GitHub Contributor',
       htmlUrl: ghUser.html_url || `https://github.com/${ghUser.login}`,
       role: isAdmin ? 'admin' : 'contributor',
       createdAt: new Date().toISOString()

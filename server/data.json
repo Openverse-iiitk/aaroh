@@ -1162,7 +1162,7 @@
     {
       "role": "admin",
       "htmlUrl": "https://github.com/Vijay-1710",
-      "bio": "Official HackAaroh Event Administrator",
+      "bio": "GitHub Contributor",
       "username": "Vijay-1710",
       "createdAt": "2026-10-11T15:15:48.487Z",
       "avatarUrl": "https://avatars.githubusercontent.com/u/232495759?v=4",
@@ -7224,13 +7224,6 @@
   ],
   "auditLogs": [
     {
-      "id": "log-1792773713020-7ux7",
-      "action": "STORAGE_LAYER_SWITCHED",
-      "actor": "Vijay-1710",
-      "details": "Switched primary persistent storage to Vercel Blob while Firebase quota resets.",
-      "timestamp": "2026-10-23T16:41:53.020Z"
-    },
-    {
       "id": "log-1792773576584-g8er",
       "action": "AUTOMATIC_DAILY_UPDATE",
       "actor": "SCHEDULED_TICKER",
@@ -7782,6 +7775,13 @@
       "actor": "Vijay-1710",
       "action": "PR_SCORE_ADJUSTED",
       "details": "Admin adjusted PR #5670 in tscircuit/tscircuit (@Sayandevxyz) from 72 to 40 credits [Reason: High-frequency bulk submission (156s between consecutive PRs)]"
+    },
+    {
+      "id": "log-1792560542823-t135-1",
+      "timestamp": "2026-10-21T05:29:02.823Z",
+      "actor": "Vijay-1710",
+      "action": "PR_SCORE_ADJUSTED",
+      "details": "Admin adjusted PR #5667 in tscircuit/tscircuit (@Sayandevxyz) from 77 to 44 credits [Reason: High-frequency bulk submission (71s between consecutive PRs)]"
     }
   ],
   "deletedPrIds": [

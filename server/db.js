@@ -99,7 +99,7 @@ const getInitialSeed = () => {
         username: 'Vijay-1710',
         name: 'Vijay-1710',
         avatarUrl: 'https://avatars.githubusercontent.com/u/Vijay-1710?v=4',
-        bio: 'Official HackAaroh Event Administrator',
+        bio: 'GitHub Contributor',
         htmlUrl: 'https://github.com/Vijay-1710',
         role: 'admin',
         createdAt: '2026-10-08T00:00:00.000Z'

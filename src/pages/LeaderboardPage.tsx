@@ -127,6 +127,9 @@ export const LeaderboardPage: React.FC<LeaderboardPageProps> = ({
         header: 'Contributor',
         cell: ({ row }) => {
           const item = row.original;
+          const displayName = (!item.user.name || item.user.name.toLowerCase().includes('hackaaroh admin') || item.user.name.includes('(Organizer)'))
+            ? item.user.username
+            : item.user.name;
           return (
             <div className="flex items-center gap-2.5">
               <img
@@ -141,7 +144,7 @@ export const LeaderboardPage: React.FC<LeaderboardPageProps> = ({
                   rel="noopener noreferrer"
                   className="font-medium text-white hover:text-blue-400 transition-colors block text-xs"
                 >
-                  {item.user.name}
+                  {displayName}
                 </a>
                 <span className="text-[11px] text-zinc-500">@{item.user.username}</span>
               </div>
