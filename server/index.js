@@ -34,24 +34,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// Ensure persistent database is loaded from Cloud Firestore & check midnight auto-evaluation
+// Ensure persistent database is loaded from primary store (Vercel Blob / local)
 app.use(async (req, res, next) => {
   if (req.url.startsWith('/api')) {
     await db.ensureLoaded();
-
-    // Check if scheduled midnight calculation is due (e.g. on serverless environments where intervals don't run continuously)
-    try {
-      const sprint = db.getSprint();
-      if (sprint && sprint.status === 'ACTIVE' && !sprint.isFinalized && sprint.nextSyncAt) {
-        const now = new Date();
-        if (new Date(sprint.nextSyncAt) <= now) {
-          console.log(`[Auto-Midnight] Scheduled daily evaluation due (${sprint.nextSyncAt} <= ${now.toISOString()}). Executing...`);
-          await performDailyCalculation(false);
-        }
-      }
-    } catch (err) {
-      console.warn('[Auto-Midnight] Check error:', err.message);
-    }
   }
   next();
 });
@@ -258,17 +244,22 @@ async function performDailyCalculation(isManualTrigger = false) {
 
   const now = new Date();
   const nextDay = (sprint.currentDay || 1) + 1;
+  const nextSyncAt = calculateNextSync(sprint.dailyUpdateTime || '00:00');
+
+  // Immediately advance nextSyncAt to prevent race condition or duplicate runs
+  await db.updateSprint({
+    lastSyncAt: now.toISOString(),
+    nextSyncAt
+  });
 
   // AUTOMATED MIDNIGHT EVALUATION:
   // Automatically evaluate and grade all pending PRs (scored strictly between 60-90 pts)
   // Preserves all previously graded PRs 100% untouched
   const evalResult = await db.evaluatePendingPullRequests({ minScore: 60, maxScore: 90, evaluator: 'Vijay-1710' });
 
-  // Advance event day and calculate next daily midnight evaluation timestamp
+  // Advance event day
   const updatedSprint = await db.updateSprint({
-    currentDay: nextDay,
-    lastSyncAt: now.toISOString(),
-    nextSyncAt: calculateNextSync(sprint.dailyUpdateTime || '00:00')
+    currentDay: nextDay
   });
 
   await db.addAuditLog(

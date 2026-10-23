@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { put } from '@vercel/blob';
 import {
   isFirestoreActive,
   loadAllFromFirestore,
@@ -12,10 +13,16 @@ import {
   saveAuditLogToFirestore,
   seedFirestoreFromData
 } from './firestore.js';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const SEED_FILE = path.join(__dirname, 'data.json');
 const DB_FILE = process.env.VERCEL ? path.join('/tmp', 'hackaaroh_data.json') : SEED_FILE;
+const BLOB_URL = 'https://ae1nkbba9sxv7ktd.public.blob.vercel-storage.com/hackaaroh_data.json';
+
+// When Firebase hits quota limits, USE_FIREBASE is turned off (default false) and Vercel Blob is primary
+const isFirebaseEnabled = () => process.env.USE_FIREBASE === 'true';
+const isBlobEnabled = () => process.env.USE_BLOB !== 'false' && Boolean(process.env.BLOB_READ_WRITE_TOKEN);
 
 export const PURGED_USERNAMES = new Set([
   'rohan-satheesh',
@@ -119,7 +126,7 @@ class Database {
   async resetToCleanEvent() {
     this.data = getInitialSeed();
     this.lastLoadedAt = Date.now();
-    if (isFirestoreActive()) {
+    if (isFirebaseEnabled() && isFirestoreActive()) {
       try {
         await seedFirestoreFromData(this.data);
       } catch (e) {
@@ -137,8 +144,49 @@ class Database {
     const now = Date.now();
     if (!force && this.lastLoadedAt && (now - this.lastLoadedAt < 3000)) return;
 
-    // 1. Cloud Firestore Priority (Authoritative Primary Store)
-    if (isFirestoreActive()) {
+    // 1. Primary Store: Vercel Blob (Authoritative remote store)
+    if (isBlobEnabled() || process.env.VERCEL) {
+      try {
+        const blobRes = await fetch(`${BLOB_URL}?t=${now}&r=${Math.random().toString(36).substring(2, 8)}`, {
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache'
+          }
+        });
+        if (blobRes.ok) {
+          const remoteData = await blobRes.json();
+          if (remoteData && remoteData.sprint && Array.isArray(remoteData.pullRequests) && Array.isArray(remoteData.users)) {
+            const deletedSet = new Set((remoteData.deletedPrIds || []).map(x => String(x).toLowerCase()));
+            (this.data?.deletedPrIds || []).forEach(x => deletedSet.add(String(x).toLowerCase()));
+            remoteData.deletedPrIds = Array.from(deletedSet);
+            remoteData.users = (remoteData.users || []).filter(u => !isUserPurged(u.username, u.name));
+            remoteData.pullRequests = (remoteData.pullRequests || []).filter(pr => {
+              if (isUserPurged(pr.author)) return false;
+              const pId = String(pr.id || '').trim().toLowerCase();
+              const pNum = String(pr.githubPrNumber || '').trim().toLowerCase();
+              const pRepoPr = `${pr.repo || ''}#${pr.githubPrNumber || ''}`.toLowerCase();
+              const pUrl = String(pr.url || '').trim().toLowerCase();
+              if (deletedSet.has(pId) || deletedSet.has(pNum) || deletedSet.has(pRepoPr) || deletedSet.has(pUrl)) return false;
+              return true;
+            });
+
+            this.data = remoteData;
+            this.lastLoadedAt = now;
+
+            try {
+              fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
+            } catch (_) {}
+            return true;
+          }
+        }
+      } catch (err) {
+        console.warn('[Database] Blob fetch warning:', err.message);
+      }
+    }
+
+    // 2. Cloud Firestore (Only if explicitly enabled via USE_FIREBASE=true)
+    if (isFirebaseEnabled() && isFirestoreActive()) {
       try {
         const remote = await loadAllFromFirestore();
         if (remote && remote.sprint) {
@@ -155,19 +203,13 @@ class Database {
             fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
           } catch (_) {}
           return true;
-        } else if (remote && !remote.sprint) {
-          // Firestore active but unseeded: automatically seed with current local data
-          console.log('[Database] Firestore empty, auto-seeding with data bundle...');
-          await seedFirestoreFromData(this.data || getInitialSeed());
-          this.lastLoadedAt = now;
-          return true;
         }
       } catch (err) {
         console.warn('[Database] Firestore load warning:', err.message);
       }
     }
 
-    // 2. Local filesystem cache fallback
+    // 3. Local filesystem cache fallback
     if (fs.existsSync(DB_FILE)) {
       try {
         const stats = fs.statSync(DB_FILE);
@@ -226,18 +268,33 @@ class Database {
     try {
       fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
     } catch (err) {
-      console.error('Failed to persist database:', err);
+      console.error('Failed to persist database to file:', err);
     }
 
-    // If Firestore is active and it's a full reset, reseed all collections
-    if (isFirestoreActive() && isFullReset) {
+    // 1. Sync to Vercel Blob
+    const token = process.env.BLOB_READ_WRITE_TOKEN;
+    if (token) {
+      try {
+        await put('hackaaroh_data.json', JSON.stringify(this.data, null, 2), {
+          access: 'public',
+          addRandomSuffix: false,
+          allowOverwrite: true,
+          cacheControlMaxAge: 0,
+          token
+        });
+      } catch (err) {
+        console.error('[Blob] Failed to save to Vercel Blob:', err.message);
+      }
+    }
+
+    // 2. Cloud Firestore sync (only if explicitly enabled)
+    if (isFirebaseEnabled() && isFirestoreActive() && isFullReset) {
       try {
         await seedFirestoreFromData(this.data);
       } catch (err) {
         console.error('[Firebase] Failed to reset Firestore state:', err.message);
       }
     }
-
   }
 
   async reset() {
@@ -294,14 +351,14 @@ class Database {
 
   async updateSprint(updates) {
     this.data.sprint = { ...this.data.sprint, ...updates };
-    if (isFirestoreActive()) {
+    if (isFirebaseEnabled() && isFirestoreActive()) {
       try {
         await saveSprintToFirestore(this.data.sprint);
       } catch (err) {
         console.error('[Firebase] Error updating sprint in Firestore:', err.message);
       }
     }
-    await this.save();
+    await this.save(false);
     return this.data.sprint;
   }
 
@@ -324,14 +381,14 @@ class Database {
     } else {
       this.data.users.push(user);
     }
-    if (isFirestoreActive()) {
+    if (isFirebaseEnabled() && isFirestoreActive()) {
       try {
         await saveUserToFirestore(user);
       } catch (err) {
         console.error('[Firebase] Error saving user in Firestore:', err.message);
       }
     }
-    await this.save();
+    await this.save(false);
     return this.getUserByUsername(user.username);
   }
 
@@ -340,14 +397,14 @@ class Database {
     const initialLen = this.data.users.length;
     this.data.users = this.data.users.filter(u => u.username.toLowerCase() !== username.toLowerCase());
     this.data.pullRequests = this.data.pullRequests.filter(pr => pr.author.toLowerCase() !== username.toLowerCase());
-    if (isFirestoreActive()) {
+    if (isFirebaseEnabled() && isFirestoreActive()) {
       try {
         await deleteUserFromFirestore(username);
       } catch (err) {
         console.error('[Firebase] Error deleting user in Firestore:', err.message);
       }
     }
-    await this.save(true);
+    await this.save(false);
     return this.data.users.length < initialLen;
   }
 
@@ -366,14 +423,14 @@ class Database {
     );
     if (!exists) {
       this.data.pullRequests.unshift(pr);
-      if (isFirestoreActive()) {
+      if (isFirebaseEnabled() && isFirestoreActive()) {
         try {
           await savePullRequestToFirestore(pr);
         } catch (err) {
           console.error('[Firebase] Error adding PR in Firestore:', err.message);
         }
       }
-      await this.save();
+      await this.save(false);
     }
     return pr;
   }
@@ -388,14 +445,14 @@ class Database {
     });
     if (idx >= 0) {
       this.data.pullRequests[idx] = { ...this.data.pullRequests[idx], ...updates };
-      if (isFirestoreActive()) {
+      if (isFirebaseEnabled() && isFirestoreActive()) {
         try {
           await savePullRequestToFirestore(this.data.pullRequests[idx]);
         } catch (err) {
           console.error('[Firebase] Error updating PR in Firestore:', err.message);
         }
       }
-      await this.save();
+      await this.save(false);
       return this.data.pullRequests[idx];
     }
     return null;
@@ -422,15 +479,14 @@ class Database {
       }
       return true;
     });
-    if (isFirestoreActive()) {
+    if (isFirebaseEnabled() && isFirestoreActive()) {
       try {
         await deletePullRequestFromFirestore(target);
       } catch (err) {
         console.error('[Firebase] Error deleting PR in Firestore:', err.message);
       }
     }
-    // Pass isFullReset = true so the deleted PR is never merged back from stale remote state
-    await this.save(true);
+    await this.save(false);
     return this.data.pullRequests.length < initialLen;
   }
 
@@ -481,7 +537,7 @@ class Database {
       pr.reviewedBy = evaluator;
       pr.reviewedAt = now;
 
-      if (isFirestoreActive()) {
+      if (isFirebaseEnabled() && isFirestoreActive()) {
         try {
           await savePullRequestToFirestore(pr);
         } catch (err) {
@@ -497,7 +553,7 @@ class Database {
         evaluator,
         `Automated midnight evaluation: Graded ${gradedCount} pending PRs (scored between ${minScore} and ${maxScore} pts). All previously graded PRs remained strictly untouched.`
       );
-      await this.save(true);
+      await this.save(false);
     }
 
     return { gradedCount, totalPrs: this.data.pullRequests.length };
@@ -515,14 +571,14 @@ class Database {
     if (this.data.auditLogs.length > 60) {
       this.data.auditLogs.pop();
     }
-    if (isFirestoreActive()) {
+    if (isFirebaseEnabled() && isFirestoreActive()) {
       try {
         await saveAuditLogToFirestore(entry);
       } catch (err) {
         console.error('[Firebase] Error saving audit log in Firestore:', err.message);
       }
     }
-    await this.save();
+    await this.save(false);
     return entry;
   }
 

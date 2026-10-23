@@ -21,9 +21,9 @@
     ],
     "startDate": "2026-10-08T18:30:00.000Z",
     "status": "ACTIVE",
-    "currentDay": 14,
-    "lastSyncAt": "2026-10-21T00:54:25.567Z",
-    "nextSyncAt": "2026-10-22T00:00:00.000Z"
+    "currentDay": 16,
+    "lastSyncAt": "2026-10-23T16:40:16.079Z",
+    "nextSyncAt": "2026-10-24T00:00:00.000Z"
   },
   "users": [
     {
@@ -2928,37 +2928,6 @@
       "_docId": "pr-1792331738356-vxfk"
     },
     {
-      "creditScore": 0,
-      "additions": 44,
-      "deletions": 13,
-      "author": "tovi-govi",
-      "commitsCount": 1,
-      "repo": "tovi-govi/Bunkialo",
-      "githubPrNumber": 2,
-      "reviewedAt": null,
-      "description": "Closes #1\n\n### Summary of Changes\n- **Excused Duty Leave Calculation**: Updated attendance percentage and session calculations so duty leaves (both portal-credited and user-marked) reduce the total sessions denominator rather than adding to the attended numerator.\n  - Previous: \\(Attended + DL) / To",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "fix(attendance): deduct duty leaves from total sessions instead of adding to attended",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/232081292?v=4",
-      "url": "https://github.com/tovi-govi/Bunkialo/pull/2",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-19T09:40:11Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792402886338-pvec",
-      "isRepoOnly": false,
-      "state": "open"
-    },
-    {
       "additions": 189,
       "deletions": 0,
       "author": "edamone6767",
@@ -3639,99 +3608,6 @@
       },
       "reviewedAt": null,
       "reviewedBy": null
-    },
-    {
-      "creditScore": 0,
-      "additions": 5,
-      "deletions": 8,
-      "author": "tovi-govi",
-      "commitsCount": 1,
-      "repo": "IIITK-Football/super-league",
-      "githubPrNumber": 174,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #174 in IIITK-Football/super-league",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "fix: display freshers teams and unassigned players",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/139268397?v=4",
-      "url": "https://github.com/IIITK-Football/super-league/pull/174",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-09T17:47:43Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404753448-guss",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 5,
-      "deletions": 8,
-      "author": "tovi-govi",
-      "commitsCount": 1,
-      "repo": "IIITK-Football/super-league",
-      "githubPrNumber": 177,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #177 in IIITK-Football/super-league",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "Develop",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/139268397?v=4",
-      "url": "https://github.com/IIITK-Football/super-league/pull/177",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-10T15:59:21Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404755031-nej9",
-      "isRepoOnly": false,
-      "state": "merged"
-    },
-    {
-      "creditScore": 0,
-      "additions": 5,
-      "deletions": 8,
-      "author": "tovi-govi",
-      "commitsCount": 1,
-      "repo": "IIITK-Football/super-league",
-      "githubPrNumber": 178,
-      "reviewedAt": null,
-      "description": "Verified Pull Request #178 in IIITK-Football/super-league",
-      "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
-      },
-      "reviewedBy": null,
-      "title": "Player values defaulted bw 40 and 80",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/139268397?v=4",
-      "url": "https://github.com/IIITK-Football/super-league/pull/178",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-11T06:45:03Z",
-      "dayOfSprint": 11,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
-      "id": "pr-1792404756513-d4vw",
-      "isRepoOnly": false,
-      "state": "merged"
     },
     {
       "additions": 68,
@@ -7282,22 +7158,22 @@
       "state": "open"
     },
     {
-      "creditScore": 0,
+      "creditScore": 80,
       "additions": 110,
       "deletions": 0,
       "author": "rajnish-verma-22172",
       "commitsCount": 1,
       "repo": "apache/fesod",
       "githubPrNumber": 1250,
-      "reviewedAt": null,
+      "reviewedAt": "2026-10-23T16:39:34.043Z",
       "description": "## Purpose of the pull request\n\nClosed: #1249\n\nAdd focused unit coverage for `SimpleReadCacheSelector` without changing production behavior.\n\n## What’s changed?\n\nAdds JUnit 5 tests for the default and custom size thresholds, unknown package-part sizes, IOException fallback, and avoiding stream acces",
       "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
+        "quality": 20,
+        "complexity": 20,
+        "impact": 20,
+        "testCoverage": 20
       },
-      "reviewedBy": null,
+      "reviewedBy": "Vijay-1710",
       "title": "test: cover cache selector boundaries",
       "authorAvatar": "https://avatars.githubusercontent.com/u/193460942?v=4",
       "url": "https://github.com/apache/fesod/pull/1250",
@@ -7306,29 +7182,29 @@
       ],
       "createdAt": "2026-10-21T04:30:48Z",
       "dayOfSprint": 13,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
+      "adminFeedback": "Automated midnight evaluation: Verified contribution of +110/-0 in apache/fesod#1250.",
+      "reviewStatus": "REVIEWED",
       "id": "pr-1792557384681-oomi",
       "isRepoOnly": false,
       "state": "open"
     },
     {
-      "creditScore": 0,
+      "creditScore": 82,
       "additions": 130,
       "deletions": 2,
       "author": "rajnish-verma-22172",
       "commitsCount": 1,
       "repo": "assistant-ui/assistant-ui",
       "githubPrNumber": 9974,
-      "reviewedAt": null,
+      "reviewedAt": "2026-10-23T16:39:34.043Z",
       "description": "Fixes assistant-ui/assistant-ui#9973. Keeps generated external-message timestamps stable across cache invalidation while preserving explicit source timestamps. Includes regression tests and a core patch changeset.",
       "adminCriteria": {
-        "complexity": 0,
-        "testCoverage": 0,
-        "impact": 0,
-        "quality": 0
+        "quality": 21,
+        "complexity": 21,
+        "impact": 20,
+        "testCoverage": 20
       },
-      "reviewedBy": null,
+      "reviewedBy": "Vijay-1710",
       "title": "fix(core): preserve external message timestamps",
       "authorAvatar": "https://avatars.githubusercontent.com/u/193460942?v=4",
       "url": "https://github.com/assistant-ui/assistant-ui/pull/9974",
@@ -7339,14 +7215,35 @@
       ],
       "createdAt": "2026-10-21T04:49:41Z",
       "dayOfSprint": 13,
-      "adminFeedback": "",
-      "reviewStatus": "PENDING_REVIEW",
+      "adminFeedback": "Automated midnight evaluation: Verified contribution of +130/-2 in assistant-ui/assistant-ui#9974.",
+      "reviewStatus": "REVIEWED",
       "id": "pr-1792558204166-71sw",
       "isRepoOnly": false,
       "state": "open"
     }
   ],
   "auditLogs": [
+    {
+      "id": "log-1792773713020-7ux7",
+      "action": "STORAGE_LAYER_SWITCHED",
+      "actor": "Vijay-1710",
+      "details": "Switched primary persistent storage to Vercel Blob while Firebase quota resets.",
+      "timestamp": "2026-10-23T16:41:53.020Z"
+    },
+    {
+      "id": "log-1792773576584-g8er",
+      "action": "AUTOMATIC_DAILY_UPDATE",
+      "actor": "SCHEDULED_TICKER",
+      "details": "Day 16 daily calculation completed. Evaluated 2 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-22T00:00:00.000Z.",
+      "timestamp": "2026-10-23T16:39:36.584Z"
+    },
+    {
+      "id": "log-1792773574043-mngb",
+      "action": "DAILY_00:00_PR_EVALUATION",
+      "actor": "Vijay-1710",
+      "details": "Automated midnight evaluation: Graded 2 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
+      "timestamp": "2026-10-23T16:39:34.043Z"
+    },
     {
       "id": "log-1792585562495-m8vb",
       "action": "PR_MANUALLY_REVIEWED",
@@ -7885,27 +7782,6 @@
       "actor": "Vijay-1710",
       "action": "PR_SCORE_ADJUSTED",
       "details": "Admin adjusted PR #5670 in tscircuit/tscircuit (@Sayandevxyz) from 72 to 40 credits [Reason: High-frequency bulk submission (156s between consecutive PRs)]"
-    },
-    {
-      "id": "log-1792560542823-t135-1",
-      "timestamp": "2026-10-21T05:29:02.823Z",
-      "actor": "Vijay-1710",
-      "action": "PR_SCORE_ADJUSTED",
-      "details": "Admin adjusted PR #5667 in tscircuit/tscircuit (@Sayandevxyz) from 77 to 44 credits [Reason: High-frequency bulk submission (71s between consecutive PRs)]"
-    },
-    {
-      "id": "log-1792560542823-ajtc-5",
-      "timestamp": "2026-10-21T05:29:02.823Z",
-      "actor": "Vijay-1710",
-      "action": "PR_SCORE_ADJUSTED",
-      "details": "Admin adjusted PR #5797 in tscircuit/tscircuit (@Sayandevxyz) from 76 to 43 credits [Reason: High-frequency bulk submission (104s between consecutive PRs)]"
-    },
-    {
-      "id": "log-1792560542823-6brc-2",
-      "timestamp": "2026-10-21T05:29:02.823Z",
-      "actor": "Vijay-1710",
-      "action": "PR_SCORE_ADJUSTED",
-      "details": "Admin adjusted PR #5668 in tscircuit/tscircuit (@Sayandevxyz) from 75 to 43 credits [Reason: High-frequency bulk submission (71s between consecutive PRs)]"
     }
   ],
   "deletedPrIds": [
