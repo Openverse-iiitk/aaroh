@@ -269,6 +269,15 @@ class Database {
       if (fs.existsSync(DB_FILE)) {
         const raw = fs.readFileSync(DB_FILE, 'utf-8');
         this.data = JSON.parse(raw);
+        if (fs.existsSync(SEED_FILE) && DB_FILE !== SEED_FILE) {
+          try {
+            const seed = JSON.parse(fs.readFileSync(SEED_FILE, 'utf-8'));
+            if ((seed.pullRequests?.length || 0) > (this.data.pullRequests?.length || 0)) {
+              this.data = seed;
+              fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
+            }
+          } catch (_) {}
+        }
       } else if (fs.existsSync(SEED_FILE)) {
         const raw = fs.readFileSync(SEED_FILE, 'utf-8');
         this.data = JSON.parse(raw);
