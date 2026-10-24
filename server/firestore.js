@@ -126,13 +126,33 @@ export function encodeDocId(id) {
 
 /**
  * Fetch all data from Firestore collections into a unified database object.
+ * Checks consolidated snapshots/latest first (1 document read instead of 490 reads).
  */
 export async function loadAllFromFirestore() {
   const db = getFirestore();
   if (!db) return null;
 
   try {
-    // 1. Load Sprint Doc
+    // 0. Ultra-efficient snapshot read: 1 read instead of 490 reads!
+    try {
+      const snapDoc = await db.collection('snapshots').doc('latest').get();
+      if (snapDoc.exists) {
+        const snap = snapDoc.data();
+        if (snap && snap.sprint && Array.isArray(snap.users) && Array.isArray(snap.pullRequests)) {
+          return {
+            sprint: snap.sprint,
+            users: snap.users,
+            pullRequests: snap.pullRequests,
+            auditLogs: snap.auditLogs || [],
+            deletedPrIds: snap.deletedPrIds || []
+          };
+        }
+      }
+    } catch (_) {
+      // Fallback to individual collections if snapshot read fails or not yet populated
+    }
+
+    // 1. Fallback: Load Sprint Doc
     const sprintDoc = await db.collection('sprints').doc('sprint-hackaaroh-current').get();
     const sprint = sprintDoc.exists ? sprintDoc.data() : null;
 
@@ -168,6 +188,26 @@ export async function loadAllFromFirestore() {
   } catch (err) {
     console.error('[Firebase] Error loading collections from Firestore:', err.message);
     return null;
+  }
+}
+
+/**
+ * Save consolidated database snapshot to Firestore (1 write, speeds up reads 490x).
+ */
+export async function saveSnapshotToFirestore(data) {
+  const db = getFirestore();
+  if (!db || !data?.sprint) return;
+  try {
+    await db.collection('snapshots').doc('latest').set({
+      sprint: data.sprint,
+      users: data.users || [],
+      pullRequests: data.pullRequests || [],
+      auditLogs: (data.auditLogs || []).slice(0, 80),
+      deletedPrIds: data.deletedPrIds || [],
+      updatedAt: new Date().toISOString()
+    });
+  } catch (err) {
+    console.error('[Firebase] Error saving snapshot to Firestore:', err.message);
   }
 }
 

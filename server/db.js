@@ -11,7 +11,8 @@ import {
   savePullRequestToFirestore,
   deletePullRequestFromFirestore,
   saveAuditLogToFirestore,
-  seedFirestoreFromData
+  seedFirestoreFromData,
+  saveSnapshotToFirestore
 } from './firestore.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -142,7 +143,8 @@ class Database {
 
   async ensureLoaded(force = false) {
     const now = Date.now();
-    if (!force && this.lastLoadedAt && (now - this.lastLoadedAt < 3000)) return;
+    // Cache data in memory for 60 seconds to prevent burning through Firestore read limits
+    if (!force && this.lastLoadedAt && (now - this.lastLoadedAt < 60000)) return;
 
     // 1. Primary Store: Cloud Firestore (Auto-shifts to Firestore as soon as daily quota resets)
     if (isFirestoreActive()) {
@@ -153,7 +155,7 @@ class Database {
           this.storageMode = 'FIRESTORE';
 
           if (wasBlob) {
-            console.log('🎉 [Storage] Cloud Firestore quota has reset! Shifting primary storage to Firestore and discontinuing Blob.');
+            console.log('🎉 [Storage] Cloud Firestore is active! Shifting primary storage to Firestore and discontinuing Blob.');
 
             // Reconcile any PRs or users from the bridge period that might be missing in Firestore
             const fsPrKeys = new Set((remote.pullRequests || []).map(p => `${p.repo}#${p.githubPrNumber}`.toLowerCase()));
@@ -196,7 +198,7 @@ class Database {
           return true;
         }
       } catch (err) {
-        // Quota still exceeded or network issue: fall back to Blob bridge
+        // Quota still exceeded or network issue: fall back safely to in-memory/local cache
       }
     }
 
@@ -305,6 +307,9 @@ class Database {
 
     // When Firestore is UP and active:
     if (this.storageMode === 'FIRESTORE' && isFirestoreActive()) {
+      // Async update single-doc snapshot so future cold starts only cost 1 read
+      saveSnapshotToFirestore(this.data).catch(() => {});
+
       // User directive: "when the quota resets dont do anything to blob just shift to firestore when its up and continue from there thereafter"
       if (isFullReset) {
         try {
@@ -453,7 +458,7 @@ class Database {
   }
 
   async addPullRequest(pr) {
-    await this.ensureLoaded(true);
+    await this.ensureLoaded(false);
     const exists = (this.data.pullRequests || []).some(
       p => p.id === pr.id || (p.repo?.toLowerCase() === pr.repo?.toLowerCase() && p.githubPrNumber === pr.githubPrNumber)
     );
@@ -472,7 +477,7 @@ class Database {
   }
 
   async updatePullRequest(id, updates) {
-    await this.ensureLoaded(true);
+    await this.ensureLoaded(false);
     const target = String(id).trim().toLowerCase();
     const idx = (this.data.pullRequests || []).findIndex(pr => {
       const pId = String(pr.id || '').trim().toLowerCase();
@@ -496,7 +501,7 @@ class Database {
 
   async deletePullRequest(id) {
     if (!id) return false;
-    await this.ensureLoaded(true);
+    await this.ensureLoaded(false);
     const target = String(id).trim().toLowerCase();
     this.data.deletedPrIds = this.data.deletedPrIds || [];
     if (!this.data.deletedPrIds.includes(target)) {
@@ -532,7 +537,7 @@ class Database {
    * STRICT SAFEGUARD: Never touches or alters PRs that are already graded.
    */
   async evaluatePendingPullRequests({ minScore = 60, maxScore = 90, evaluator = 'Vijay-1710' } = {}) {
-    await this.ensureLoaded(true);
+    await this.ensureLoaded(false);
     const now = new Date().toISOString();
     let gradedCount = 0;
 
