@@ -119,8 +119,8 @@ const getInitialSeed = () => {
 
 class Database {
   constructor() {
-    // Mode transitions from 'BLOB' (temporary bridge) to 'FIRESTORE' (permanent primary) when quota resets
-    this.storageMode = 'BLOB';
+    // Primary storage mode: Cloud Firestore
+    this.storageMode = 'FIRESTORE';
     this.init();
   }
 
