@@ -133,7 +133,7 @@ export async function loadAllFromFirestore() {
   if (!db) return null;
 
   try {
-    // 0. Ultra-efficient snapshot read: 1 read instead of 490 reads!
+    // 0. Ultra-efficient snapshot read: 1 read instead of 500+ individual reads!
     try {
       const snapDoc = await db.collection('snapshots').doc('latest').get();
       if (snapDoc.exists) {
@@ -148,8 +148,19 @@ export async function loadAllFromFirestore() {
           };
         }
       }
-    } catch (_) {
-      // Fallback to individual collections if snapshot read fails or not yet populated
+    } catch (snapErr) {
+      const msg = String(snapErr?.message || '');
+      const isQuotaError = snapErr?.code === 8 ||
+        snapErr?.code === 'RESOURCE_EXHAUSTED' ||
+        msg.includes('RESOURCE_EXHAUSTED') ||
+        msg.includes('Quota exceeded') ||
+        msg.includes('Bandwidth limit');
+
+      if (isQuotaError) {
+        console.warn('[Firebase] Firestore read quota exceeded on snapshot. Skipping individual collection queries to avoid burning reads.');
+        return null;
+      }
+      // Only fall back to individual collections if snapshot document simply does not exist or unhandled error
     }
 
     // 1. Fallback: Load Sprint Doc

@@ -644,7 +644,7 @@ app.all(['/api/admin/reset-db', '/api/admin/reset-event', '/api/admin/purge-demo
 
 // Get current sprint status
 app.get('/api/sprint', (req, res) => {
-  res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=30');
+  res.setHeader('Cache-Control', 'public, s-maxage=30, stale-while-revalidate=60');
   const sprint = db.getSprint();
   res.json(sprint);
 });
@@ -767,7 +767,7 @@ app.post('/api/sprint/reset-to-not-started', requireAdmin, async (req, res) => {
 app.get('/api/pull-requests', (req, res) => {
   const { author, status, day, repo, mine } = req.query;
   if (!mine && author !== 'mine' && author !== 'me') {
-    res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=30');
+    res.setHeader('Cache-Control', 'public, s-maxage=30, stale-while-revalidate=60');
   } else {
     res.setHeader('Cache-Control', 'no-store');
   }
@@ -1024,7 +1024,7 @@ app.post('/api/pull-requests', async (req, res) => {
   };
 
   await db.addPullRequest(newPr);
-  await db.addAuditLog('PR_SUBMITTED', sessionUser.username, `@${sessionUser.username} submitted verified PR #${prNumber} in ${cleanRepo}`);
+  db.addAuditLog('PR_SUBMITTED', sessionUser.username, `@${sessionUser.username} submitted verified PR #${prNumber} in ${cleanRepo}`).catch(() => {});
   res.status(201).json({ message: 'Pull request submitted successfully for review', pr: newPr });
 });
 
@@ -1108,7 +1108,7 @@ app.get('/api/admin/audit-logs', requireAdmin, (req, res) => {
 
 // Real-time Leaderboard
 app.get('/api/leaderboard', (req, res) => {
-  res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=30');
+  res.setHeader('Cache-Control', 'public, s-maxage=30, stale-while-revalidate=60');
   const sprint = db.getSprint();
   const leaderboard = db.getLeaderboard();
 

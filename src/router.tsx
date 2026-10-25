@@ -60,22 +60,25 @@ function RootLayout() {
   const { data: sprint } = useQuery({
     queryKey: ['sprint'],
     queryFn: fetchSprint,
-    refetchInterval: 45000,
-    staleTime: 10000,
+    refetchInterval: 90000,
+    staleTime: 30000,
+    refetchOnWindowFocus: false,
   });
 
   const { data: leaderboardData } = useQuery({
     queryKey: ['leaderboard'],
     queryFn: fetchLeaderboard,
-    refetchInterval: 45000,
-    staleTime: 10000,
+    refetchInterval: 90000,
+    staleTime: 30000,
+    refetchOnWindowFocus: false,
   });
 
   const { data: pullRequests = [] } = useQuery({
     queryKey: ['pullRequests'],
     queryFn: () => fetchPullRequests(),
-    refetchInterval: 45000,
-    staleTime: 10000,
+    refetchInterval: 90000,
+    staleTime: 30000,
+    refetchOnWindowFocus: false,
   });
 
   const { data: auditLogs = [] } = useQuery({

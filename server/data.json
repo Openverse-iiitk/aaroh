@@ -1517,9 +1517,330 @@
       "name": "zpao",
       "id": "usr_zpao",
       "username": "zpao"
+    },
+    {
+      "id": "usr_new-hacker-9827",
+      "username": "new-hacker-9827",
+      "name": "Alex Innovator",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/new-hacker-9827?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/new-hacker-9827",
+      "role": "contributor",
+      "createdAt": "2026-10-25T06:58:19.977Z"
+    },
+    {
+      "id": "usr_tester-gn0s",
+      "username": "tester-gn0s",
+      "name": "Automated Tester",
+      "avatarUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/tester-gn0s",
+      "role": "contributor",
+      "createdAt": "2026-10-25T06:58:20.115Z"
+    },
+    {
+      "id": "usr_new-hacker-9933",
+      "username": "new-hacker-9933",
+      "name": "Alex Innovator",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/new-hacker-9933?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/new-hacker-9933",
+      "role": "contributor",
+      "createdAt": "2026-10-25T07:00:09.937Z"
+    },
+    {
+      "id": "usr_tester-dylz",
+      "username": "tester-dylz",
+      "name": "Automated Tester",
+      "avatarUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/tester-dylz",
+      "role": "contributor",
+      "createdAt": "2026-10-25T07:00:10.133Z"
+    },
+    {
+      "id": "gh_320487068",
+      "username": "churukantirohith2007-pixel",
+      "name": "churukantirohith2007-pixel",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/320487068?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/churukantirohith2007-pixel",
+      "role": "contributor",
+      "createdAt": "2026-10-25T07:06:23.448Z",
+      "githubId": 320487068
+    },
+    {
+      "id": "gh_347629844",
+      "username": "BharathReddy15",
+      "name": "BharathReddy15",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/347629844?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/BharathReddy15",
+      "role": "contributor",
+      "createdAt": "2026-10-25T07:09:28.322Z",
+      "githubId": 347629844
+    },
+    {
+      "id": "gh_242739440",
+      "githubId": 242739440,
+      "username": "marupakalaharsith20-beep",
+      "name": "marupakalaharsith20-beep",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/242739440?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/marupakalaharsith20-beep",
+      "role": "contributor",
+      "createdAt": "2026-10-25T07:13:15.801Z"
     }
   ],
   "pullRequests": [
+    {
+      "id": "pr-1792912228062-5hi2",
+      "githubPrNumber": 193,
+      "isRepoOnly": false,
+      "repo": "pugulist/math-stats",
+      "title": "feat: add sum function (#171)",
+      "description": "## Description\n\nAdds `sum(numbers)` returning the sum of numbers in an array.\n- Returns `0` for empty arrays (`sum([]) === 0`)\n- Returns `null` when the argument is not an array\n- Does not modify the caller's array\n- Added TypeScript declarations in `index.d.ts`\n- Added usage documentation in `READM",
+      "url": "https://github.com/pugulist/math-stats/pull/193",
+      "state": "open",
+      "author": "BharathReddy15",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/347629844?v=4",
+      "createdAt": "2026-10-25T06:44:21Z",
+      "dayOfSprint": 17,
+      "additions": 31,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792912223277-i7v8",
+      "githubPrNumber": 192,
+      "isRepoOnly": false,
+      "repo": "pugulist/math-stats",
+      "title": "docs: add Contributor Covenant 2.1 code of conduct (#161)",
+      "description": "## Description\n\nAdds `CODE_OF_CONDUCT.md` adopting Contributor Covenant v2.1 with maintainer contact emails (`kannupriya@llm4s.org` and `pavanvamsi3@gmail.com`).\n\nFixes #161\n\n## Checklist\n\n- [x] Contributor Covenant 2.1 added with maintainer contacts\n- [x] Linter passes (`npm run lint`)\n- [x] Tests ",
+      "url": "https://github.com/pugulist/math-stats/pull/192",
+      "state": "open",
+      "author": "BharathReddy15",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/347629844?v=4",
+      "createdAt": "2026-10-25T06:41:38Z",
+      "dayOfSprint": 17,
+      "additions": 128,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792912219489-9npa",
+      "githubPrNumber": 191,
+      "isRepoOnly": false,
+      "repo": "pugulist/math-stats",
+      "title": "chore: add pull request template (#159)",
+      "description": "## Description\n\nAdds `.github/pull_request_template.md` with a concise checklist covering tests, TypeScript declarations (`index.d.ts`), documentation (`README.md`), and lint checks.\n\nFixes #159\n\n## Checklist\n\n- [x] Template added in `.github/pull_request_template.md`\n- [x] Linter passes (`npm run l",
+      "url": "https://github.com/pugulist/math-stats/pull/191",
+      "state": "open",
+      "author": "BharathReddy15",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/347629844?v=4",
+      "createdAt": "2026-10-25T06:39:50Z",
+      "dayOfSprint": 17,
+      "additions": 10,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792912212997-vsst",
+      "githubPrNumber": 190,
+      "isRepoOnly": false,
+      "repo": "pugulist/math-stats",
+      "title": "chore: add .editorconfig (#167)",
+      "description": "## Description\n\nAdds `.editorconfig` to enforce 4-space indentation, LF line endings, UTF-8 charset, trimming trailing whitespace, and final newlines across editors (with 2 spaces for JSON and YAML), matching the repository's ESLint rules.\n\nFixes #167\n\n## Checklist\n\n- [x] Matches ESLint configuratio",
+      "url": "https://github.com/pugulist/math-stats/pull/190",
+      "state": "open",
+      "author": "BharathReddy15",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/347629844?v=4",
+      "createdAt": "2026-10-25T06:38:42Z",
+      "dayOfSprint": 17,
+      "additions": 12,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792912005698-ve10",
+      "githubPrNumber": 55,
+      "isRepoOnly": false,
+      "repo": "harshiniramasamy5-star/open-source-workshop",
+      "title": "Fix typo: grate -> great (#9)",
+      "description": "Closes #9",
+      "url": "https://github.com/harshiniramasamy5-star/open-source-workshop/pull/55",
+      "state": "open",
+      "author": "churukantirohith2007-pixel",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/320487068?v=4",
+      "createdAt": "2026-10-25T07:01:20Z",
+      "dayOfSprint": 17,
+      "additions": 1,
+      "deletions": 1,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792912002180-0n9y",
+      "githubPrNumber": 54,
+      "isRepoOnly": false,
+      "repo": "harshiniramasamy5-star/open-source-workshop",
+      "title": "Fix typo: devlopers -> developers (#8)",
+      "description": "Closes #8",
+      "url": "https://github.com/harshiniramasamy5-star/open-source-workshop/pull/54",
+      "state": "open",
+      "author": "churukantirohith2007-pixel",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/320487068?v=4",
+      "createdAt": "2026-10-25T07:00:31Z",
+      "dayOfSprint": 17,
+      "additions": 1,
+      "deletions": 1,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792911998644-x9a1",
+      "githubPrNumber": 53,
+      "isRepoOnly": false,
+      "repo": "harshiniramasamy5-star/open-source-workshop",
+      "title": "Fix typo: maintaned -> maintained (#4)",
+      "description": "Closes #4",
+      "url": "https://github.com/harshiniramasamy5-star/open-source-workshop/pull/53",
+      "state": "open",
+      "author": "churukantirohith2007-pixel",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/320487068?v=4",
+      "createdAt": "2026-10-25T06:59:30Z",
+      "dayOfSprint": 17,
+      "additions": 1,
+      "deletions": 1,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792911994639-nkb0",
+      "githubPrNumber": 52,
+      "isRepoOnly": false,
+      "repo": "harshiniramasamy5-star/open-source-workshop",
+      "title": "Fix typo: avialable -> available (#2)",
+      "description": "Closes #2",
+      "url": "https://github.com/harshiniramasamy5-star/open-source-workshop/pull/52",
+      "state": "open",
+      "author": "churukantirohith2007-pixel",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/320487068?v=4",
+      "createdAt": "2026-10-25T06:58:19Z",
+      "dayOfSprint": 17,
+      "additions": 1,
+      "deletions": 1,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
     {
       "id": "pr-1792819436546-9z9f",
       "githubPrNumber": 929,
@@ -10427,6 +10748,76 @@
   ],
   "auditLogs": [
     {
+      "id": "log-1792912228380-1bt9",
+      "action": "PR_SUBMITTED",
+      "actor": "BharathReddy15",
+      "details": "@BharathReddy15 submitted verified PR #193 in pugulist/math-stats",
+      "timestamp": "2026-10-25T07:10:28.380Z"
+    },
+    {
+      "id": "log-1792912223603-g5t4",
+      "action": "PR_SUBMITTED",
+      "actor": "BharathReddy15",
+      "details": "@BharathReddy15 submitted verified PR #192 in pugulist/math-stats",
+      "timestamp": "2026-10-25T07:10:23.603Z"
+    },
+    {
+      "id": "log-1792912219820-3fh2",
+      "action": "PR_SUBMITTED",
+      "actor": "BharathReddy15",
+      "details": "@BharathReddy15 submitted verified PR #191 in pugulist/math-stats",
+      "timestamp": "2026-10-25T07:10:19.820Z"
+    },
+    {
+      "id": "log-1792912213347-t8kw",
+      "action": "PR_SUBMITTED",
+      "actor": "BharathReddy15",
+      "details": "@BharathReddy15 submitted verified PR #190 in pugulist/math-stats",
+      "timestamp": "2026-10-25T07:10:13.347Z"
+    },
+    {
+      "id": "log-1792912006025-92li",
+      "action": "PR_SUBMITTED",
+      "actor": "churukantirohith2007-pixel",
+      "details": "@churukantirohith2007-pixel submitted verified PR #55 in harshiniramasamy5-star/open-source-workshop",
+      "timestamp": "2026-10-25T07:06:46.025Z"
+    },
+    {
+      "id": "log-1792912002526-mx8f",
+      "action": "PR_SUBMITTED",
+      "actor": "churukantirohith2007-pixel",
+      "details": "@churukantirohith2007-pixel submitted verified PR #54 in harshiniramasamy5-star/open-source-workshop",
+      "timestamp": "2026-10-25T07:06:42.526Z"
+    },
+    {
+      "id": "log-1792911999003-esy0",
+      "action": "PR_SUBMITTED",
+      "actor": "churukantirohith2007-pixel",
+      "details": "@churukantirohith2007-pixel submitted verified PR #53 in harshiniramasamy5-star/open-source-workshop",
+      "timestamp": "2026-10-25T07:06:39.003Z"
+    },
+    {
+      "id": "log-1792911994974-z9qp",
+      "action": "PR_SUBMITTED",
+      "actor": "churukantirohith2007-pixel",
+      "details": "@churukantirohith2007-pixel submitted verified PR #52 in harshiniramasamy5-star/open-source-workshop",
+      "timestamp": "2026-10-25T07:06:34.974Z"
+    },
+    {
+      "id": "log-1792911610483-cdyq",
+      "action": "USER_LOGIN",
+      "actor": "tester-dylz",
+      "details": "User connected with role contributor",
+      "timestamp": "2026-10-25T07:00:10.483Z"
+    },
+    {
+      "id": "log-1792911500536-jroa",
+      "action": "USER_LOGIN",
+      "actor": "tester-gn0s",
+      "details": "User connected with role contributor",
+      "timestamp": "2026-10-25T06:58:20.536Z"
+    },
+    {
       "id": "log-1792905471291-r6at",
       "action": "AUTOMATIC_DAILY_UPDATE",
       "actor": "SCHEDULED_TICKER",
@@ -10915,76 +11306,6 @@
       "actor": "SCHEDULED_TICKER",
       "details": "Day 16 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
       "timestamp": "2026-10-23T11:51:41.014Z"
-    },
-    {
-      "id": "log-1792756298647-oupp",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T11:51:38.647Z"
-    },
-    {
-      "id": "log-1792756298452-yej8",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T11:51:38.452Z"
-    },
-    {
-      "id": "log-1792756297234-k9nr",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T11:51:37.234Z"
-    },
-    {
-      "id": "log-1792756296259-7ojn",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T11:51:36.259Z"
-    },
-    {
-      "id": "log-1792756293958-4p5i",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T11:51:33.958Z"
-    },
-    {
-      "id": "log-1792756293957-55ni",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T11:51:33.957Z"
-    },
-    {
-      "id": "log-1792755148356-mpz5",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T11:32:28.356Z"
-    },
-    {
-      "id": "log-1792755147909-qi69",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T11:32:27.909Z"
-    },
-    {
-      "id": "log-1792755147331-jr20",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T11:32:27.331Z"
-    },
-    {
-      "id": "log-1792755147322-4riw",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T11:32:27.322Z"
     }
   ],
   "deletedPrIds": [
@@ -11004,6 +11325,8 @@
     "tovi-govi/bunkialo#2",
     "iiitk-football/super-league#174",
     "iiitk-football/super-league#177",
-    "iiitk-football/super-league#178"
+    "iiitk-football/super-league#178",
+    "pr-test-latency-1792912765858",
+    "999999"
   ]
 }

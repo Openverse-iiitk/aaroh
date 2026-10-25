@@ -23,6 +23,20 @@ const BLOB_URL = 'https://ae1nkbba9sxv7ktd.public.blob.vercel-storage.com/hackaa
 
 const isBlobEnabled = () => process.env.USE_BLOB !== 'false' && Boolean(process.env.BLOB_READ_WRITE_TOKEN);
 
+// Debounce timer for Firestore snapshot updates so rapid consecutive actions coalesce into 1 snapshot write
+let snapshotDebounceTimer = null;
+function queueFirestoreSnapshot(data) {
+  if (snapshotDebounceTimer) {
+    clearTimeout(snapshotDebounceTimer);
+  }
+  snapshotDebounceTimer = setTimeout(() => {
+    snapshotDebounceTimer = null;
+    saveSnapshotToFirestore(data).catch(err => {
+      console.warn('[Firebase] Debounced snapshot save note:', err?.message);
+    });
+  }, 2500);
+}
+
 export const PURGED_USERNAMES = new Set([
   'rohan-satheesh',
   'deva4509',
@@ -143,8 +157,11 @@ class Database {
 
   async ensureLoaded(force = false) {
     const now = Date.now();
-    // Cache data in memory for 60 seconds to prevent burning through Firestore read limits
-    if (!force && this.lastLoadedAt && (now - this.lastLoadedAt < 60000)) return;
+    // Cache data in memory for 120 seconds to prevent burning through Firestore read limits
+    if (!force && this.lastLoadedAt && (now - this.lastLoadedAt < 120000)) return;
+
+    // Immediately record timestamp to prevent concurrent requests or failures from triggering Firestore re-reads
+    this.lastLoadedAt = now;
 
     // 1. Primary Store: Cloud Firestore (Auto-shifts to Firestore as soon as daily quota resets)
     if (isFirestoreActive()) {
@@ -316,16 +333,21 @@ class Database {
 
     // When Firestore is UP and active:
     if (this.storageMode === 'FIRESTORE' && isFirestoreActive()) {
-      // Async update single-doc snapshot so future cold starts only cost 1 read
-      saveSnapshotToFirestore(this.data).catch(() => {});
-
       // User directive: "when the quota resets dont do anything to blob just shift to firestore when its up and continue from there thereafter"
       if (isFullReset) {
+        if (snapshotDebounceTimer) {
+          clearTimeout(snapshotDebounceTimer);
+          snapshotDebounceTimer = null;
+        }
         try {
+          await saveSnapshotToFirestore(this.data);
           await seedFirestoreFromData(this.data);
         } catch (err) {
           console.error('[Firebase] Failed to reset Firestore state:', err.message);
         }
+      } else {
+        // Coalesce rapid consecutive writes into a single debounced snapshot update
+        queueFirestoreSnapshot(this.data);
       }
       return; // Do NOT write to Blob anymore!
     }
@@ -432,13 +454,11 @@ class Database {
       this.data.users.push(user);
     }
     if (this.storageMode === 'FIRESTORE' && isFirestoreActive()) {
-      try {
-        await saveUserToFirestore(user);
-      } catch (err) {
+      saveUserToFirestore(user).catch(err => {
         console.error('[Firebase] Error saving user in Firestore:', err.message);
-      }
+      });
     }
-    await this.save(false);
+    this.save(false).catch(() => {});
     return this.getUserByUsername(user.username);
   }
 
@@ -448,13 +468,11 @@ class Database {
     this.data.users = this.data.users.filter(u => u.username.toLowerCase() !== username.toLowerCase());
     this.data.pullRequests = this.data.pullRequests.filter(pr => pr.author.toLowerCase() !== username.toLowerCase());
     if (this.storageMode === 'FIRESTORE' && isFirestoreActive()) {
-      try {
-        await deleteUserFromFirestore(username);
-      } catch (err) {
+      deleteUserFromFirestore(username).catch(err => {
         console.error('[Firebase] Error deleting user in Firestore:', err.message);
-      }
+      });
     }
-    await this.save(false);
+    this.save(false).catch(() => {});
     return this.data.users.length < initialLen;
   }
 
@@ -467,26 +485,22 @@ class Database {
   }
 
   async addPullRequest(pr) {
-    await this.ensureLoaded(false);
     const exists = (this.data.pullRequests || []).some(
       p => p.id === pr.id || (p.repo?.toLowerCase() === pr.repo?.toLowerCase() && p.githubPrNumber === pr.githubPrNumber)
     );
     if (!exists) {
       this.data.pullRequests.unshift(pr);
       if (this.storageMode === 'FIRESTORE' && isFirestoreActive()) {
-        try {
-          await savePullRequestToFirestore(pr);
-        } catch (err) {
+        savePullRequestToFirestore(pr).catch(err => {
           console.error('[Firebase] Error adding PR in Firestore:', err.message);
-        }
+        });
       }
-      await this.save(false);
+      this.save(false).catch(() => {});
     }
     return pr;
   }
 
   async updatePullRequest(id, updates) {
-    await this.ensureLoaded(false);
     const target = String(id).trim().toLowerCase();
     const idx = (this.data.pullRequests || []).findIndex(pr => {
       const pId = String(pr.id || '').trim().toLowerCase();
@@ -496,13 +510,11 @@ class Database {
     if (idx >= 0) {
       this.data.pullRequests[idx] = { ...this.data.pullRequests[idx], ...updates };
       if (this.storageMode === 'FIRESTORE' && isFirestoreActive()) {
-        try {
-          await savePullRequestToFirestore(this.data.pullRequests[idx]);
-        } catch (err) {
+        savePullRequestToFirestore(this.data.pullRequests[idx]).catch(err => {
           console.error('[Firebase] Error updating PR in Firestore:', err.message);
-        }
+        });
       }
-      await this.save(false);
+      this.save(false).catch(() => {});
       return this.data.pullRequests[idx];
     }
     return null;
@@ -510,7 +522,6 @@ class Database {
 
   async deletePullRequest(id) {
     if (!id) return false;
-    await this.ensureLoaded(false);
     const target = String(id).trim().toLowerCase();
     this.data.deletedPrIds = this.data.deletedPrIds || [];
     if (!this.data.deletedPrIds.includes(target)) {
@@ -530,13 +541,11 @@ class Database {
       return true;
     });
     if (this.storageMode === 'FIRESTORE' && isFirestoreActive()) {
-      try {
-        await deletePullRequestFromFirestore(target);
-      } catch (err) {
+      deletePullRequestFromFirestore(target).catch(err => {
         console.error('[Firebase] Error deleting PR in Firestore:', err.message);
-      }
+      });
     }
-    await this.save(false);
+    this.save(false).catch(() => {});
     return this.data.pullRequests.length < initialLen;
   }
 
@@ -622,13 +631,11 @@ class Database {
       this.data.auditLogs.pop();
     }
     if (this.storageMode === 'FIRESTORE' && isFirestoreActive()) {
-      try {
-        await saveAuditLogToFirestore(entry);
-      } catch (err) {
+      saveAuditLogToFirestore(entry).catch(err => {
         console.error('[Firebase] Error saving audit log in Firestore:', err.message);
-      }
+      });
     }
-    await this.save(false);
+    this.save(false).catch(() => {});
     return entry;
   }
 
