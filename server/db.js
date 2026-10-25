@@ -43,7 +43,13 @@ export const PURGED_USERNAMES = new Set([
   'manav-codes',
   'sarah-dev',
   'admin-starlit',
-  'ptr25'
+  'ptr25',
+  'vipulreddyvemula',
+  'zpao',
+  'new-hacker-9827',
+  'tester-gn0s',
+  'new-hacker-9933',
+  'tester-dylz'
 ]);
 
 export function isUserPurged(username, name = '') {
@@ -51,6 +57,8 @@ export function isUserPurged(username, name = '') {
   const u = String(username || '').toLowerCase().trim();
   const n = String(name || '').toLowerCase().trim();
   if (PURGED_USERNAMES.has(u)) return true;
+  if (u.startsWith('new-hacker-') || u.startsWith('tester-')) return true;
+  if (n === 'automated tester' || n === 'alex innovator') return true;
   if (n === 'pranathi t r' || n === 'pranathi tr') return true;
   return false;
 }

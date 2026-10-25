@@ -131,9 +131,25 @@ async function runAuthTests() {
     console.error('  FAIL ✗ Production check error:', err.message);
   }
 
+  // Automatic Cleanup: Ensure test participants never pollute the leaderboard
+  console.log('\n[Cleanup] Removing temporary test participant accounts...');
+  try {
+    if (newAccountUsername) {
+      await db.deleteUser(newAccountUsername);
+      console.log(`  ✓ Removed temporary account @${newAccountUsername}`);
+    }
+    if (mockUsername) {
+      await db.deleteUser(mockUsername);
+      console.log(`  ✓ Removed temporary account @${mockUsername}`);
+    }
+  } catch (cleanErr) {
+    console.warn('  Cleanup note:', cleanErr.message);
+  }
+
   console.log('\n====================================================');
   console.log('             AUTHENTICATION TESTS FINISHED           ');
   console.log('====================================================\n');
 }
 
 runAuthTests().catch(console.error);
+

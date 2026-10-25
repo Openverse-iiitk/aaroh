@@ -22,13 +22,28 @@ function authHeaders(): Record<string, string> {
   return headers;
 }
 
-const PURGED_USERNAMES = ['rohan-satheesh', 'deva4509', 'manav-codes', 'sarah-dev', 'admin-starlit', 'ptr25', 'vipulreddyvemula'];
+const PURGED_USERNAMES = [
+  'rohan-satheesh',
+  'deva4509',
+  'manav-codes',
+  'sarah-dev',
+  'admin-starlit',
+  'ptr25',
+  'vipulreddyvemula',
+  'zpao',
+  'new-hacker-9827',
+  'tester-gn0s',
+  'new-hacker-9933',
+  'tester-dylz'
+];
 
 export function isClientUserPurged(username?: string, name?: string): boolean {
   if (!username && !name) return false;
   const u = (username || '').toLowerCase().trim();
   const n = (name || '').toLowerCase().trim();
   if (PURGED_USERNAMES.includes(u)) return true;
+  if (u.startsWith('new-hacker-') || u.startsWith('tester-')) return true;
+  if (n === 'automated tester' || n === 'alex innovator') return true;
   if (n === 'pranathi t r' || n === 'pranathi tr') return true;
   return false;
 }

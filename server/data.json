@@ -508,7 +508,7 @@
       "bio": "GitHub Contributor",
       "id": "gh_224089015",
       "username": "gouthamkrishnap",
-      "createdAt": "2026-10-23T13:49:14.077Z"
+      "createdAt": "2026-10-25T08:40:21.837Z"
     },
     {
       "role": "contributor",
@@ -1479,18 +1479,6 @@
       "name": "Vijay-1710"
     },
     {
-      "role": "contributor",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/228353228?v=4",
-      "githubId": 228353228,
-      "htmlUrl": "https://github.com/vipulreddyvemula",
-      "name": "VEMULA VIPUL REDDY",
-      "bio": "GitHub Contributor",
-      "id": "gh_228353228",
-      "username": "vipulreddyvemula",
-      "_docId": "vipulreddyvemula",
-      "createdAt": "2026-10-12T13:53:30.292Z"
-    },
-    {
       "createdAt": "2026-10-21T18:09:04.978Z",
       "role": "contributor",
       "avatarUrl": "https://avatars.githubusercontent.com/u/172998137?v=4",
@@ -1511,52 +1499,6 @@
       "bio": "B.Tech CSE (AI) student | Java, C, C++ | Learning DSA | Building and growing every day.\r\n",
       "id": "gh_232448420",
       "username": "yashuagarwal786"
-    },
-    {
-      "role": "contributor",
-      "name": "zpao",
-      "id": "usr_zpao",
-      "username": "zpao"
-    },
-    {
-      "id": "usr_new-hacker-9827",
-      "username": "new-hacker-9827",
-      "name": "Alex Innovator",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/new-hacker-9827?v=4",
-      "bio": "GitHub Contributor",
-      "htmlUrl": "https://github.com/new-hacker-9827",
-      "role": "contributor",
-      "createdAt": "2026-10-25T06:58:19.977Z"
-    },
-    {
-      "id": "usr_tester-gn0s",
-      "username": "tester-gn0s",
-      "name": "Automated Tester",
-      "avatarUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
-      "bio": "GitHub Contributor",
-      "htmlUrl": "https://github.com/tester-gn0s",
-      "role": "contributor",
-      "createdAt": "2026-10-25T06:58:20.115Z"
-    },
-    {
-      "id": "usr_new-hacker-9933",
-      "username": "new-hacker-9933",
-      "name": "Alex Innovator",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/new-hacker-9933?v=4",
-      "bio": "GitHub Contributor",
-      "htmlUrl": "https://github.com/new-hacker-9933",
-      "role": "contributor",
-      "createdAt": "2026-10-25T07:00:09.937Z"
-    },
-    {
-      "id": "usr_tester-dylz",
-      "username": "tester-dylz",
-      "name": "Automated Tester",
-      "avatarUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
-      "bio": "GitHub Contributor",
-      "htmlUrl": "https://github.com/tester-dylz",
-      "role": "contributor",
-      "createdAt": "2026-10-25T07:00:10.133Z"
     },
     {
       "id": "gh_320487068",
@@ -1590,9 +1532,144 @@
       "htmlUrl": "https://github.com/marupakalaharsith20-beep",
       "role": "contributor",
       "createdAt": "2026-10-25T07:13:15.801Z"
+    },
+    {
+      "id": "gh_263715687",
+      "githubId": 263715687,
+      "username": "Neha-Shree28",
+      "name": "Neha Shree S",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/263715687?v=4",
+      "bio": "GitHub Contributor",
+      "htmlUrl": "https://github.com/Neha-Shree28",
+      "role": "contributor",
+      "createdAt": "2026-10-25T09:32:21.160Z"
     }
   ],
   "pullRequests": [
+    {
+      "id": "pr-1792916916027-jhjl",
+      "githubPrNumber": 484,
+      "isRepoOnly": false,
+      "repo": "ilyamiro/serpantinum",
+      "title": "fix(quickactions): keep calculator dropdown open while hovering its list",
+      "description": "The calculator dropdowns close when moving the mouse over the options list because the popup is outside the sidebar's hover area. This starts the auto-hide timer, which eventually closes the entire QuickActions panel.\n\nThis change makes the sidebar account for dropdown popup hover, keeping the panel",
+      "url": "https://github.com/ilyamiro/serpantinum/pull/484",
+      "state": "merged",
+      "author": "gouthamkrishnap",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/224089015?v=4",
+      "createdAt": "2026-10-22T12:51:19Z",
+      "dayOfSprint": 17,
+      "additions": 20,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "REVIEWED",
+      "creditScore": 83,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 22,
+        "complexity": 20,
+        "impact": 21,
+        "testCoverage": 20
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-25T08:31:17.486Z",
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792913179974-0dnk",
+      "githubPrNumber": 68,
+      "isRepoOnly": false,
+      "repo": "codepiyusss/open_source_issue_contribution",
+      "title": "feat: add kg_to_lbs and lbs_to_kg conversions (#13)",
+      "description": "### Summary\nAdds weight conversion functions (\\kg_to_lbs\\ and \\lbs_to_kg\\) and exposes them as CLI choices \\kg2lb\\ and \\lb2kg\\ in \\\fixit convert\\.\n\n### Changes\n- Defined \\LBS_PER_KG = 2.20462\\ and implemented \\kg_to_lbs(kg: float) -> float\\ and \\lbs_to_kg(lbs: float) -> float\\ with full docstrings i",
+      "url": "https://github.com/codepiyusss/open_source_issue_contribution/pull/68",
+      "state": "open",
+      "author": "marupakalaharsith20-beep",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/242739440?v=4",
+      "createdAt": "2026-10-25T07:25:32Z",
+      "dayOfSprint": 17,
+      "additions": 48,
+      "deletions": 0,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792913177266-ak2s",
+      "githubPrNumber": 67,
+      "isRepoOnly": false,
+      "repo": "codepiyusss/open_source_issue_contribution",
+      "title": "feat: add --sort-keys option to json command (#16)",
+      "description": "### Summary\nAdds the \\--sort-keys\\ flag to the \\\fixit json\\ command and adds the \\sort_keys: bool = False\\ parameter to \\\fixit.jsonfmt.format_json()\\.\n\n### Changes\n- Updated \\\format_json()\\ in \\\fixit/jsonfmt.py\\ to accept \\sort_keys: bool = False\\ and pass it to \\json.dumps()\\.\n- Added \\--sort-keys\\",
+      "url": "https://github.com/codepiyusss/open_source_issue_contribution/pull/67",
+      "state": "open",
+      "author": "marupakalaharsith20-beep",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/242739440?v=4",
+      "createdAt": "2026-10-25T07:22:55Z",
+      "dayOfSprint": 17,
+      "additions": 21,
+      "deletions": 3,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
+    {
+      "id": "pr-1792913173381-uz5o",
+      "githubPrNumber": 66,
+      "isRepoOnly": false,
+      "repo": "codepiyusss/open_source_issue_contribution",
+      "title": "fix: preserve non-ASCII characters in format_json (#8)",
+      "description": "### Summary\nFixes #8 by setting \\ensure_ascii=False\\ in \\json.dumps()\\ within \\\format_json()\\. Previously, non-ASCII characters such as \\café\\ were escaped into Unicode escape sequences like \\caf\\u00e9\\.\n\n### Changes\n- Updated \\\format_json\\ in \\\fixit/jsonfmt.py\\ to pass \\ensure_ascii=False\\ to \\json",
+      "url": "https://github.com/codepiyusss/open_source_issue_contribution/pull/66",
+      "state": "open",
+      "author": "marupakalaharsith20-beep",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/242739440?v=4",
+      "createdAt": "2026-10-25T07:21:04Z",
+      "dayOfSprint": 17,
+      "additions": 6,
+      "deletions": 1,
+      "commitsCount": 1,
+      "reviewStatus": "PENDING_REVIEW",
+      "creditScore": 0,
+      "adminFeedback": "",
+      "adminCriteria": {
+        "quality": 0,
+        "complexity": 0,
+        "impact": 0,
+        "testCoverage": 0
+      },
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "tags": [
+        "contribution"
+      ]
+    },
     {
       "id": "pr-1792912228062-5hi2",
       "githubPrNumber": 193,
@@ -2799,7 +2876,7 @@
       "commitsCount": 1,
       "repo": "ilyamiro/serpantinum",
       "githubPrNumber": 439,
-      "reviewedAt": "2026-10-18T14:32:33.739Z",
+      "reviewedAt": "2026-10-25T08:33:48.204Z",
       "description": "## Summary\n\nFixed an issue where the lock screen showed the charging indicator even when the battery was discharging.\n\nThe `isCharging` check was missing a comparison against the current battery state for `UPowerDeviceState.FullyCharged`. This caused it to always evaluate as true when the battery in",
       "reviewedBy": "Vijay-1710",
       "title": "fix(lock): compare FullyCharged against battery state",
@@ -2815,12 +2892,12 @@
       "id": "pr-1792259033641-unf8",
       "isRepoOnly": false,
       "state": "merged",
-      "creditScore": 71,
+      "creditScore": 75,
       "adminCriteria": {
-        "impact": 19,
         "quality": 19,
         "complexity": 17,
-        "testCoverage": 16
+        "impact": 21,
+        "testCoverage": 18
       },
       "_docId": "pr-1792259033641-unf8"
     },
@@ -6702,22 +6779,22 @@
       "state": "open"
     },
     {
-      "creditScore": 73,
+      "creditScore": 83,
       "additions": 21,
       "deletions": 9,
       "author": "gouthamkrishnap",
       "commitsCount": 1,
       "repo": "ilyamiro/serpantinum",
       "githubPrNumber": 461,
-      "reviewedAt": null,
+      "reviewedAt": "2026-10-25T08:34:45.984Z",
       "description": "Scrolling inside a QuickActions tab can unexpectedly switch to the neighbouring tab. This happens in Notes when a long note reaches the top or bottom of its scroll view, and in Timer when the cursor drifts slightly off a selector while scrolling.\n\nThe cause is the wheel handler on `gridMouseArea` in",
       "adminCriteria": {
-        "complexity": 18,
-        "testCoverage": 18,
-        "impact": 18,
-        "quality": 19
+        "quality": 22,
+        "complexity": 20,
+        "impact": 20,
+        "testCoverage": 21
       },
-      "reviewedBy": null,
+      "reviewedBy": "Vijay-1710",
       "title": "fix(quickactions): only switch tabs on scroll over the sidebar",
       "authorAvatar": "https://avatars.githubusercontent.com/u/224089015?v=4",
       "url": "https://github.com/ilyamiro/serpantinum/pull/461",
@@ -6733,22 +6810,22 @@
       "state": "merged"
     },
     {
-      "creditScore": 60,
+      "creditScore": 79,
       "additions": 1,
       "deletions": 0,
       "author": "gouthamkrishnap",
       "commitsCount": 3,
       "repo": "ilyamiro/serpantinum",
       "githubPrNumber": 451,
-      "reviewedAt": null,
+      "reviewedAt": "2026-10-25T08:40:07.916Z",
       "description": "## Summary\r\n\r\nWhen the music popup is switched to a player other than the active one, its album art fails to load and the popup falls back to the default gradient.\r\n\r\n`art_fetch.sh` expects four arguments: player ID, artwork URL, track title and artist. However, `customArtFetchProc` in `MusicPlayerS",
       "adminCriteria": {
-        "complexity": 15,
-        "testCoverage": 15,
-        "impact": 15,
-        "quality": 15
+        "quality": 21,
+        "complexity": 19,
+        "impact": 19,
+        "testCoverage": 20
       },
-      "reviewedBy": null,
+      "reviewedBy": "Vijay-1710",
       "title": "fix(media): pass player id to art_fetch.sh from the music popup",
       "authorAvatar": "https://avatars.githubusercontent.com/u/224089015?v=4",
       "url": "https://github.com/ilyamiro/serpantinum/pull/451",
@@ -10748,6 +10825,83 @@
   ],
   "auditLogs": [
     {
+      "id": "log-1792917607924-iyki",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #451 (gouthamkrishnap) -> Awarded 79 credits with status REVIEWED",
+      "timestamp": "2026-10-25T08:40:07.924Z"
+    },
+    {
+      "id": "log-1792917583959-1dti",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #451 (gouthamkrishnap) -> Awarded 79 credits with status REVIEWED",
+      "timestamp": "2026-10-25T08:39:43.959Z"
+    },
+    {
+      "id": "log-1792917554977-q1wr",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #451 (gouthamkrishnap) -> Awarded 78 credits with status REVIEWED",
+      "timestamp": "2026-10-25T08:39:14.977Z"
+    },
+    {
+      "id": "log-1792917438764-qtnf",
+      "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-25T08:37:18.764Z"
+    },
+    {
+      "id": "log-1792917285995-hhu5",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #461 (gouthamkrishnap) -> Awarded 83 credits with status REVIEWED",
+      "timestamp": "2026-10-25T08:34:45.995Z"
+    },
+    {
+      "id": "log-1792917228212-mzt6",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #439 (gouthamkrishnap) -> Awarded 75 credits with status REVIEWED",
+      "timestamp": "2026-10-25T08:33:48.212Z"
+    },
+    {
+      "id": "log-1792917077494-dt8x",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #484 (gouthamkrishnap) -> Awarded 83 credits with status REVIEWED",
+      "timestamp": "2026-10-25T08:31:17.494Z"
+    },
+    {
+      "id": "log-1792916916048-eyyh",
+      "action": "PR_SUBMITTED",
+      "actor": "gouthamkrishnap",
+      "details": "@gouthamkrishnap submitted verified PR #484 in ilyamiro/serpantinum",
+      "timestamp": "2026-10-25T08:28:36.049Z"
+    },
+    {
+      "id": "log-1792913179982-w87j",
+      "action": "PR_SUBMITTED",
+      "actor": "marupakalaharsith20-beep",
+      "details": "@marupakalaharsith20-beep submitted verified PR #68 in codepiyusss/open_source_issue_contribution",
+      "timestamp": "2026-10-25T07:26:19.982Z"
+    },
+    {
+      "id": "log-1792913177272-nazs",
+      "action": "PR_SUBMITTED",
+      "actor": "marupakalaharsith20-beep",
+      "details": "@marupakalaharsith20-beep submitted verified PR #67 in codepiyusss/open_source_issue_contribution",
+      "timestamp": "2026-10-25T07:26:17.272Z"
+    },
+    {
+      "id": "log-1792913173397-4iyw",
+      "action": "PR_SUBMITTED",
+      "actor": "marupakalaharsith20-beep",
+      "details": "@marupakalaharsith20-beep submitted verified PR #66 in codepiyusss/open_source_issue_contribution",
+      "timestamp": "2026-10-25T07:26:13.397Z"
+    },
+    {
       "id": "log-1792912228380-1bt9",
       "action": "PR_SUBMITTED",
       "actor": "BharathReddy15",
@@ -11229,83 +11383,6 @@
       "actor": "SCHEDULED_TICKER",
       "details": "Day 16 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
       "timestamp": "2026-10-23T12:23:29.316Z"
-    },
-    {
-      "id": "log-1792758207537-5kqi",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T12:23:27.537Z"
-    },
-    {
-      "id": "log-1792758206386-gn9m",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T12:23:26.386Z"
-    },
-    {
-      "id": "log-1792758204525-93n5",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T12:23:24.525Z"
-    },
-    {
-      "id": "log-1792758204514-4w88",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T12:23:24.514Z"
-    },
-    {
-      "id": "log-1792758202815-vps0",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T12:23:22.815Z"
-    },
-    {
-      "id": "log-1792756908328-by44",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T12:01:48.328Z"
-    },
-    {
-      "id": "log-1792756908309-khjv",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T12:01:48.309Z"
-    },
-    {
-      "id": "log-1792756903816-6dcd",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T12:01:43.816Z"
-    },
-    {
-      "id": "log-1792756903746-as8x",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T12:01:43.746Z"
-    },
-    {
-      "id": "log-1792756301950-7k92",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T11:51:41.950Z"
-    },
-    {
-      "id": "log-1792756301014-bonh",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T11:51:41.014Z"
     }
   ],
   "deletedPrIds": [
@@ -11326,7 +11403,8 @@
     "iiitk-football/super-league#174",
     "iiitk-football/super-league#177",
     "iiitk-football/super-league#178",
-    "pr-test-latency-1792912765858",
-    "999999"
+    "pr-benchmark-1792928976604",
+    "999991",
+    "pr-benchmark-1792929028489"
   ]
 }
