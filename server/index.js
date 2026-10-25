@@ -7,6 +7,7 @@ import fs from 'fs';
 import crypto from 'crypto';
 import { fileURLToPath } from 'url';
 import { db, calculateNextSync, isUserPurged } from './db.js';
+import { isFirestoreActive, saveUserToFirestore } from './firestore.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -95,13 +96,15 @@ function verifySecretPasskey(providedKey) {
   return crypto.timingSafeEqual(a, b);
 }
 
-// Create cryptographically signed HMAC-SHA256 session token
-function createSignedSessionToken(username, role = 'contributor', isAdminAuth = false, ghAccessToken = null) {
+// Create cryptographically signed HMAC-SHA256 session token with full identity payload
+function createSignedSessionToken(username, role = 'contributor', isAdminAuth = false, ghAccessToken = null, name = null, avatarUrl = null) {
   const payload = JSON.stringify({
     u: username,
     r: role,
     adm: Boolean(isAdminAuth),
     gh: ghAccessToken || null,
+    n: name || username,
+    av: avatarUrl || `https://avatars.githubusercontent.com/u/${username}?v=4`,
     t: Date.now()
   });
   const b64 = Buffer.from(payload).toString('base64url');
@@ -168,7 +171,33 @@ const getAuthenticatedSession = (req) => {
   if (rawToken && typeof rawToken === 'string' && rawToken.includes('.')) {
     const payload = verifySignedSessionToken(rawToken);
     if (payload && payload.u) {
-      const dbUser = db.getUserByUsername(payload.u);
+      let dbUser = db.getUserByUsername(payload.u);
+
+      // Self-heal new accounts across isolated serverless lambda containers:
+      // If the cryptographic signature is verified, this token was authentically issued by our server.
+      if (!dbUser && payload.u && !isUserPurged(payload.u, payload.n)) {
+        dbUser = {
+          id: `usr_${payload.u.toLowerCase()}`,
+          username: payload.u,
+          name: payload.n || payload.u,
+          avatarUrl: payload.av || `https://avatars.githubusercontent.com/u/${payload.u}?v=4`,
+          bio: 'GitHub Contributor',
+          htmlUrl: `https://github.com/${payload.u}`,
+          role: payload.adm ? 'admin' : (payload.r || 'contributor'),
+          createdAt: new Date().toISOString()
+        };
+        const existingIdx = (db.data.users || []).findIndex(u => u.username.toLowerCase() === dbUser.username.toLowerCase());
+        if (existingIdx >= 0) {
+          db.data.users[existingIdx] = dbUser;
+        } else {
+          db.data.users.push(dbUser);
+        }
+        db.save(false).catch(() => {});
+        if (isFirestoreActive()) {
+          saveUserToFirestore(dbUser).catch(() => {});
+        }
+      }
+
       if (dbUser) {
         const isAdminVerified = Boolean(payload.adm && (dbUser.role === 'admin' || payload.r === 'admin'));
         return {
@@ -362,7 +391,7 @@ app.post('/api/auth/admin-secret-login', async (req, res) => {
     user = await db.upsertUser({ ...user, role: 'admin' });
   }
 
-  const token = createSignedSessionToken(user.username, 'admin', true);
+  const token = createSignedSessionToken(user.username, 'admin', true, null, user.name, user.avatarUrl);
 
   res.cookie('reflect_session', token, {
     httpOnly: true,
@@ -409,7 +438,7 @@ app.post('/api/auth/mock-login', async (req, res) => {
     });
   }
 
-  const token = createSignedSessionToken(user.username, 'contributor', false);
+  const token = createSignedSessionToken(user.username, 'contributor', false, null, user.name, user.avatarUrl);
 
   res.cookie('reflect_session', token, {
     httpOnly: true,
@@ -502,6 +531,10 @@ app.get('/api/auth/github/callback', async (req, res) => {
       }
     });
     const ghUser = await userRes.json();
+    if (!ghUser || !ghUser.login) {
+      console.error('[OAuth] Failed to fetch user profile from GitHub:', ghUser);
+      return res.redirect(`${frontendUrl}/?error=github_profile_failed&message=${encodeURIComponent(ghUser?.message || 'Could not retrieve GitHub user profile')}`);
+    }
 
     const adminUsers = (process.env.ADMIN_GITHUB_USER || 'Vijay-1710')
       .toLowerCase()
@@ -518,9 +551,9 @@ app.get('/api/auth/github/callback', async (req, res) => {
       return res.redirect(`${frontendUrl}/?error=logins_paused&message=${encodeURIComponent('Logins are temporarily paused by event organizers. Please check back shortly!')}`);
     }
 
-    const user = await db.upsertUser({
-      id: `gh_${ghUser.id}`,
-      githubId: ghUser.id,
+    const userObj = {
+      id: `gh_${ghUser.id || ghUser.login.toLowerCase()}`,
+      githubId: ghUser.id || null,
       username: ghUser.login,
       name: ghUser.name || ghUser.login,
       avatarUrl: ghUser.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
@@ -528,7 +561,9 @@ app.get('/api/auth/github/callback', async (req, res) => {
       htmlUrl: ghUser.html_url || `https://github.com/${ghUser.login}`,
       role: isAdmin ? 'admin' : 'contributor',
       createdAt: new Date().toISOString()
-    });
+    };
+
+    const user = (await db.upsertUser(userObj)) || userObj;
 
     if (tokenData.access_token) {
       userAccessTokens.set(user.username.toLowerCase(), tokenData.access_token);
@@ -536,7 +571,14 @@ app.get('/api/auth/github/callback', async (req, res) => {
 
     // No automatic scraping of historical PRs upon login. Contributors submit their event PRs explicitly.
 
-    const sessionToken = createSignedSessionToken(user.username, user.role, isAdmin, tokenData.access_token);
+    const sessionToken = createSignedSessionToken(
+      user.username,
+      user.role,
+      isAdmin,
+      tokenData.access_token,
+      user.name,
+      user.avatarUrl
+    );
 
     res.cookie('reflect_session', sessionToken, {
       httpOnly: true,
