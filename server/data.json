@@ -21,9 +21,9 @@
     ],
     "startDate": "2026-10-08T18:30:00.000Z",
     "status": "ACTIVE",
-    "currentDay": 18,
-    "lastSyncAt": "2026-10-25T05:16:57.935Z",
-    "nextSyncAt": "2026-10-26T00:00:00.000Z"
+    "lastSyncAt": "2026-10-28T00:54:28.756Z",
+    "nextSyncAt": "2026-10-29T00:00:00.000Z",
+    "currentDay": 21
   },
   "users": [
     {
@@ -35,7 +35,8 @@
       "name": "249xa33106",
       "bio": "GitHub Contributor",
       "id": "gh_222018012",
-      "username": "249xa33106"
+      "username": "249xa33106",
+      "docId": "249xa33106"
     },
     {
       "createdAt": "2026-10-11T10:11:36.998Z",
@@ -46,7 +47,8 @@
       "name": "Anuj Paroha",
       "bio": "B.Tech AIML Student | Python • FastAPI • ML • Data Science | Building AI/ML and automation projects",
       "id": "gh_229555308",
-      "username": "77anuj77"
+      "username": "77anuj77",
+      "docId": "77anuj77"
     },
     {
       "createdAt": "2026-10-18T05:33:04.158Z",
@@ -57,7 +59,8 @@
       "name": "Aaryan Singh",
       "bio": "GitHub Contributor",
       "id": "gh_267396942",
-      "username": "aaryansingh200617-cyber"
+      "username": "aaryansingh200617-cyber",
+      "docId": "aaryansingh200617-cyber"
     },
     {
       "createdAt": "2026-10-17T06:17:42.390Z",
@@ -68,7 +71,8 @@
       "name": "aashiyadav893-web",
       "bio": "GitHub Contributor",
       "id": "gh_290732884",
-      "username": "aashiyadav893-web"
+      "username": "aashiyadav893-web",
+      "docId": "aashiyadav893-web"
     },
     {
       "createdAt": "2026-10-10T12:27:18.528Z",
@@ -79,7 +83,8 @@
       "name": "Abarna-2511",
       "bio": "GitHub Contributor",
       "id": "gh_248707773",
-      "username": "Abarna-2511"
+      "username": "Abarna-2511",
+      "docId": "abarna-2511"
     },
     {
       "createdAt": "2026-10-16T09:26:50.863Z",
@@ -90,7 +95,8 @@
       "name": "abdulaziz965-dev",
       "bio": "GitHub Contributor",
       "id": "gh_185824768",
-      "username": "abdulaziz965-dev"
+      "username": "abdulaziz965-dev",
+      "docId": "abdulaziz965-dev"
     },
     {
       "role": "contributor",
@@ -101,7 +107,8 @@
       "bio": "Student at IIT Jodhpur | Applied AI & Data Science | AI Agents | Machine Learning | Python | Data Analytics | Open Source | Building Real-World Projects | Aspir",
       "id": "gh_222751478",
       "username": "abhibob369-crypto",
-      "createdAt": "2026-10-09T10:32:57.419Z"
+      "createdAt": "2026-10-09T10:32:57.419Z",
+      "docId": "abhibob369-crypto"
     },
     {
       "createdAt": "2026-10-22T04:32:48.413Z",
@@ -112,7 +119,8 @@
       "name": "Abhishek singh",
       "bio": "Student developer exploring software engineering, algorithms, and open-source projects.\r\nAlways learning, always improving.",
       "id": "gh_252246243",
-      "username": "abhisheksinghcodebase"
+      "username": "abhisheksinghcodebase",
+      "docId": "abhisheksinghcodebase"
     },
     {
       "createdAt": "2026-10-13T20:17:48.114Z",
@@ -123,7 +131,8 @@
       "name": "Aditya Pandey",
       "bio": "GitHub Contributor",
       "id": "gh_195340186",
-      "username": "Ad895731"
+      "username": "Ad895731",
+      "docId": "ad895731"
     },
     {
       "createdAt": "2026-10-12T13:36:18.892Z",
@@ -134,7 +143,8 @@
       "name": "adarshsingh022006-tech",
       "bio": "GitHub Contributor",
       "id": "gh_267011181",
-      "username": "adarshsingh022006-tech"
+      "username": "adarshsingh022006-tech",
+      "docId": "adarshsingh022006-tech"
     },
     {
       "createdAt": "2026-10-11T17:36:50.203Z",
@@ -145,7 +155,8 @@
       "name": "Guda Adhi Yadav",
       "bio": "GitHub Contributor",
       "id": "gh_248521792",
-      "username": "adhiyadav-31"
+      "username": "adhiyadav-31",
+      "docId": "adhiyadav-31"
     },
     {
       "createdAt": "2026-10-17T13:51:57.491Z",
@@ -156,7 +167,8 @@
       "name": "Aditya Mahajan",
       "bio": "GitHub Contributor",
       "id": "gh_178887069",
-      "username": "Aditya8369"
+      "username": "Aditya8369",
+      "docId": "aditya8369"
     },
     {
       "createdAt": "2026-10-09T20:26:11.425Z",
@@ -167,7 +179,8 @@
       "name": "Afroz Middya",
       "bio": "GitHub Contributor",
       "id": "gh_160333462",
-      "username": "afrozmiddya"
+      "username": "afrozmiddya",
+      "docId": "afrozmiddya"
     },
     {
       "createdAt": "2026-10-20T17:25:53.572Z",
@@ -178,7 +191,8 @@
       "name": "AkibOnStack",
       "bio": "GitHub Contributor",
       "id": "gh_71378420",
-      "username": "AKIB2005"
+      "username": "AKIB2005",
+      "docId": "akib2005"
     },
     {
       "createdAt": "2026-10-21T16:21:43.714Z",
@@ -189,7 +203,8 @@
       "name": "Akshat Jain",
       "bio": "GitHub Contributor",
       "id": "gh_300370504",
-      "username": "AkshatJain2612009"
+      "username": "AkshatJain2612009",
+      "docId": "akshatjain2612009"
     },
     {
       "createdAt": "2026-10-14T14:27:52.954Z",
@@ -200,7 +215,8 @@
       "name": "Alen Alex",
       "bio": "GitHub Contributor",
       "id": "gh_233162342",
-      "username": "alenAlex707"
+      "username": "alenAlex707",
+      "docId": "alenalex707"
     },
     {
       "createdAt": "2026-10-11T13:12:31.742Z",
@@ -211,7 +227,8 @@
       "name": "Manav A",
       "bio": "GitHub Contributor",
       "id": "gh_254606435",
-      "username": "amanav2712-blip"
+      "username": "amanav2712-blip",
+      "docId": "amanav2712-blip"
     },
     {
       "createdAt": "2026-10-10T15:51:39.501Z",
@@ -222,7 +239,8 @@
       "name": "Ankush Shahu",
       "bio": "GitHub Contributor",
       "id": "gh_238998372",
-      "username": "ankush-dev-eng"
+      "username": "ankush-dev-eng",
+      "docId": "ankush-dev-eng"
     },
     {
       "createdAt": "2026-10-11T12:54:57.914Z",
@@ -233,7 +251,8 @@
       "name": "anshumansinghrajawat85-png",
       "bio": "GitHub Contributor",
       "id": "gh_301418833",
-      "username": "anshumansinghrajawat85-png"
+      "username": "anshumansinghrajawat85-png",
+      "docId": "anshumansinghrajawat85-png"
     },
     {
       "createdAt": "2026-10-09T12:05:14.415Z",
@@ -244,7 +263,8 @@
       "name": "Antim Yadav",
       "bio": "GitHub Contributor",
       "id": "gh_239117958",
-      "username": "antim8799-prog"
+      "username": "antim8799-prog",
+      "docId": "antim8799-prog"
     },
     {
       "createdAt": "2026-10-10T14:58:38.406Z",
@@ -255,7 +275,8 @@
       "name": "AnuragkGithub",
       "bio": "GitHub Contributor",
       "id": "gh_83278900",
-      "username": "AnuragkGithub"
+      "username": "AnuragkGithub",
+      "docId": "anuragkgithub"
     },
     {
       "createdAt": "2026-10-23T09:05:46.553Z",
@@ -266,7 +287,8 @@
       "name": "Arnab Kr Kashyap",
       "bio": "GitHub Contributor",
       "id": "gh_198343332",
-      "username": "arnabkashyap"
+      "username": "arnabkashyap",
+      "docId": "arnabkashyap"
     },
     {
       "createdAt": "2026-10-15T09:43:45.246Z",
@@ -277,7 +299,8 @@
       "name": "ASLINE HEPZIBAH FEBINA J",
       "bio": "I AM AN ASPIRRING CSE STUDENT ",
       "id": "gh_233886301",
-      "username": "aslinefebina-lab"
+      "username": "aslinefebina-lab",
+      "docId": "aslinefebina-lab"
     },
     {
       "createdAt": "2026-10-21T13:35:13.708Z",
@@ -288,7 +311,8 @@
       "name": "Ayukt Gujral",
       "bio": "GitHub Contributor",
       "id": "gh_328345081",
-      "username": "ayukt-v"
+      "username": "ayukt-v",
+      "docId": "ayukt-v"
     },
     {
       "createdAt": "2026-10-17T15:47:32.067Z",
@@ -299,7 +323,8 @@
       "name": "Ayush Agrawal",
       "bio": "i am fresher learning web development ...with little knowledge of java",
       "id": "gh_298653075",
-      "username": "ayushagrawalfzd4321-dot"
+      "username": "ayushagrawalfzd4321-dot",
+      "docId": "ayushagrawalfzd4321-dot"
     },
     {
       "createdAt": "2026-10-20T09:41:53.112Z",
@@ -310,7 +335,8 @@
       "name": "azvirontechnologies",
       "bio": "GitHub Contributor",
       "id": "gh_334614058",
-      "username": "azvirontechnologies"
+      "username": "azvirontechnologies",
+      "docId": "azvirontechnologies"
     },
     {
       "role": "contributor",
@@ -321,7 +347,8 @@
       "bio": "GitHub Contributor",
       "id": "gh_250530100",
       "username": "Bhavyam4808",
-      "createdAt": "2026-10-21T13:55:19.738Z"
+      "createdAt": "2026-10-21T13:55:19.738Z",
+      "docId": "bhavyam4808"
     },
     {
       "role": "contributor",
@@ -332,7 +359,8 @@
       "bio": "GitHub Contributor",
       "id": "gh_285468035",
       "username": "blank-0007",
-      "createdAt": "2026-10-22T03:50:43.044Z"
+      "createdAt": "2026-10-22T03:50:43.044Z",
+      "docId": "blank-0007"
     },
     {
       "createdAt": "2026-10-10T16:35:44.773Z",
@@ -343,7 +371,8 @@
       "name": "ch4225519-max",
       "bio": "GitHub Contributor",
       "id": "gh_309008476",
-      "username": "ch4225519-max"
+      "username": "ch4225519-max",
+      "docId": "ch4225519-max"
     },
     {
       "createdAt": "2026-10-14T05:55:54.526Z",
@@ -354,7 +383,8 @@
       "name": "P S Charitha",
       "bio": "GitHub Contributor",
       "id": "gh_214610003",
-      "username": "charitha1702"
+      "username": "charitha1702",
+      "docId": "charitha1702"
     },
     {
       "createdAt": "2026-10-09T15:20:34.839Z",
@@ -365,7 +395,8 @@
       "name": "cyberatharv",
       "bio": "GitHub Contributor",
       "id": "gh_255289515",
-      "username": "cyber-atharv"
+      "username": "cyber-atharv",
+      "docId": "cyber-atharv"
     },
     {
       "role": "contributor",
@@ -376,7 +407,8 @@
       "bio": "REC SONBHADRA 2K29",
       "id": "gh_211018717",
       "username": "d4-dhiraj",
-      "createdAt": "2026-10-23T10:26:11.776Z"
+      "createdAt": "2026-10-23T10:26:11.776Z",
+      "docId": "d4-dhiraj"
     },
     {
       "role": "contributor",
@@ -387,7 +419,8 @@
       "bio": "CSE UnderGrad | Hactoberfest'26 '25 '24 | SIH' 26 '25 '24 | Competitive Programmer | Open-Source Code Contributor |  Data Scientist |",
       "id": "gh_183620616",
       "username": "deveshvaidyaofficial",
-      "createdAt": "2026-10-21T14:27:15.224Z"
+      "createdAt": "2026-10-21T14:27:15.224Z",
+      "docId": "deveshvaidyaofficial"
     },
     {
       "createdAt": "2026-10-21T13:34:33.098Z",
@@ -398,7 +431,8 @@
       "name": "Dipansu Mishra",
       "bio": "🎓 CSE Student | 💻 Web Developer.\r\n\r\n🚀 Building projects, exploring AI & looking  to contribute in Open Source.\r\n\r\n💡 Turning ideas into real-world solutions.",
       "id": "gh_294399167",
-      "username": "dipansumishra9797-sudo"
+      "username": "dipansumishra9797-sudo",
+      "docId": "dipansumishra9797-sudo"
     },
     {
       "role": "contributor",
@@ -409,7 +443,8 @@
       "bio": "Delhi\r\n\r\n",
       "id": "gh_241068726",
       "username": "divyanshisrivastava395",
-      "createdAt": "2026-10-21T17:39:22.187Z"
+      "createdAt": "2026-10-21T17:39:22.187Z",
+      "docId": "divyanshisrivastava395"
     },
     {
       "role": "contributor",
@@ -420,7 +455,8 @@
       "bio": "GitHub Contributor",
       "id": "gh_344219582",
       "username": "edamone6767",
-      "createdAt": "2026-10-19T19:39:25.285Z"
+      "createdAt": "2026-10-19T19:39:25.285Z",
+      "docId": "edamone6767"
     },
     {
       "createdAt": "2026-10-16T14:33:46.234Z",
@@ -431,7 +467,8 @@
       "name": "Puri Eklavya",
       "bio": "GitHub Contributor",
       "id": "gh_207858994",
-      "username": "Eklavvyaaaaa"
+      "username": "Eklavvyaaaaa",
+      "docId": "eklavvyaaaaa"
     },
     {
       "createdAt": "2026-10-22T04:01:05.133Z",
@@ -442,7 +479,8 @@
       "name": "EmlynM",
       "bio": "GitHub Contributor",
       "id": "gh_194776385",
-      "username": "EmlynM"
+      "username": "EmlynM",
+      "docId": "emlynm"
     },
     {
       "createdAt": "2026-10-10T05:26:42.243Z",
@@ -453,7 +491,8 @@
       "name": "Sai Ram Dash",
       "bio": "16 • Commerce Student • 2nd Trillionaire probably!",
       "id": "gh_295812831",
-      "username": "ewwhardik"
+      "username": "ewwhardik",
+      "docId": "ewwhardik"
     },
     {
       "createdAt": "2026-10-20T04:03:48.561Z",
@@ -464,7 +503,8 @@
       "name": "Sai Yogesh",
       "bio": "GitHub Contributor",
       "id": "gh_84241539",
-      "username": "expertX221"
+      "username": "expertX221",
+      "docId": "expertx221"
     },
     {
       "createdAt": "2026-10-09T10:32:58.323Z",
@@ -475,7 +515,8 @@
       "name": "Govardhanan Gokuldhas",
       "bio": "🚀 AI & Data Science Student | Building AI-Powered Solutions | Hackathon Enthusiast | Python • Java • Web Development | Open Source Learner",
       "id": "gh_241099203",
-      "username": "gokuldhasgovardhanan-crypto"
+      "username": "gokuldhasgovardhanan-crypto",
+      "docId": "gokuldhasgovardhanan-crypto"
     },
     {
       "createdAt": "2026-10-19T12:26:48.802Z",
@@ -486,7 +527,8 @@
       "name": "Gopal",
       "bio": "Full Stack Developer ",
       "id": "gh_182204388",
-      "username": "Gopal7387"
+      "username": "Gopal7387",
+      "docId": "gopal7387"
     },
     {
       "createdAt": "2026-10-20T18:08:24.990Z",
@@ -497,7 +539,8 @@
       "name": "Gopikrishna Mahalingam",
       "bio": "Computer Engineering Student || Java | DSA | JavaScript | Web Development\r\n|| Currently building toward Java Full-Stack Development.",
       "id": "gh_241567481",
-      "username": "gopikrishnamahalingam"
+      "username": "gopikrishnamahalingam",
+      "docId": "gopikrishnamahalingam"
     },
     {
       "role": "contributor",
@@ -508,7 +551,8 @@
       "bio": "GitHub Contributor",
       "id": "gh_224089015",
       "username": "gouthamkrishnap",
-      "createdAt": "2026-10-25T08:40:21.837Z"
+      "createdAt": "2026-10-23T13:49:14.077Z",
+      "docId": "gouthamkrishnap"
     },
     {
       "role": "contributor",
@@ -519,7 +563,8 @@
       "bio": "GitHub Contributor",
       "id": "gh_236617457",
       "username": "Gyan987",
-      "createdAt": "2026-10-19T15:15:18.607Z"
+      "createdAt": "2026-10-19T15:15:18.607Z",
+      "docId": "gyan987"
     },
     {
       "createdAt": "2026-10-14T09:39:56.154Z",
@@ -530,7 +575,8 @@
       "name": "Harsh Kumar",
       "bio": "GitHub Contributor",
       "id": "gh_178459042",
-      "username": "harsh1546"
+      "username": "harsh1546",
+      "docId": "harsh1546"
     },
     {
       "role": "contributor",
@@ -541,7 +587,8 @@
       "bio": "Student at  SRM University | IIT Madras BS |🌆 From Hyderabad, Telangana, India 🇮🇳",
       "id": "gh_180102080",
       "username": "harshith7002",
-      "createdAt": "2026-10-21T04:05:56.456Z"
+      "createdAt": "2026-10-21T04:05:56.456Z",
+      "docId": "harshith7002"
     },
     {
       "createdAt": "2026-10-10T15:11:46.303Z",
@@ -552,7 +599,8 @@
       "name": "himanshugupta77",
       "bio": "GitHub Contributor",
       "id": "gh_214311684",
-      "username": "himanshugupta77"
+      "username": "himanshugupta77",
+      "docId": "himanshugupta77"
     },
     {
       "createdAt": "2026-10-21T13:37:21.876Z",
@@ -563,7 +611,8 @@
       "name": "prit.core",
       "bio": "GitHub Contributor",
       "id": "gh_315628357",
-      "username": "hiremathpreetam339-max"
+      "username": "hiremathpreetam339-max",
+      "docId": "hiremathpreetam339-max"
     },
     {
       "createdAt": "2026-10-10T17:46:00.305Z",
@@ -574,7 +623,8 @@
       "name": "Hardik Kumar Sinha",
       "bio": "GitHub Contributor",
       "id": "gh_83366038",
-      "username": "HKSinha510"
+      "username": "HKSinha510",
+      "docId": "hksinha510"
     },
     {
       "createdAt": "2026-10-20T12:22:19.367Z",
@@ -585,7 +635,8 @@
       "name": "hrishibond007",
       "bio": "GitHub Contributor",
       "id": "gh_75049729",
-      "username": "hrishibond007"
+      "username": "hrishibond007",
+      "docId": "hrishibond007"
     },
     {
       "createdAt": "2026-10-10T21:41:43.498Z",
@@ -596,7 +647,8 @@
       "name": "Armaan Middha",
       "bio": "GitHub Contributor",
       "id": "gh_211892234",
-      "username": "Jalalabadi32-bit"
+      "username": "Jalalabadi32-bit",
+      "docId": "jalalabadi32-bit"
     },
     {
       "createdAt": "2026-10-12T17:46:47.857Z",
@@ -607,7 +659,8 @@
       "name": "Jaysukh Sesham",
       "bio": "GitHub Contributor",
       "id": "gh_235364791",
-      "username": "JaysukhCSE28"
+      "username": "JaysukhCSE28",
+      "docId": "jaysukhcse28"
     },
     {
       "createdAt": "2026-10-23T07:48:17.012Z",
@@ -618,7 +671,8 @@
       "name": "Jeevan M",
       "bio": "GitHub Contributor",
       "id": "gh_199288486",
-      "username": "Jeevanm2004"
+      "username": "Jeevanm2004",
+      "docId": "jeevanm2004"
     },
     {
       "createdAt": "2026-10-09T18:06:57.319Z",
@@ -629,7 +683,8 @@
       "name": "Aditi Rathore",
       "bio": "GitHub Contributor",
       "id": "gh_193341718",
-      "username": "KALEIDOSCOPE279"
+      "username": "KALEIDOSCOPE279",
+      "docId": "kaleidoscope279"
     },
     {
       "createdAt": "2026-10-09T15:41:29.763Z",
@@ -640,7 +695,8 @@
       "name": "Karthik s",
       "bio": "GitHub Contributor",
       "id": "gh_62698887",
-      "username": "karthik-s-22222"
+      "username": "karthik-s-22222",
+      "docId": "karthik-s-22222"
     },
     {
       "role": "contributor",
@@ -651,7 +707,8 @@
       "bio": "GitHub Contributor",
       "id": "gh_308359294",
       "username": "kawhale-patil",
-      "createdAt": "2026-10-21T01:32:05.218Z"
+      "createdAt": "2026-10-21T01:32:05.218Z",
+      "docId": "kawhale-patil"
     },
     {
       "role": "contributor",
@@ -662,7 +719,8 @@
       "bio": "GitHub Contributor",
       "id": "gh_93468344",
       "username": "KeerthiKumarR",
-      "createdAt": "2026-10-21T15:27:03.789Z"
+      "createdAt": "2026-10-21T15:27:03.789Z",
+      "docId": "keerthikumarr"
     },
     {
       "createdAt": "2026-10-17T11:31:16.981Z",
@@ -673,7 +731,8 @@
       "name": "Khanjan nath",
       "bio": "Turning ideas into code and coffee into creations ☕💻",
       "id": "gh_161429455",
-      "username": "khanjan2024"
+      "username": "khanjan2024",
+      "docId": "khanjan2024"
     },
     {
       "createdAt": "2026-10-20T18:07:51.468Z",
@@ -684,7 +743,8 @@
       "name": "Khushleen kaur",
       "bio": "Coder/Learner!\r\nHTML | CSS | JS  || JAVA, Python, Basic CPP",
       "id": "gh_141584284",
-      "username": "Khushleen-Kaur"
+      "username": "Khushleen-Kaur",
+      "docId": "khushleen-kaur"
     },
     {
       "createdAt": "2026-10-12T06:12:00.018Z",
@@ -695,7 +755,8 @@
       "name": "Maya",
       "bio": "B.Tech AI & Data Science | Exploring AI Research & Intelligent Agents | Building AI Solutions for Real-World Problems",
       "id": "gh_241434081",
-      "username": "kit29-25bad095"
+      "username": "kit29-25bad095",
+      "docId": "kit29-25bad095"
     },
     {
       "createdAt": "2026-10-21T13:44:40.038Z",
@@ -706,7 +767,8 @@
       "name": "Krishna Chaurasiya",
       "bio": "I am studying at Mirai School of Technology.",
       "id": "gh_321531139",
-      "username": "krishna8400302704-ship-it"
+      "username": "krishna8400302704-ship-it",
+      "docId": "krishna8400302704-ship-it"
     },
     {
       "createdAt": "2026-10-10T08:37:13.116Z",
@@ -717,7 +779,8 @@
       "name": "Suraj Kumar",
       "bio": "GitHub Contributor",
       "id": "gh_244688245",
-      "username": "ksuraj42280-afk"
+      "username": "ksuraj42280-afk",
+      "docId": "ksuraj42280-afk"
     },
     {
       "role": "contributor",
@@ -728,7 +791,8 @@
       "bio": "Cloud enthusiast and full stack developer working with AWS, GCP, and modern web technologies — always learning and building 🌍",
       "id": "gh_233261143",
       "username": "Kumar44developer",
-      "createdAt": "2026-10-18T05:04:32.133Z"
+      "createdAt": "2026-10-18T05:04:32.133Z",
+      "docId": "kumar44developer"
     },
     {
       "createdAt": "2026-10-22T05:24:49.485Z",
@@ -739,7 +803,8 @@
       "name": "kumarswamyry54-jpg",
       "bio": "GitHub Contributor",
       "id": "gh_298003873",
-      "username": "kumarswamyry54-jpg"
+      "username": "kumarswamyry54-jpg",
+      "docId": "kumarswamyry54-jpg"
     },
     {
       "createdAt": "2026-10-11T15:24:15.547Z",
@@ -750,7 +815,8 @@
       "name": "LAKSHIGA SHREE S P",
       "bio": "GitHub Contributor",
       "id": "gh_193434367",
-      "username": "Lakshigashree"
+      "username": "Lakshigashree",
+      "docId": "lakshigashree"
     },
     {
       "createdAt": "2026-10-11T13:15:55.355Z",
@@ -761,7 +827,8 @@
       "name": "LOKESH ",
       "bio": "GitHub Contributor",
       "id": "gh_146335332",
-      "username": "Lokesh11868"
+      "username": "Lokesh11868",
+      "docId": "lokesh11868"
     },
     {
       "createdAt": "2026-10-12T16:01:30.821Z",
@@ -772,7 +839,8 @@
       "name": "nomulalokesh",
       "bio": "GitHub Contributor",
       "id": "gh_87014842",
-      "username": "lokigamer2911"
+      "username": "lokigamer2911",
+      "docId": "lokigamer2911"
     },
     {
       "createdAt": "2026-10-21T13:44:31.993Z",
@@ -783,7 +851,8 @@
       "name": "Shobhit Soam",
       "bio": "GitHub Contributor",
       "id": "gh_226991915",
-      "username": "Lucario9184"
+      "username": "Lucario9184",
+      "docId": "lucario9184"
     },
     {
       "createdAt": "2026-10-11T17:32:21.482Z",
@@ -794,7 +863,8 @@
       "name": "maduruavulanikhitha63",
       "bio": "GitHub Contributor",
       "id": "gh_265766166",
-      "username": "maduruavulanikhitha63"
+      "username": "maduruavulanikhitha63",
+      "docId": "maduruavulanikhitha63"
     },
     {
       "createdAt": "2026-10-21T13:11:53.053Z",
@@ -805,7 +875,8 @@
       "name": "Manasvi",
       "bio": "GitHub Contributor",
       "id": "gh_225230001",
-      "username": "manasviwairkar"
+      "username": "manasviwairkar",
+      "docId": "manasviwairkar"
     },
     {
       "createdAt": "2026-10-12T16:37:12.342Z",
@@ -816,7 +887,8 @@
       "name": "Kunda Manohar",
       "bio": "MCA Student | Java Developer | Cyber Security Learner | Networking Enthusiast | Open to Internship Opportunities",
       "id": "gh_99658245",
-      "username": "manohar-kunda"
+      "username": "manohar-kunda",
+      "docId": "manohar-kunda"
     },
     {
       "role": "contributor",
@@ -827,7 +899,8 @@
       "bio": "just another curious guy",
       "id": "gh_235041349",
       "username": "manoj-1407",
-      "createdAt": "2026-10-23T14:10:51.175Z"
+      "createdAt": "2026-10-23T14:10:51.175Z",
+      "docId": "manoj-1407"
     },
     {
       "createdAt": "2026-10-17T04:40:25.207Z",
@@ -838,7 +911,8 @@
       "name": "Mansi",
       "bio": "GitHub Contributor",
       "id": "gh_222844990",
-      "username": "mansi040805-dotcom"
+      "username": "mansi040805-dotcom",
+      "docId": "mansi040805-dotcom"
     },
     {
       "role": "contributor",
@@ -849,7 +923,8 @@
       "bio": "GitHub Contributor",
       "id": "gh_67535496",
       "username": "manvith12",
-      "createdAt": "2026-10-12T06:45:12.505Z"
+      "createdAt": "2026-10-12T06:45:12.505Z",
+      "docId": "manvith12"
     },
     {
       "createdAt": "2026-10-09T15:55:10.403Z",
@@ -860,7 +935,8 @@
       "name": "Master-Zero1",
       "bio": "Hi !!\r\nI am Master-Zero1, but the government knows me as Prithvi ;)\r\n|19|\r\nI love to code and draw stuff whenever I can\r\nWelcome to my digital junkyard > - <",
       "id": "gh_274167026",
-      "username": "Master-Zero1"
+      "username": "Master-Zero1",
+      "docId": "master-zero1"
     },
     {
       "createdAt": "2026-10-21T15:26:21.312Z",
@@ -871,7 +947,8 @@
       "name": "Mayank Yaduvanshi",
       "bio": "Mern stack developer",
       "id": "gh_214951453",
-      "username": "Mayank421657646437284637324"
+      "username": "Mayank421657646437284637324",
+      "docId": "mayank421657646437284637324"
     },
     {
       "createdAt": "2026-10-20T10:49:25.711Z",
@@ -882,7 +959,8 @@
       "name": "mithlesh",
       "bio": "blah blah blah",
       "id": "gh_172577010",
-      "username": "mithhhilesh"
+      "username": "mithhhilesh",
+      "docId": "mithhhilesh"
     },
     {
       "createdAt": "2026-10-20T06:18:38.705Z",
@@ -893,7 +971,8 @@
       "name": "Mithun Prasath",
       "bio": "GitHub Contributor",
       "id": "gh_231480358",
-      "username": "MithunPrasath"
+      "username": "MithunPrasath",
+      "docId": "mithunprasath"
     },
     {
       "createdAt": "2026-10-13T05:34:31.024Z",
@@ -904,7 +983,8 @@
       "name": "Satyam Mitkari",
       "bio": "GitHub Contributor",
       "id": "gh_249679434",
-      "username": "mitkarisatyam"
+      "username": "mitkarisatyam",
+      "docId": "mitkarisatyam"
     },
     {
       "role": "contributor",
@@ -915,7 +995,8 @@
       "bio": "GitHub Contributor",
       "id": "gh_68137628",
       "username": "moneytosms",
-      "createdAt": "2026-10-19T13:22:32.813Z"
+      "createdAt": "2026-10-19T13:22:32.813Z",
+      "docId": "moneytosms"
     },
     {
       "createdAt": "2026-10-10T09:10:42.092Z",
@@ -926,7 +1007,8 @@
       "name": "mrravitripathi1331-ship-it",
       "bio": "GitHub Contributor",
       "id": "gh_301419344",
-      "username": "mrravitripathi1331-ship-it"
+      "username": "mrravitripathi1331-ship-it",
+      "docId": "mrravitripathi1331-ship-it"
     },
     {
       "createdAt": "2026-10-20T14:34:19.933Z",
@@ -937,7 +1019,8 @@
       "name": "mukilganesan1528",
       "bio": "GitHub Contributor",
       "id": "gh_316266015",
-      "username": "mukilganesan1528"
+      "username": "mukilganesan1528",
+      "docId": "mukilganesan1528"
     },
     {
       "createdAt": "2026-10-10T06:01:11.216Z",
@@ -948,7 +1031,8 @@
       "name": "Nachiketa sharma ",
       "bio": "SRM IST 29'\r\nCSE aspirant | Developer in progress\r\nSports • Music • Tech\r\nFocused on growth, discipline, and building something big",
       "id": "gh_224293481",
-      "username": "nachiketa11"
+      "username": "nachiketa11",
+      "docId": "nachiketa11"
     },
     {
       "createdAt": "2026-10-16T05:59:05.961Z",
@@ -959,7 +1043,8 @@
       "name": "Navaneeth Mohan",
       "bio": "\r\ngotta codee!!\r\n",
       "id": "gh_96969584",
-      "username": "NavaneethNem"
+      "username": "NavaneethNem",
+      "docId": "navaneethnem"
     },
     {
       "createdAt": "2026-10-13T07:02:48.066Z",
@@ -970,7 +1055,8 @@
       "name": "Guthikonda Naveen",
       "bio": "Aspiring SDE | Python | ML/AI (BERT, GPT-3.5, FAISS, RAG) | REST APIs | Microservices | IoT | Open to SDE roles",
       "id": "gh_196183614",
-      "username": "Naveen230497"
+      "username": "Naveen230497",
+      "docId": "naveen230497"
     },
     {
       "createdAt": "2026-10-17T06:54:05.049Z",
@@ -981,7 +1067,8 @@
       "name": "nayanjyoti kalita",
       "bio": "learning",
       "id": "gh_220146835",
-      "username": "nayan45633"
+      "username": "nayan45633",
+      "docId": "nayan45633"
     },
     {
       "role": "contributor",
@@ -992,7 +1079,8 @@
       "bio": "doesn't care♦️♠️♣️",
       "id": "gh_183050107",
       "username": "nexpectArpit",
-      "createdAt": "2026-10-21T17:56:49.273Z"
+      "createdAt": "2026-10-21T17:56:49.273Z",
+      "docId": "nexpectarpit"
     },
     {
       "createdAt": "2026-10-09T16:24:06.169Z",
@@ -1003,7 +1091,8 @@
       "name": "Nikhil Kumar Jha",
       "bio": "Building real projects, not tutorials",
       "id": "gh_185291051",
-      "username": "nick2726"
+      "username": "nick2726",
+      "docId": "nick2726"
     },
     {
       "createdAt": "2026-10-10T18:15:46.680Z",
@@ -1014,7 +1103,8 @@
       "name": "Sk Nooruddin",
       "bio": "GitHub Contributor",
       "id": "gh_235022415",
-      "username": "nooruddinsk660-rgb"
+      "username": "nooruddinsk660-rgb",
+      "docId": "nooruddinsk660-rgb"
     },
     {
       "createdAt": "2026-10-12T17:51:54.549Z",
@@ -1025,7 +1115,8 @@
       "name": "Tarun N",
       "bio": "GitHub Contributor",
       "id": "gh_185945328",
-      "username": "NTarun-111"
+      "username": "NTarun-111",
+      "docId": "ntarun-111"
     },
     {
       "role": "contributor",
@@ -1036,7 +1127,8 @@
       "bio": "GitHub Contributor",
       "id": "gh_194948962",
       "username": "Omkarop0808",
-      "createdAt": "2026-10-18T05:45:09.242Z"
+      "createdAt": "2026-10-18T05:45:09.242Z",
+      "docId": "omkarop0808"
     },
     {
       "role": "contributor",
@@ -1047,7 +1139,8 @@
       "bio": "Code, computers, and music define my world.",
       "id": "gh_95137948",
       "username": "OshekharO",
-      "createdAt": "2026-10-21T09:21:34.253Z"
+      "createdAt": "2026-10-21T09:21:34.253Z",
+      "docId": "oshekharo"
     },
     {
       "createdAt": "2026-10-16T15:27:26.779Z",
@@ -1058,7 +1151,8 @@
       "name": "Piyush",
       "bio": "Hye I Am Piyush Mathur  .\r\nI   am a 2nd Year Computer Science Student.\r\nI am a tech enthusiast learning web development along with Data Structures And Algorithm",
       "id": "gh_239327158",
-      "username": "piyushmathur153"
+      "username": "piyushmathur153",
+      "docId": "piyushmathur153"
     },
     {
       "createdAt": "2026-10-12T18:45:38.540Z",
@@ -1069,7 +1163,8 @@
       "name": "Piyush Patel",
       "bio": "GitHub Contributor",
       "id": "gh_136020845",
-      "username": "piyushpatelcodes"
+      "username": "piyushpatelcodes",
+      "docId": "piyushpatelcodes"
     },
     {
       "role": "contributor",
@@ -1080,7 +1175,8 @@
       "bio": "GitHub Contributor",
       "id": "gh_294398956",
       "username": "pomerinejeager2026",
-      "createdAt": "2026-10-21T14:46:13.595Z"
+      "createdAt": "2026-10-21T14:46:13.595Z",
+      "docId": "pomerinejeager2026"
     },
     {
       "createdAt": "2026-10-13T16:10:36.868Z",
@@ -1091,7 +1187,8 @@
       "name": "Prasanna Kulkarni",
       "bio": "Hi! I'm Prasanna Kulkarni, a passionate tech enthusiast and problem solver who loves turning ideas into reality through code, creativity, and logic.",
       "id": "gh_201370274",
-      "username": "PrasannaX-Spec"
+      "username": "PrasannaX-Spec",
+      "docId": "prasannax-spec"
     },
     {
       "createdAt": "2026-10-12T15:21:02.840Z",
@@ -1102,7 +1199,8 @@
       "name": "Pruthvi",
       "bio": "GitHub Contributor",
       "id": "gh_244775848",
-      "username": "pruthvilr"
+      "username": "pruthvilr",
+      "docId": "pruthvilr"
     },
     {
       "createdAt": "2026-10-21T13:55:18.865Z",
@@ -1113,7 +1211,8 @@
       "name": "psychic-singularity",
       "bio": "GitHub Contributor",
       "id": "gh_179015200",
-      "username": "psychic-singularity"
+      "username": "psychic-singularity",
+      "docId": "psychic-singularity"
     },
     {
       "createdAt": "2026-10-21T14:29:52.702Z",
@@ -1124,7 +1223,8 @@
       "name": "punyavasishta",
       "bio": "GitHub Contributor",
       "id": "gh_314994959",
-      "username": "punyavasishta"
+      "username": "punyavasishta",
+      "docId": "punyavasishta"
     },
     {
       "role": "contributor",
@@ -1135,7 +1235,8 @@
       "bio": "GitHub Contributor",
       "id": "gh_273587221",
       "username": "Pushkar-Shahi",
-      "createdAt": "2026-10-23T09:48:44.577Z"
+      "createdAt": "2026-10-23T09:48:44.577Z",
+      "docId": "pushkar-shahi"
     },
     {
       "createdAt": "2026-10-21T04:54:04.206Z",
@@ -1146,7 +1247,8 @@
       "name": "rajnish-verma-22172",
       "bio": "GitHub Contributor",
       "id": "gh_193460942",
-      "username": "rajnish-verma-22172"
+      "username": "rajnish-verma-22172",
+      "docId": "rajnish-verma-22172"
     },
     {
       "createdAt": "2026-10-20T07:50:25.822Z",
@@ -1157,7 +1259,8 @@
       "name": "rakshita ",
       "bio": "\"I'm incredibly passionate about cyber security and technology. It's not just a hobby for me; it's a driving force in my life.\"\r\n\r\n\r\n\r\n",
       "id": "gh_173669154",
-      "username": "rakshita93"
+      "username": "rakshita93",
+      "docId": "rakshita93"
     },
     {
       "createdAt": "2026-10-20T21:55:06.407Z",
@@ -1168,7 +1271,8 @@
       "name": "RANJITH ROSAN",
       "bio": "Analyst @ACCENTURE | Ex-Intern @ SeeWise.AI | Specialized in ML, AI & Computer Vision ",
       "id": "gh_91519971",
-      "username": "RANJITHROSAN17"
+      "username": "RANJITHROSAN17",
+      "docId": "ranjithrosan17"
     },
     {
       "createdAt": "2026-10-09T13:37:38.834Z",
@@ -1179,7 +1283,8 @@
       "name": "Rishit Khare",
       "bio": "GitHub Contributor",
       "id": "gh_115403841",
-      "username": "rishit270308"
+      "username": "rishit270308",
+      "docId": "rishit270308"
     },
     {
       "role": "contributor",
@@ -1190,7 +1295,8 @@
       "bio": "just a tech",
       "id": "gh_180702365",
       "username": "sadSanta-07",
-      "createdAt": "2026-10-22T13:42:27.689Z"
+      "createdAt": "2026-10-22T13:42:27.689Z",
+      "docId": "sadsanta-07"
     },
     {
       "createdAt": "2026-10-11T12:48:00.826Z",
@@ -1201,7 +1307,8 @@
       "name": "saikripa-2546",
       "bio": "GitHub Contributor",
       "id": "gh_186403716",
-      "username": "saikripa-2546"
+      "username": "saikripa-2546",
+      "docId": "saikripa-2546"
     },
     {
       "createdAt": "2026-10-11T17:39:22.479Z",
@@ -1212,7 +1319,8 @@
       "name": "Sanjay Kumar K",
       "bio": "GitHub Contributor",
       "id": "gh_199333829",
-      "username": "Sanjay-07-Sk"
+      "username": "Sanjay-07-Sk",
+      "docId": "sanjay-07-sk"
     },
     {
       "createdAt": "2026-10-20T03:49:33.866Z",
@@ -1223,7 +1331,8 @@
       "name": "Sarvesh",
       "bio": "GitHub Contributor",
       "id": "gh_115926855",
-      "username": "SarveshShahane"
+      "username": "SarveshShahane",
+      "docId": "sarveshshahane"
     },
     {
       "role": "contributor",
@@ -1234,7 +1343,8 @@
       "bio": "Python Developer in Progress 🐍 | Exploring AI, Machine Learning & Automation | Open Source Learner",
       "id": "gh_196914744",
       "username": "Sayandevxyz",
-      "createdAt": "2026-10-20T06:38:01.235Z"
+      "createdAt": "2026-10-20T06:38:01.235Z",
+      "docId": "sayandevxyz"
     },
     {
       "createdAt": "2026-10-20T15:38:36.411Z",
@@ -1245,7 +1355,8 @@
       "name": "Seyd-24-Shihabuddeen",
       "bio": "GitHub Contributor",
       "id": "gh_335120379",
-      "username": "Seyd-24-Shihabuddeen"
+      "username": "Seyd-24-Shihabuddeen",
+      "docId": "seyd-24-shihabuddeen"
     },
     {
       "createdAt": "2026-10-14T10:29:46.377Z",
@@ -1256,7 +1367,8 @@
       "name": "shagunmehta10",
       "bio": "GitHub Contributor",
       "id": "gh_206090275",
-      "username": "shagunmehta10"
+      "username": "shagunmehta10",
+      "docId": "shagunmehta10"
     },
     {
       "createdAt": "2026-10-21T13:47:09.210Z",
@@ -1267,7 +1379,8 @@
       "name": "shudh91730",
       "bio": "GitHub Contributor",
       "id": "gh_296397347",
-      "username": "shudh91730"
+      "username": "shudh91730",
+      "docId": "shudh91730"
     },
     {
       "role": "contributor",
@@ -1278,7 +1391,8 @@
       "bio": "👨‍💻 MERN Dev | Embedded Tech | Innovator.\r\nBuilding smart systems. Always learning.\r\n\r\nSolving real-world problems with tech.\r\nLet's connect and collaborate",
       "id": "gh_170221403",
       "username": "sinankp31",
-      "createdAt": "2026-10-18T05:06:56.391Z"
+      "createdAt": "2026-10-18T05:06:56.391Z",
+      "docId": "sinankp31"
     },
     {
       "createdAt": "2026-10-11T19:18:59.611Z",
@@ -1289,7 +1403,8 @@
       "name": "sinchanmondal",
       "bio": "GitHub Contributor",
       "id": "gh_250565106",
-      "username": "sinchanmondal"
+      "username": "sinchanmondal",
+      "docId": "sinchanmondal"
     },
     {
       "role": "contributor",
@@ -1300,7 +1415,8 @@
       "bio": "Finance & Data Science student. Leveraging Python, NLP, and Quantitative Modeling to solve business inefficiencies.",
       "id": "gh_207640448",
       "username": "somebeing2",
-      "createdAt": "2026-10-19T15:35:54.871Z"
+      "createdAt": "2026-10-19T15:35:54.871Z",
+      "docId": "somebeing2"
     },
     {
       "createdAt": "2026-10-10T13:37:04.159Z",
@@ -1311,7 +1427,8 @@
       "name": "Sourodip Mahato",
       "bio": "Hello ! \r\nSourodip here",
       "id": "gh_291987715",
-      "username": "Sourodip1804"
+      "username": "Sourodip1804",
+      "docId": "sourodip1804"
     },
     {
       "createdAt": "2026-10-16T17:53:13.188Z",
@@ -1322,7 +1439,8 @@
       "name": "Sujith",
       "bio": "GitHub Contributor",
       "id": "gh_290822448",
-      "username": "sujithkumarjilakara-sudo"
+      "username": "sujithkumarjilakara-sudo",
+      "docId": "sujithkumarjilakara-sudo"
     },
     {
       "role": "contributor",
@@ -1333,7 +1451,8 @@
       "bio": "𝗪𝗿𝗲𝘁𝗰𝗵𝗲𝗱 𝗖𝗼𝗱𝗲𝗿 🏃 • 𝘛𝘩𝘦 𝘲𝘶𝘪𝘦𝘵𝘦𝘳 𝘺𝘰𝘶 𝘣𝘦𝘤𝘰𝘮𝘦, 𝘵𝘩𝘦 𝘮𝘰𝘳𝘦 𝘺𝘰𝘶 𝘤𝘢𝘯 𝘩𝘦𝘢𝘳.",
       "id": "gh_180283757",
       "username": "Sunil56224972",
-      "createdAt": "2026-10-17T08:43:19.211Z"
+      "createdAt": "2026-10-17T08:43:19.211Z",
+      "docId": "sunil56224972"
     },
     {
       "createdAt": "2026-10-18T02:17:49.780Z",
@@ -1344,7 +1463,8 @@
       "name": "Suraj vishwakarma",
       "bio": "I am an enthusiastic tech student . ",
       "id": "gh_183356746",
-      "username": "Suraj5560"
+      "username": "Suraj5560",
+      "docId": "suraj5560"
     },
     {
       "createdAt": "2026-10-21T16:43:09.600Z",
@@ -1355,7 +1475,8 @@
       "name": "Swati Jain",
       "bio": "A  B.Tech student in Data Science and AI/ML, passionate about building AI-driven solutions using machine learning, deep learning, and geospatial data. 🚀",
       "id": "gh_247923751",
-      "username": "swatijain200701-sys"
+      "username": "swatijain200701-sys",
+      "docId": "swatijain200701-sys"
     },
     {
       "createdAt": "2026-10-17T15:24:00.224Z",
@@ -1366,7 +1487,8 @@
       "name": "Syamjith  V",
       "bio": "GitHub Contributor",
       "id": "gh_218446500",
-      "username": "syamjithv"
+      "username": "syamjithv",
+      "docId": "syamjithv"
     },
     {
       "createdAt": "2026-10-09T15:07:15.372Z",
@@ -1377,7 +1499,8 @@
       "name": "Tanya Garg",
       "bio": "GitHub Contributor",
       "id": "gh_162972888",
-      "username": "Tanya-garg10"
+      "username": "Tanya-garg10",
+      "docId": "tanya-garg10"
     },
     {
       "role": "contributor",
@@ -1388,7 +1511,8 @@
       "id": "gh_79405663",
       "username": "TarsierIsCool",
       "createdAt": "2026-10-19T19:17:46.346Z",
-      "name": "ACEharsh"
+      "name": "ACEharsh",
+      "docId": "tarsieriscool"
     },
     {
       "createdAt": "2026-10-20T14:43:41.499Z",
@@ -1399,7 +1523,8 @@
       "name": "Tejas Lamba",
       "bio": "Rust | Java |  TypeScript ",
       "id": "gh_73745640",
-      "username": "TejasLamba2006"
+      "username": "TejasLamba2006",
+      "docId": "tejaslamba2006"
     },
     {
       "createdAt": "2026-10-15T06:16:55.086Z",
@@ -1410,7 +1535,8 @@
       "name": "theaadix",
       "bio": "GitHub Contributor",
       "id": "gh_277151654",
-      "username": "theaadix"
+      "username": "theaadix",
+      "docId": "theaadix"
     },
     {
       "createdAt": "2026-10-16T16:32:26.212Z",
@@ -1421,7 +1547,8 @@
       "name": "Ayan Khan",
       "bio": "Computer science student exploring the foundations of programming languages, compilers, and developer tools through hands-on systems work.",
       "id": "gh_211229353",
-      "username": "ThunderKhan"
+      "username": "ThunderKhan",
+      "docId": "thunderkhan"
     },
     {
       "role": "contributor",
@@ -1432,7 +1559,8 @@
       "bio": "absolute garbage ",
       "id": "gh_232081292",
       "username": "tovi-govi",
-      "createdAt": "2026-10-21T05:05:42.731Z"
+      "createdAt": "2026-10-21T05:05:42.731Z",
+      "docId": "tovi-govi"
     },
     {
       "createdAt": "2026-10-20T03:11:42.943Z",
@@ -1443,7 +1571,8 @@
       "name": "Harshit Vaidya",
       "bio": "Hi, I'm Harshit Vaidya, A B.Tech student specializing in Artificial Intelligence & Machine Learning. I enjoy building real-world projects, exploring AI",
       "id": "gh_259094781",
-      "username": "vaidyaharshit"
+      "username": "vaidyaharshit",
+      "docId": "vaidyaharshit"
     },
     {
       "createdAt": "2026-10-16T11:26:13.968Z",
@@ -1454,7 +1583,8 @@
       "name": "vaishrutha",
       "bio": "GitHub Contributor",
       "id": "gh_264797695",
-      "username": "vaishrutha"
+      "username": "vaishrutha",
+      "docId": "vaishrutha"
     },
     {
       "createdAt": "2026-10-10T11:42:52.492Z",
@@ -1465,7 +1595,8 @@
       "name": "Sajal Vaish",
       "bio": "GitHub Contributor",
       "id": "gh_235052269",
-      "username": "vaishsajal82"
+      "username": "vaishsajal82",
+      "docId": "vaishsajal82"
     },
     {
       "role": "admin",
@@ -1476,7 +1607,8 @@
       "avatarUrl": "https://avatars.githubusercontent.com/u/232495759?v=4",
       "githubId": 232495759,
       "id": "gh_232495759",
-      "name": "Vijay-1710"
+      "name": "Vijay-1710",
+      "docId": "vijay-1710"
     },
     {
       "createdAt": "2026-10-21T18:09:04.978Z",
@@ -1487,7 +1619,8 @@
       "name": "VISHAL V",
       "bio": "💻 Aspiring Data Scientist | Ethical Hacker 🛡️  \r\n🚀 Building ChatNovaX | IoT & AI Projects  \r\n🌱 Interested in Cyber Security, AI & Innovation  ",
       "id": "gh_172998137",
-      "username": "vvishal0507"
+      "username": "vvishal0507",
+      "docId": "vvishal0507"
     },
     {
       "createdAt": "2026-10-20T04:34:03.335Z",
@@ -1498,7 +1631,8 @@
       "name": "Yash Agarwal",
       "bio": "B.Tech CSE (AI) student | Java, C, C++ | Learning DSA | Building and growing every day.\r\n",
       "id": "gh_232448420",
-      "username": "yashuagarwal786"
+      "username": "yashuagarwal786",
+      "docId": "yashuagarwal786"
     },
     {
       "id": "gh_320487068",
@@ -1509,290 +1643,261 @@
       "htmlUrl": "https://github.com/churukantirohith2007-pixel",
       "role": "contributor",
       "createdAt": "2026-10-25T07:06:23.448Z",
-      "githubId": 320487068
+      "githubId": 320487068,
+      "docId": "churukantirohith2007-pixel"
     },
     {
-      "id": "gh_347629844",
+      "id": "usr_bharathreddy15",
       "username": "BharathReddy15",
       "name": "BharathReddy15",
       "avatarUrl": "https://avatars.githubusercontent.com/u/347629844?v=4",
       "bio": "GitHub Contributor",
       "htmlUrl": "https://github.com/BharathReddy15",
       "role": "contributor",
-      "createdAt": "2026-10-25T07:09:28.322Z",
+      "createdAt": "2026-10-25T07:01:30.117Z",
+      "docId": "bharathreddy15",
       "githubId": 347629844
     },
     {
-      "id": "gh_242739440",
-      "githubId": 242739440,
-      "username": "marupakalaharsith20-beep",
-      "name": "marupakalaharsith20-beep",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/242739440?v=4",
-      "bio": "GitHub Contributor",
-      "htmlUrl": "https://github.com/marupakalaharsith20-beep",
+      "id": "gh_224145541",
+      "githubId": 224145541,
+      "username": "shubhamrai9122-creator",
+      "name": "shubham kumar",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/224145541?v=4",
+      "bio": "full-stack dev, into open source and shipping things that work\r\n",
+      "htmlUrl": "https://github.com/shubhamrai9122-creator",
       "role": "contributor",
-      "createdAt": "2026-10-25T07:13:15.801Z"
+      "createdAt": "2026-10-28T10:52:52.665Z",
+      "docId": "shubhamrai9122-creator"
     },
     {
-      "id": "gh_263715687",
-      "githubId": 263715687,
-      "username": "Neha-Shree28",
-      "name": "Neha Shree S",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/263715687?v=4",
+      "id": "gh_285455094",
+      "username": "sidd-289",
+      "name": "Siddhant Gautam Dubey",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/285455094?v=4",
       "bio": "GitHub Contributor",
-      "htmlUrl": "https://github.com/Neha-Shree28",
+      "htmlUrl": "https://github.com/sidd-289",
       "role": "contributor",
-      "createdAt": "2026-10-25T09:32:21.160Z"
+      "createdAt": "2026-10-28T11:28:31.612Z",
+      "githubId": 285455094,
+      "docId": "sidd-289"
+    },
+    {
+      "docId": "brand-new-tester-889",
+      "createdAt": "2026-10-25T06:54:53.779Z",
+      "role": "contributor",
+      "avatarUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
+      "htmlUrl": "https://github.com/brand-new-tester-889",
+      "name": "Brand New Tester",
+      "bio": "GitHub Contributor",
+      "id": "usr_brand-new-tester-889",
+      "username": "brand-new-tester-889"
+    },
+    {
+      "docId": "chandanasree26-hash",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/241965068?v=4",
+      "githubId": 241965068,
+      "htmlUrl": "https://github.com/chandanasree26-hash",
+      "name": "chandanasree26-hash",
+      "bio": "GitHub Contributor",
+      "username": "chandanasree26-hash",
+      "createdAt": "2026-10-26T04:47:49.338Z",
+      "id": "usr_chandanasree26-hash"
+    },
+    {
+      "docId": "mahesh11219181",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/265320432?v=4",
+      "githubId": 265320432,
+      "htmlUrl": "https://github.com/mahesh11219181",
+      "name": "mahesh11219181",
+      "bio": "GitHub Contributor",
+      "username": "mahesh11219181",
+      "id": "usr_mahesh11219181",
+      "createdAt": "2026-10-26T05:45:50.031Z"
+    },
+    {
+      "docId": "marupakalaharsith20-beep",
+      "createdAt": "2026-10-25T07:13:15.801Z",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/242739440?v=4",
+      "githubId": 242739440,
+      "htmlUrl": "https://github.com/marupakalaharsith20-beep",
+      "name": "marupakalaharsith20-beep",
+      "bio": "GitHub Contributor",
+      "id": "gh_242739440",
+      "username": "marupakalaharsith20-beep"
+    },
+    {
+      "docId": "neha-shree28",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/263715687?v=4",
+      "githubId": 263715687,
+      "htmlUrl": "https://github.com/Neha-Shree28",
+      "name": "Neha Shree S",
+      "bio": "GitHub Contributor",
+      "username": "Neha-Shree28",
+      "createdAt": "2026-10-25T09:32:22.007Z",
+      "id": "usr_neha-shree28"
+    },
+    {
+      "docId": "pabitra260609",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/184985278?v=4",
+      "githubId": 184985278,
+      "htmlUrl": "https://github.com/Pabitra260609",
+      "name": "Pabitra Deb",
+      "bio": "GitHub Contributor",
+      "username": "Pabitra260609",
+      "id": "usr_pabitra260609",
+      "createdAt": "2026-10-27T06:33:40.828Z"
+    },
+    {
+      "docId": "prashil0056",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/294255252?v=4",
+      "htmlUrl": "https://github.com/prashil0056",
+      "name": "Prashil Gajbhiye",
+      "username": "prashil0056",
+      "createdAt": "2026-10-28T16:53:12.194Z",
+      "githubId": 294255252,
+      "bio": "19 year old || Aspiring CSE Student || C++ || Python || Web Developement || Go || Fueled by Music & Gaming.",
+      "id": "gh_294255252"
+    },
+    {
+      "docId": "sameerdubey293595-cmd",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/321780376?v=4",
+      "githubId": 321780376,
+      "htmlUrl": "https://github.com/sameerdubey293595-cmd",
+      "name": "sameerdubey293595-cmd",
+      "bio": "GitHub Contributor",
+      "username": "sameerdubey293595-cmd",
+      "id": "usr_sameerdubey293595-cmd",
+      "createdAt": "2026-10-28T12:54:51.006Z"
+    },
+    {
+      "docId": "samkumar1850-hub",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/321281506?v=4",
+      "githubId": 321281506,
+      "htmlUrl": "https://github.com/samkumar1850-hub",
+      "name": "Sumit kumar",
+      "bio": "GitHub Contributor",
+      "username": "samkumar1850-hub",
+      "createdAt": "2026-10-28T16:09:39.727Z",
+      "id": "usr_samkumar1850-hub"
+    },
+    {
+      "docId": "sapnilbiswas",
+      "role": "contributor",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/230308982?v=4",
+      "githubId": 230308982,
+      "htmlUrl": "https://github.com/sapnilbiswas",
+      "name": "Sapnil Biswas",
+      "username": "sapnilbiswas",
+      "createdAt": "2026-10-28T11:12:22.226Z",
+      "bio": "GitHub Contributor",
+      "id": "usr_sapnilbiswas"
     }
   ],
   "pullRequests": [
     {
-      "id": "pr-1792916916027-jhjl",
-      "githubPrNumber": 484,
+      "id": "pr-1793105188936-9yco",
+      "githubPrNumber": 7,
       "isRepoOnly": false,
-      "repo": "ilyamiro/serpantinum",
-      "title": "fix(quickactions): keep calculator dropdown open while hovering its list",
-      "description": "The calculator dropdowns close when moving the mouse over the options list because the popup is outside the sidebar's hover area. This starts the auto-hide timer, which eventually closes the entire QuickActions panel.\n\nThis change makes the sidebar account for dropdown popup hover, keeping the panel",
-      "url": "https://github.com/ilyamiro/serpantinum/pull/484",
+      "repo": "nachiketa11/OOPSBannerApp",
+      "title": "Extract banner rendering and add lightweight tests",
+      "description": "## Summary\n- Extract the combined banner generation into a reusable `renderBanner()` method.\n- Add a dependency-free Java test runner for pattern dimensions and output.\n- Document compile, run, and test commands.\n\n## Why\nSeparating rendering from console output makes the logic easier to reuse and ve",
+      "url": "https://github.com/nachiketa11/OOPSBannerApp/pull/7",
       "state": "merged",
-      "author": "gouthamkrishnap",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/224089015?v=4",
-      "createdAt": "2026-10-22T12:51:19Z",
-      "dayOfSprint": 17,
-      "additions": 20,
-      "deletions": 0,
-      "commitsCount": 1,
+      "author": "nachiketa11",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/224293481?v=4",
+      "createdAt": "2026-10-27T08:50:36Z",
+      "dayOfSprint": 19,
+      "additions": 80,
+      "deletions": 16,
+      "commitsCount": 3,
       "reviewStatus": "REVIEWED",
-      "creditScore": 83,
-      "adminFeedback": "",
+      "creditScore": 81,
+      "adminFeedback": "Automated midnight evaluation: Verified contribution of +80/-16 in nachiketa11/OOPSBannerApp#7.",
       "adminCriteria": {
-        "quality": 22,
         "complexity": 20,
-        "impact": 21,
-        "testCoverage": 20
+        "testCoverage": 20,
+        "impact": 20,
+        "quality": 21
       },
       "reviewedBy": "Vijay-1710",
-      "reviewedAt": "2026-10-25T08:31:17.486Z",
+      "reviewedAt": "2026-10-28T00:54:29.114Z",
       "tags": [
         "contribution"
-      ]
+      ],
+      "docId": "pr-1793105188936-9yco"
     },
     {
-      "id": "pr-1792913179974-0dnk",
-      "githubPrNumber": 68,
+      "id": "pr-1793090812114-kzyv",
+      "githubPrNumber": 1,
       "isRepoOnly": false,
-      "repo": "codepiyusss/open_source_issue_contribution",
-      "title": "feat: add kg_to_lbs and lbs_to_kg conversions (#13)",
-      "description": "### Summary\nAdds weight conversion functions (\\kg_to_lbs\\ and \\lbs_to_kg\\) and exposes them as CLI choices \\kg2lb\\ and \\lb2kg\\ in \\\fixit convert\\.\n\n### Changes\n- Defined \\LBS_PER_KG = 2.20462\\ and implemented \\kg_to_lbs(kg: float) -> float\\ and \\lbs_to_kg(lbs: float) -> float\\ with full docstrings i",
-      "url": "https://github.com/codepiyusss/open_source_issue_contribution/pull/68",
-      "state": "open",
-      "author": "marupakalaharsith20-beep",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/242739440?v=4",
-      "createdAt": "2026-10-25T07:25:32Z",
-      "dayOfSprint": 17,
-      "additions": 48,
-      "deletions": 0,
-      "commitsCount": 1,
-      "reviewStatus": "REVIEWED",
-      "creditScore": 75,
-      "adminFeedback": "Automated midnight evaluation: Verified contribution of +48/-0 in codepiyusss/open_source_issue_contribution#68.",
-      "adminCriteria": {
-        "quality": 19,
-        "complexity": 19,
-        "impact": 19,
-        "testCoverage": 18
-      },
-      "reviewedBy": "Vijay-1710",
-      "reviewedAt": "2026-10-25T12:21:58.235Z",
-      "tags": [
-        "contribution"
-      ]
-    },
-    {
-      "id": "pr-1792913177266-ak2s",
-      "githubPrNumber": 67,
-      "isRepoOnly": false,
-      "repo": "codepiyusss/open_source_issue_contribution",
-      "title": "feat: add --sort-keys option to json command (#16)",
-      "description": "### Summary\nAdds the \\--sort-keys\\ flag to the \\\fixit json\\ command and adds the \\sort_keys: bool = False\\ parameter to \\\fixit.jsonfmt.format_json()\\.\n\n### Changes\n- Updated \\\format_json()\\ in \\\fixit/jsonfmt.py\\ to accept \\sort_keys: bool = False\\ and pass it to \\json.dumps()\\.\n- Added \\--sort-keys\\",
-      "url": "https://github.com/codepiyusss/open_source_issue_contribution/pull/67",
-      "state": "open",
-      "author": "marupakalaharsith20-beep",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/242739440?v=4",
-      "createdAt": "2026-10-25T07:22:55Z",
-      "dayOfSprint": 17,
-      "additions": 21,
-      "deletions": 3,
-      "commitsCount": 1,
-      "reviewStatus": "REVIEWED",
-      "creditScore": 75,
-      "adminFeedback": "Automated midnight evaluation: Verified contribution of +21/-3 in codepiyusss/open_source_issue_contribution#67.",
-      "adminCriteria": {
-        "quality": 19,
-        "complexity": 19,
-        "impact": 19,
-        "testCoverage": 18
-      },
-      "reviewedBy": "Vijay-1710",
-      "reviewedAt": "2026-10-25T12:21:58.235Z",
-      "tags": [
-        "contribution"
-      ]
-    },
-    {
-      "id": "pr-1792913173381-uz5o",
-      "githubPrNumber": 66,
-      "isRepoOnly": false,
-      "repo": "codepiyusss/open_source_issue_contribution",
-      "title": "fix: preserve non-ASCII characters in format_json (#8)",
-      "description": "### Summary\nFixes #8 by setting \\ensure_ascii=False\\ in \\json.dumps()\\ within \\\format_json()\\. Previously, non-ASCII characters such as \\café\\ were escaped into Unicode escape sequences like \\caf\\u00e9\\.\n\n### Changes\n- Updated \\\format_json\\ in \\\fixit/jsonfmt.py\\ to pass \\ensure_ascii=False\\ to \\json",
-      "url": "https://github.com/codepiyusss/open_source_issue_contribution/pull/66",
-      "state": "open",
-      "author": "marupakalaharsith20-beep",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/242739440?v=4",
-      "createdAt": "2026-10-25T07:21:04Z",
-      "dayOfSprint": 17,
-      "additions": 6,
-      "deletions": 1,
-      "commitsCount": 1,
-      "reviewStatus": "REVIEWED",
-      "creditScore": 70,
-      "adminFeedback": "Automated midnight evaluation: Verified contribution of +6/-1 in codepiyusss/open_source_issue_contribution#66.",
-      "adminCriteria": {
-        "quality": 18,
-        "complexity": 18,
-        "impact": 17,
-        "testCoverage": 17
-      },
-      "reviewedBy": "Vijay-1710",
-      "reviewedAt": "2026-10-25T12:21:58.235Z",
-      "tags": [
-        "contribution"
-      ]
-    },
-    {
-      "id": "pr-1792912228062-5hi2",
-      "githubPrNumber": 193,
-      "isRepoOnly": false,
-      "repo": "pugulist/math-stats",
-      "title": "feat: add sum function (#171)",
-      "description": "## Description\n\nAdds `sum(numbers)` returning the sum of numbers in an array.\n- Returns `0` for empty arrays (`sum([]) === 0`)\n- Returns `null` when the argument is not an array\n- Does not modify the caller's array\n- Added TypeScript declarations in `index.d.ts`\n- Added usage documentation in `READM",
-      "url": "https://github.com/pugulist/math-stats/pull/193",
-      "state": "open",
-      "author": "BharathReddy15",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/347629844?v=4",
-      "createdAt": "2026-10-25T06:44:21Z",
-      "dayOfSprint": 17,
-      "additions": 31,
-      "deletions": 0,
-      "commitsCount": 1,
+      "repo": "nachiketa11/Docker-project",
+      "title": "Add a JSON health endpoint",
+      "description": "## Summary\n- Add `GET /health`, returning HTTP 200 with JSON `{\"status\":\"ok\"}`.\n- Bind the server to `0.0.0.0` when started directly, supporting container access.\n- Export the Express app for future automated testing without starting a listener on import.\n\n## Why\nA predictable health endpoint is use",
+      "url": "https://github.com/nachiketa11/Docker-project/pull/1",
+      "state": "merged",
+      "author": "nachiketa11",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/224293481?v=4",
+      "createdAt": "2026-10-27T06:12:37Z",
+      "dayOfSprint": 19,
+      "additions": 20,
+      "deletions": 11,
+      "commitsCount": 3,
       "reviewStatus": "REVIEWED",
       "creditScore": 72,
-      "adminFeedback": "Automated midnight evaluation: Verified contribution of +31/-0 in pugulist/math-stats#193.",
+      "adminFeedback": "Automated midnight evaluation: Verified contribution of +20/-11 in nachiketa11/Docker-project#1.",
       "adminCriteria": {
-        "quality": 18,
         "complexity": 18,
+        "testCoverage": 18,
         "impact": 18,
-        "testCoverage": 18
+        "quality": 18
       },
       "reviewedBy": "Vijay-1710",
-      "reviewedAt": "2026-10-25T12:21:58.235Z",
+      "reviewedAt": "2026-10-28T00:54:29.114Z",
       "tags": [
         "contribution"
-      ]
+      ],
+      "docId": "pr-1793090812114-kzyv"
     },
     {
-      "id": "pr-1792912223277-i7v8",
-      "githubPrNumber": 192,
+      "id": "pr-1793085416512-gu5w",
+      "githubPrNumber": 1,
       "isRepoOnly": false,
-      "repo": "pugulist/math-stats",
-      "title": "docs: add Contributor Covenant 2.1 code of conduct (#161)",
-      "description": "## Description\n\nAdds `CODE_OF_CONDUCT.md` adopting Contributor Covenant v2.1 with maintainer contact emails (`kannupriya@llm4s.org` and `pavanvamsi3@gmail.com`).\n\nFixes #161\n\n## Checklist\n\n- [x] Contributor Covenant 2.1 added with maintainer contacts\n- [x] Linter passes (`npm run lint`)\n- [x] Tests ",
-      "url": "https://github.com/pugulist/math-stats/pull/192",
-      "state": "open",
-      "author": "BharathReddy15",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/347629844?v=4",
-      "createdAt": "2026-10-25T06:41:38Z",
-      "dayOfSprint": 17,
-      "additions": 128,
-      "deletions": 0,
-      "commitsCount": 1,
+      "repo": "nachiketa11/docker-hello-world",
+      "title": "Add a health endpoint to the Docker demo",
+      "description": "## Summary\n- Add a `/health` endpoint that returns HTTP 200 and `ok`.\n- Include explicit content type and content length headers.\n- Bind the server to `0.0.0.0` and guard startup with `if __name__ == \"__main__\"`.\n\n## Why\nA simple health endpoint makes it easier to check whether the containerized HTT",
+      "url": "https://github.com/nachiketa11/docker-hello-world/pull/1",
+      "state": "merged",
+      "author": "nachiketa11",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/224293481?v=4",
+      "createdAt": "2026-10-27T06:10:57Z",
+      "dayOfSprint": 19,
+      "additions": 35,
+      "deletions": 13,
+      "commitsCount": 2,
       "reviewStatus": "REVIEWED",
-      "creditScore": 80,
-      "adminFeedback": "Automated midnight evaluation: Verified contribution of +128/-0 in pugulist/math-stats#192.",
+      "creditScore": 76,
+      "adminFeedback": "Automated midnight evaluation: Verified contribution of +35/-13 in nachiketa11/docker-hello-world#1.",
       "adminCriteria": {
-        "quality": 20,
-        "complexity": 20,
-        "impact": 20,
-        "testCoverage": 20
+        "complexity": 19,
+        "testCoverage": 19,
+        "impact": 19,
+        "quality": 19
       },
       "reviewedBy": "Vijay-1710",
-      "reviewedAt": "2026-10-25T12:21:58.235Z",
+      "reviewedAt": "2026-10-28T00:54:29.114Z",
       "tags": [
         "contribution"
-      ]
-    },
-    {
-      "id": "pr-1792912219489-9npa",
-      "githubPrNumber": 191,
-      "isRepoOnly": false,
-      "repo": "pugulist/math-stats",
-      "title": "chore: add pull request template (#159)",
-      "description": "## Description\n\nAdds `.github/pull_request_template.md` with a concise checklist covering tests, TypeScript declarations (`index.d.ts`), documentation (`README.md`), and lint checks.\n\nFixes #159\n\n## Checklist\n\n- [x] Template added in `.github/pull_request_template.md`\n- [x] Linter passes (`npm run l",
-      "url": "https://github.com/pugulist/math-stats/pull/191",
-      "state": "open",
-      "author": "BharathReddy15",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/347629844?v=4",
-      "createdAt": "2026-10-25T06:39:50Z",
-      "dayOfSprint": 17,
-      "additions": 10,
-      "deletions": 0,
-      "commitsCount": 1,
-      "reviewStatus": "REVIEWED",
-      "creditScore": 73,
-      "adminFeedback": "Automated midnight evaluation: Verified contribution of +10/-0 in pugulist/math-stats#191.",
-      "adminCriteria": {
-        "quality": 19,
-        "complexity": 18,
-        "impact": 18,
-        "testCoverage": 18
-      },
-      "reviewedBy": "Vijay-1710",
-      "reviewedAt": "2026-10-25T12:21:58.235Z",
-      "tags": [
-        "contribution"
-      ]
-    },
-    {
-      "id": "pr-1792912212997-vsst",
-      "githubPrNumber": 190,
-      "isRepoOnly": false,
-      "repo": "pugulist/math-stats",
-      "title": "chore: add .editorconfig (#167)",
-      "description": "## Description\n\nAdds `.editorconfig` to enforce 4-space indentation, LF line endings, UTF-8 charset, trimming trailing whitespace, and final newlines across editors (with 2 spaces for JSON and YAML), matching the repository's ESLint rules.\n\nFixes #167\n\n## Checklist\n\n- [x] Matches ESLint configuratio",
-      "url": "https://github.com/pugulist/math-stats/pull/190",
-      "state": "open",
-      "author": "BharathReddy15",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/347629844?v=4",
-      "createdAt": "2026-10-25T06:38:42Z",
-      "dayOfSprint": 17,
-      "additions": 12,
-      "deletions": 0,
-      "commitsCount": 1,
-      "reviewStatus": "REVIEWED",
-      "creditScore": 70,
-      "adminFeedback": "Automated midnight evaluation: Verified contribution of +12/-0 in pugulist/math-stats#190.",
-      "adminCriteria": {
-        "quality": 18,
-        "complexity": 18,
-        "impact": 17,
-        "testCoverage": 17
-      },
-      "reviewedBy": "Vijay-1710",
-      "reviewedAt": "2026-10-25T12:21:58.235Z",
-      "tags": [
-        "contribution"
-      ]
+      ],
+      "docId": "pr-1793085416512-gu5w"
     },
     {
       "id": "pr-1792912005698-ve10",
@@ -1820,7 +1925,7 @@
         "testCoverage": 16
       },
       "reviewedBy": "Vijay-1710",
-      "reviewedAt": "2026-10-25T12:21:58.235Z",
+      "reviewedAt": "2026-10-26T05:17:01.652Z",
       "tags": [
         "contribution"
       ]
@@ -1851,7 +1956,7 @@
         "testCoverage": 15
       },
       "reviewedBy": "Vijay-1710",
-      "reviewedAt": "2026-10-25T12:21:58.235Z",
+      "reviewedAt": "2026-10-26T05:17:01.652Z",
       "tags": [
         "contribution"
       ]
@@ -1882,7 +1987,7 @@
         "testCoverage": 16
       },
       "reviewedBy": "Vijay-1710",
-      "reviewedAt": "2026-10-25T12:21:58.235Z",
+      "reviewedAt": "2026-10-26T05:17:01.652Z",
       "tags": [
         "contribution"
       ]
@@ -1913,7 +2018,7 @@
         "testCoverage": 15
       },
       "reviewedBy": "Vijay-1710",
-      "reviewedAt": "2026-10-25T12:21:58.235Z",
+      "reviewedAt": "2026-10-26T05:17:01.652Z",
       "tags": [
         "contribution"
       ]
@@ -2896,10 +3001,11 @@
       "adminCriteria": {
         "quality": 19,
         "complexity": 17,
-        "impact": 21,
-        "testCoverage": 18
+        "testCoverage": 18,
+        "impact": 21
       },
-      "_docId": "pr-1792259033641-unf8"
+      "_docId": "pr-1792259033641-unf8",
+      "docId": "pr-1792259033641-unf8"
     },
     {
       "additions": 58,
@@ -3608,37 +3714,6 @@
       "_docId": "pr-1792331738356-vxfk"
     },
     {
-      "additions": 44,
-      "deletions": 13,
-      "author": "tovi-govi",
-      "commitsCount": 1,
-      "repo": "tovi-govi/Bunkialo",
-      "githubPrNumber": 2,
-      "description": "Closes #1\n\n### Summary of Changes\n- **Excused Duty Leave Calculation**: Updated attendance percentage and session calculations so duty leaves (both portal-credited and user-marked) reduce the total sessions denominator rather than adding to the attended numerator.\n  - Previous: \\(Attended + DL) / To",
-      "title": "fix(attendance): deduct duty leaves from total sessions instead of adding to attended",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/232081292?v=4",
-      "url": "https://github.com/tovi-govi/Bunkialo/pull/2",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-19T09:40:11Z",
-      "dayOfSprint": 11,
-      "id": "pr-1792402886338-pvec",
-      "isRepoOnly": false,
-      "state": "open",
-      "creditScore": 76,
-      "adminFeedback": "Automated midnight evaluation: Verified contribution of +44/-13 in tovi-govi/Bunkialo#2.",
-      "reviewStatus": "REVIEWED",
-      "adminCriteria": {
-        "complexity": 19,
-        "testCoverage": 19,
-        "impact": 19,
-        "quality": 19
-      },
-      "reviewedBy": "Vijay-1710",
-      "reviewedAt": "2026-10-23T15:14:45.229Z"
-    },
-    {
       "additions": 189,
       "deletions": 0,
       "author": "edamone6767",
@@ -4319,99 +4394,6 @@
       },
       "reviewedAt": null,
       "reviewedBy": null
-    },
-    {
-      "additions": 5,
-      "deletions": 8,
-      "author": "tovi-govi",
-      "commitsCount": 1,
-      "repo": "IIITK-Football/super-league",
-      "githubPrNumber": 174,
-      "description": "Verified Pull Request #174 in IIITK-Football/super-league",
-      "title": "fix: display freshers teams and unassigned players",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/139268397?v=4",
-      "url": "https://github.com/IIITK-Football/super-league/pull/174",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-09T17:47:43Z",
-      "dayOfSprint": 11,
-      "id": "pr-1792404753448-guss",
-      "isRepoOnly": false,
-      "state": "merged",
-      "creditScore": 70,
-      "adminFeedback": "Automated midnight evaluation: Verified contribution of +5/-8 in IIITK-Football/super-league#174.",
-      "reviewStatus": "REVIEWED",
-      "adminCriteria": {
-        "complexity": 18,
-        "testCoverage": 17,
-        "impact": 17,
-        "quality": 18
-      },
-      "reviewedBy": "Vijay-1710",
-      "reviewedAt": "2026-10-23T15:14:45.229Z"
-    },
-    {
-      "additions": 5,
-      "deletions": 8,
-      "author": "tovi-govi",
-      "commitsCount": 1,
-      "repo": "IIITK-Football/super-league",
-      "githubPrNumber": 177,
-      "description": "Verified Pull Request #177 in IIITK-Football/super-league",
-      "title": "Develop",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/139268397?v=4",
-      "url": "https://github.com/IIITK-Football/super-league/pull/177",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-10T15:59:21Z",
-      "dayOfSprint": 11,
-      "id": "pr-1792404755031-nej9",
-      "isRepoOnly": false,
-      "state": "merged",
-      "creditScore": 68,
-      "adminFeedback": "Automated midnight evaluation: Verified contribution of +5/-8 in IIITK-Football/super-league#177.",
-      "reviewStatus": "REVIEWED",
-      "adminCriteria": {
-        "complexity": 17,
-        "testCoverage": 17,
-        "impact": 17,
-        "quality": 17
-      },
-      "reviewedBy": "Vijay-1710",
-      "reviewedAt": "2026-10-23T15:14:45.229Z"
-    },
-    {
-      "additions": 5,
-      "deletions": 8,
-      "author": "tovi-govi",
-      "commitsCount": 1,
-      "repo": "IIITK-Football/super-league",
-      "githubPrNumber": 178,
-      "description": "Verified Pull Request #178 in IIITK-Football/super-league",
-      "title": "Player values defaulted bw 40 and 80",
-      "authorAvatar": "https://avatars.githubusercontent.com/u/139268397?v=4",
-      "url": "https://github.com/IIITK-Football/super-league/pull/178",
-      "tags": [
-        "contribution"
-      ],
-      "createdAt": "2026-10-11T06:45:03Z",
-      "dayOfSprint": 11,
-      "id": "pr-1792404756513-d4vw",
-      "isRepoOnly": false,
-      "state": "merged",
-      "creditScore": 71,
-      "adminFeedback": "Automated midnight evaluation: Verified contribution of +5/-8 in IIITK-Football/super-league#178.",
-      "reviewStatus": "REVIEWED",
-      "adminCriteria": {
-        "complexity": 18,
-        "testCoverage": 17,
-        "impact": 18,
-        "quality": 18
-      },
-      "reviewedBy": "Vijay-1710",
-      "reviewedAt": "2026-10-23T15:14:45.229Z"
     },
     {
       "additions": 68,
@@ -6789,10 +6771,10 @@
       "reviewedAt": "2026-10-25T08:34:45.984Z",
       "description": "Scrolling inside a QuickActions tab can unexpectedly switch to the neighbouring tab. This happens in Notes when a long note reaches the top or bottom of its scroll view, and in Timer when the cursor drifts slightly off a selector while scrolling.\n\nThe cause is the wheel handler on `gridMouseArea` in",
       "adminCriteria": {
-        "quality": 22,
         "complexity": 20,
+        "testCoverage": 21,
         "impact": 20,
-        "testCoverage": 21
+        "quality": 22
       },
       "reviewedBy": "Vijay-1710",
       "title": "fix(quickactions): only switch tabs on scroll over the sidebar",
@@ -6807,7 +6789,8 @@
       "reviewStatus": "REVIEWED",
       "id": "pr-1792439270003-asaa",
       "isRepoOnly": false,
-      "state": "merged"
+      "state": "merged",
+      "docId": "pr-1792439270003-asaa"
     },
     {
       "creditScore": 79,
@@ -6820,10 +6803,10 @@
       "reviewedAt": "2026-10-25T08:40:07.916Z",
       "description": "## Summary\r\n\r\nWhen the music popup is switched to a player other than the active one, its album art fails to load and the popup falls back to the default gradient.\r\n\r\n`art_fetch.sh` expects four arguments: player ID, artwork URL, track title and artist. However, `customArtFetchProc` in `MusicPlayerS",
       "adminCriteria": {
-        "quality": 21,
         "complexity": 19,
-        "impact": 19,
-        "testCoverage": 20
+        "quality": 21,
+        "testCoverage": 20,
+        "impact": 19
       },
       "reviewedBy": "Vijay-1710",
       "title": "fix(media): pass player id to art_fetch.sh from the music popup",
@@ -6838,7 +6821,8 @@
       "reviewStatus": "REVIEWED",
       "id": "pr-1792439311729-qvjk",
       "isRepoOnly": false,
-      "state": "merged"
+      "state": "merged",
+      "docId": "pr-1792439311729-qvjk"
     },
     {
       "creditScore": 81,
@@ -10821,10 +10805,1367 @@
       },
       "state": "merged",
       "reviewedAt": "2026-10-21T12:26:00.828Z"
+    },
+    {
+      "docId": "pr-1792903442293-ypfk",
+      "creditScore": 0,
+      "additions": 73,
+      "deletions": 3,
+      "author": "Kumar44developer",
+      "commitsCount": 1,
+      "repo": "npm/node-semver",
+      "githubPrNumber": 930,
+      "reviewedAt": null,
+      "description": "In loose mode, semver's range parser discarded any token it could not parse and kept whatever remained, so a range containing text that is not range syntax parsed successfully as something materially weaker than what was written. The dangerous case: validRange('* (4.1.x 4.1.2)', {loose:true}) returns '*', meaning a string written to pin version 4.1.2 silently becomes one that matches every version, and a caller validating input before storing it is told the string is fine and then handed back a different range. '>=1.0.0 (foo)' parsed as '>=1.0.0' with the garbage dropped. '(1.2.3)' did throw, but only because nothing survived the filter and the empty set was rejected afterwards, so a single valid comparator anywhere in the range masked everything else. I started with the obvious fix - reject anything unparseable - and measured it before committing to it: three test files fail, because loose mode genuinely relies on that drop for the leftovers of its own normalization, with inputs like '== 1', '== 1.0.0 || foo' and '1.2.3 || 1.2.3= x' pinned as parsing today. So I used a narrower rule instead: a token is dropped exactly as before unless it carries a character that appears in no comparator and no version, in which case the whole range is invalid. A stray '==' is sloppy range syntax; '(foo)' is not range syntax at all. The error reuses the Invalid SemVer Range type the constructor already raises, so nothing new appears in the API, and strict mode is untouched since it already rejected these. I chased down a false lead honestly along the way: my first measurement showed failures on inputs that turned out to already throw on main, where my experiment had only changed the error message rather than the behaviour, and correcting that is what pinned down the real constraint. I also found a case I deliberately did not change: '1.2.3, <2.0.0' parses as '<2.0.0', the same hazard with the lower bound vanishing, but it is pinned by an existing test, so I left it working and raised it for the maintainers rather than quietly reversing documented behaviour under a different issue number. Tests: six rows in the range-parse fixture, which exercises every input across all four option combinations, plus two focused tests on either side of the line - one that non-syntax input is rejected and validRange returns null, one that loose mode still tolerates its own leftovers including the comma case, which is what would catch a future widening of the check. Verified the tests fail with the fix reverted, and the full suite of 53 files and eslint are both clean.",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "fix: loose mode no longer drops input that is not range syntax",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/233261143?v=4",
+      "url": "https://github.com/npm/node-semver/pull/930",
+      "tags": [
+        "bug-fix",
+        "javascript",
+        "semver",
+        "input-validation",
+        "parser",
+        "testing",
+        "npm"
+      ],
+      "createdAt": "2026-10-22T18:27:49Z",
+      "dayOfSprint": 17,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1792903442293-ypfk",
+      "isRepoOnly": false,
+      "state": "open"
+    },
+    {
+      "docId": "pr-1792903489059-l0yy",
+      "creditScore": 0,
+      "additions": 64,
+      "deletions": 6,
+      "author": "Kumar44developer",
+      "commitsCount": 1,
+      "repo": "yargs/yargs",
+      "githubPrNumber": 2615,
+      "reviewedAt": null,
+      "description": "Calling parse(args, cb) invoked the callback twice whenever the arguments carried --get-yargs-completions, which is how every shell completion request arrives. The cause is that completion works out its suggestions by running a nested parse, and the parse callback is stored as instance state that the freeze/unfreeze stack saves and restores but never clears - so the nested call inherited the callback belonging to the outer parse and fired it on the way through. The first of the two invocations is the damaging one: it carries an argv that does not contain the completion flag and an empty output string, so a caller that acts on the first callback it receives acts on the wrong argv and prints nothing at all. The two invocations also disagreed on the error argument, null the first time and undefined the second, which silently breaks the common if (err === null) check. I fixed it by clearing the stored callback around the completion call and restoring it in a finally afterwards, so a nested parse cannot reach a callback that does not belong to it. The restore deliberately happens when getCompletion returns rather than when its callback fires, which is correct because the nested parse is synchronous inside getCompletion while an asynchronous custom completion function resolves later and never parses again. I documented the contract this pins - that parse(args, cb) calls cb exactly once including on the completion path - and explained in the PR why I kept the completion invocation rather than suppressing the callback entirely on that path, since the completion invocation is the one carrying the real argv and real output; I offered the maintainers the alternative if they prefer it. Writing the tests turned up something the issue did not report: the callback double-fires even when no completion is registered at all, so the bug was wider than described, and that case is now covered too. Three tests assert the call count, that the surviving invocation is the completion one and not the parse before it, and that the count holds with no completion registered. All three fail before the change with 'expected 2 to equal 1'; after it the completion suite is 106 passing and the full suite 839 passing with zero failures.",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "fix: call the parse callback once for --get-yargs-completions",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/233261143?v=4",
+      "url": "https://github.com/yargs/yargs/pull/2615",
+      "tags": [
+        "bug-fix",
+        "javascript",
+        "typescript",
+        "cli",
+        "yargs",
+        "shell-completion",
+        "testing"
+      ],
+      "createdAt": "2026-10-22T18:48:11Z",
+      "dayOfSprint": 17,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1792903489059-l0yy",
+      "isRepoOnly": false,
+      "state": "closed"
+    },
+    {
+      "docId": "pr-1792904596706-qp3p",
+      "creditScore": 0,
+      "additions": 73,
+      "deletions": 3,
+      "author": "Kumar44developer",
+      "commitsCount": 1,
+      "repo": "npm/node-semver",
+      "githubPrNumber": 930,
+      "reviewedAt": null,
+      "description": "In loose mode, semver's range parser discarded any token it could not parse and kept whatever remained, so a range containing text that is not range syntax parsed successfully as something materially weaker than what was written. The dangerous case: validRange('* (4.1.x 4.1.2)', {loose:true}) returns '*', meaning a string written to pin version 4.1.2 silently becomes one that matches every version, and a caller validating input before storing it is told the string is fine and then handed back a different range. '>=1.0.0 (foo)' parsed as '>=1.0.0' with the garbage dropped. '(1.2.3)' did throw, but only because nothing survived the filter and the empty set was rejected afterwards, so a single valid comparator anywhere in the range masked everything else. I started with the obvious fix - reject anything unparseable - and measured it before committing to it: three test files fail, because loose mode genuinely relies on that drop for the leftovers of its own normalization, with inputs like '== 1', '== 1.0.0 || foo' and '1.2.3 || 1.2.3= x' pinned as parsing today. So I used a narrower rule instead: a token is dropped exactly as before unless it carries a character that appears in no comparator and no version, in which case the whole range is invalid. A stray '==' is sloppy range syntax; '(foo)' is not range syntax at all. The error reuses the Invalid SemVer Range type the constructor already raises, so nothing new appears in the API, and strict mode is untouched since it already rejected these. I chased down a false lead honestly along the way: my first measurement showed failures on inputs that turned out to already throw on main, where my experiment had only changed the error message rather than the behaviour, and correcting that is what pinned down the real constraint. I also found a case I deliberately did not change: '1.2.3, <2.0.0' parses as '<2.0.0', the same hazard with the lower bound vanishing, but it is pinned by an existing test, so I left it working and raised it for the maintainers rather than quietly reversing documented behaviour under a different issue number. Tests: six rows in the range-parse fixture, which exercises every input across all four option combinations, plus two focused tests on either side of the line - one that non-syntax input is rejected and validRange returns null, one that loose mode still tolerates its own leftovers including the comma case, which is what would catch a future widening of the check. Verified the tests fail with the fix reverted, and the full suite of 53 files and eslint are both clean.",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "fix: loose mode no longer drops input that is not range syntax",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/233261143?v=4",
+      "url": "https://github.com/npm/node-semver/pull/930",
+      "tags": [
+        "bug-fix",
+        "javascript",
+        "semver",
+        "input-validation",
+        "parser",
+        "testing",
+        "npm"
+      ],
+      "createdAt": "2026-10-22T18:27:49Z",
+      "dayOfSprint": 17,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1792904596706-qp3p",
+      "isRepoOnly": false,
+      "state": "open"
+    },
+    {
+      "docId": "pr-1792904637636-0dyp",
+      "creditScore": 0,
+      "additions": 64,
+      "deletions": 6,
+      "author": "Kumar44developer",
+      "commitsCount": 1,
+      "repo": "yargs/yargs",
+      "githubPrNumber": 2615,
+      "reviewedAt": null,
+      "description": "Calling parse(args, cb) invoked the callback twice whenever the arguments carried --get-yargs-completions, which is how every shell completion request arrives. The cause is that completion works out its suggestions by running a nested parse, and the parse callback is stored as instance state that the freeze/unfreeze stack saves and restores but never clears - so the nested call inherited the callback belonging to the outer parse and fired it on the way through. The first of the two invocations is the damaging one: it carries an argv that does not contain the completion flag and an empty output string, so a caller that acts on the first callback it receives acts on the wrong argv and prints nothing at all. The two invocations also disagreed on the error argument, null the first time and undefined the second, which silently breaks the common if (err === null) check. I fixed it by clearing the stored callback around the completion call and restoring it in a finally afterwards, so a nested parse cannot reach a callback that does not belong to it. The restore deliberately happens when getCompletion returns rather than when its callback fires, which is correct because the nested parse is synchronous inside getCompletion while an asynchronous custom completion function resolves later and never parses again. I documented the contract this pins - that parse(args, cb) calls cb exactly once including on the completion path - and explained in the PR why I kept the completion invocation rather than suppressing the callback entirely on that path, since the completion invocation is the one carrying the real argv and real output; I offered the maintainers the alternative if they prefer it. Writing the tests turned up something the issue did not report: the callback double-fires even when no completion is registered at all, so the bug was wider than described, and that case is now covered too. Three tests assert the call count, that the surviving invocation is the completion one and not the parse before it, and that the count holds with no completion registered. All three fail before the change with 'expected 2 to equal 1'; after it the completion suite is 106 passing and the full suite 839 passing with zero failures.",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "fix: call the parse callback once for --get-yargs-completions",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/233261143?v=4",
+      "url": "https://github.com/yargs/yargs/pull/2615",
+      "tags": [
+        "bug-fix",
+        "javascript",
+        "typescript",
+        "cli",
+        "yargs",
+        "shell-completion",
+        "testing"
+      ],
+      "createdAt": "2026-10-22T18:48:11Z",
+      "dayOfSprint": 17,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1792904637636-0dyp",
+      "isRepoOnly": false,
+      "state": "closed"
+    },
+    {
+      "docId": "pr-1792904899989-ybfx",
+      "creditScore": 0,
+      "additions": 73,
+      "deletions": 3,
+      "author": "Kumar44developer",
+      "commitsCount": 1,
+      "repo": "npm/node-semver",
+      "githubPrNumber": 930,
+      "reviewedAt": null,
+      "description": "In loose mode, semver's range parser discarded any token it could not parse and kept whatever remained, so a range containing text that is not range syntax parsed successfully as something materially weaker than what was written. The dangerous case: validRange('* (4.1.x 4.1.2)', {loose:true}) returns '*', meaning a string written to pin version 4.1.2 silently becomes one that matches every version, and a caller validating input before storing it is told the string is fine and then handed back a different range. '>=1.0.0 (foo)' parsed as '>=1.0.0' with the garbage dropped. '(1.2.3)' did throw, but only because nothing survived the filter and the empty set was rejected afterwards, so a single valid comparator anywhere in the range masked everything else. I started with the obvious fix - reject anything unparseable - and measured it before committing to it: three test files fail, because loose mode genuinely relies on that drop for the leftovers of its own normalization, with inputs like '== 1', '== 1.0.0 || foo' and '1.2.3 || 1.2.3= x' pinned as parsing today. So I used a narrower rule instead: a token is dropped exactly as before unless it carries a character that appears in no comparator and no version, in which case the whole range is invalid. A stray '==' is sloppy range syntax; '(foo)' is not range syntax at all. The error reuses the Invalid SemVer Range type the constructor already raises, so nothing new appears in the API, and strict mode is untouched since it already rejected these. I chased down a false lead honestly along the way: my first measurement showed failures on inputs that turned out to already throw on main, where my experiment had only changed the error message rather than the behaviour, and correcting that is what pinned down the real constraint. I also found a case I deliberately did not change: '1.2.3, <2.0.0' parses as '<2.0.0', the same hazard with the lower bound vanishing, but it is pinned by an existing test, so I left it working and raised it for the maintainers rather than quietly reversing documented behaviour under a different issue number. Tests: six rows in the range-parse fixture, which exercises every input across all four option combinations, plus two focused tests on either side of the line - one that non-syntax input is rejected and validRange returns null, one that loose mode still tolerates its own leftovers including the comma case, which is what would catch a future widening of the check. Verified the tests fail with the fix reverted, and the full suite of 53 files and eslint are both clean.",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "fix: loose mode no longer drops input that is not range syntax",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/233261143?v=4",
+      "url": "https://github.com/npm/node-semver/pull/930",
+      "tags": [
+        "bug-fix",
+        "javascript",
+        "semver",
+        "input-validation",
+        "parser",
+        "testing",
+        "npm"
+      ],
+      "createdAt": "2026-10-22T18:27:49Z",
+      "dayOfSprint": 17,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1792904899989-ybfx",
+      "isRepoOnly": false,
+      "state": "open"
+    },
+    {
+      "docId": "pr-1792907453381-oj3v",
+      "creditScore": 0,
+      "additions": 73,
+      "deletions": 3,
+      "author": "Kumar44developer",
+      "commitsCount": 1,
+      "repo": "npm/node-semver",
+      "githubPrNumber": 930,
+      "reviewedAt": null,
+      "description": "In loose mode, semver's range parser discarded any token it could not parse and kept whatever remained, so a range containing text that is not range syntax parsed successfully as something materially weaker than what was written. The dangerous case: validRange('* (4.1.x 4.1.2)', {loose:true}) returns '*', meaning a string written to pin version 4.1.2 silently becomes one that matches every version, and a caller validating input before storing it is told the string is fine and then handed back a different range. '>=1.0.0 (foo)' parsed as '>=1.0.0' with the garbage dropped. '(1.2.3)' did throw, but only because nothing survived the filter and the empty set was rejected afterwards, so a single valid comparator anywhere in the range masked everything else. I started with the obvious fix - reject anything unparseable - and measured it before committing to it: three test files fail, because loose mode genuinely relies on that drop for the leftovers of its own normalization, with inputs like '== 1', '== 1.0.0 || foo' and '1.2.3 || 1.2.3= x' pinned as parsing today. So I used a narrower rule instead: a token is dropped exactly as before unless it carries a character that appears in no comparator and no version, in which case the whole range is invalid. A stray '==' is sloppy range syntax; '(foo)' is not range syntax at all. The error reuses the Invalid SemVer Range type the constructor already raises, so nothing new appears in the API, and strict mode is untouched since it already rejected these. I chased down a false lead honestly along the way: my first measurement showed failures on inputs that turned out to already throw on main, where my experiment had only changed the error message rather than the behaviour, and correcting that is what pinned down the real constraint. I also found a case I deliberately did not change: '1.2.3, <2.0.0' parses as '<2.0.0', the same hazard with the lower bound vanishing, but it is pinned by an existing test, so I left it working and raised it for the maintainers rather than quietly reversing documented behaviour under a different issue number. Tests: six rows in the range-parse fixture, which exercises every input across all four option combinations, plus two focused tests on either side of the line - one that non-syntax input is rejected and validRange returns null, one that loose mode still tolerates its own leftovers including the comma case, which is what would catch a future widening of the check. Verified the tests fail with the fix reverted, and the full suite of 53 files and eslint are both clean.",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "fix: loose mode no longer drops input that is not range syntax",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/233261143?v=4",
+      "url": "https://github.com/npm/node-semver/pull/930",
+      "tags": [
+        "bug-fix",
+        "javascript",
+        "semver",
+        "input-validation",
+        "parser",
+        "testing",
+        "npm"
+      ],
+      "createdAt": "2026-10-22T18:27:49Z",
+      "dayOfSprint": 17,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1792907453381-oj3v",
+      "isRepoOnly": false,
+      "state": "open"
+    },
+    {
+      "docId": "pr-1792907486147-h0jc",
+      "creditScore": 0,
+      "additions": 64,
+      "deletions": 6,
+      "author": "Kumar44developer",
+      "commitsCount": 1,
+      "repo": "yargs/yargs",
+      "githubPrNumber": 2615,
+      "reviewedAt": null,
+      "description": "Calling parse(args, cb) invoked the callback twice whenever the arguments carried --get-yargs-completions, which is how every shell completion request arrives. The cause is that completion works out its suggestions by running a nested parse, and the parse callback is stored as instance state that the freeze/unfreeze stack saves and restores but never clears - so the nested call inherited the callback belonging to the outer parse and fired it on the way through. The first of the two invocations is the damaging one: it carries an argv that does not contain the completion flag and an empty output string, so a caller that acts on the first callback it receives acts on the wrong argv and prints nothing at all. The two invocations also disagreed on the error argument, null the first time and undefined the second, which silently breaks the common if (err === null) check. I fixed it by clearing the stored callback around the completion call and restoring it in a finally afterwards, so a nested parse cannot reach a callback that does not belong to it. The restore deliberately happens when getCompletion returns rather than when its callback fires, which is correct because the nested parse is synchronous inside getCompletion while an asynchronous custom completion function resolves later and never parses again. I documented the contract this pins - that parse(args, cb) calls cb exactly once including on the completion path - and explained in the PR why I kept the completion invocation rather than suppressing the callback entirely on that path, since the completion invocation is the one carrying the real argv and real output; I offered the maintainers the alternative if they prefer it. Writing the tests turned up something the issue did not report: the callback double-fires even when no completion is registered at all, so the bug was wider than described, and that case is now covered too. Three tests assert the call count, that the surviving invocation is the completion one and not the parse before it, and that the count holds with no completion registered. All three fail before the change with 'expected 2 to equal 1'; after it the completion suite is 106 passing and the full suite 839 passing with zero failures.",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "fix: call the parse callback once for --get-yargs-completions",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/233261143?v=4",
+      "url": "https://github.com/yargs/yargs/pull/2615",
+      "tags": [
+        "bug-fix",
+        "javascript",
+        "typescript",
+        "cli",
+        "yargs",
+        "shell-completion",
+        "testing"
+      ],
+      "createdAt": "2026-10-22T18:48:11Z",
+      "dayOfSprint": 17,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1792907486147-h0jc",
+      "isRepoOnly": false,
+      "state": "closed"
+    },
+    {
+      "docId": "pr-1792910868048-9f1i",
+      "creditScore": 0,
+      "additions": 10,
+      "deletions": 0,
+      "author": "BharathReddy15",
+      "commitsCount": 1,
+      "repo": "pugulist/math-stats",
+      "githubPrNumber": 191,
+      "reviewedAt": null,
+      "description": "## Description\n\nAdds `.github/pull_request_template.md` with a concise checklist covering tests, TypeScript declarations (`index.d.ts`), documentation (`README.md`), and lint checks.\n\nFixes #159\n\n## Checklist\n\n- [x] Template added in `.github/pull_request_template.md`\n- [x] Linter passes (`npm run l",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "chore: add pull request template (#159)",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/347629844?v=4",
+      "url": "https://github.com/pugulist/math-stats/pull/191",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-25T06:39:50Z",
+      "dayOfSprint": 17,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1792910868048-9f1i",
+      "isRepoOnly": false,
+      "state": "open"
+    },
+    {
+      "docId": "pr-1792910875629-bpb6",
+      "creditScore": 0,
+      "additions": 12,
+      "deletions": 0,
+      "author": "BharathReddy15",
+      "commitsCount": 1,
+      "repo": "pugulist/math-stats",
+      "githubPrNumber": 190,
+      "reviewedAt": null,
+      "description": "## Description\n\nAdds `.editorconfig` to enforce 4-space indentation, LF line endings, UTF-8 charset, trimming trailing whitespace, and final newlines across editors (with 2 spaces for JSON and YAML), matching the repository's ESLint rules.\n\nFixes #167\n\n## Checklist\n\n- [x] Matches ESLint configuratio",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "chore: add .editorconfig (#167)",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/347629844?v=4",
+      "url": "https://github.com/pugulist/math-stats/pull/190",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-25T06:38:42Z",
+      "dayOfSprint": 17,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1792910875629-bpb6",
+      "isRepoOnly": false,
+      "state": "open"
+    },
+    {
+      "docId": "pr-1792910884706-0no1",
+      "creditScore": 0,
+      "additions": 128,
+      "deletions": 0,
+      "author": "BharathReddy15",
+      "commitsCount": 1,
+      "repo": "pugulist/math-stats",
+      "githubPrNumber": 192,
+      "reviewedAt": null,
+      "description": "## Description\n\nAdds `CODE_OF_CONDUCT.md` adopting Contributor Covenant v2.1 with maintainer contact emails (`kannupriya@llm4s.org` and `pavanvamsi3@gmail.com`).\n\nFixes #161\n\n## Checklist\n\n- [x] Contributor Covenant 2.1 added with maintainer contacts\n- [x] Linter passes (`npm run lint`)\n- [x] Tests ",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "docs: add Contributor Covenant 2.1 code of conduct (#161)",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/347629844?v=4",
+      "url": "https://github.com/pugulist/math-stats/pull/192",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-25T06:41:38Z",
+      "dayOfSprint": 17,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1792910884706-0no1",
+      "isRepoOnly": false,
+      "state": "open"
+    },
+    {
+      "docId": "pr-1792910891792-78en",
+      "creditScore": 0,
+      "additions": 31,
+      "deletions": 0,
+      "author": "BharathReddy15",
+      "commitsCount": 1,
+      "repo": "pugulist/math-stats",
+      "githubPrNumber": 193,
+      "reviewedAt": null,
+      "description": "## Description\n\nAdds `sum(numbers)` returning the sum of numbers in an array.\n- Returns `0` for empty arrays (`sum([]) === 0`)\n- Returns `null` when the argument is not an array\n- Does not modify the caller's array\n- Added TypeScript declarations in `index.d.ts`\n- Added usage documentation in `READM",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "feat: add sum function (#171)",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/347629844?v=4",
+      "url": "https://github.com/pugulist/math-stats/pull/193",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-25T06:44:21Z",
+      "dayOfSprint": 17,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1792910891792-78en",
+      "isRepoOnly": false,
+      "state": "open"
+    },
+    {
+      "docId": "pr-1792910935502-5j32",
+      "creditScore": 0,
+      "additions": 128,
+      "deletions": 0,
+      "author": "BharathReddy15",
+      "commitsCount": 1,
+      "repo": "pugulist/math-stats",
+      "githubPrNumber": 192,
+      "reviewedAt": null,
+      "description": "## Description\n\nAdds `CODE_OF_CONDUCT.md` adopting Contributor Covenant v2.1 with maintainer contact emails (`kannupriya@llm4s.org` and `pavanvamsi3@gmail.com`).\n\nFixes #161\n\n## Checklist\n\n- [x] Contributor Covenant 2.1 added with maintainer contacts\n- [x] Linter passes (`npm run lint`)\n- [x] Tests ",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "docs: add Contributor Covenant 2.1 code of conduct (#161)",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/347629844?v=4",
+      "url": "https://github.com/pugulist/math-stats/pull/192",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-25T06:41:38Z",
+      "dayOfSprint": 17,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1792910935502-5j32",
+      "isRepoOnly": false,
+      "state": "open"
+    },
+    {
+      "docId": "pr-1792910940856-zb7q",
+      "creditScore": 0,
+      "additions": 31,
+      "deletions": 0,
+      "author": "BharathReddy15",
+      "commitsCount": 1,
+      "repo": "pugulist/math-stats",
+      "githubPrNumber": 193,
+      "reviewedAt": null,
+      "description": "## Description\n\nAdds `sum(numbers)` returning the sum of numbers in an array.\n- Returns `0` for empty arrays (`sum([]) === 0`)\n- Returns `null` when the argument is not an array\n- Does not modify the caller's array\n- Added TypeScript declarations in `index.d.ts`\n- Added usage documentation in `READM",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "feat: add sum function (#171)",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/347629844?v=4",
+      "url": "https://github.com/pugulist/math-stats/pull/193",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-25T06:44:21Z",
+      "dayOfSprint": 17,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1792910940856-zb7q",
+      "isRepoOnly": false,
+      "state": "open"
+    },
+    {
+      "docId": "pr-1792910970125-waxf",
+      "creditScore": 0,
+      "additions": 12,
+      "deletions": 0,
+      "author": "BharathReddy15",
+      "commitsCount": 1,
+      "repo": "pugulist/math-stats",
+      "githubPrNumber": 190,
+      "reviewedAt": null,
+      "description": "## Description\n\nAdds `.editorconfig` to enforce 4-space indentation, LF line endings, UTF-8 charset, trimming trailing whitespace, and final newlines across editors (with 2 spaces for JSON and YAML), matching the repository's ESLint rules.\n\nFixes #167\n\n## Checklist\n\n- [x] Matches ESLint configuratio",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "chore: add .editorconfig (#167)",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/347629844?v=4",
+      "url": "https://github.com/pugulist/math-stats/pull/190",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-25T06:38:42Z",
+      "dayOfSprint": 17,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1792910970125-waxf",
+      "isRepoOnly": false,
+      "state": "open"
+    },
+    {
+      "docId": "pr-1792910978973-cavy",
+      "creditScore": 0,
+      "additions": 10,
+      "deletions": 0,
+      "author": "BharathReddy15",
+      "commitsCount": 1,
+      "repo": "pugulist/math-stats",
+      "githubPrNumber": 191,
+      "reviewedAt": null,
+      "description": "## Description\n\nAdds `.github/pull_request_template.md` with a concise checklist covering tests, TypeScript declarations (`index.d.ts`), documentation (`README.md`), and lint checks.\n\nFixes #159\n\n## Checklist\n\n- [x] Template added in `.github/pull_request_template.md`\n- [x] Linter passes (`npm run l",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "chore: add pull request template (#159)",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/347629844?v=4",
+      "url": "https://github.com/pugulist/math-stats/pull/191",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-25T06:39:50Z",
+      "dayOfSprint": 17,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1792910978973-cavy",
+      "isRepoOnly": false,
+      "state": "open"
+    },
+    {
+      "docId": "pr-1792911182597-mpl6",
+      "creditScore": 0,
+      "additions": 10,
+      "deletions": 0,
+      "author": "BharathReddy15",
+      "commitsCount": 1,
+      "repo": "pugulist/math-stats",
+      "githubPrNumber": 191,
+      "reviewedAt": null,
+      "description": "## Description\n\nAdds `.github/pull_request_template.md` with a concise checklist covering tests, TypeScript declarations (`index.d.ts`), documentation (`README.md`), and lint checks.\n\nFixes #159\n\n## Checklist\n\n- [x] Template added in `.github/pull_request_template.md`\n- [x] Linter passes (`npm run l",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "chore: add pull request template (#159)",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/347629844?v=4",
+      "url": "https://github.com/pugulist/math-stats/pull/191",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-25T06:39:50Z",
+      "dayOfSprint": 17,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1792911182597-mpl6",
+      "isRepoOnly": false,
+      "state": "open"
+    },
+    {
+      "docId": "pr-1792912212997-vsst",
+      "additions": 12,
+      "deletions": 0,
+      "author": "BharathReddy15",
+      "commitsCount": 1,
+      "repo": "pugulist/math-stats",
+      "githubPrNumber": 190,
+      "description": "## Description\n\nAdds `.editorconfig` to enforce 4-space indentation, LF line endings, UTF-8 charset, trimming trailing whitespace, and final newlines across editors (with 2 spaces for JSON and YAML), matching the repository's ESLint rules.\n\nFixes #167\n\n## Checklist\n\n- [x] Matches ESLint configuratio",
+      "title": "chore: add .editorconfig (#167)",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/347629844?v=4",
+      "url": "https://github.com/pugulist/math-stats/pull/190",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-25T06:38:42Z",
+      "dayOfSprint": 17,
+      "id": "pr-1792912212997-vsst",
+      "isRepoOnly": false,
+      "state": "open",
+      "creditScore": 70,
+      "adminFeedback": "Automated midnight evaluation: Verified contribution of +12/-0 in pugulist/math-stats#190.",
+      "reviewedAt": "2026-10-25T12:21:58.235Z",
+      "reviewStatus": "REVIEWED",
+      "adminCriteria": {
+        "complexity": 18,
+        "testCoverage": 17,
+        "impact": 17,
+        "quality": 18
+      },
+      "reviewedBy": "Vijay-1710"
+    },
+    {
+      "docId": "pr-1792912219489-9npa",
+      "additions": 10,
+      "deletions": 0,
+      "author": "BharathReddy15",
+      "commitsCount": 1,
+      "repo": "pugulist/math-stats",
+      "githubPrNumber": 191,
+      "description": "## Description\n\nAdds `.github/pull_request_template.md` with a concise checklist covering tests, TypeScript declarations (`index.d.ts`), documentation (`README.md`), and lint checks.\n\nFixes #159\n\n## Checklist\n\n- [x] Template added in `.github/pull_request_template.md`\n- [x] Linter passes (`npm run l",
+      "title": "chore: add pull request template (#159)",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/347629844?v=4",
+      "url": "https://github.com/pugulist/math-stats/pull/191",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-25T06:39:50Z",
+      "dayOfSprint": 17,
+      "id": "pr-1792912219489-9npa",
+      "isRepoOnly": false,
+      "state": "open",
+      "creditScore": 73,
+      "adminFeedback": "Automated midnight evaluation: Verified contribution of +10/-0 in pugulist/math-stats#191.",
+      "reviewedAt": "2026-10-25T12:21:58.235Z",
+      "reviewStatus": "REVIEWED",
+      "adminCriteria": {
+        "complexity": 18,
+        "testCoverage": 18,
+        "impact": 18,
+        "quality": 19
+      },
+      "reviewedBy": "Vijay-1710"
+    },
+    {
+      "docId": "pr-1792912223277-i7v8",
+      "additions": 128,
+      "deletions": 0,
+      "author": "BharathReddy15",
+      "commitsCount": 1,
+      "repo": "pugulist/math-stats",
+      "githubPrNumber": 192,
+      "description": "## Description\n\nAdds `CODE_OF_CONDUCT.md` adopting Contributor Covenant v2.1 with maintainer contact emails (`kannupriya@llm4s.org` and `pavanvamsi3@gmail.com`).\n\nFixes #161\n\n## Checklist\n\n- [x] Contributor Covenant 2.1 added with maintainer contacts\n- [x] Linter passes (`npm run lint`)\n- [x] Tests ",
+      "title": "docs: add Contributor Covenant 2.1 code of conduct (#161)",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/347629844?v=4",
+      "url": "https://github.com/pugulist/math-stats/pull/192",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-25T06:41:38Z",
+      "dayOfSprint": 17,
+      "id": "pr-1792912223277-i7v8",
+      "isRepoOnly": false,
+      "state": "open",
+      "creditScore": 80,
+      "adminFeedback": "Automated midnight evaluation: Verified contribution of +128/-0 in pugulist/math-stats#192.",
+      "reviewedAt": "2026-10-25T12:21:58.235Z",
+      "reviewStatus": "REVIEWED",
+      "adminCriteria": {
+        "complexity": 20,
+        "testCoverage": 20,
+        "impact": 20,
+        "quality": 20
+      },
+      "reviewedBy": "Vijay-1710"
+    },
+    {
+      "docId": "pr-1792912228062-5hi2",
+      "additions": 31,
+      "deletions": 0,
+      "author": "BharathReddy15",
+      "commitsCount": 1,
+      "repo": "pugulist/math-stats",
+      "githubPrNumber": 193,
+      "description": "## Description\n\nAdds `sum(numbers)` returning the sum of numbers in an array.\n- Returns `0` for empty arrays (`sum([]) === 0`)\n- Returns `null` when the argument is not an array\n- Does not modify the caller's array\n- Added TypeScript declarations in `index.d.ts`\n- Added usage documentation in `READM",
+      "title": "feat: add sum function (#171)",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/347629844?v=4",
+      "url": "https://github.com/pugulist/math-stats/pull/193",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-25T06:44:21Z",
+      "dayOfSprint": 17,
+      "id": "pr-1792912228062-5hi2",
+      "isRepoOnly": false,
+      "state": "open",
+      "creditScore": 72,
+      "adminFeedback": "Automated midnight evaluation: Verified contribution of +31/-0 in pugulist/math-stats#193.",
+      "reviewedAt": "2026-10-25T12:21:58.235Z",
+      "reviewStatus": "REVIEWED",
+      "adminCriteria": {
+        "complexity": 18,
+        "testCoverage": 18,
+        "impact": 18,
+        "quality": 18
+      },
+      "reviewedBy": "Vijay-1710"
+    },
+    {
+      "docId": "pr-1792913173381-uz5o",
+      "additions": 6,
+      "deletions": 1,
+      "author": "marupakalaharsith20-beep",
+      "commitsCount": 1,
+      "repo": "codepiyusss/open_source_issue_contribution",
+      "githubPrNumber": 66,
+      "description": "### Summary\nFixes #8 by setting \\ensure_ascii=False\\ in \\json.dumps()\\ within \\\format_json()\\. Previously, non-ASCII characters such as \\café\\ were escaped into Unicode escape sequences like \\caf\\u00e9\\.\n\n### Changes\n- Updated \\\format_json\\ in \\\fixit/jsonfmt.py\\ to pass \\ensure_ascii=False\\ to \\json",
+      "title": "fix: preserve non-ASCII characters in format_json (#8)",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/242739440?v=4",
+      "url": "https://github.com/codepiyusss/open_source_issue_contribution/pull/66",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-25T07:21:04Z",
+      "dayOfSprint": 17,
+      "id": "pr-1792913173381-uz5o",
+      "isRepoOnly": false,
+      "state": "open",
+      "adminFeedback": "Automated midnight evaluation: Verified contribution of +6/-1 in codepiyusss/open_source_issue_contribution#66.",
+      "reviewStatus": "REVIEWED",
+      "reviewedBy": "Vijay-1710",
+      "creditScore": 83,
+      "reviewedAt": "2026-10-26T04:50:07.550Z",
+      "adminCriteria": {
+        "complexity": 18,
+        "testCoverage": 21,
+        "impact": 21,
+        "quality": 23
+      }
+    },
+    {
+      "docId": "pr-1792913177266-ak2s",
+      "additions": 21,
+      "deletions": 3,
+      "author": "marupakalaharsith20-beep",
+      "commitsCount": 1,
+      "repo": "codepiyusss/open_source_issue_contribution",
+      "githubPrNumber": 67,
+      "description": "### Summary\nAdds the \\--sort-keys\\ flag to the \\\fixit json\\ command and adds the \\sort_keys: bool = False\\ parameter to \\\fixit.jsonfmt.format_json()\\.\n\n### Changes\n- Updated \\\format_json()\\ in \\\fixit/jsonfmt.py\\ to accept \\sort_keys: bool = False\\ and pass it to \\json.dumps()\\.\n- Added \\--sort-keys\\",
+      "title": "feat: add --sort-keys option to json command (#16)",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/242739440?v=4",
+      "url": "https://github.com/codepiyusss/open_source_issue_contribution/pull/67",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-25T07:22:55Z",
+      "dayOfSprint": 17,
+      "id": "pr-1792913177266-ak2s",
+      "isRepoOnly": false,
+      "state": "open",
+      "creditScore": 75,
+      "adminFeedback": "Automated midnight evaluation: Verified contribution of +21/-3 in codepiyusss/open_source_issue_contribution#67.",
+      "reviewedAt": "2026-10-25T12:21:58.235Z",
+      "reviewStatus": "REVIEWED",
+      "adminCriteria": {
+        "complexity": 19,
+        "testCoverage": 18,
+        "impact": 19,
+        "quality": 19
+      },
+      "reviewedBy": "Vijay-1710"
+    },
+    {
+      "docId": "pr-1792913179974-0dnk",
+      "additions": 48,
+      "deletions": 0,
+      "author": "marupakalaharsith20-beep",
+      "commitsCount": 1,
+      "repo": "codepiyusss/open_source_issue_contribution",
+      "githubPrNumber": 68,
+      "description": "### Summary\nAdds weight conversion functions (\\kg_to_lbs\\ and \\lbs_to_kg\\) and exposes them as CLI choices \\kg2lb\\ and \\lb2kg\\ in \\\fixit convert\\.\n\n### Changes\n- Defined \\LBS_PER_KG = 2.20462\\ and implemented \\kg_to_lbs(kg: float) -> float\\ and \\lbs_to_kg(lbs: float) -> float\\ with full docstrings i",
+      "title": "feat: add kg_to_lbs and lbs_to_kg conversions (#13)",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/242739440?v=4",
+      "url": "https://github.com/codepiyusss/open_source_issue_contribution/pull/68",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-25T07:25:32Z",
+      "dayOfSprint": 17,
+      "id": "pr-1792913179974-0dnk",
+      "isRepoOnly": false,
+      "state": "open",
+      "reviewStatus": "REVIEWED",
+      "reviewedBy": "Vijay-1710",
+      "creditScore": 75,
+      "adminFeedback": "Automated midnight evaluation: Verified contribution of +48/-0 in codepiyusss/open_source_issue_contribution#68.",
+      "reviewedAt": "2026-10-25T12:21:58.235Z",
+      "adminCriteria": {
+        "complexity": 19,
+        "testCoverage": 18,
+        "impact": 19,
+        "quality": 19
+      }
+    },
+    {
+      "docId": "pr-1792916468609-c0kr",
+      "creditScore": 0,
+      "additions": 20,
+      "deletions": 0,
+      "author": "gouthamkrishnap",
+      "commitsCount": 1,
+      "repo": "ilyamiro/serpantinum",
+      "githubPrNumber": 484,
+      "reviewedAt": null,
+      "description": "The calculator dropdowns close when moving the mouse over the options list because the popup is outside the sidebar's hover area. This starts the auto-hide timer, which eventually closes the entire QuickActions panel.\n\nThis change makes the sidebar account for dropdown popup hover, keeping the panel",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "fix(quickactions): keep calculator dropdown open while hovering its list",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/224089015?v=4",
+      "url": "https://github.com/ilyamiro/serpantinum/pull/484",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-22T12:51:19Z",
+      "dayOfSprint": 17,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1792916468609-c0kr",
+      "isRepoOnly": false,
+      "state": "merged"
+    },
+    {
+      "docId": "pr-1792916916027-jhjl",
+      "additions": 20,
+      "deletions": 0,
+      "author": "gouthamkrishnap",
+      "commitsCount": 1,
+      "repo": "ilyamiro/serpantinum",
+      "githubPrNumber": 484,
+      "description": "The calculator dropdowns close when moving the mouse over the options list because the popup is outside the sidebar's hover area. This starts the auto-hide timer, which eventually closes the entire QuickActions panel.\n\nThis change makes the sidebar account for dropdown popup hover, keeping the panel",
+      "title": "fix(quickactions): keep calculator dropdown open while hovering its list",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/224089015?v=4",
+      "url": "https://github.com/ilyamiro/serpantinum/pull/484",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-22T12:51:19Z",
+      "dayOfSprint": 17,
+      "adminFeedback": "",
+      "id": "pr-1792916916027-jhjl",
+      "isRepoOnly": false,
+      "state": "merged",
+      "creditScore": 83,
+      "reviewStatus": "REVIEWED",
+      "adminCriteria": {
+        "complexity": 20,
+        "testCoverage": 20,
+        "impact": 21,
+        "quality": 22
+      },
+      "reviewedBy": "Vijay-1710",
+      "reviewedAt": "2026-10-25T08:32:06.126Z"
+    },
+    {
+      "docId": "pr-1793009094878-hiix",
+      "additions": 73,
+      "deletions": 3,
+      "author": "Kumar44developer",
+      "commitsCount": 1,
+      "repo": "npm/node-semver",
+      "githubPrNumber": 930,
+      "description": "In loose mode, semver's range parser discarded any token it could not parse and kept whatever remained, so a range containing text that is not range syntax parsed successfully as something materially weaker than what was written. The dangerous case: validRange('* (4.1.x 4.1.2)', {loose:true}) returns '*', meaning a string written to pin version 4.1.2 silently becomes one that matches every version, and a caller validating input before storing it is told the string is fine and then handed back a different range. '>=1.0.0 (foo)' parsed as '>=1.0.0' with the garbage dropped. '(1.2.3)' did throw, but only because nothing survived the filter and the empty set was rejected afterwards, so a single valid comparator anywhere in the range masked everything else. I started with the obvious fix - reject anything unparseable - and measured it before committing to it: three test files fail, because loose mode genuinely relies on that drop for the leftovers of its own normalization, with inputs like '== 1', '== 1.0.0 || foo' and '1.2.3 || 1.2.3= x' pinned as parsing today. So I used a narrower rule instead: a token is dropped exactly as before unless it carries a character that appears in no comparator and no version, in which case the whole range is invalid. A stray '==' is sloppy range syntax; '(foo)' is not range syntax at all. The error reuses the Invalid SemVer Range type the constructor already raises, so nothing new appears in the API, and strict mode is untouched since it already rejected these. I chased down a false lead honestly along the way: my first measurement showed failures on inputs that turned out to already throw on main, where my experiment had only changed the error message rather than the behaviour, and correcting that is what pinned down the real constraint. I also found a case I deliberately did not change: '1.2.3, <2.0.0' parses as '<2.0.0', the same hazard with the lower bound vanishing, but it is pinned by an existing test, so I left it working and raised it for the maintainers rather than quietly reversing documented behaviour under a different issue number. Tests: six rows in the range-parse fixture, which exercises every input across all four option combinations, plus two focused tests on either side of the line - one that non-syntax input is rejected and validRange returns null, one that loose mode still tolerates its own leftovers including the comma case, which is what would catch a future widening of the check. Verified the tests fail with the fix reverted, and the full suite of 53 files and eslint are both clean.",
+      "title": "fix: loose mode no longer drops input that is not range syntax",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/233261143?v=4",
+      "url": "https://github.com/npm/node-semver/pull/930",
+      "tags": [
+        "bug-fix",
+        "javascript",
+        "semver",
+        "input-validation",
+        "parser",
+        "testing",
+        "npm"
+      ],
+      "createdAt": "2026-10-22T18:27:49Z",
+      "dayOfSprint": 18,
+      "id": "pr-1793009094878-hiix",
+      "isRepoOnly": false,
+      "state": "open",
+      "creditScore": 77,
+      "adminFeedback": "Automated midnight evaluation: Verified contribution of +73/-3 in npm/node-semver#930.",
+      "reviewedAt": "2026-10-27T00:54:29.486Z",
+      "reviewStatus": "REVIEWED",
+      "adminCriteria": {
+        "complexity": 19,
+        "testCoverage": 19,
+        "impact": 19,
+        "quality": 20
+      },
+      "reviewedBy": "Vijay-1710"
+    },
+    {
+      "docId": "pr-1793009132261-abpl",
+      "creditScore": 0,
+      "additions": 64,
+      "deletions": 6,
+      "author": "Kumar44developer",
+      "commitsCount": 1,
+      "repo": "yargs/yargs",
+      "githubPrNumber": 2615,
+      "reviewedAt": null,
+      "description": "Calling parse(args, cb) invoked the callback twice whenever the arguments carried --get-yargs-completions, which is how every shell completion request arrives. The cause is that completion works out its suggestions by running a nested parse, and the parse callback is stored as instance state that the freeze/unfreeze stack saves and restores but never clears - so the nested call inherited the callback belonging to the outer parse and fired it on the way through. The first of the two invocations is the damaging one: it carries an argv that does not contain the completion flag and an empty output string, so a caller that acts on the first callback it receives acts on the wrong argv and prints nothing at all. The two invocations also disagreed on the error argument, null the first time and undefined the second, which silently breaks the common if (err === null) check. I fixed it by clearing the stored callback around the completion call and restoring it in a finally afterwards, so a nested parse cannot reach a callback that does not belong to it. The restore deliberately happens when getCompletion returns rather than when its callback fires, which is correct because the nested parse is synchronous inside getCompletion while an asynchronous custom completion function resolves later and never parses again. I documented the contract this pins - that parse(args, cb) calls cb exactly once including on the completion path - and explained in the PR why I kept the completion invocation rather than suppressing the callback entirely on that path, since the completion invocation is the one carrying the real argv and real output; I offered the maintainers the alternative if they prefer it. Writing the tests turned up something the issue did not report: the callback double-fires even when no completion is registered at all, so the bug was wider than described, and that case is now covered too. Three tests assert the call count, that the surviving invocation is the completion one and not the parse before it, and that the count holds with no completion registered. All three fail before the change with 'expected 2 to equal 1'; after it the completion suite is 106 passing and the full suite 839 passing with zero failures.",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "fix: call the parse callback once for --get-yargs-completions",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/233261143?v=4",
+      "url": "https://github.com/yargs/yargs/pull/2615",
+      "tags": [
+        "bug-fix",
+        "javascript",
+        "typescript",
+        "cli",
+        "yargs",
+        "shell-completion",
+        "testing"
+      ],
+      "createdAt": "2026-10-22T18:48:11Z",
+      "dayOfSprint": 18,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1793009132261-abpl",
+      "isRepoOnly": false,
+      "state": "closed"
+    },
+    {
+      "docId": "pr-1793009178351-pr4v",
+      "additions": 64,
+      "deletions": 6,
+      "author": "Kumar44developer",
+      "commitsCount": 1,
+      "repo": "yargs/yargs",
+      "githubPrNumber": 2615,
+      "description": "Calling parse(args, cb) invoked the callback twice whenever the arguments carried --get-yargs-completions, which is how every shell completion request arrives. The cause is that completion works out its suggestions by running a nested parse, and the parse callback is stored as instance state that the freeze/unfreeze stack saves and restores but never clears - so the nested call inherited the callback belonging to the outer parse and fired it on the way through. The first of the two invocations is the damaging one: it carries an argv that does not contain the completion flag and an empty output string, so a caller that acts on the first callback it receives acts on the wrong argv and prints nothing at all. The two invocations also disagreed on the error argument, null the first time and undefined the second, which silently breaks the common if (err === null) check. I fixed it by clearing the stored callback around the completion call and restoring it in a finally afterwards, so a nested parse cannot reach a callback that does not belong to it. The restore deliberately happens when getCompletion returns rather than when its callback fires, which is correct because the nested parse is synchronous inside getCompletion while an asynchronous custom completion function resolves later and never parses again. I documented the contract this pins - that parse(args, cb) calls cb exactly once including on the completion path - and explained in the PR why I kept the completion invocation rather than suppressing the callback entirely on that path, since the completion invocation is the one carrying the real argv and real output; I offered the maintainers the alternative if they prefer it. Writing the tests turned up something the issue did not report: the callback double-fires even when no completion is registered at all, so the bug was wider than described, and that case is now covered too. Three tests assert the call count, that the surviving invocation is the completion one and not the parse before it, and that the count holds with no completion registered. All three fail before the change with 'expected 2 to equal 1'; after it the completion suite is 106 passing and the full suite 839 passing with zero failures.",
+      "title": "fix: call the parse callback once for --get-yargs-completions",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/233261143?v=4",
+      "url": "https://github.com/yargs/yargs/pull/2615",
+      "tags": [
+        "bug-fix",
+        "javascript",
+        "typescript",
+        "cli",
+        "yargs",
+        "shell-completion",
+        "testing"
+      ],
+      "createdAt": "2026-10-22T18:48:11Z",
+      "dayOfSprint": 18,
+      "id": "pr-1793009178351-pr4v",
+      "isRepoOnly": false,
+      "state": "closed",
+      "creditScore": 75,
+      "adminFeedback": "Automated midnight evaluation: Verified contribution of +64/-6 in yargs/yargs#2615.",
+      "reviewedAt": "2026-10-27T00:54:29.486Z",
+      "reviewStatus": "REVIEWED",
+      "adminCriteria": {
+        "complexity": 19,
+        "testCoverage": 18,
+        "impact": 19,
+        "quality": 19
+      },
+      "reviewedBy": "Vijay-1710"
+    },
+    {
+      "docId": "pr-1793017059187-hwvg",
+      "additions": 20,
+      "deletions": 0,
+      "author": "gouthamkrishnap",
+      "commitsCount": 1,
+      "repo": "ilyamiro/serpantinum",
+      "githubPrNumber": 484,
+      "description": "The calculator dropdowns close when moving the mouse over the options list because the popup is outside the sidebar's hover area. This starts the auto-hide timer, which eventually closes the entire QuickActions panel.\n\nThis change makes the sidebar account for dropdown popup hover, keeping the panel",
+      "title": "fix(quickactions): keep calculator dropdown open while hovering its list",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/224089015?v=4",
+      "url": "https://github.com/ilyamiro/serpantinum/pull/484",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-22T12:51:19Z",
+      "dayOfSprint": 18,
+      "adminFeedback": "",
+      "id": "pr-1793017059187-hwvg",
+      "isRepoOnly": false,
+      "state": "merged",
+      "creditScore": 84,
+      "reviewedAt": "2026-10-26T12:28:05.919Z",
+      "reviewStatus": "REVIEWED",
+      "adminCriteria": {
+        "complexity": 21,
+        "testCoverage": 20,
+        "impact": 21,
+        "quality": 22
+      },
+      "reviewedBy": "Vijay-1710"
+    },
+    {
+      "docId": "pr-1793081592318-hkx5",
+      "creditScore": 0,
+      "additions": 116,
+      "deletions": 3,
+      "author": "nachiketa11",
+      "commitsCount": 3,
+      "repo": "nachiketa11/grade-calculator",
+      "githubPrNumber": 1,
+      "reviewedAt": null,
+      "description": "## Summary\n- Reject `nan`, `inf`, and `-inf` for marks and maximum-marks input.\n- Add standard-library unit tests for grade thresholds and input validation.\n- Document setup, usage, grading scale, and test commands.\n\n## Why\nPython's `float()` accepts non-finite values, which can bypass ordinary rang",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "Fix non-finite input handling and add tests",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/224293481?v=4",
+      "url": "https://github.com/nachiketa11/grade-calculator/pull/1",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-27T06:06:51Z",
+      "dayOfSprint": 19,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1793081592318-hkx5",
+      "isRepoOnly": false,
+      "state": "merged"
+    },
+    {
+      "docId": "pr-1793085340879-fwgt",
+      "creditScore": 0,
+      "additions": 116,
+      "deletions": 3,
+      "author": "nachiketa11",
+      "commitsCount": 3,
+      "repo": "nachiketa11/grade-calculator",
+      "githubPrNumber": 1,
+      "reviewedAt": null,
+      "description": "## Summary\n- Reject `nan`, `inf`, and `-inf` for marks and maximum-marks input.\n- Add standard-library unit tests for grade thresholds and input validation.\n- Document setup, usage, grading scale, and test commands.\n\n## Why\nPython's `float()` accepts non-finite values, which can bypass ordinary rang",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "Fix non-finite input handling and add tests",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/224293481?v=4",
+      "url": "https://github.com/nachiketa11/grade-calculator/pull/1",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-27T06:06:51Z",
+      "dayOfSprint": 19,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1793085340879-fwgt",
+      "isRepoOnly": false,
+      "state": "merged"
+    },
+    {
+      "docId": "pr-1793090752122-d5iu",
+      "creditScore": 0,
+      "additions": 56,
+      "deletions": 0,
+      "author": "nachiketa11",
+      "commitsCount": 1,
+      "repo": "nachiketa11/kubernetes-devops-project",
+      "githubPrNumber": 1,
+      "reviewedAt": null,
+      "description": "## Summary\n- Add prerequisites and context checks before applying Kubernetes manifests.\n- Document deployment rollout, pod troubleshooting, events, logs, and PVC checks.\n- Add a cautious cleanup workflow and clarify that resource names must be verified against repository manifests.\n\n## Why\nThe repos",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "Document Kubernetes quickstart and validation workflow",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/224293481?v=4",
+      "url": "https://github.com/nachiketa11/kubernetes-devops-project/pull/1",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-27T06:11:59Z",
+      "dayOfSprint": 19,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1793090752122-d5iu",
+      "isRepoOnly": false,
+      "state": "merged"
+    },
+    {
+      "docId": "pr-1793090837885-tckl",
+      "creditScore": 0,
+      "additions": 20,
+      "deletions": 11,
+      "author": "nachiketa11",
+      "commitsCount": 3,
+      "repo": "nachiketa11/Docker-project",
+      "githubPrNumber": 1,
+      "reviewedAt": null,
+      "description": "## Summary\n- Add `GET /health`, returning HTTP 200 with JSON `{\"status\":\"ok\"}`.\n- Bind the server to `0.0.0.0` when started directly, supporting container access.\n- Export the Express app for future automated testing without starting a listener on import.\n\n## Why\nA predictable health endpoint is use",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "Add a JSON health endpoint",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/224293481?v=4",
+      "url": "https://github.com/nachiketa11/Docker-project/pull/1",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-27T06:12:37Z",
+      "dayOfSprint": 19,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1793090837885-tckl",
+      "isRepoOnly": false,
+      "state": "merged"
+    },
+    {
+      "docId": "pr-1793182594756-d37a",
+      "creditScore": 0,
+      "additions": 278,
+      "deletions": 10,
+      "author": "d4-dhiraj",
+      "commitsCount": 1,
+      "repo": "subhranshudash13-dotcom/Contribo",
+      "githubPrNumber": 109,
+      "reviewedAt": null,
+      "description": "Description\nExpand the current 6 resource cards on /resources with deeper guides addressing fundamental questions:\n\nWhat is Open Source & Why Does It Matter? (Solo tutorial clones vs. real production collaboration).\nDemystifying Pull Requests: Why they are called \"Pull\" requests and how they add tangible business and engineering value.\nMastering Issues & Bug Reports: How issues drive 80% of project momentum before code is written.\nCode Review Etiquette: How to interpret maintainer feedback and survive \"Request Changes\".\nSecurity Hygiene & Licensing: Permissive vs. copyleft (MIT vs. GPL) and sanitizing .env credentials before committing.\nProposed Implementation\nAdd new guide entries to src/app/resources/data/resourceGuides.tsx.\nEnhance ResourceCard.tsx with difficulty tags (Beginner, Intermediate, Advanced), read time badges, and expandable real-world scenario code blocks.\nAcceptance Criteria\n\nAll new guides include practical real-world scenarios or code diff examples.\n\nClean expandable cards with smooth transitions.",
+      "adminCriteria": {
+        "complexity": 0,
+        "testCoverage": 0,
+        "impact": 0,
+        "quality": 0
+      },
+      "reviewedBy": null,
+      "title": "feat(resources): add deep dive guides with difficulty tags and read time",
+      "authorAvatar": "https://avatars.githubusercontent.com/u/211018717?v=4",
+      "url": "https://github.com/subhranshudash13-dotcom/Contribo/pull/109",
+      "tags": [
+        "contribution"
+      ],
+      "createdAt": "2026-10-28T10:14:20Z",
+      "dayOfSprint": 20,
+      "adminFeedback": "",
+      "reviewStatus": "PENDING_REVIEW",
+      "id": "pr-1793182594756-d37a",
+      "isRepoOnly": false,
+      "state": "open"
     }
   ],
   "auditLogs": [
     {
+      "docId": "log-1793182594765-s0bi",
+      "id": "log-1793182594765-s0bi",
+      "action": "PR_SUBMITTED",
+      "actor": "d4-dhiraj",
+      "details": "@d4-dhiraj submitted verified PR #109 in subhranshudash13-dotcom/Contribo",
+      "timestamp": "2026-10-28T10:16:34.765Z"
+    },
+    {
+      "docId": "log-1793148871997-zbbl",
+      "id": "log-1793148871997-zbbl",
+      "action": "AUTOMATIC_DAILY_UPDATE",
+      "actor": "SCHEDULED_TICKER",
+      "details": "Day 21 daily calculation completed. Evaluated 3 pending PRs (60-90 pts). Timeline advanced to Day 21. Next midnight evaluation at 2026-10-29T00:00:00.000Z.",
+      "timestamp": "2026-10-28T00:54:31.997Z"
+    },
+    {
+      "docId": "log-1793148871396-g91l",
+      "id": "log-1793148871396-g91l",
+      "action": "DAILY_00:00_PR_EVALUATION",
+      "actor": "Vijay-1710",
+      "details": "Automated midnight evaluation: Graded 3 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
+      "timestamp": "2026-10-28T00:54:31.396Z"
+    },
+    {
+      "docId": "log-1793105188954-miro",
+      "id": "log-1793105188954-miro",
+      "action": "PR_SUBMITTED",
+      "actor": "nachiketa11",
+      "details": "@nachiketa11 submitted verified PR #7 in nachiketa11/OOPSBannerApp",
+      "timestamp": "2026-10-27T12:46:28.954Z"
+    },
+    {
+      "docId": "log-1793090837891-ene2",
+      "id": "log-1793090837891-ene2",
+      "action": "PR_SUBMITTED",
+      "actor": "nachiketa11",
+      "details": "@nachiketa11 submitted verified PR #1 in nachiketa11/Docker-project",
+      "timestamp": "2026-10-27T08:47:17.891Z"
+    },
+    {
+      "docId": "log-1793090812138-61a0",
+      "id": "log-1793090812138-61a0",
+      "action": "PR_SUBMITTED",
+      "actor": "nachiketa11",
+      "details": "@nachiketa11 submitted verified PR #1 in nachiketa11/Docker-project",
+      "timestamp": "2026-10-27T08:46:52.138Z"
+    },
+    {
+      "docId": "log-1793090752152-7zd7",
+      "id": "log-1793090752152-7zd7",
+      "action": "PR_SUBMITTED",
+      "actor": "nachiketa11",
+      "details": "@nachiketa11 submitted verified PR #1 in nachiketa11/kubernetes-devops-project",
+      "timestamp": "2026-10-27T08:45:52.152Z"
+    },
+    {
+      "docId": "log-1793085416537-umih",
+      "id": "log-1793085416537-umih",
+      "action": "PR_SUBMITTED",
+      "actor": "nachiketa11",
+      "details": "@nachiketa11 submitted verified PR #1 in nachiketa11/docker-hello-world",
+      "timestamp": "2026-10-27T07:16:56.537Z"
+    },
+    {
+      "docId": "log-1793085340898-fda2",
+      "id": "log-1793085340898-fda2",
+      "action": "PR_SUBMITTED",
+      "actor": "nachiketa11",
+      "details": "@nachiketa11 submitted verified PR #1 in nachiketa11/grade-calculator",
+      "timestamp": "2026-10-27T07:15:40.898Z"
+    },
+    {
+      "docId": "log-1793081592339-9p6b",
+      "id": "log-1793081592339-9p6b",
+      "action": "PR_SUBMITTED",
+      "actor": "nachiketa11",
+      "details": "@nachiketa11 submitted verified PR #1 in nachiketa11/grade-calculator",
+      "timestamp": "2026-10-27T06:13:12.339Z"
+    },
+    {
+      "docId": "log-1793076078716-hgu9",
+      "id": "log-1793076078716-hgu9",
+      "action": "AUTOMATIC_DAILY_UPDATE",
+      "actor": "SCHEDULED_TICKER",
+      "details": "Day 20 daily calculation completed. Evaluated 0 pending PRs (60-90 pts). Timeline advanced to Day 20. Next midnight evaluation at 2026-10-28T00:00:00.000Z.",
+      "timestamp": "2026-10-27T04:41:18.716Z"
+    },
+    {
+      "docId": "log-1793062472569-b2a9",
+      "id": "log-1793062472569-b2a9",
+      "action": "AUTOMATIC_DAILY_UPDATE",
+      "actor": "SCHEDULED_TICKER",
+      "details": "Day 20 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 20. Next midnight evaluation at 2026-10-28T00:00:00.000Z.",
+      "timestamp": "2026-10-27T00:54:32.569Z"
+    },
+    {
+      "docId": "log-1793062472194-zd4u",
+      "id": "log-1793062472194-zd4u",
+      "action": "DAILY_00:00_PR_EVALUATION",
+      "actor": "Vijay-1710",
+      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
+      "timestamp": "2026-10-27T00:54:32.194Z"
+    },
+    {
+      "docId": "log-1793017685932-xt6q",
+      "id": "log-1793017685932-xt6q",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #484 (gouthamkrishnap) -> Awarded 84 credits with status REVIEWED",
+      "timestamp": "2026-10-26T12:28:05.932Z"
+    },
+    {
+      "docId": "log-1793017590522-1jmj",
+      "id": "log-1793017590522-1jmj",
+      "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-26T12:26:30.522Z"
+    },
+    {
+      "docId": "log-1793017511186-qsr3",
+      "id": "log-1793017511186-qsr3",
+      "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-26T12:25:11.186Z"
+    },
+    {
+      "docId": "log-1793017259796-uqqw",
+      "id": "log-1793017259796-uqqw",
+      "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-26T12:20:59.796Z"
+    },
+    {
+      "docId": "log-1793017059202-y0yh",
+      "id": "log-1793017059202-y0yh",
+      "action": "PR_SUBMITTED",
+      "actor": "gouthamkrishnap",
+      "details": "@gouthamkrishnap submitted verified PR #484 in ilyamiro/serpantinum",
+      "timestamp": "2026-10-26T12:17:39.202Z"
+    },
+    {
+      "docId": "log-1793009178358-osr9",
+      "id": "log-1793009178358-osr9",
+      "action": "PR_SUBMITTED",
+      "actor": "Kumar44developer",
+      "details": "@Kumar44developer submitted verified PR #2615 in yargs/yargs",
+      "timestamp": "2026-10-26T10:06:18.358Z"
+    },
+    {
+      "docId": "log-1793009132273-xcja",
+      "id": "log-1793009132273-xcja",
+      "action": "PR_SUBMITTED",
+      "actor": "Kumar44developer",
+      "details": "@Kumar44developer submitted verified PR #2615 in yargs/yargs",
+      "timestamp": "2026-10-26T10:05:32.273Z"
+    },
+    {
+      "docId": "log-1793009094885-gw0n",
+      "id": "log-1793009094885-gw0n",
+      "action": "PR_SUBMITTED",
+      "actor": "Kumar44developer",
+      "details": "@Kumar44developer submitted verified PR #930 in npm/node-semver",
+      "timestamp": "2026-10-26T10:04:54.885Z"
+    },
+    {
+      "docId": "log-1792992353834-bg0z",
+      "id": "log-1792992353834-bg0z",
+      "action": "AUTOMATIC_DAILY_UPDATE",
+      "actor": "SCHEDULED_TICKER",
+      "details": "Day 19 daily calculation completed. Evaluated 4 pending PRs (60-90 pts). Timeline advanced to Day 19. Next midnight evaluation at 2026-10-27T00:00:00.000Z.",
+      "timestamp": "2026-10-26T05:25:53.834Z"
+    },
+    {
+      "docId": "log-1792992353016-bb78",
+      "id": "log-1792992353016-bb78",
+      "action": "DAILY_00:00_PR_EVALUATION",
+      "actor": "Vijay-1710",
+      "details": "Automated midnight evaluation: Graded 4 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
+      "timestamp": "2026-10-26T05:25:53.016Z"
+    },
+    {
+      "docId": "log-1792990207558-4s2w",
+      "id": "log-1792990207558-4s2w",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #66 (marupakalaharsith20-beep) -> Awarded 83 credits with status REVIEWED",
+      "timestamp": "2026-10-26T04:50:07.558Z"
+    },
+    {
+      "docId": "log-1792990173070-drxu",
+      "id": "log-1792990173070-drxu",
+      "action": "ADMIN_SECRET_LOGIN",
+      "actor": "Vijay-1710",
+      "details": "Admin authenticated via verified secret passkey",
+      "timestamp": "2026-10-26T04:49:33.070Z"
+    },
+    {
+      "docId": "log-1792976071037-sjju",
+      "id": "log-1792976071037-sjju",
+      "action": "AUTOMATIC_DAILY_UPDATE",
+      "actor": "SCHEDULED_TICKER",
+      "details": "Day 19 daily calculation completed. Evaluated 0 pending PRs (60-90 pts). Timeline advanced to Day 19. Next midnight evaluation at 2026-10-27T00:00:00.000Z.",
+      "timestamp": "2026-10-26T00:54:31.037Z"
+    },
+    {
+      "docId": "log-1792930919237-vqhc",
       "id": "log-1792930919237-vqhc",
       "action": "DAILY_00:00_PR_EVALUATION",
       "actor": "Vijay-1710",
@@ -10832,6 +12173,7 @@
       "timestamp": "2026-10-25T12:21:59.237Z"
     },
     {
+      "docId": "log-1792917607924-iyki",
       "id": "log-1792917607924-iyki",
       "action": "PR_MANUALLY_REVIEWED",
       "actor": "Vijay-1710",
@@ -10839,6 +12181,7 @@
       "timestamp": "2026-10-25T08:40:07.924Z"
     },
     {
+      "docId": "log-1792917583959-1dti",
       "id": "log-1792917583959-1dti",
       "action": "PR_MANUALLY_REVIEWED",
       "actor": "Vijay-1710",
@@ -10846,6 +12189,7 @@
       "timestamp": "2026-10-25T08:39:43.959Z"
     },
     {
+      "docId": "log-1792917554977-q1wr",
       "id": "log-1792917554977-q1wr",
       "action": "PR_MANUALLY_REVIEWED",
       "actor": "Vijay-1710",
@@ -10853,6 +12197,23 @@
       "timestamp": "2026-10-25T08:39:14.977Z"
     },
     {
+      "docId": "log-1792917503156-uo5l",
+      "id": "log-1792917503156-uo5l",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #451 (gouthamkrishnap) -> Awarded 81 credits with status REVIEWED",
+      "timestamp": "2026-10-25T08:38:23.156Z"
+    },
+    {
+      "docId": "log-1792917477278-f68j",
+      "id": "log-1792917477278-f68j",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #451 (gouthamkrishnap) -> Awarded 81 credits with status REVIEWED",
+      "timestamp": "2026-10-25T08:37:57.278Z"
+    },
+    {
+      "docId": "log-1792917438764-qtnf",
       "id": "log-1792917438764-qtnf",
       "action": "ADMIN_SECRET_LOGIN",
       "actor": "Vijay-1710",
@@ -10860,6 +12221,7 @@
       "timestamp": "2026-10-25T08:37:18.764Z"
     },
     {
+      "docId": "log-1792917285995-hhu5",
       "id": "log-1792917285995-hhu5",
       "action": "PR_MANUALLY_REVIEWED",
       "actor": "Vijay-1710",
@@ -10867,6 +12229,7 @@
       "timestamp": "2026-10-25T08:34:45.995Z"
     },
     {
+      "docId": "log-1792917228212-mzt6",
       "id": "log-1792917228212-mzt6",
       "action": "PR_MANUALLY_REVIEWED",
       "actor": "Vijay-1710",
@@ -10874,6 +12237,15 @@
       "timestamp": "2026-10-25T08:33:48.212Z"
     },
     {
+      "docId": "log-1792917126134-i6sw",
+      "id": "log-1792917126134-i6sw",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #484 (gouthamkrishnap) -> Awarded 83 credits with status REVIEWED",
+      "timestamp": "2026-10-25T08:32:06.134Z"
+    },
+    {
+      "docId": "log-1792917077494-dt8x",
       "id": "log-1792917077494-dt8x",
       "action": "PR_MANUALLY_REVIEWED",
       "actor": "Vijay-1710",
@@ -10881,6 +12253,15 @@
       "timestamp": "2026-10-25T08:31:17.494Z"
     },
     {
+      "docId": "log-1792917029399-yzg8",
+      "id": "log-1792917029399-yzg8",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #451 (gouthamkrishnap) -> Awarded 75 credits with status REVIEWED",
+      "timestamp": "2026-10-25T08:30:29.399Z"
+    },
+    {
+      "docId": "log-1792916916048-eyyh",
       "id": "log-1792916916048-eyyh",
       "action": "PR_SUBMITTED",
       "actor": "gouthamkrishnap",
@@ -10888,6 +12269,23 @@
       "timestamp": "2026-10-25T08:28:36.049Z"
     },
     {
+      "docId": "log-1792916863448-y8h3",
+      "id": "log-1792916863448-y8h3",
+      "action": "PR_MANUALLY_REVIEWED",
+      "actor": "Vijay-1710",
+      "details": "Admin reviewed PR #68 (marupakalaharsith20-beep) -> Awarded 84 credits with status REVIEWED",
+      "timestamp": "2026-10-25T08:27:43.448Z"
+    },
+    {
+      "docId": "log-1792916468620-m0ug",
+      "id": "log-1792916468620-m0ug",
+      "action": "PR_SUBMITTED",
+      "actor": "gouthamkrishnap",
+      "details": "@gouthamkrishnap submitted verified PR #484 in ilyamiro/serpantinum",
+      "timestamp": "2026-10-25T08:21:08.620Z"
+    },
+    {
+      "docId": "log-1792913179982-w87j",
       "id": "log-1792913179982-w87j",
       "action": "PR_SUBMITTED",
       "actor": "marupakalaharsith20-beep",
@@ -10895,6 +12293,7 @@
       "timestamp": "2026-10-25T07:26:19.982Z"
     },
     {
+      "docId": "log-1792913177272-nazs",
       "id": "log-1792913177272-nazs",
       "action": "PR_SUBMITTED",
       "actor": "marupakalaharsith20-beep",
@@ -10902,6 +12301,7 @@
       "timestamp": "2026-10-25T07:26:17.272Z"
     },
     {
+      "docId": "log-1792913173397-4iyw",
       "id": "log-1792913173397-4iyw",
       "action": "PR_SUBMITTED",
       "actor": "marupakalaharsith20-beep",
@@ -10909,6 +12309,7 @@
       "timestamp": "2026-10-25T07:26:13.397Z"
     },
     {
+      "docId": "log-1792912228380-1bt9",
       "id": "log-1792912228380-1bt9",
       "action": "PR_SUBMITTED",
       "actor": "BharathReddy15",
@@ -10916,6 +12317,7 @@
       "timestamp": "2026-10-25T07:10:28.380Z"
     },
     {
+      "docId": "log-1792912223603-g5t4",
       "id": "log-1792912223603-g5t4",
       "action": "PR_SUBMITTED",
       "actor": "BharathReddy15",
@@ -10923,6 +12325,7 @@
       "timestamp": "2026-10-25T07:10:23.603Z"
     },
     {
+      "docId": "log-1792912219820-3fh2",
       "id": "log-1792912219820-3fh2",
       "action": "PR_SUBMITTED",
       "actor": "BharathReddy15",
@@ -10930,6 +12333,7 @@
       "timestamp": "2026-10-25T07:10:19.820Z"
     },
     {
+      "docId": "log-1792912213347-t8kw",
       "id": "log-1792912213347-t8kw",
       "action": "PR_SUBMITTED",
       "actor": "BharathReddy15",
@@ -10937,6 +12341,7 @@
       "timestamp": "2026-10-25T07:10:13.347Z"
     },
     {
+      "docId": "log-1792912006025-92li",
       "id": "log-1792912006025-92li",
       "action": "PR_SUBMITTED",
       "actor": "churukantirohith2007-pixel",
@@ -10944,6 +12349,7 @@
       "timestamp": "2026-10-25T07:06:46.025Z"
     },
     {
+      "docId": "log-1792912002526-mx8f",
       "id": "log-1792912002526-mx8f",
       "action": "PR_SUBMITTED",
       "actor": "churukantirohith2007-pixel",
@@ -10951,6 +12357,7 @@
       "timestamp": "2026-10-25T07:06:42.526Z"
     },
     {
+      "docId": "log-1792911999003-esy0",
       "id": "log-1792911999003-esy0",
       "action": "PR_SUBMITTED",
       "actor": "churukantirohith2007-pixel",
@@ -10958,6 +12365,7 @@
       "timestamp": "2026-10-25T07:06:39.003Z"
     },
     {
+      "docId": "log-1792911994974-z9qp",
       "id": "log-1792911994974-z9qp",
       "action": "PR_SUBMITTED",
       "actor": "churukantirohith2007-pixel",
@@ -10965,6 +12373,7 @@
       "timestamp": "2026-10-25T07:06:34.974Z"
     },
     {
+      "docId": "log-1792911610483-cdyq",
       "id": "log-1792911610483-cdyq",
       "action": "USER_LOGIN",
       "actor": "tester-dylz",
@@ -10972,6 +12381,7 @@
       "timestamp": "2026-10-25T07:00:10.483Z"
     },
     {
+      "docId": "log-1792911500536-jroa",
       "id": "log-1792911500536-jroa",
       "action": "USER_LOGIN",
       "actor": "tester-gn0s",
@@ -10979,6 +12389,119 @@
       "timestamp": "2026-10-25T06:58:20.536Z"
     },
     {
+      "docId": "log-1792911294130-v388",
+      "id": "log-1792911294130-v388",
+      "action": "USER_LOGIN",
+      "actor": "brand-new-tester-889",
+      "details": "User connected with role contributor",
+      "timestamp": "2026-10-25T06:54:54.130Z"
+    },
+    {
+      "docId": "log-1792911183541-kksh",
+      "id": "log-1792911183541-kksh",
+      "action": "PR_SUBMITTED",
+      "actor": "BharathReddy15",
+      "details": "@BharathReddy15 submitted verified PR #191 in pugulist/math-stats",
+      "timestamp": "2026-10-25T06:53:03.541Z"
+    },
+    {
+      "docId": "log-1792910979305-9482",
+      "id": "log-1792910979305-9482",
+      "action": "PR_SUBMITTED",
+      "actor": "BharathReddy15",
+      "details": "@BharathReddy15 submitted verified PR #191 in pugulist/math-stats",
+      "timestamp": "2026-10-25T06:49:39.305Z"
+    },
+    {
+      "docId": "log-1792910971024-f5yc",
+      "id": "log-1792910971024-f5yc",
+      "action": "PR_SUBMITTED",
+      "actor": "BharathReddy15",
+      "details": "@BharathReddy15 submitted verified PR #190 in pugulist/math-stats",
+      "timestamp": "2026-10-25T06:49:31.024Z"
+    },
+    {
+      "docId": "log-1792910941195-6yrd",
+      "id": "log-1792910941195-6yrd",
+      "action": "PR_SUBMITTED",
+      "actor": "BharathReddy15",
+      "details": "@BharathReddy15 submitted verified PR #193 in pugulist/math-stats",
+      "timestamp": "2026-10-25T06:49:01.195Z"
+    },
+    {
+      "docId": "log-1792910936522-mr4e",
+      "id": "log-1792910936522-mr4e",
+      "action": "PR_SUBMITTED",
+      "actor": "BharathReddy15",
+      "details": "@BharathReddy15 submitted verified PR #192 in pugulist/math-stats",
+      "timestamp": "2026-10-25T06:48:56.522Z"
+    },
+    {
+      "docId": "log-1792910892124-zndz",
+      "id": "log-1792910892124-zndz",
+      "action": "PR_SUBMITTED",
+      "actor": "BharathReddy15",
+      "details": "@BharathReddy15 submitted verified PR #193 in pugulist/math-stats",
+      "timestamp": "2026-10-25T06:48:12.124Z"
+    },
+    {
+      "docId": "log-1792910885036-14u9",
+      "id": "log-1792910885036-14u9",
+      "action": "PR_SUBMITTED",
+      "actor": "BharathReddy15",
+      "details": "@BharathReddy15 submitted verified PR #192 in pugulist/math-stats",
+      "timestamp": "2026-10-25T06:48:05.036Z"
+    },
+    {
+      "docId": "log-1792910876601-wqoz",
+      "id": "log-1792910876601-wqoz",
+      "action": "PR_SUBMITTED",
+      "actor": "BharathReddy15",
+      "details": "@BharathReddy15 submitted verified PR #190 in pugulist/math-stats",
+      "timestamp": "2026-10-25T06:47:56.601Z"
+    },
+    {
+      "docId": "log-1792910868987-4rsu",
+      "id": "log-1792910868987-4rsu",
+      "action": "PR_SUBMITTED",
+      "actor": "BharathReddy15",
+      "details": "@BharathReddy15 submitted verified PR #191 in pugulist/math-stats",
+      "timestamp": "2026-10-25T06:47:48.987Z"
+    },
+    {
+      "docId": "log-1792907487177-66fv",
+      "id": "log-1792907487177-66fv",
+      "action": "PR_SUBMITTED",
+      "actor": "Kumar44developer",
+      "details": "@Kumar44developer submitted verified PR #2615 in yargs/yargs",
+      "timestamp": "2026-10-25T05:51:27.177Z"
+    },
+    {
+      "docId": "log-1792907454421-lyto",
+      "id": "log-1792907454421-lyto",
+      "action": "PR_SUBMITTED",
+      "actor": "Kumar44developer",
+      "details": "@Kumar44developer submitted verified PR #930 in npm/node-semver",
+      "timestamp": "2026-10-25T05:50:54.421Z"
+    },
+    {
+      "docId": "log-1792905580592-sik8",
+      "id": "log-1792905580592-sik8",
+      "action": "AUTOMATIC_DAILY_UPDATE",
+      "actor": "SCHEDULED_TICKER",
+      "details": "Day 18 daily calculation completed. Evaluated 2 pending PRs (60-90 pts). Timeline advanced to Day 18. Next midnight evaluation at 2026-10-26T00:00:00.000Z.",
+      "timestamp": "2026-10-25T05:19:40.592Z"
+    },
+    {
+      "docId": "log-1792905579719-cni4",
+      "id": "log-1792905579719-cni4",
+      "action": "DAILY_00:00_PR_EVALUATION",
+      "actor": "Vijay-1710",
+      "details": "Automated midnight evaluation: Graded 2 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
+      "timestamp": "2026-10-25T05:19:39.719Z"
+    },
+    {
+      "docId": "log-1792905471291-r6at",
       "id": "log-1792905471291-r6at",
       "action": "AUTOMATIC_DAILY_UPDATE",
       "actor": "SCHEDULED_TICKER",
@@ -10986,6 +12509,7 @@
       "timestamp": "2026-10-25T05:17:51.291Z"
     },
     {
+      "docId": "log-1792905470941-otlb",
       "id": "log-1792905470941-otlb",
       "action": "DAILY_00:00_PR_EVALUATION",
       "actor": "Vijay-1710",
@@ -10993,6 +12517,63 @@
       "timestamp": "2026-10-25T05:17:50.941Z"
     },
     {
+      "docId": "log-1792904901002-eugx",
+      "id": "log-1792904901002-eugx",
+      "action": "PR_SUBMITTED",
+      "actor": "Kumar44developer",
+      "details": "@Kumar44developer submitted verified PR #930 in npm/node-semver",
+      "timestamp": "2026-10-25T05:08:21.002Z"
+    },
+    {
+      "docId": "log-1792904638713-cj24",
+      "id": "log-1792904638713-cj24",
+      "action": "PR_SUBMITTED",
+      "actor": "Kumar44developer",
+      "details": "@Kumar44developer submitted verified PR #2615 in yargs/yargs",
+      "timestamp": "2026-10-25T05:03:58.713Z"
+    },
+    {
+      "docId": "log-1792904597730-msf5",
+      "id": "log-1792904597730-msf5",
+      "action": "PR_SUBMITTED",
+      "actor": "Kumar44developer",
+      "details": "@Kumar44developer submitted verified PR #930 in npm/node-semver",
+      "timestamp": "2026-10-25T05:03:17.730Z"
+    },
+    {
+      "docId": "log-1792903490021-rnu7",
+      "id": "log-1792903490021-rnu7",
+      "action": "PR_SUBMITTED",
+      "actor": "Kumar44developer",
+      "details": "@Kumar44developer submitted verified PR #2615 in yargs/yargs",
+      "timestamp": "2026-10-25T04:44:50.021Z"
+    },
+    {
+      "docId": "log-1792903443220-tprj",
+      "id": "log-1792903443220-tprj",
+      "action": "PR_SUBMITTED",
+      "actor": "Kumar44developer",
+      "details": "@Kumar44developer submitted verified PR #930 in npm/node-semver",
+      "timestamp": "2026-10-25T04:44:03.220Z"
+    },
+    {
+      "docId": "log-1792889670925-dym3",
+      "id": "log-1792889670925-dym3",
+      "action": "AUTOMATIC_DAILY_UPDATE",
+      "actor": "SCHEDULED_TICKER",
+      "details": "Day 18 daily calculation completed. Evaluated 2 pending PRs (60-90 pts). Timeline advanced to Day 18. Next midnight evaluation at 2026-10-26T00:00:00.000Z.",
+      "timestamp": "2026-10-25T00:54:30.925Z"
+    },
+    {
+      "docId": "log-1792889669942-is8u",
+      "id": "log-1792889669942-is8u",
+      "action": "DAILY_00:00_PR_EVALUATION",
+      "actor": "Vijay-1710",
+      "details": "Automated midnight evaluation: Graded 2 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
+      "timestamp": "2026-10-25T00:54:29.942Z"
+    },
+    {
+      "docId": "log-1792836083178-rrhv",
       "id": "log-1792836083178-rrhv",
       "action": "AUTOMATIC_DAILY_UPDATE",
       "actor": "SCHEDULED_TICKER",
@@ -11000,6 +12581,7 @@
       "timestamp": "2026-10-24T10:01:23.178Z"
     },
     {
+      "docId": "log-1792836082861-7mye",
       "id": "log-1792836082861-7mye",
       "action": "DAILY_00:00_PR_EVALUATION",
       "actor": "Vijay-1710",
@@ -11007,382 +12589,12 @@
       "timestamp": "2026-10-24T10:01:22.861Z"
     },
     {
+      "docId": "log-1792768490778-cdzq",
       "id": "log-1792768490778-cdzq",
       "action": "DAILY_00:00_PR_EVALUATION",
       "actor": "Vijay-1710",
       "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
       "timestamp": "2026-10-23T15:14:50.778Z"
-    },
-    {
-      "id": "log-1792768391484-fdob",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T15:13:11.484Z"
-    },
-    {
-      "id": "log-1792768390620-yza3",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T15:13:10.620Z"
-    },
-    {
-      "id": "log-1792768388988-bkvz",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T15:13:08.988Z"
-    },
-    {
-      "id": "log-1792768384265-wyhe",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T15:13:04.265Z"
-    },
-    {
-      "id": "log-1792768184566-59q5",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 0 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T15:09:44.566Z"
-    },
-    {
-      "id": "log-1792768008841-v4z1",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T15:06:48.841Z"
-    },
-    {
-      "id": "log-1792768008646-9y5a",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T15:06:48.646Z"
-    },
-    {
-      "id": "log-1792767152483-2keb",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 0 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T14:52:32.483Z"
-    },
-    {
-      "id": "log-1792767120586-d0u6",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T14:52:00.586Z"
-    },
-    {
-      "id": "log-1792766347004-spcj",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T14:39:07.004Z"
-    },
-    {
-      "id": "log-1792766346752-et18",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T14:39:06.752Z"
-    },
-    {
-      "id": "log-1792764633184-v7n6",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 0 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T14:10:33.184Z"
-    },
-    {
-      "id": "log-1792764495837-evtv",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 0 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T14:08:15.837Z"
-    },
-    {
-      "id": "log-1792764495810-9ghv",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 0 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T14:08:15.810Z"
-    },
-    {
-      "id": "log-1792764495776-dgd5",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 0 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T14:08:15.776Z"
-    },
-    {
-      "id": "log-1792764495749-f7m7",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 0 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T14:08:15.749Z"
-    },
-    {
-      "id": "log-1792764428370-5grh",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T14:07:08.370Z"
-    },
-    {
-      "id": "log-1792764427205-pe9w",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T14:07:07.205Z"
-    },
-    {
-      "id": "log-1792764426166-zf6z",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T14:07:06.166Z"
-    },
-    {
-      "id": "log-1792764425304-5ybf",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T14:07:05.304Z"
-    },
-    {
-      "id": "log-1792763350550-ns0p",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 0 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T13:49:10.550Z"
-    },
-    {
-      "id": "log-1792763350545-xodw",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 0 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T13:49:10.545Z"
-    },
-    {
-      "id": "log-1792763350099-ejow",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 0 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T13:49:10.099Z"
-    },
-    {
-      "id": "log-1792763350099-67zq",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 0 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T13:49:10.099Z"
-    },
-    {
-      "id": "log-1792763348943-oft6",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T13:49:08.943Z"
-    },
-    {
-      "id": "log-1792763348538-07lq",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T13:49:08.538Z"
-    },
-    {
-      "id": "log-1792763347913-c15q",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T13:49:07.913Z"
-    },
-    {
-      "id": "log-1792763346445-tc1v",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T13:49:06.445Z"
-    },
-    {
-      "id": "log-1792763346135-vyz3",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T13:49:06.135Z"
-    },
-    {
-      "id": "log-1792762081289-02er",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T13:28:01.289Z"
-    },
-    {
-      "id": "log-1792762080698-cljp",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T13:28:00.698Z"
-    },
-    {
-      "id": "log-1792762079323-w1m9",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T13:27:59.323Z"
-    },
-    {
-      "id": "log-1792762077803-yt1q",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 0 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T13:27:57.803Z"
-    },
-    {
-      "id": "log-1792761432482-nvjx",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T13:17:12.482Z"
-    },
-    {
-      "id": "log-1792761431784-bsjy",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T13:17:11.784Z"
-    },
-    {
-      "id": "log-1792761191591-dj91",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 0 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T13:13:11.591Z"
-    },
-    {
-      "id": "log-1792761191577-hnbq",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 0 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T13:13:11.577Z"
-    },
-    {
-      "id": "log-1792760992790-6nv4",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T13:09:52.790Z"
-    },
-    {
-      "id": "log-1792760992745-ro7s",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T13:09:52.745Z"
-    },
-    {
-      "id": "log-1792760990215-gpds",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T13:09:50.215Z"
-    },
-    {
-      "id": "log-1792760989373-76r0",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T13:09:49.373Z"
-    },
-    {
-      "id": "log-1792760988088-ovhg",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T13:09:48.088Z"
-    },
-    {
-      "id": "log-1792760988071-lo4r",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T13:09:48.071Z"
-    },
-    {
-      "id": "log-1792759829303-6cw2",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T12:50:29.303Z"
-    },
-    {
-      "id": "log-1792759828892-6kg3",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T12:50:28.892Z"
-    },
-    {
-      "id": "log-1792759828012-fhbg",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T12:50:28.012Z"
-    },
-    {
-      "id": "log-1792759827052-z83q",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T12:50:27.052Z"
-    },
-    {
-      "id": "log-1792759824545-igaa",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T12:50:24.545Z"
-    },
-    {
-      "id": "log-1792759824122-p8yp",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T12:50:24.122Z"
-    },
-    {
-      "id": "log-1792759823247-j2qs",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T12:50:23.247Z"
-    },
-    {
-      "id": "log-1792759822359-i7h1",
-      "action": "DAILY_00:00_PR_EVALUATION",
-      "actor": "Vijay-1710",
-      "details": "Automated midnight evaluation: Graded 6 pending PRs (scored between 60 and 90 pts). All previously graded PRs remained strictly untouched.",
-      "timestamp": "2026-10-23T12:50:22.359Z"
-    },
-    {
-      "id": "log-1792758210799-f8si",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T12:23:30.799Z"
-    },
-    {
-      "id": "log-1792758209378-dei9",
-      "action": "AUTOMATIC_DAILY_UPDATE",
-      "actor": "SCHEDULED_TICKER",
-      "details": "Day 16 daily calculation completed. Evaluated 6 pending PRs (60-90 pts). Timeline advanced to Day 16. Next midnight evaluation at 2026-10-24T00:00:00.000Z.",
-      "timestamp": "2026-10-23T12:23:29.378Z"
     }
   ],
   "deletedPrIds": [
@@ -11404,7 +12616,8 @@
     "iiitk-football/super-league#177",
     "iiitk-football/super-league#178",
     "pr-benchmark-1792928976604",
-    "999991",
+    "pr-benchmark-1792929028489",
     "pr-benchmark-1792930936642"
-  ]
+  ],
+  "updatedAt": "2026-10-28T18:00:16.111Z"
 }
